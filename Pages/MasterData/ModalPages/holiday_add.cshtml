@@ -1,0 +1,46 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                @*<div class="col-md-6">
+                    <label>Holiday Code</label>
+                    <input class="HolidayCode form-control form-control-sm triggerdetail" value="0" type="text" hidden>
+                </div>*@
+                <div class="col-md-6">
+                    <label>Holiday Name</label>
+                    <input class="HolidayName form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-6">
+                    <label>Holiday Type</label>
+                    <select class="HolidayTypeCode HolidayTypeName HolidayType form-control form-control-sm triggerdetail">
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label>Holiday Year</label>
+                    <input class="HolidayYear form-control form-control-sm triggerdetail" type="number">
+                </div>
+                <div class="col-md-4">
+                    <label>Holiday Month</label>
+                    <input class="HolidayMonth form-control form-control-sm triggerdetail" type="number">
+                </div>
+                <div class="col-md-4">
+                    <label>Holiday Day</label>
+                    <input class="HolidayDay form-control form-control-sm triggerdetail" type="number">
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Remarks</label>
+                    <textarea class="remarks form-control form-control-sm triggerdetail"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var dataSource = 'Holiday';
+    var dataSourceIdCol = 'HolidayCode';
+    getOptDataForAdd();
+</script>

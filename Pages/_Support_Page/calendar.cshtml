@@ -1,0 +1,119 @@
+<div class="row calmat">
+</div>
+<script>
+    var year = moment().format('yyyy');
+    $('.HTML_container').ready(function () {
+        $('.modal-title').prepend(year + ' ');
+        getCalendarMatrix();
+    })
+    function getCalendarMatrix() {
+        var yeartogen = year;
+        if ($('#calyear').val()) {
+            yeartogen = $('#calyear').val();
+            $('.modal-title').html(yeartogen + ' LFC Calendar');
+        }
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getCalendarMatrix',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                app: 'FMS',
+                token: '6d7e7e8e-dc7f-4509-a8c4-3b86edea3ae0',
+                year: yeartogen
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data == 0) {
+                    alert('Calendar can not be loaded because the selected calendar year is not yet generated from Masterdata');
+                }
+                var output = '';
+                var period = 1;
+                var week = 1;
+                var weekperperiod = 4;
+                var dayperweek = 8;
+                for (var x = 0; x < data.length;) {
+                    if (data[x].period == period) {
+                        output += '<div class="col-sm-12 col-md-6 col-xl-4 table-responsive">' +
+                            '<table class="table table-bordered" style="text-align: center;">' +
+                            '<thead style="background-color: #90d398;">' +
+                            '<tr>' +
+                            '<td colspan="8"><b>Period ' + data[x].period + '</b></td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<td style="border-right: outset;border-bottom: outset;"><b>Wk</b></td>' +
+                            '<td style="border-bottom: outset;">Mo</td>' +
+                            '<td style="border-bottom: outset;">Tu</td>' +
+                            '<td style="border-bottom: outset;">We</td>' +
+                            '<td style="border-bottom: outset;">Th</td>' +
+                            '<td style="border-bottom: outset;">Fr</td>' +
+                            '<td style="border-bottom: outset;">Sa</td>' +
+                            '<td style="color: red;border-bottom: outset;">Su</td>' +
+                            '</tr>' +
+                            '</thead>' +
+                            '<tbody>';
+                        var weekperperiodCounter = 1;
+                        for (var y = 1; y <= weekperperiod; y++) {
+                            if (y == weekperperiodCounter) {
+                                output += '<tr>' +
+                                    '<td style="background-color: #90d398;padding: 0.25rem;border-right: outset;text-shadow: -0.5px -0.5px 0px #000000, 0.5px 0.5px 0px #000000, -0.5px 0.5px 0px #000000, 0.5px -0.5px 0px #000000;"><b style="font-size: xx-small;color:' + data[x].ColorName + ';">' + data[x].ColorName + '</b><br>' + data[x].week + '</td>';
+                                for (var z = 1; z <= dayperweek; z++) {
+                                    if (x < data.length) {
+                                        if (data[x].week == week) {
+                                            var style = 'padding: 0.25rem;';
+                                            var datetoday = '';
+                                            var backgrountcolor = '';
+                                            if (z == 7) {
+                                                style += 'color: red;';
+                                            }
+                                            if (data[x].month % 2 == 1) {
+                                                backgrountcolor = 'beige';
+                                            } else {
+                                                backgrountcolor = 'white';
+                                            }
+                                            if (moment().format('MM') == data[x].month && moment().format('DD') == data[x].day) {
+                                                style += 'background: radial-gradient(#5fcd78 70%, transparent 0%,' + backgrountcolor + ' 0%);'
+                                                datetoday = '<b><bb  style="font-size: xx-small;">' + getMonthNamebyNumber(data[x].month) + '</bb><br>' + data[x].day + '</b>';
+                                            } else {
+                                                style += 'background-color: ' + backgrountcolor + ';';
+                                                datetoday = '<b style="font-size: xx-small;">' + getMonthNamebyNumber(data[x].month) + '</b><br><b>' + data[x].day + '</b>';
+                                            }
+                                            output += '<td style="' + style + '">' + datetoday + '</td>';
+                                            x++;
+                                        } else if (z == 8) {
+                                            output += '</tr>';
+                                            week++;
+                                        }
+                                    }
+                                }
+                            }
+                            weekperperiodCounter++
+                        }
+                        output += '</tbody>' +
+                            '</table>' +
+                            '</div>';
+                        period++;
+                    }
+                }
+
+                output += '<div class="col-sm-12 col-md-6 col-xl-4 table-responsive"><input type="number" id="calyear"><button onclick="getCalendarMatrix()">Generate</button></div>';
+                $('.calmat').html(output);
+            }
+        })
+    }
+    function print(){
+        window.jsPDF = window.jspdf.jsPDF;
+        var doc = new jsPDF();
+        var elementHTML = document.querySelector(".calmat");
+        doc.html(elementHTML, {
+            callback: function(doc) {
+                window.open(doc.output('bloburl'), '_blank');
+                @* doc.save('Calendar.pdf'); *@
+            },
+            margin: [10, 10, 10, 10],
+            x: 0,
+            y: 0,
+            width: 190, //target width in the PDF document
+            windowWidth: 1100 //window width in CSS pixels
+        });
+    }
+</script>

@@ -1,0 +1,128 @@
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-4">
+        <div class="info-box mb-3">
+            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Active Users</span>
+                <span class="info-box-number activeUser">0</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-4">
+        <div class="info-box mb-3">
+            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-user-alt-slash"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Inactive Users</span>
+                <span class="info-box-number inactiveUser">0</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-4">
+        <div class="info-box mb-3">
+            <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-id-badge"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Active Domain Users</span>
+                <span class="info-box-number domainUser">0</span>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix hidden-md-up"></div>
+</div>
+
+<div class="row">
+    @*<div class="col-md-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add FMS User</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>Domain Account</h6>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><input type="radio" name="isdomain"></span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm domusername" autocomplete="off" placeholder="Enter Domain Username">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <h6>Local Account</h6>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><input type="radio" name="isdomain"></span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm locusername" autocomplete="off" placeholder="Enter Local Username">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <h6>Emp ID #</h6>
+                                <input class="form-control form-control-sm" type="text" placeholder="Enter Employee ID">
+                            </div>
+                            <div class="col-lg-12">
+                                <h6>Mobile #</h6>
+                                <input class="form-control form-control-sm" type="email" placeholder="Enter Mobile #">
+                            </div>
+                            <div class="col-lg-12">
+                                <h6>Email</h6>
+                                <input class="form-control form-control-sm" type="email" placeholder="Enter Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button class="btn btn-success">Save</button>
+                        <button class="btn btn-danger">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">Farm Management System Users</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            @*<button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>*@
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="tbl_SysUsers" class="table table-bordered table-striped table-sm" style="width:100%" data-editpage="pages/_admin/modalpages/user_update"  data-addpage="pages/_admin/modalpages/user_add">
+                            <thead>
+                                <tr style="text-align:center">
+                                    <th style="width:20%">Actions</th>
+                                    <th style="width:10%">Employee ID</th>
+                                    <th style="width:25%">Username</th>
+                                    <th style="width:25%">Last Login</th>
+                                    @*<th style="width:15%">Username</th>
+                                    <th style="width:35%">Name</th>*@
+                                    <th style="width:10%">Domain</th>
+                                    <th style="width:10%">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl_SysUsers-data">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/_Admin/users.js"></script>

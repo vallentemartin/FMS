@@ -1,0 +1,11 @@
+@{
+    Session["name"] = Request.Form["username"];
+    Session["username"] = Request.Form["username"];
+    Session["loginToken"] = Request.Form["loginToken"];
+    Session["isdomainlogin"] = Request.Form["isdomainlogin"];
+    Session["empid"] = Request.Form["empid"];
+    Session["useremail"] = Request.Form["useremail"];
+    Session["pageTheme"] = Request.Form["pageTheme"];
+
+}
+Welcome @HttpContext.Current.Session["name"]!

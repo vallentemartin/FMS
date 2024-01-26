@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title">List Of Weeks</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="tbl_Calendar" class="table table-bordered table-striped table-sm" style="width:100%">
+                    <thead>
+                        <tr style="text-align:center">
+                            <th class="CalendarCode">Calendar Code</th>
+                            <th class="CalendarName">Calendar Name</th>
+                            <th class="week">Week #</th>
+                            <th class="period">Period</th>
+                            <th class="year">Year</th>
+                            <th class="startdate">Start Date</th>
+                            <th class="enddate">End Date</th>
+                            <th class="modifiedby">Last Modified By</th>
+                            <th class="modifiedon">Last Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_Users-data">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title">List Of Period</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="tbl_Period" class="table table-bordered table-striped table-sm" style="width:100%">
+                    <thead>
+                        <tr style="text-align:center">
+                            <th class="PeriodCode">Period Code</th>
+                            <th class="PeriodName">Period Name</th>
+                            <th class="year">Period Year</th>
+                            <th class="startdate">Start Date</th>
+                            <th class="enddate">End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_Users-data">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/MasterData/Calendar.js"></script>

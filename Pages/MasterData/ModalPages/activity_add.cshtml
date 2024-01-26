@@ -1,0 +1,49 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Activity Code</label>
+                    <input class="ActivityCode form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-4">
+                    <label>Activity Name</label>
+                    <input class="ActivityName form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-4">
+                    <label>Operation Code</label>
+                    <select class="OperationCode OperationName Operation form-control form-control-sm triggerdetail">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <label>Unit</label>
+                <select class="UnitCode UnitName Unit form-control form-control-sm triggerdetail">
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>Standard</label>
+                <input class="std form-control form-control-sm triggerdetail" type="text">
+            </div>
+            <div class="col-md-4">
+                <label>Pay Type</label>
+                <input class="PayType form-control form-control-sm triggerdetail" type="text">
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Remarks</label>
+                    <textarea class="remarks form-control form-control-sm triggerdetail"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var dataSource = 'Activity';
+    var dataSourceIdCol = 'ActivityCode';
+    getOptDataForAdd();
+</script>

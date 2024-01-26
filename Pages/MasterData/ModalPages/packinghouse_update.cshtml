@@ -1,0 +1,75 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Packinghouse Code</label>
+                    <input class="PackinghouseCode form-control form-control-sm triggerdetail" type="text" disabled>
+                </div>
+                <div class="col-md-4">
+                    <label>Packinghouse Name</label>
+                    <input class="PackinghouseName form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-4">
+                    <label>Area</label>
+                    <select class="AreaCode AreaName Area form-control form-control-sm triggerdetail">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Packinghouse Address</label>
+                    <input class="PackinghouseAddress form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-4">
+                    <label>Contact Person</label>
+                    <input class="ContactPerson form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-4">
+                    <label>Contact Person Number</label>
+                    <input class="ContactPersonNo form-control form-control-sm triggerdetail" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Remarks</label>
+                    <textarea class="remarks form-control form-control-sm triggerdetail"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var dataSource = 'Packinghouse';
+    var dataSourceIdCol = 'PackinghouseCode';
+    getSysData(dataSource, dataSourceIdCol);
+    $('.triggerdetail').on('change', function () {
+        var syscol = $(this)[0].className.split(' ');
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/updateSysData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                dataSource: dataSource,
+                filter: dataSourceIdCol,
+                selectedid: $('.selectedid').data('id'),
+                syscol: syscol[0],
+                syscolval: $(this).val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                getSysAllData(dataSource);
+            },
+            error: function () {
+                toastr.error('Error on Updating!');
+            }
+        })
+    })
+</script>

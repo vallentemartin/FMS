@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Welcome! This dynamic system was made by Martin Paolo Vallente, a web developer/tech savey guy from Philippines!">
+    <title>Farm Management System</title>
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="~/Media/sysImages/system_icon.png">
+    <link rel="stylesheet" href="~/Assets/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/Assets/dist/css/adminlte.css">
+    <link rel="stylesheet" href="~/Assets/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="~/Assets/toastr/toastr.min.css">
+    <link rel="stylesheet" href="~/Assets/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+    <link rel="stylesheet" href="~/Assets/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Assets/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Assets/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Assets/daterangepicker/daterangepicker.css">
+    <script src="~/Assets/jspdf.umd.min.js"></script>
+    <script src="~/Assets/html2canvas.min.js"></script>
+    <script src="~/Assets/jquery/jquery.min.js"></script>
+    <script src="~/Assets/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/Assets/chart.js/Chart.min.js"></script>
+    <script src="~/Assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Assets/moment/moment.min.js"></script>
+    <script src="~/Assets/daterangepicker/daterangepicker.js"></script>
+    <script src="~/Assets/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Assets/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Assets/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/Assets/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Assets/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/Assets/jszip/jszip.min.js"></script>
+    <script src="~/Assets/pdfmake/pdfmake.min.js"></script>
+    <script src="~/Assets/pdfmake/vfs_fonts.js"></script>
+    <script src="~/Assets/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Assets/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Assets/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/Assets/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+    <script src="~/Assets/dist/js/adminlte.js"></script>
+    <script src="~/Assets/toastr/toastr.min.js"></script>
+    <script src="~/Assets/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+
+    <script>
+        var Permission = [];
+        var plantations = [];
+        var excempted = ["administrator"];
+        var sysapp = 3;
+        var mbgl = 'pk.eyJ1IjoidmFsbGVudGVtYXJ0aW4iLCJhIjoiY2xuYmlmMTZtMDZwYTJtbnpoaWk3bGlodyJ9.QCHl60dk3a2aypwVWh6RUA';
+        $(document).ready(function () {
+            if ("@HttpContext.Current.Session["name"]" != "") {
+                //window.onbeforeunload = function () {
+                //    return "Reload site?";
+                //}
+                var empid = 0;
+                if ("@HttpContext.Current.Session["empid"]" != "") {
+                    empid = "@HttpContext.Current.Session["empid"]";
+                }
+                $.ajax({
+                    url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Helper/GetUserPictureData/' + empid,
+                    type: 'get',
+                    success: function (data) {
+                        $('#userAvatarImg').html('<img src="data:image/png;base64,' + data.photo + '" class="elevation-2" style="width: 50px;" alt="UserImg">');
+                    },
+                    error: function () {
+                        toastr.error('Something went wrong while fetching your avatar');
+                        stopLoading();
+                    }
+                })
+                toastr.info('You are login as @HttpContext.Current.Session["name"]');
+                $.ajax({
+                    url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getRoutesbyCreds',
+                    type: 'post',
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        username: $("#username").val(),
+                        token: $("#token").val(),
+                        sysapp: sysapp
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        $.ajax({
+                            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getPermissionbyCreds',
+                            type: 'post',
+                            dataType: 'json',
+                            data: JSON.stringify({
+                                username: $("#username").val(),
+                                token: $("#token").val(),
+                                sysapp: sysapp
+                            }),
+                            contentType: "application/json; charset=utf-8",
+                            success: function (Permissiondata) {
+                                for (var j in Permissiondata) {
+                                    Permission.push(Permissiondata[j].PermissionCode);
+                                }
+                                stopLoading();
+                            },
+                            error: function () {
+                                toastr.error('Error on Fetching Permissions!');
+                                stopLoading();
+                            }
+                        })
+                        $.ajax({
+                            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getPlantationsbyCreds',
+                            type: 'post',
+                            dataType: 'json',
+                            data: JSON.stringify({
+                                username: $("#username").val(),
+                                token: $("#token").val(),
+                                sysapp: sysapp
+                            }),
+                            contentType: "application/json; charset=utf-8",
+                            success: function (plantationdata) {
+                                for (var j in plantationdata) {
+                                    plantations.push(plantationdata[j].PlantationCode);
+                                }
+                                stopLoading();
+                            },
+                            error: function () {
+                                toastr.error('Error on Fetching Roles!');
+                                stopLoading();
+                            }
+                        })
+                        for (var i in data) {
+                            if (data[i].parent_code == "-") {
+                                if (data[i].isParent) {
+                                    var htmlraw =
+                                        '<li class="nav-item pageroute' + data[i].route_code + ' ">' +
+                                            '<a href="javascript:;" class="' + data[i].route_code + ' nav-link"  data-link="' + data[i].route_fileLoc + '" data-pagename="' + data[i].route_name + '" data-bcrumbs="' + data[i].breadcrumb + '" data-isparentpage="1">' +
+                                                '<i class="nav-icon ' + data[i].route_icon + '"></i>' +
+                                                '<p>' +
+                                                    data[i].route_name +
+                                                    '<i class="right fas fa-angle-left"></i>' +
+                                                '</p>' +
+                                            '</a >' +
+                                        '</li > ';
+                                    $('.rolelist').append(htmlraw);
+                                } else {
+                                    var htmlraw =
+                                        '<li class="nav-item pageroute' + data[i].route_code + ' ">' +
+                                            '<a href="javascript:;" class="pagelink ' + data[i].route_code + ' nav-link"  data-link="' + data[i].route_fileLoc + '" data-pagename="' + data[i].route_name + '" data-bcrumbs="' + data[i].breadcrumb + '" data-isparentpage="0">' +
+                                                '<i class="nav-icon ' + data[i].route_icon + '"></i>' +
+                                                '<p>' +
+                                                    data[i].route_name +
+                                                '</p>' +
+                                            '</a >' +
+                                        '</li > ';
+                                    $('.rolelist').append(htmlraw);
+                                }
+                            } else {
+                                var selector = '.pageroute' + data[i].parent_code + '';
+                                if (data[i].isParent) {
+                                    var htmlrawchild =
+                                        '<ul class="nav nav-treeview">' +
+                                            '<li class="nav-item pageroute' + data[i].route_code + ' ">' +
+                                                '<a href="javascript:;" class="' + data[i].route_code + ' nav-link"  data-link="' + data[i].route_fileLoc + '" data-pagename="' + data[i].route_name + '" data-bcrumbs="' + data[i].breadcrumb + '" data-isparentpage="1">' +
+                                                    '<i class="nav-icon ' + data[i].route_icon + '"></i>' +
+                                                    '<p>' +
+                                                        data[i].route_name +
+                                                        '<i class="right fas fa-angle-left"></i>' +
+                                                    '</p>' +
+                                                '</a >' +
+                                            '</li > ' +
+                                        '</ul > ';
+                                    $(selector).append(htmlrawchild);
+                                } else {
+                                    var htmlrawchild =
+                                        '<ul class="nav nav-treeview">' +
+                                            '<li class="nav-item pageroute' + data[i].route_code + ' ">' +
+                                                '<a href="javascript:;" class="pagelink ' + data[i].route_code + ' nav-link"  data-link="' + data[i].route_fileLoc + '" data-pagename="' + data[i].route_name + '" data-bcrumbs="' + data[i].breadcrumb + '" data-isparentpage="0">' +
+                                                    '<i class="nav-icon ' + data[i].route_icon + '"></i>' +
+                                                    '<p>' +
+                                                        data[i].route_name +
+                                                    '</p>' +
+                                                '</a >' +
+                                            '</li > ' +
+                                        '</ul > ';
+                                    $(selector).append(htmlrawchild);
+                                }
+                            }
+
+                        }
+                        //var x = '.pageroute .AR00';
+                        //$('.pageroute .AR00').append('1');
+                        //$(x).append('2');
+                        //var logoutmenu =
+                        //    '<li class="nav-item">' +
+                        //        '<a onclick="logoutToPage()" href="javascript:;" class="nav-link" style="color: color(srgb 0.98 0.22 0.22)">' +
+                        //            '<i class="nav-icon fas fa-sign-out-alt"></i>' +
+                        //            '<p>' +
+                        //                'Logout' +
+                        //            '</p>' +
+                        //        '</a>' +
+                        //    '</li>';
+                        //$('.rolelist').append(logoutmenu);
+
+                        $.ajax({
+                            url: 'Pages/Home/default.cshtml',
+                            type: 'post',
+                            dataType: 'html',
+                            success: function (htmlreturn) {
+                                var title = 'Home';
+                                $('.pageTitle').html(title);
+                                $('.HTML_container').html(htmlreturn);
+                                $('.breadcrumb').html('<li class="breadcrumb-item active">Home</li>');
+                                stopLoading();
+                            },
+                            error: function () {
+                                toastr.error('Error on Home Page!');
+                                stopLoading();
+                            }
+                        })
+                    },
+                    error: function () {
+                        toastr.error('Error on fetching routes by credentials!');
+                        stopLoading();
+                    }
+                })
+            } else {
+                var header = $('body');
+                var backgrounds = new Array(
+                    'url(Media/splashBG/banana1.jpg)'
+                    , 'url(Media/splashBG/pineapple1.jpg)'
+                    , 'url(Media/splashBG/banana2.jpg)'
+                    , 'url(Media/splashBG/pineapple2.jpg)'
+                );
+                var current = 0;
+
+                function nextBackground() {
+                    current++;
+                    current = current % backgrounds.length;
+                    header.css({
+                        'background-image': backgrounds[current],
+                        'transition': 'background-image 2s ease-out',
+                        'background-size': '100% 100%',
+                        'backdrop-filter': 'blur(10px)'
+                    });
+                }
+                setInterval(nextBackground, 7000);
+
+                header.css({
+                    'background-image': backgrounds[0],
+                    'background-size': '100% 100%',
+                    'backdrop-filter': 'blur(10px)'
+                });
+            }
+        });
+
+    </script>
+</head>
+    @RenderBody()
+</html>

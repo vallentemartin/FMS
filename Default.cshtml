@@ -1,0 +1,244 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+}
+@if (@HttpContext.Current.Session["name"] != null)
+{
+    <body class="hold-transition sidebar-mini layout-fixed text-sm layout-navbar-fixed @HttpContext.Current.Session["pageTheme"] ">
+        <div class="wrapper">
+            <div class="preloader flex-column justify-content-center align-items-center">
+                <img class="animation__wobble" src="~/Media/sysImages/system_icon.png" alt="FMS Logo" height="200" width="200">
+                <h2>LOADING...</h2>
+            </div>
+            <nav class="main-header navbar navbar-expand navbar-dark">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="javascript:;" role="button"><i class="fas fa-bars"></i></a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="javascript:;" class="nav-link pageTitle"></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" hidden>
+                        <ol class="breadcrumb float-sm-right">
+                        </ol>
+                    </li>
+                    <li class="nav-item">
+                        &nbsp<button type="button" onclick="confirmReload()" id="reloadpage" class="btn btn-outline-success btn-sm" data-routepage="Home" title="Reload Page"><i class="fas fa-redo-alt"></i></button>
+                    </li>
+                    <li class="nav-item">
+                        &nbsp<button type="button" onclick="viewCalendar()" class="btn btn-outline-success btn-sm" title="View Calendar"><i class="fas fa-calendar"></i></button>
+                    </li>
+                    <li class="nav-item">
+                        &nbsp<button type="button" id="duplicatepage" class="btn btn-outline-success btn-sm" title="Duplicate Tab"><i class="fas fa-share-square"></i></button>
+                    </li>
+                    <li class="nav-item">
+                        &nbsp<button type="button" id="helpbtn" class="btn btn-outline-success btn-sm" title="Help"><i class="fas fa-question-circle"></i></button>
+                    </li>
+                    <li class="nav-item">
+                        &nbsp<button type="button" onclick="confirmToLogout()" class="btn btn-outline-danger btn-sm" title="Logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    </li>
+                </ul>
+            </nav>
+            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+                <a href="javascript:;" class="brand-link">
+                    <img src="~/Media/sysImages/system_icon.png" alt="FMS Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <span class="brand-text font-weight-dark">Farm Management System</span>
+                </a>
+                <div class="sidebar">
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image" id="userAvatarImg">
+                            <i class="nav-icon fas fa-spinner fa-spin img-circle elevation-2"></i>
+                        </div>
+                        <div class="info">
+                            <a href="#" class="d-block" onclick="viewLoginUser()">
+                                @HttpContext.Current.Session["name"] [@HttpContext.Current.Session["empid"]]
+                                <p style="font-size: x-small;">@HttpContext.Current.Session["useremail"]</p>
+                            </a>
+                            <input type="hidden" id="username" value="@HttpContext.Current.Session["username"]" />
+                            <input type="hidden" id="token" value="@HttpContext.Current.Session["loginToken"]" />
+                        </div>
+                    </div>
+                    @*<div class="form-inline">
+                        <div class="input-group" data-widget="sidebar-search">
+                            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-sidebar">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>*@
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-flat nav-compact rolelist" data-widget="treeview" role="menu" data-accordion="false">
+                            <li class="nav-item">
+                                <a href="javascript:;" class="pagelink nav-link active" data-link="Pages/Home/default" data-pagename="Home" data-bcrumbs="Home">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>
+                                        Home
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="eventBannerBottom" style="width: 100%; position: fixed; bottom: 0"></div>
+                    </nav>
+                </div>
+            </aside>
+            <div class="content-wrapper overlay-wrapper">
+                <div class="overlay dark invisible">
+                    <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                </div>
+                <br />
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="HTML_container">
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <footer class="main-footer">
+                    <strong>LFC ITSS-ERP TEAM</strong>
+                    <div class="float-right d-none d-sm-inline-block">
+                        <b>Version</b> 1.0
+                    </div>
+                </footer>
+        </div>
+        <div class="modal fade" id="modal-default">
+            <div id="modal-dialog" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Default Modal</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modalBody">
+                        <p>One fine body&hellip;</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        const checkUserTokenInterval = setInterval(function () {
+            checkUserToken()
+        }, 60000);
+    </script>
+}
+else
+{
+    string myIP = HttpContext.Current.Request.UserHostAddress;
+    IPAddress addr = IPAddress.Parse(myIP);
+    HttpBrowserCapabilities browse = HttpContext.Current.Request.Browser;
+    string dn;
+    try
+    {
+        IPHostEntry entry = Dns.GetHostEntry(addr);
+        dn = entry.HostName;
+    }
+    catch
+    {
+        dn = "NonLapandayDevice";
+    }
+    string platform = browse.Browser + " - " + browse.Platform + " - " + dn;
+    <body class="hold-transition login-page dark-mode overlay-wrapper">
+        <div id="eventBannerTop" style="width: 100%; position: fixed; top: 0; padding: 5px"></div>
+        <div id="eventBannerBottom" style="width: 100%; position: fixed; bottom: 0"></div>
+        <div class="overlay dark invisible"><i class="fas fa-3x fa-sync-alt fa-spin"></i></div>
+        <div class="login-box">
+            <div class="card card-outline card-primary" style="background: rgb(0, 0, 0,.5);">
+                <div class="card-header text-center">
+                    <img src="~/Media/sysImages/system_icon.png" alt="FMS Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <h1><b>Lapanday</b> FMS</h1>
+                </div>
+                <div class="card-body">
+                    <p class="login-box-msg">Sign in to start your session</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control loginbox" placeholder="Username" id="usrUsername" autocomplete="off">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control loginbox" placeholder="Password" id="usrPassword">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="isdomainlogin" checked>
+                                <label for="isdomainlogin">
+                                    LFC Domain Login
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <input id="ipadd" data-ipadd=" @myIP " data-pform=" @platform " hidden />
+                            <button onclick="loginToPage()" id="loginToPage" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+}
+@{
+    DateTime currentDateTime = DateTime.Now;
+    int month = Int32.Parse(currentDateTime.ToString("MM"));
+    int adlaw = Int32.Parse(currentDateTime.ToString("dd"));
+    int intencity = 0;
+    if ((month > 8 || (month == 1 && adlaw >= 15)) && @HttpContext.Current.Session["name"] == null)
+    {
+        if (month == 12)
+        {
+            intencity = 20 * adlaw;
+        }
+        else if (month == 9)
+        {
+            intencity = 5;
+        }
+        else if (month == 10)
+        {
+            intencity = 10;
+        }
+        else if (month == 11)
+        {
+            intencity = 20;
+        }
+        else if (month == 1)
+        {
+            intencity = 200 / adlaw;
+        }
+        @:<script src="/Assets/snowstorm-min.js"></script>
+        @:<script>
+            @:    snowStorm.excludeMobile = false;
+            @:    //snowStorm.snowColor = '#99ccff';
+            @:    snowStorm.snowColor = '#ffffff';
+            @:    snowStorm.flakesMaxActive = @intencity;    // show more snow on screen at once
+            @:    snowStorm.useTwinkleEffect = true;
+        if ((month == 10 && adlaw >= 25) || (month == 11 && adlaw <= 5))
+        {
+            @:$('#eventBannerTop').html('<marquee><img src="/Media/eventImg/ghost.png" style="opacity: .5; width: 75px"></marquee>');
+        }
+        if ((month == 12 && adlaw >= 1) && (month == 12 && adlaw <= 27))
+        {
+            @:$('#eventBannerTop').html('<marquee><img src="/Media/eventImg/santasleigh.png" style=" width: 150px"></marquee>');
+        }
+        if ((month == 1 && adlaw >= 1) && (month == 1 && adlaw <= 15))
+        {
+            @:$('#eventBannerBottom').html('<img src="/Media/eventImg/new-year-fireworks-image.gif" style="opacity: .5;width: 100%">');
+        }
+        @:</script>
+    }
+}
+
+<!-- <script src="http://farm.lapanday.com/Scripts/_main.js"></script> -->
+<script src="~/Scripts/_main.js"></script>

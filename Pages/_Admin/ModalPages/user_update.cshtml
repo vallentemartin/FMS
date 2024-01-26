@@ -1,0 +1,337 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Username</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptusername" type="text" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Email</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptuseremail userdetail" data-syscol="useremail" type="email">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Emp ID #</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptempid userdetail" data-syscol="empid" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Mobile #</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptusermobileno userdetail" data-syscol="usermobileno" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Access</h5>
+                    <select class="accessOpt" multiple="multiple">
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <h5>Plantation Mapping</h5>
+                    <select class="plantationOpt" multiple="multiple">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <h5>Access Permissions</h5>
+                <select class="permissionOpt" multiple="multiple">
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    getAppAccess();
+    getAppPermission();
+    getPlantations();
+    getUserDetails();
+    function getAppAccess() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getAppAccess',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var htmlforopt = '';
+                for (var i in data) {
+                    htmlforopt += '<option value="' + data[i].route_code + '">' + data[i].route_code + ' - ' + data[i].route_name + '</option>';
+                }
+                $('.accessOpt').html(htmlforopt);
+                getUserAppAccess()
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+                stopLoading();
+            }
+        })
+    }
+    function getUserAppAccess() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getUserAppAccess',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                selecteduser: $('.selectedusername').text(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                for (var i in data) {
+                    $('.accessOpt option[value=' + data[i].route_code + ']').attr('selected', true);
+                }
+                $('.accessOpt').bootstrapDualListbox({
+                    nonSelectedListLabel: 'Access Available',
+                    selectedListLabel: 'Access Applied',
+                    //moveOnSelect: false,
+                    selectorMinimalHeight: 140
+                })
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+                stopLoading();
+            }
+        })
+    }
+
+    function getAppPermission() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getAppPermission',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var htmlforopt = '';
+                for (var i in data) {
+                    htmlforopt += '<option value="' + data[i].PermissionCode + '">' + data[i].PermissionCode + ' - ' + data[i].PermissionName + '</option>';
+                }
+                $('.permissionOpt').html(htmlforopt);
+                getUserAppPermission()
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+                stopLoading();
+            }
+        })
+    }
+    function getUserAppPermission() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getUserAppPermission',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                selecteduser: $('.selectedusername').text(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                for (var i in data) {
+                    $('.permissionOpt option[value=' + data[i].PermissionCode + ']').attr('selected', true);
+                }
+                $('.permissionOpt').bootstrapDualListbox({
+                    nonSelectedListLabel: 'Permissions Available',
+                    selectedListLabel: 'Permissions Applied',
+                    //moveOnSelect: false,
+                    selectorMinimalHeight: 140
+                })
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+                stopLoading();
+            }
+        })
+    }
+
+    function getPlantations() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getAppPlantations',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var htmlforopt = '';
+                for (var i in data) {
+                    htmlforopt += '<option value="' + data[i].PlantationCode + '">' + data[i].PlantationCode + ' - ' + data[i].PlantationName + '</option>';
+                }
+                $('.plantationOpt').html(htmlforopt);
+                getUserPlantations()
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+                stopLoading();
+            }
+        })
+    }
+    function getUserPlantations() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getUserAppPlantations',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                selecteduser: $('.selectedusername').text(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                for (var i in data) {
+                    $('.plantationOpt option[value=' + data[i].PlantationCode + ']').attr('selected', true);
+                }
+                $('.plantationOpt').bootstrapDualListbox({
+                    nonSelectedListLabel: 'Plantations Available',
+                    selectedListLabel: 'Plantations Applied',
+                    //moveOnSelect: false,
+                    selectorMinimalHeight: 140
+                })
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+                stopLoading();
+            }
+        })
+    }
+    function getUserDetails() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getUserDetails',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                selecteduser: $('.selectedusername').text(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $('.iptusername').val(data.username);
+                $('.iptuseremail').val(data.useremail);
+                $('.iptempid').val(data.empid);
+                $('.iptusermobileno').val(data.usermobileno);
+            },
+            error: function () {
+                toastr.error('Access change error!');
+                stopLoading();
+            }
+        })
+    }
+    $('.accessOpt').on('change', function () {
+        var accessSelected = $(this).val();
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/updateUserAccess',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                selecteduser: $('.selectedusername').text(),
+                accessSelected: accessSelected,
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+            },
+            error: function () {
+                toastr.error('Access change error!');
+            }
+        })
+    })
+    $('.permissionOpt').on('change', function () {
+        var permissionSelected = $(this).val();
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/updateUserPermission',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                selecteduser: $('.selectedusername').text(),
+                permissionSelected: permissionSelected,
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+            },
+            error: function () {
+                toastr.error('Permission change error!');
+            }
+        })
+    })
+    $('.plantationOpt').on('change', function () {
+        var plantationsSelected = $(this).val();
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/updateUserPlantations',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                selecteduser: $('.selectedusername').text(),
+                plantationsSelected: plantationsSelected,
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+            },
+            error: function () {
+                toastr.error('Plantation change error!');
+            }
+        })
+    })
+    $('.userdetail').on('change', function () {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'UserFunctions/updateUserDetail',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                appid: sysapp,
+                selecteduser: $('.selectedusername').text(),
+                syscol: $(this).data('syscol'),
+                syscolval: $(this).val()
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+            }
+        })
+    })
+</script>

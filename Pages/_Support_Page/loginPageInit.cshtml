@@ -1,0 +1,36 @@
+<script>
+    const date = new Date();
+    let month = date.getMonth() + 1;
+    let adlaw = date.getDate();
+    var intencity = 0;
+    if (month > 8 || (month == 1 && adlaw >= 15)) {
+        if (month == 12) {
+            intencity = 20 * adlaw
+        } else if (month == 9) {
+            intencity = 5
+        } else if (month == 10) {
+            intencity = 10
+        } else if (month == 11) {
+            intencity = 20
+        } else if (month == 1) {
+            intencity = 200 / adlaw
+        }
+        $.ajax({
+            url: 'Pages/_Support_Page/SnowEffect.cshtml',
+            type: 'post',
+            dataType: 'html',
+            success: function (data) {
+                $('body').append(data);
+            }
+        })
+    }
+    if ((month == 10 && adlaw >= 28) || (month == 11 && adlaw >= 5)) {
+        $('#eventBannerTop').html('<marquee><img src="/Media/eventImg/ghost.png" style="opacity: .5; width: 75px"></marquee>');
+    }
+    if ((month == 12 && adlaw >= 1) && (month == 12 && adlaw <= 27)) {
+        $('#eventBannerTop').html('<marquee><img src="/Media/eventImg/santasleigh.png" style=" width: 150px"></marquee>');
+    }
+    if ((month == 1 && adlaw >= 1) && (month == 1 && adlaw <= 15)) {
+        $('#eventBannerBottom').html('<img src="/Media/eventImg/new-year-fireworks-image.gif" style="opacity: .5;width: 100%">');
+    }
+</script>

@@ -1,0 +1,32 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-12">
+            <label>Week count</label>
+            <input class="form-control form-control-sm triggerdetail weekcount" type="number">
+        </div>
+    </div>
+</div>
+<script>
+    function GenerateDate() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/generateDate',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                weekcount: $(".weekcount").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                toastr.success('Calendar generation success!');
+                routePagebyBC($('#reloadpage').data('routepage'));
+                hideModal();
+            },
+            error: function () {
+                toastr.error('Error on generating calendar!');
+            }
+        })
+    }
+</script>

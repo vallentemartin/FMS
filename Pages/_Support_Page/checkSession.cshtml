@@ -1,0 +1,7 @@
+@if (@HttpContext.Current.Session["loginToken"] == null)
+{
+    <script>
+        toastr.error('Invalid Token!');
+        logoutToPage();
+    </script>
+}

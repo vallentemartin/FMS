@@ -1,0 +1,72 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <label>Activity Code</label>
+                <input class="ActivityCode form-control form-control-sm triggerdetail" type="text" disabled>
+            </div>
+            <div class="col-md-4">
+                <label>Activity Name</label>
+                <input class="ActivityName form-control form-control-sm triggerdetail" type="text">
+            </div>
+            <div class="col-md-4">
+                <label>Operation</label>
+                <select class="OperationCode OperationName Operation form-control form-control-sm triggerdetail">
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <label>Unit</label>
+                <select class="UnitCode UnitName Unit form-control form-control-sm triggerdetail">
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>Standard</label>
+                <input class="std form-control form-control-sm triggerdetail" type="text">
+            </div>
+            <div class="col-md-4">
+                <label>Pay Type</label>
+                <input class="PayType form-control form-control-sm triggerdetail" type="text">
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Remarks</label>
+                    <textarea class="remarks form-control form-control-sm triggerdetail"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var dataSource = 'Activity';
+    var dataSourceIdCol = 'ActivityCode';
+    getSysData(dataSource, dataSourceIdCol);
+    $('.triggerdetail').on('change', function () {
+        var syscol = $(this)[0].className.split(' ');
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/updateSysData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                dataSource: dataSource,
+                filter: dataSourceIdCol,
+                selectedid: $('.selectedid').data('id'),
+                syscol: syscol[0],
+                syscolval: $(this).val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                getSysAllData(dataSource);
+            },
+            error: function () {
+                toastr.error('Error on Updating!');
+            }
+        })
+    })
+</script>

@@ -1,0 +1,60 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Plantation Code</label>
+                    <input class="PlantationCode form-control form-control-sm triggerdetail" type="text" disabled>
+                </div>
+                <div class="col-md-4">
+                    <label>Plantation Name</label>
+                    <input class="PlantationName form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-4">
+                    <label>Area</label>
+                    <select class="AreaCode Area AreaName form-control form-control-sm triggerdetail">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Region</label>
+                    <input class="region form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-4">
+                    <label>Plantation Head</label>
+                    <input class="plantationhead form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-4">
+                    <label>Area Head</label>
+                    <input class="areahead form-control form-control-sm triggerdetail" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Geo Location (Lat, Long)</label>
+                    <input class="geoLocation form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-8">
+                    <label>Plantation Address</label>
+                    <input class="plantAddress  form-control form-control-sm triggerdetail" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Remarks</label>
+                    <textarea class="remarks form-control form-control-sm triggerdetail" type="text"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    getSysData('Plantation', 'PlantationCode');
+</script>

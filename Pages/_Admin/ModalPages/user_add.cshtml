@@ -1,0 +1,70 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Username</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptusername" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Email</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptuseremail" type="email">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Emp ID #</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptempid" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Mobile #</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptusermobileno" type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function saveNewUser() {
+        if ($(".iptusername").val() != '') {
+            $.ajax({
+                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'UserFunctions/saveNewUser',
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify({
+                    username: $("#username").val(),
+                    token: $("#token").val(),
+                    toaddusername: $(".iptusername").val(),
+                    useremail: $(".iptuseremail").val(),
+                    empid: $(".iptempid").val(),
+                    usermobileno: $(".iptusermobileno").val(),
+                    appid: sysapp
+                }),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    toastr.info(data.retmessage);
+                    routePagebyBC($('#reloadpage').data('routepage'));
+                },
+                error: function () {
+                    toastr.error('Error on saving data!');
+                }
+            })
+        } else {
+            toastr.error('Invalid Username!');
+        }
+    }
+</script>

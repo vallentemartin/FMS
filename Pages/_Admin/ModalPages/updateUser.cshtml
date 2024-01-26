@@ -1,0 +1,166 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Username</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptusername" type="text" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Email</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptuseremail userdetail" data-syscol="useremail" type="email">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Emp ID #</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptempid userdetail" data-syscol="empid" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Mobile #</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptusermobileno userdetail" data-syscol="usermobileno" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <select class="duallistbox rolesOpt" multiple="multiple" >
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    getAppRoles();
+    getUserDetails();
+    function getAppRoles() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getAppRoles',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val()
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var htmlforopt = '';
+                for (var i in data) {
+                    htmlforopt += '<option value="' + data[i].route_code + '">' + data[i].route_code + ' - ' + data[i].route_name + '</option>';
+                }
+                $('.rolesOpt').html(htmlforopt);
+                getUserAppRoles()
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+                stopLoading();
+            }
+        })
+    }
+    function getUserAppRoles() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getUserAppRoles',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                selecteduser: $('.selectedusername').text()
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                for (var i in data) {
+                    $('.rolesOpt option[value=' + data[i].route_code + ']').attr('selected', true);
+                }
+                $('.duallistbox').bootstrapDualListbox({
+                    nonSelectedListLabel: 'Available Roles',
+                    selectedListLabel: 'Applied Roles',
+                    //moveOnSelect: false,
+                    selectorMinimalHeight: 470
+                })
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+                stopLoading();
+            }
+        })
+    }
+    function getUserDetails() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getUserDetails',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                selecteduser: $('.selectedusername').text()
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $('.iptusername').val(data.username);
+                $('.iptuseremail').val(data.useremail);
+                $('.iptempid').val(data.empid);
+                $('.iptusermobileno').val(data.usermobileno);
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+                stopLoading();
+            }
+        })
+    }
+    $('.rolesOpt').on('change', function () {
+        var rolesSelected = $(this).val();
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updateUserRoles',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                selecteduser: $('.selectedusername').text(),
+                rolesSelected: rolesSelected
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+            }
+        })
+    })
+    $('.userdetail').on('change', function () {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'UserFunctions/updateUserDetail',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                appid: 3,
+                selecteduser: $('.selectedusername').text(),
+                syscol: $(this).data('syscol'),
+                syscolval: $(this).val()
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+            }
+        })
+    })
+</script>

@@ -1,0 +1,175 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Username</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptusername" type="text" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Email</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptuseremail userdetail" data-syscol="useremail" type="email">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Emp ID #</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptempid userdetail" data-syscol="empid" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Mobile #</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm iptusermobileno userdetail" data-syscol="usermobileno" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Theme Preference</p>
+                </div>
+                <div class="col-md-9">
+                    <select class="form-control form-control-sm iptpageTheme userdetail" data-syscol="pageTheme" type="text">
+                        <option value="">Default Theme</option>
+                        <option value="dark-mode">Dark Theme</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <hr />
+        </div>
+        <div class="col-md-12 resetpass">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Password</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm" id="usrpass" type="password">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Confirm Password</p>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control form-control-sm" id="usrpasscon" type="password">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-success" style="float:right" onclick="resetpassword()">Reset Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    if (!@HttpContext.Current.Session["isdomainlogin"]) {
+        $('.resetpass').show();
+    } else {
+        $('.resetpass').hide();
+    }
+    $.ajax({
+        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'UserFunctions/getUserDetails',
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+            username: $("#username").val(),
+            token: $("#token").val(),
+            appid: sysapp
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            $('.iptusername').val(data.username);
+            $('.iptuseremail').val(data.useremail);
+            $('.iptempid').val(data.empid);
+            $('.iptusermobileno').val(data.usermobileno);
+            $('.iptpageTheme').val(data.pageTheme);
+        },
+        error: function () {
+            toastr.error('Error on Fetching User Details!');
+            stopLoading();
+        }
+    })
+    $('.userdetail').on('change', function () {
+        var kani = this;
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'UserFunctions/updateUserDetail',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                appid: sysapp,
+                selecteduser: $("#username").val(),
+                syscol: $(this).data('syscol'),
+                syscolval: $(this).val()
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if ($(kani).data('syscol') == "pageTheme") {
+                    let text = 'To apply the selected theme, user must login again to take effect.\n\nLogout to the system?';
+                    if (confirm(text) == true) {
+                        logoutToPage();
+                    }
+                }
+            },
+            error: function () {
+                toastr.error('API Auth Error!');
+            }
+        })
+    })
+    function resetpassword() {
+        var usrpw = $("#usrpass").val();
+        var usrpwc = $("#usrpasscon").val()
+        if (usrpw.length >= 8) {
+            if (!/^[a-zA-Z0-9- ]*$/.test(usrpw)) {
+                if (usrpw == usrpwc) {
+                    let text = 'Are you sure you want to change your password?';
+                    if (confirm(text) == true) {
+                        $.ajax({
+                            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'UserFunctions/ChangeNonDomainUserPassword',
+                            type: 'post',
+                            dataType: 'json',
+                            data: JSON.stringify({
+                                username: $("#username").val(),
+                                token: $("#token").val(),
+                                password: usrpwc,
+                                appid: sysapp
+                            }),
+                            contentType: "application/json; charset=utf-8",
+                            success: function () {
+                                toastr.success('Password successfully changed!');
+                                stopLoading();
+                            },
+                            error: function () {
+                                toastr.error('Error on Fetching User Details!');
+                                stopLoading();
+                            }
+                        })
+                    }
+                } else {
+                    toastr.error('Password didn\'t matched!');
+                }
+            } else {
+                toastr.error('Password must have at least 1 special character!');
+            }
+        } else {
+            toastr.error('Password must have at least 8 characters!');
+        }
+    }
+</script>

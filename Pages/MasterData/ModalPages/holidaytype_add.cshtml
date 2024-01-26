@@ -1,0 +1,29 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Type Code</label>
+                    <input class="HolidayTypeCode form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-6">
+                    <label>Type Name</label>
+                    <input class="HolidayTypeName form-control form-control-sm triggerdetail" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Remarks</label>
+                    <textarea class="remarks form-control form-control-sm triggerdetail"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var dataSource = 'HolidayType';
+    var dataSourceIdCol = 'HolidayTypeCode';
+    getOptDataForAdd();
+</script>
