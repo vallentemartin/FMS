@@ -1,0 +1,331 @@
+<section>
+    <div class="container-fluid">    
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title">Landowner Information</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <!-- START: LANDOWNER INFORMATION -->
+                    <div class="container">
+                        <div class="col-md-12">
+                            <!-- insert here -->
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!-- checkbox -->
+                                        <div class="form-group clearfix">
+                                            <div class="icheck-lightblue d-inline">
+                                            <input type="checkbox" id="checkbox1" class="checkCompany">
+                                            <label for="checkbox1">COMPANY</label>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 checkboxCompany">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Company</label>
+                                        <input class="LastName form-control form-control-sm" id="company" type="text" placeholder="-" autocomplete="off">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Contract Number</label>
+                                        <input class="ContactNumber form-control form-control-sm" id="companynumber" type="number" placeholder="(e.g 09XXXXXXXXX)" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 checkboxCompany">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Address</label>
+                                        <textarea class="Address form-control form-control-sm companyaddress" placeholder="(e.g Unit/Room No., Floor, Building Name, Lot No., Phase No., House No., Street Name)" id="addressTextArea" autocomplete="off"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 checkboxCompany">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Remarks</label>
+                                        <textarea class="remarks form-control form-control-sm" id="companyremarks" placeholder="-" autocomplete="off"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    @*<div class="col-md-4">
+                                        <label>Landowner Code</label>
+                                        <input class="LandownerCode form-control form-control-sm triggerlandowner" value="0" type="text" hidden>
+                                    </div>*@
+                                    <div class="col-md-3">
+                                        <label class="hideFirstName">First Name</label>
+                                        <input class="FirstName form-control form-control-sm triggerlandowner hideFirstName" type="text" placeholder="-" autocomplete="off">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="hideMiddleName">Middle Name</label>
+                                        <input class="MiddleName form-control form-control-sm triggerlandowner hideMiddleName" type="text" placeholder="(e.g [D., Doe])" autocomplete="off">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="hideLastName">Last Name</label>
+                                        <input class="LastnName form-control form-control-sm hideLastName" id="idvllastname" type="text" placeholder="-" autocomplete="off">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="hideSuffix" id="suffixLabel">Suffix</label>
+                                        <input class="Suffix form-control form-control-sm triggerlandowner hideSuffix idvlsuffix" type="text" id="suffixInput" placeholder="(e.g. Jr., II)" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 form-group hideGenderCode">
+                                        <label class="hideGenderCode">Sex</label>
+                                        <select class="GenderCode GenderName Gender form-control form-control-sm triggerlandowner select2">
+                                        </select>
+                                    </div>
+                                    <!-- <div class="hideBirthday col-md-3 form-group">
+                                        <label>Date of Birth:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                <i class="far fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="Birthday form-control form-control-sm float-right triggerlandowner" id="birthday" autocomplete="off">
+                                        </div>
+                                    </div> -->
+                                    <div class="col-md-3 hideBirthday">
+                                            <label>Date of Birth:</label>
+                                            <input type="date" class="Birthday form-control form-control-sm float-right triggerlandowner" autocomplete="off">
+                                        </div>
+                                    <div class="col-md-3 hideSelection">
+                                        <label>Country</label>
+                                        <select class="CountryCode en_short_name Country form-control form-control-sm triggerlandowner select2" id="countrySelect">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group hideCivilStatusCode">
+                                            <label class="hideCivilStatusCode">Civil Status</label>
+                                            <select class="CivilStatusCode CS_Name CivilStatus form-control form-control-sm triggerlandowner select2" id="civilStatus">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label id="addressLabel" class="hideAddress">Address</label>
+                                        <textarea class="Address form-control form-control-sm triggerlandowner hideAddress idvladdress" placeholder="(e.g Unit/Room No., Floor, Building Name, Lot No., Phase No., House No., Street Name)" id="addressTextArea" autocomplete="off"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 hideSelection">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label id="provinceLabel">Province</label>
+                                        <select class="provinceCode provinceName Province form-control form-control-sm triggerlandowner select2" type="text" id="provinceSelect">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label id="cityLabel">Municipality/City</label>
+                                        <select class="cityCode form-control form-control-sm select2" type="text" id="citySelect" disabled>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label id="barangayLabel">Barangay</label>
+                                        <select class="barangayCode form-control form-control-sm select2" style="text-transform: uppercase;" type="text" id="barangaySelect" disabled>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="hideNationality">Nationality</label>
+                                        <input class="Nationality form-control form-control-sm triggerlandowner hideNationality" type="text" placeholder="(e.g Filipino, American)" autocomplete="off">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="hideContactNumber">Contact Number</label>
+                                        <input class="ContractNumber form-control form-control-sm hideContactNumber" id="idvlcontactnumber" type="number" placeholder="(e.g 09XXXXXXXXX)" autocomplete="off">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="hideEmail">Email Address</label>
+                                        <input class="Email form-control form-control-sm triggerlandowner hideEmail" type="email" placeholder="ABC@xyz.com" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="hideremarks">Remarks</label>
+                                        <textarea class="remarks form-control form-control-sm hideremarks" id="idvlremarks" placeholder="-" autocomplete="off"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- insert here: ends here -->
+                        </div>
+                    </div>
+                <!-- END: LANDOWNER INFORMATION -->
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+
+<script>
+    var sourceLandowner = 'Landowner';
+    var dataSourceIdCol = 'LandownerCode';
+    var sourceOptionSelect = 'City';
+    getOptDataForAddLandowner();
+
+/////////////////////////////////////////////////////////////////////////////START: HIDE AND DISABLE FIELDS UPON LOADING MODAL/////////////////////////////////////////////////////////////////////////////
+    $('.checkboxCompany').hide();
+    $("#citySelect").attr('disabled','disabled');
+    $("#barangaySelect").attr('disabled','disabled');
+/////////////////////////////////////////////////////////////////////////////END: HIDE AND DISABLE FIELDS UPON LOADING MODAL/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////START: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN SEARCHING CSS/////////////////////////////////////////////////////////////////////////////
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+/////////////////////////////////////////////////////////////////////////////END: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN SEARCHING CSS//////////////////////////////////////////////////////////////////////////////
+
+//START:
+    $('.checkCompany').change(function () {
+    // Check if the selected value is not Philippines then 'hide' || Country:Select
+    if ($('.checkCompany').is(":checked") == true) {
+        //show
+        $('.checkboxCompany').show();
+        //hide
+        $(".hideFirstName").hide();
+        $(".hideMiddleName").hide();
+        $(".hideLastName").hide();
+        $(".hideSuffix").hide();
+        $(".hideGenderCode").hide();
+        $(".hideBirthday").hide();
+        $(".hideCivilStatusCode").hide();
+        $(".hideAddress").hide();
+        $(".hideNationality").hide();
+        $(".hideContactNumber").hide();
+        $(".hideEmail").hide();
+        $(".hideremarks").hide();
+        //combo box show
+        $(".hideSelection").hide();
+        //clear
+        $('#idvllastname').val('');
+        $('#idvlcontactnumber').val('');
+        $('#idvlremarks').val('');
+        $('.idvladdress').val('');
+    } else {
+        //hide
+        $('.checkboxCompany').hide();
+        //show
+        $(".hideFirstName").show();
+        $(".hideMiddleName").show();
+        $(".hideLastName").show();
+        $(".hideSuffix").show();
+        $(".hideGenderCode").show();
+        $(".hideBirthday").show();
+        $(".hideCivilStatusCode").show();
+        $(".hideAddress").show();
+        $(".hideNationality").show();
+        $(".hideContactNumber").show();
+        $(".hideEmail").show();
+        $(".hideremarks").show();
+        //combo box show
+        $(".hideSelection").show();
+        //clear
+        $('#company').val('');
+        $('#companynumber').val('');
+        $('#companyremarks').val('');
+        $('.companyaddress').val('');
+    }
+    });
+//END:
+
+/////////////////////////////////////////////////////////////////////////////START: COUNTRY:SELECT/////////////////////////////////////////////////////////////////////////////
+    $('#countrySelect').change(function () {
+    // Check if the selected value is not Philippines then 'hide' || Country:Select
+    if ($('#countrySelect').val() != 608) {
+        $("#addressTextArea").attr('disabled','disabled');
+        $("#citySelect").attr('disabled','disabled');
+        $("#provinceSelect").attr('disabled','disabled');
+        $("#barangaySelect").attr('disabled','disabled');
+    } else {
+        $("#addressTextArea").removeAttr('disabled');
+        $("#provinceSelect").removeAttr('disabled');
+    }
+    });
+/////////////////////////////////////////////////////////////////////////////END: COUNTRY:SELECT/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////START: FETCH CITY FROM SELECTED PROVINCE/////////////////////////////////////////////////////////////////////////////
+    $("#provinceSelect").change(function(e) {
+        $('#citySelect').append('<option value="-">loading...</option>');
+        var provinceCode = $("#provinceSelect option:selected").val();
+        var CITYHTML = '<option value="-" selected disabled>SELECT CITY</option>';
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/getCityByProvince',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                ProvinceCode: provinceCode,
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if ( data.length !== 0 ) {
+                    for (var i in data) {
+                        CITYHTML += '<option value="' + data[i].cityCode + '">' + data[i].cityName + '</option>';
+                    }
+                    $('#citySelect').html(CITYHTML);
+                    $("#citySelect").removeAttr('disabled');					
+                } else {
+                    // Handle the case when no data is returned
+                    console.log('No city data available.');
+                }
+            }
+        })
+    });
+/////////////////////////////////////////////////////////////////////////////END: FETCH CITY FROM SELECTED PROVINCE/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////START: FETCH BARANGAY FROM SELECTED PROVINCE/////////////////////////////////////////////////////////////////////////////
+    $("#citySelect").change(function(e) {
+        $('#barangaySelect').append('<option value="-">loading...</option>');
+        var cityCode = $("#citySelect option:selected").val();
+        var BRGYHTML = '<option value="-" selected disabled>SELECT BARANGAY</option>';
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/getBarangayByCity',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                CityCode: cityCode,
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if ( data.length !== 0 ) {
+                    if ( data.length !== 0 ) {
+                        for (var i in data) {
+                            BRGYHTML += '<option value="' + data[i].barangayCode + '">' + data[i].barangayName + '</option>';
+                        }
+                        $('#barangaySelect').html(BRGYHTML);
+                        $("#barangaySelect").removeAttr('disabled');					
+                    } else {
+                        // Handle the case when no data is returned
+                        console.log('No barangay data available.');
+                    }					
+                }
+            }
+        })
+    });
+/////////////////////////////////////////////////////////////////////////////END: FETCH BARANGAY FROM SELECTED PROVINCE/////////////////////////////////////////////////////////////////////////////
+</script>

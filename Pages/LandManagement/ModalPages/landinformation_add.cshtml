@@ -1,0 +1,201 @@
+<section>
+    <div class="container-fluid">
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title">Land Information</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <!-- START: LAND INFORMATION -->
+                    <div class="container">
+                        <div class="col-md-12">
+                            <!-- insert here -->
+                            <div class="row">
+                                @*<div class="col-md-4">
+                                    <label>Landowner Title Code</label>
+                                    <input class="LandInformationCode form-control form-control-sm triggerlandinformation" value="0" type="text" hidden>
+                                </div>*@
+                                <div class="col-md-6">
+                                    <label>Document Presented</label>
+                                    <select class="DocumentTypeCode Description DocumentType form-control form-control-sm triggerlandinformation" id="DocumentTypeSelect">
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Document Number</label>
+                                    <input class="DocumentNumber form-control form-control-sm triggerlandinformation" type="text" placeholder="-" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Lot Number</label>
+                                    <input class="LotNumber form-control form-control-sm triggerlandinformation" type="text" placeholder="-"  autocomplete="off">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Total Area <i>(sqm)</i></label>
+                                    <input class="Area form-control form-control-sm triggerlandinformation" step='0.01' placeholder='0.00' type="number">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Landowner/Company</label>
+                                        <!-- <select class="LandownerCode FullName Landowner form-control form-control-sm triggermultiple select2" multiple="multiple" data-placeholder="Select Landowner" name="LandownermultipleSelect" id="LandownerMultiple">
+                                        </select> -->
+                                        <select class="LandownerCode FullName Landowner form-control form-control-sm triggerlandinformation select2" data-placeholder="Select Landowner" name="LandownermultipleSelect" id="LandownerMultiple">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 hideCoOwner">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group clearfix">
+                                                <div class="icheck-lightblue d-inline">
+                                                    <input type="checkbox" id="checkbox2"  class="checkCoOwners">
+                                                    <label for="checkbox2">Co-Owners</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <textarea class="CoOwner form-control form-control-sm" placeholder="-" autocomplete="off" id="textareaCoOwner" disabled></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                        <label id="provinceLabel">Province</label>
+                                        <select class="provinceCode provinceName Province form-control form-control-sm triggerlandinformation select2" type="text" placeholder="-" id="provinceSelect">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label id="cityLabel">Municipality/City</label>
+                                        <select class="cityCode form-control form-control-sm select2" type="text" placeholder="-" id="citySelect" disabled>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label id="barangayLabel">Barangay</label>
+                                        <select class="barangayCode form-control form-control-sm select2" type="text" placeholder="-" id="barangaySelect" disabled>
+                                        </select>
+                                    </div>
+                            </div>
+                            <div class="row" id="remarksTextArea">
+                                <div class="col-md-12">
+                                    <label>Remarks</label>
+                                    <textarea class="remarks form-control form-control-sm triggerlandinformation" placeholder="-"></textarea  autocomplete="off">
+                                </div>
+                            </div>
+                            <!-- insert here: ends here -->
+                        </div>
+                    </div>
+                <!-- END: LAND INFORMATION -->
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+<script>
+    var sourceLandInformation = 'LandInformation';
+    getOptDataForAddLandInformation();
+    getOptDataForAddLandInformationMultiple();
+
+    //START: INITIALIZATION OF MULTIPLE SELECT CSS
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+    //END: INITIALIZATION OF MULTIPLE SELECT CSS
+
+    //START: OTHERS SELECT
+    $('#remarksTextArea').hide();
+    $('#DocumentTypeSelect').change(function () {
+        if( $('#DocumentTypeSelect').val() == 3 ) {
+            $('#remarksTextArea').show();
+        } else {
+            $('#remarksTextArea').hide();
+        }
+    })
+    //END: OTHERS SELECT
+/////////////////////////////////////////////////////////////////////////////START: FETCH CITY FROM SELECTED PROVINCE/////////////////////////////////////////////////////////////////////////////
+    $("#provinceSelect").change(function(e) {
+        $('#citySelect').append('<option value="-">loading...</option>');
+        var provinceCode = $("#provinceSelect option:selected").val();
+        var CITYHTML = '<option value="-" selected disabled>SELECT CITY</option>';
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/getCityByProvince',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                ProvinceCode: provinceCode,
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if ( data.length !== 0 ) {
+                    for (var i in data) {
+                        CITYHTML += '<option value="' + data[i].cityCode + '">' + data[i].cityName + '</option>';
+                    }
+                    $('#citySelect').html(CITYHTML);
+                    $("#citySelect").removeAttr('disabled');					
+                } else {
+                    // Handle the case when no data is returned
+                    console.log('No city data available.');
+                }
+            }
+        })
+    });
+/////////////////////////////////////////////////////////////////////////////END: FETCH CITY FROM SELECTED PROVINCE/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////START: FETCH BARANGAY FROM SELECTED PROVINCE/////////////////////////////////////////////////////////////////////////////
+    $("#citySelect").change(function(e) {
+        $('#barangaySelect').append('<option value="-">loading...</option>');
+        var cityCode = $("#citySelect option:selected").val();
+        var BRGYHTML = '<option value="-" selected disabled>SELECT BARANGAY</option>';
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/getBarangayByCity',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                CityCode: cityCode,
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if ( data.length !== 0 ) {
+                    if ( data.length !== 0 ) {
+                        for (var i in data) {
+                            BRGYHTML += '<option value="' + data[i].barangayCode + '">' + data[i].barangayName + '</option>';
+                        }
+                        $('#barangaySelect').html(BRGYHTML);
+                        $("#barangaySelect").removeAttr('disabled');					
+                    } else {
+                        // Handle the case when no data is returned
+                        console.log('No barangay data available.');
+                    }					
+                }
+            }
+        })
+    });
+/////////////////////////////////////////////////////////////////////////////END: FETCH BARANGAY FROM SELECTED PROVINCE/////////////////////////////////////////////////////////////////////////////
+
+//START:
+    $('.checkCoOwners').change(function () {
+        if ( $('.checkCoOwners').is(":checked") == true ) {
+            $("#textareaCoOwner").removeAttr('disabled');
+        } else {
+            $("#textareaCoOwner").attr('disabled','disabled');
+            $("#textareaCoOwner").val('');
+        }
+    });
+//END:
+</script>
