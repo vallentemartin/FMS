@@ -360,10 +360,6 @@ function getSysData(dataSource, filter) {
     })
 }
 function updateData(data, id, name, status) {
-    console.log(data);
-    console.log(id);
-    console.log(name);
-    console.log(status);
     showModal();
     ModalSize('xl');
     var title = 'Update ' + data + ' <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
@@ -545,7 +541,7 @@ function getOptDataForUpdate(dataSource, filter, id, name, selected) {
                     for (var i in data) {
                         RAWHTML += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
                     }
-                    $('.' + id + '.triggerdetail').html(RAWHTML);
+                    $('.' + id + '.triggerdetail').html(RAWHTML).select2();
                 },
                 error: function () {
                     toastr.error('Error on gathering Options!');
@@ -571,36 +567,41 @@ function getOptDataForAdd() {
     for (var j in fieldID) {
         if ($('.' + fieldID[j] + '.triggerdetail')[0].tagName == 'SELECT') {
             var tagClasses = $('.' + fieldID[j] + '.triggerdetail')[0].className.split(' ');
+            
+            console.log(tagClasses);
             var optSource = tagClasses[2];
             var optId = tagClasses[0];
             var optName = tagClasses[1];
             var RAWHTML = '<option disabled selected>-</option>';
-            $.ajax({
-                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getOptData',
-                type: 'post',
-                dataType: 'json',
-                data: JSON.stringify({
-                    username: $("#username").val(),
-                    token: $("#token").val(),
-                    dataSource: optSource,
-                    id: optId,
-                    name: optName,
-                    sysapp: sysapp
-                }),
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    for (var i in data) {
-                        RAWHTML += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
-                    }
-                    $('.' + optSource + '.triggerdetail').html(RAWHTML);
-                },
-                error: function () {
-                    toastr.error('Error on gathering Options!');
-                    stopLoading();
-                }
-            })
+            getOptDataForAddAppend(optSource,optId,optName,RAWHTML);
         }
     }
+}
+function getOptDataForAddAppend(optSource,optId,optName,RAWHTML){
+    $.ajax({
+        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getOptData',
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+            username: $("#username").val(),
+            token: $("#token").val(),
+            dataSource: optSource,
+            id: optId,
+            name: optName,
+            sysapp: sysapp
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            for (var i in data) {
+                RAWHTML += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+            }
+            $('.' + optSource + '.triggerdetail').html(RAWHTML).select2();
+        },
+        error: function () {
+            toastr.error('Error on gathering Options!');
+            stopLoading();
+        }
+    })
 }
 function showiFrame(data) {
     showModal();
@@ -612,10 +613,10 @@ function showiFrame(data) {
     //$('.modal-body').html('<iframe src="https://www.google.com/maps/place?igu=1/' + data + '"></iframe>');
     $('.modal-body').html('');
     $('#modalBody').css("height", "70vh");
-    setTimeout(initMap, 250, data);
+    setTimeout(initMapGeoLoc, 250, data);
 }
 
-function initMap(data) {
+function initMapGeoLoc(data) {
     var geoloc = data.split(',');
     mapboxgl.accessToken = mbgl;
     var map = new mapboxgl.Map({
@@ -728,6 +729,8 @@ function initDataTables(Data) {
             $(this).bootstrapSwitch('state', $(this).prop('checked'));
         })
     }
+    console.log(Data);
+    console.log(Permission.includes(Data + "_add") || excempted.includes($("#username").val()));
     if (Permission.includes(Data + "_add") || excempted.includes($("#username").val())) {
         $('#tbl_' + Data + '_filter').append(' <button class="btn btn-outline-success btn-sm addData" onclick="addData(\'' + Data + '\')"><i class="fas fa-plus"></i> Add</button>');
     }

@@ -1,0 +1,34 @@
+<section>
+    <!-- insert here -->
+</section>
+<script>
+    var sourceContract = 'ContractMain';
+    var dataSourceIdCol = 'LandContractCode';
+    getSysContractInfoData(sourceContract, dataSourceIdCol);
+
+    $('.triggercontractinfo').on('change', function () {
+        var syscol = $(this)[0].className.split(' ');
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/updateSysData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                dataSource: sourceContract,
+                filter: dataSourceIdCol,
+                selectedid: $('.selectedid').data('id'),
+                syscol: syscol[0],
+                syscolval: $(this).val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                getSysAllContractInfoData(sourceContract);
+            },
+            error: function () {
+                toastr.error('Error on Updating!');
+            }
+        })
+    })
+</script>
