@@ -988,45 +988,4 @@
         $('#Sqm').val(squareMeters);
     });
     /////////////////////////////////////////////////////////////////////////////END: SQM CONVERTION INTO HAS/////////////////////////////////////////////////////////////////////////////
-
-    //START:
-    $(".LandownerCode").change(function (e) {
-        LOcode = $('.LandownerCode option:selected').val();
-        console.log('LandownerCode', LOcode);
-        $.ajax({
-            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getSelectedLandownerInfoData',
-            type: 'post',
-            dataType: 'json',
-            data: JSON.stringify({
-                LandownerCode: LOcode,
-                username: $("#username").val(),
-                token: $("#token").val(),
-                sysapp: sysapp
-            }),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                console.log('Landowner Info', data);
-
-                // is Representative Data
-                $("#isRep").change(function (e) {
-                    if ($('#isRep').is(":checked") == true) {
-                        $('.RepName').prop('disabled',true);
-                        $('.RepContactNumber').prop('disabled',true);
-                        $('.RepEmail').prop('disabled',true);
-                        $('.RepName').val(data.Fullname);
-                        $('.RepContactNumber').val(data.ContactNumber);
-                        $('.RepEmail').val(data.Email);
-                    } else {
-                        $(".RepName").removeAttr('disabled');
-                        $(".RepContactNumber").removeAttr('disabled');
-                        $(".RepEmail").removeAttr('disabled');
-                        $('.RepName').val('');
-                        $('.RepContactNumber').val('');
-                        $('.RepEmail').val('');
-                    }
-                });
-            }
-        })
-    });
-    //END:
 </script>
