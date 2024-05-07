@@ -134,9 +134,17 @@ function saveLandContractData(sourceContract) {
         inputDataCollection['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
         inputDataCollection['LandInformationCode'] = $('#viewLandInformation').val();
         inputDataCollection['LandContractedArea'] = $('.LandContractedArea').val();
-        inputDataCollection['RepresentativeName'] = $('.RepName').val();
-        inputDataCollection['RepresentativeContactNumber'] = $('.RepContactNumber').val();
-        inputDataCollection['RepresentativeEmail'] = $('.RepEmail').val();
+
+        if ( $('.RepName').val() == '' && $('.RepContactNumber').val() == '' && $('.RepEmail').val() == '' ) {
+            inputDataCollection['RepresentativeName'] = null;
+            inputDataCollection['RepresentativeContactNumber'] = null;
+            inputDataCollection['RepresentativeEmail'] = null;
+        } else {
+            inputDataCollection['RepresentativeName'] = $('.RepName').val();
+            inputDataCollection['RepresentativeContactNumber'] = $('.RepContactNumber').val();
+            inputDataCollection['RepresentativeEmail'] = $('.RepEmail').val();
+        }
+
         console.log('sample', inputDataCollection);
         for (var j in fieldID) {
             inputDataCollection[fieldID[j]] = $('.triggercontractinfo.' + fieldID[j]).val();
@@ -155,7 +163,6 @@ function saveLandContractData(sourceContract) {
             success: function (data) {
                 console.log(data);
                 if (data == 1) {
-                    saveEscalation();
                     getSysAllContractInfoData(sourceContract);
                     saveNewFile(sourcefile);
                     toastr.success('Data added!');
@@ -710,34 +717,6 @@ function viewContractInfoData(sourceContract, filter) {
                     $('.landcontractedarea').text(viewContract.contractdata.LandContractedArea);
                 }
             })
-
-            // $.ajax({
-            //     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/viewContractMainData',
-            //     type: 'post',
-            //     dataType: 'json',
-            //     data: JSON.stringify({
-            //         LandContractCode: LandContractCode,
-            //         username: $("#username").val(),
-            //         token: $("#token").val(),
-            //         sysapp: sysapp
-            //     }),
-            //     contentType: "application/json; charset=utf-8",
-            //     success: function (viewcontractdata) {
-            //         console.log('ContractMain data', viewcontractdata);
-            //         console.log('ContractMain data', viewcontractdata.LeaseTerm);
-            //         $('#viewCompanyCode').val(viewcontractdata.CompanyCode + ' - ' + viewcontractdata.Companyname);
-            //         $('#viewPlantation').val(viewcontractdata.PlantationCode);
-            //         $('#viewCompanyCode').val(viewcontractdata.CompanyCode);
-            //         $('#repTextArea').val(viewcontractdata.RepresentativeName);
-            //         $('#viewLandowner').val(viewcontractdata.name);
-            //         $('#viewlease_period').val(viewcontractdata.LeasePeriod);
-            //         $('#viewLeaseTerm').val(viewcontractdata.LeaseTerm);
-            //         $('#viewAdvancePayment').val(viewcontractdata.AdvancePayment);
-            //         $('.viewStartOfPayment').val(viewcontractdata.StartOfPayment);
-            //         $('#viewAmountOfAdvancePayment').val(viewcontractdata.AmountOfAdvancePayment);
-            //         $('#viewPaymentTerm').val(viewcontractdata.PaymentTerms);
-            //     }
-            // })
             stopLoading();
         },
         error: function () {
@@ -814,7 +793,7 @@ function saveNewUploadedFile(name, filename, extension, dataSource) {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             if (data.retval == 1) {
-                toastr.success('Data added!');
+                // toastr.success('Data added!');
                 $('.triggerdetail').val('');
             } else {
                 toastr.error('Duplicate code!');

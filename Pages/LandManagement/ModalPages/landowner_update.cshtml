@@ -24,7 +24,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label>Contact Number</label>
-                                            <input class="ContactNumber form-control form-control-sm triggerlandowner" type="number" placeholder="(e.g 09XXXXXXXXX)" autocomplete="off">
+                                            <input class="ContactNumber form-control form-control-sm triggerlandowner" type="text" placeholder="(e.g 09XXXXXXXXX)" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label>Address</label>
-                                            <textarea class="Address form-control form-control-sm" placeholder="(e.g Unit/Room No., Floor, Building Name, Lot No., Phase No., House No., Street Name)" autocomplete="off"></textarea>
+                                            <textarea class="Address form-control form-control-sm" autocomplete="off"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -76,18 +76,6 @@
                                             <select class="GenderCode GenderName Gender form-control form-control-sm triggerlandowner">
                                             </select>
                                         </div>
-                                        <!-- <div class="col-md-3 form-group">
-                                            <label>Date of Birth:</label>
-
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">
-                                                    <i class="far fa-calendar-alt"></i>
-                                                    </span>
-                                                </div>
-                                                <input type="text" class="Birthday form-control form-control-sm float-right triggerlandowner" id="birthday" autocomplete="off">
-                                            </div>
-                                        </div> -->
                                         <div class="col-md-3">
                                             <label>Date of Birth:</label>
                                             <input type="date" class="Birthday form-control form-control-sm float-right triggerlandowner" autocomplete="off">
@@ -141,7 +129,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label>Contact Number</label>
-                                            <input class="ContactNumber form-control form-control-sm triggerlandowner" type="number" placeholder="(e.g 09XXXXXXXXX)" autocomplete="off">
+                                            <input class="ContactNumber form-control form-control-sm triggerlandowner" type="text" placeholder="(e.g 09XXXXXXXXX)" autocomplete="off">
                                         </div>
                                         <div class="col-md-4">
                                             <label>Email Address</label>
@@ -319,27 +307,6 @@
             stopLoading();
     });
 ////////////////////////////////////////////////////////END: FETCH DATA OF PROVINCE, CITY, AND BARANGAY UPON UPDATE/////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////START: DATEPICKER PER BIRTHDAY///////////////////////////////////////////////////////////////////////
-    // $('#birthday').daterangepicker({
-    //     singleDatePicker: true,
-    //     showDropdowns: true,
-    //     minYear: 1901,
-    //     maxYear: 3001,
-    //     // locale: {
-    //     //     cancelLabel: 'Clear',
-    //     //     format: 'MM/DD/YYYY'
-    //     // }
-    // });
-
-    // $('#birthday').on('apply.daterangepicker', function(ev, picker) {
-    // $(this).val(picker.startDate.format('yyy/MM/dd'));
-    // });
-
-    // $('#birthday').on('cancel.daterangepicker', function(ev, picker) {
-    // $(this).val('');
-    // });
-/////////////////////////////////////////////////////////////////////////////END: DATEPICKER PER ///////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////START: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN ///////////////////////////////////////////////////////
     //Initialize Select2 Elements

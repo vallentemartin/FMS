@@ -353,6 +353,12 @@ function getSysLandInformationData(sourceLandInformation, filter) {
         success: function (data) {
             console.log('land information update', data);
 
+            if ( data.WithCoOwner == false) {
+                $('.hideCoOwner').hide();
+            } else {
+                $('.hideCoOwner').show();
+            }
+
             if ( data.DocumentTypeCode != 3 ) {
                 $('#hideRemarks').hide();
             } else {

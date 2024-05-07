@@ -868,6 +868,16 @@ $(document).on('click', '#duplicatepage', function () {
 $(document).on('click', '#helpbtn', function () {
     window.open('http://support.lapanday.com', '_blank');
 })
+$(document).on('keyup', '.autoCaps', function () {
+    $(this).val($(this).val().toUpperCase());
+})
+$(document).on('keyup', '.maskAmount', function () {
+    $(this).mask("#,##0.00", { reverse: true });
+
+})
+$(document).on('keyup', '.maskPhone', function () {
+    $(this).mask("0000-000-0000");
+})
 function showModal() {
     $('#modalBody').removeAttr('style');
     $('#modal-default').modal('show');

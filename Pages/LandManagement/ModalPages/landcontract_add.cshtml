@@ -103,6 +103,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <br>
                     <div class="col-md-12 bg-light headertext">
                         <h5>Representative</h5>
                     </div>
@@ -115,7 +116,7 @@
                                             <div class="form-group clearfix">
                                                 <div class="icheck-lightblue d-inline">
                                                     <input type="checkbox" id="isRep" class="checkRepresentative">
-                                                    <label for="isRep">is Landowner the Representative?</label>
+                                                    <label for="isRep">is the Landowner same as the Authorize Representative?</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,40 +143,49 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <br>
                     <div class="col-md-12 bg-light headertext">
                         <h5>Area to be Contracted</h5>
                     </div>
-                    <div class="row">
+                    <div class="row flort-right">
                         <div class="col-md-6">
+                            <label>Total Area Remaining <i>(sqm)</i></label>
+                            <input type="text"
+                                class="Hectare form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
+                                id="Remaining" step='0.01' min="1" placeholder='0.00' type="number" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Area to be contracted per <i>(has)</i></label>
+                            <input type="text"
+                                class="Hectare form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
+                                id="Hectares" step='0.01' min="1" placeholder='0.00' type="number" disabled>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <label>Area to be contracted per <i>(sqm)</i></label>
                             <input type="text"
                                 class="LandContractedArea form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
                                 id="Sqm" step='0.01' min="1" max="1000000" placeholder='0.00' type="number"
                                 onkeyup=imposeMinMax(this) disabled>
                         </div>
-                        <div class="col-md-3">
-                            <label>Area to be contracted per <i>(has)</i></label>
-                            <input type="text"
-                                class="Hectare form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
-                                id="Hectares" step='0.01' min="1" placeholder='0.00' type="number"
-                                onkeyup=imposeMinMax(this) disabled>
+                        <br>
+                        <br>
+                        <div class="col-md-12 bg-light headertext">
+                            <h5>Attachment</h5>
                         </div>
-                        <div class="col-md-3">
-                            <label>Total Area Remaining <i>(sqm)</i></label>
-                            <input type="text"
-                                class="Hectare form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
-                                id="Remaining" step='0.01' min="1" placeholder='0.00' type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Heirs</label>
-                                <textarea class="Heirs form-control form-control-sm triggercontractinfo" placeholder="(e.g John B. Doe, Anna N. Lee)" autocomplete="off" id="heairTextArea" disabled></textarea>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="file">Attach Document</label>
+                                    <input id="fileUploader" name="file"
+                                        class="Init_Filename form-control form-control-sm triggerdetail" type="file" multiple />
+                                </div>
                             </div>
                         </div>
-                    </div> -->
+                        
+                    </div>
+                </div>
                 <!-- END: CONTRACT INFORMATION -->
             </div>
             <!-- /.card-body -->
@@ -183,7 +193,7 @@
     </div>
 </section>
 
-<section>
+<!-- <section>
     <div class="container-fluid">
         <div class="card card-lightblue">
             <div class="card-header">
@@ -192,15 +202,12 @@
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
                     </button>
-                    @*<button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>*@
                 </div>
-            </div>
+            </div> -->
             <!-- /.card-header -->
-            <div class="card-body">
+            <!-- <div class="card-body"> -->
                 <!-- START: CONTRACT INFORMATION -->
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
                             <label for="file">Attach Document</label>
@@ -208,13 +215,13 @@
                                 class="Init_Filename form-control form-control-sm triggerdetail" type="file" multiple />
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- END: CONTRACT INFORMATION -->
-            </div>
+            <!-- </div> -->
             <!-- /.card-body -->
-        </div>
+        <!-- </div>
     </div>
-</section>
+</section> -->
 
 <section>
     <div class="container-fluid">
@@ -314,35 +321,21 @@
                                             <tbody id="tbl_Users-data">
                                             </tbody>
                                         </table>
+                                        <tfoot>
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-success" onclick="generateEscalation()">Generate Escalation</button>
+                                            </div>
+                                            
+                                            <!-- <tr>
+                                                <td>Sum</td>
+                                                <td>$180</td>
+                                            </tr> -->
+                                        </tfoot>
                                     </div>
                                 </div>
                             </div>
                             <!-- insert table end -->
                             <div class="container">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="labelwidth">Total Rental:</label>
-                                            <span class="Total_rental"></span>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label class="labelwidth">Advance Payment:</label>
-                                            <input class="advance_payment_amount" style="border:1px solid #ced4da">
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label class="labelwidth">Remaining Rental:</label>
-                                            <span class="Remaining_rental"></span>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label class="dividedyrs labelwidth" for="divided"></label>
-                                            <input class="yrsdivided" style="border:1px solid #ced4da">
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label class="labelwidth">Payment Amount:</label>
-                                            <span class="Payment_Amount"></span>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -366,7 +359,36 @@
                                                         <td><span class="Payment_Amount"></span></td>
                                                     </tr>
                                                 </tbody>
+                                                <tfoot>
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label class="labelwidth">Total Rental:</label>
+                                                                <span class="Total_rental"></span>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label class="labelwidth">Advance Payment:</label>
+                                                                <input class="advance_payment_amount" style="border:1px solid #ced4da">
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label class="labelwidth">Remaining Rental:</label>
+                                                                <span class="Remaining_rental"></span>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label class="dividedyrs labelwidth" for="divided"></label>
+                                                                <input class="yrsdivided" style="border:1px solid #ced4da">
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label class="labelwidth">Payment Amount:</label>
+                                                                <span class="Payment_Amount"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </tfoot>
                                             </table>
+                                            <div class="col-md-12">
+                                                <button type="button" class="view btn btn-success" onclick="generatePaymentSched()"> View Payment Schedule </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -398,12 +420,9 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="col-md-12">
-                    <button type="button" class="btn btn-success" onclick="generateEscalation()">Generate Escalation</button>
-                    <button type="button" class="view btn btn-success" onclick="generatePaymentSched()"> View Payment Schedule </button>
-                </div>
-            </div>
+            <!-- <div class="card-footer">
+                
+            </div> -->
         </div>
     </div>
 </section>
@@ -420,7 +439,7 @@
     initDataTablesEscalation();
     getOptDataForPlantation();
     $('.hideCoOwner').hide();
-    $('.hideRepresentativeLabel').hide();
+    // $('.hideRepresentativeLabel').hide();
     $('.view').hide();
     $('.yrsdivided').hide();
 
@@ -866,21 +885,6 @@
                 } else {
                     console.log('No Land Information data available.');
                 }
-
-                // is Representative Data
-                $("#isRep").change(function (e) {
-                    if ($('#isRep').is(":checked") == true) {
-                        $('.hideRepresentativeLabel').show();
-                        $('.RepName').val(LandInformation.LIName);
-                        $('.RepContactNumber').val(LandInformation.LIContact);
-                        $('.RepEmail').val(LandInformation.LIEmail);
-                    } else {
-                        $('.hideRepresentativeLabel').hide();
-                        $('.RepName').val(null);
-                        $('.RepContactNumber').val(null);
-                        $('.RepEmail').val(null);
-                    }
-                });
             }
         })
     });
@@ -894,9 +898,13 @@
                 input.value = input.min;
             }
 
-            if (parseFloat(input.value) > parseFloat($('#viewArea').text())) {
+            // if (parseFloat(input.value) > parseFloat($('#viewArea').text())) {
+            //     toastr.error('Input data reach the max limit of total area!');
+            //     input.value = $('#viewArea').text();
+            // }
+            if (parseFloat(input.value) > parseFloat($('#Remaining').val())) {
                 toastr.error('Input data reach the max limit of total area!');
-                input.value = $('#viewArea').text();
+                input.value = $('#Remaining').val();
             }
         }
     }
@@ -980,4 +988,45 @@
         $('#Sqm').val(squareMeters);
     });
     /////////////////////////////////////////////////////////////////////////////END: SQM CONVERTION INTO HAS/////////////////////////////////////////////////////////////////////////////
+    
+    //START:
+    $(".LandownerCode").change(function (e) {
+        LOcode = $('.LandownerCode option:selected').val();
+        console.log('LandownerCode', LOcode);
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getSelectedLandownerInfoData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                LandownerCode: LOcode,
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log('Landowner Info', data);
+
+                // is Representative Data
+                $("#isRep").change(function (e) {
+                    if ($('#isRep').is(":checked") == true) {
+                        $('.RepName').prop('disabled',true);
+                        $('.RepContactNumber').prop('disabled',true);
+                        $('.RepEmail').prop('disabled',true);
+                        $('.RepName').val(data.Fullname);
+                        $('.RepContactNumber').val(data.ContactNumber);
+                        $('.RepEmail').val(data.Email);
+                    } else {
+                        $(".RepName").removeAttr('disabled');
+                        $(".RepContactNumber").removeAttr('disabled');
+                        $(".RepEmail").removeAttr('disabled');
+                        $('.RepName').val('');
+                        $('.RepContactNumber').val('');
+                        $('.RepEmail').val('');
+                    }
+                });
+            }
+        })
+    });
+    //END:
 </script>
