@@ -59,6 +59,16 @@
                                         </select>
                                     </div>
                             </div>
+                            <div class="row hideCoOwner">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Co-Owner</label>
+                                            <textarea class="CoOwner form-control form-control-sm triggerlandinformation autoCaps" placeholder="-" autocomplete="off" id="textareaCoOwner"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row" id="hideRemarks">
                                 <div class="col-md-12">
                                     <label>Remarks</label>
@@ -78,6 +88,13 @@
     var sourceLandInformation = 'LandInformation';
     var dataSourceIdCol = 'LandInformationCode';
     getSysLandInformationData(sourceLandInformation, dataSourceIdCol);
+
+    // if ( $('.hideCoOwner').val() == '' ) {
+    //     $('.hideCoOwner').hide();
+    // } else {
+    //     $('.hideCoOwner').show();
+    // }
+
     $('.triggerlandinformation').on('change', function () {
         var syscol = $(this)[0].className.split(' ');
         $.ajax({
@@ -149,7 +166,7 @@
     })
     //END: INITIALIZATION OF MULTIPLE SELECT CSS
 
-////////////////////////////////////////////////////////START: FETCH DATA OF PROVINCE, CITY, AND BARANGAY UPON UPDATE/////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////START: FETCH DATA OF PROVINCE, CITY, AND BARANGAY UPON UPDATE////////////////////////////////////////////////////////////////////////////
     $('#provinceSelect').change(function() {
         $("#barangaySelect").attr('disabled','disabled');
         //START: PARAMETER: PROVINCECODE TO FETCH CITY
@@ -216,5 +233,5 @@
             //END:  PARAMETER: CITYICODE TO FETCH BARANGAY
             stopLoading();
     });
-////////////////////////////////////////////////////////END: FETCH DATA OF PROVINCE, CITY, AND BARANGAY UPON UPDATE/////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////END: FETCH DATA OF PROVINCE, CITY, AND BARANGAY UPON UPDATE////////////////////////////////////////////////////////////////////////////
 </script>
