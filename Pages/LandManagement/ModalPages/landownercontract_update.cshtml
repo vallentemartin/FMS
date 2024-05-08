@@ -1,0 +1,150 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <!-- <div class="col-md-4">
+                    <label>Land Title Number</label>
+                    <input class="LandTitleNo form-control form-control-sm triggerdetail" type="text" disabled>
+                </div> -->
+                <div class="col-md-4">
+                    <label>Land Contact Code</label>
+                    <input class="LandownerContractCode LandownerContractCode LandownerContract form-control form-control-sm triggerdetail" type="text" disabled>
+                </div>
+                <div class="col-md-4">
+                    <label>Contact Person</label>
+                    <select class="LandownerCode FullName Landowner form-control form-control-sm triggerdetail">
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label>Plantation Code</label>
+                    <select class="PlantationCode PlantationName Plantation form-control form-control-sm triggerdetail">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Payment Term</label>
+                    <select class="PaymentTermsCode PaymentTerms PaymentTerms form-control form-control-sm triggerdetail">
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>Start Date:</label>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                            <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="StartDate form-control form-control-sm float-right triggerdetail" id="startdate">
+                    </div>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>End Date:</label>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                            <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="EndDate form-control form-control-sm float-right triggerdetail" id="enddate">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Remarks</label>
+                    <textarea class="remarks form-control form-control-sm triggerdetail"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var dataSource = 'LandownerContract';
+    var dataSourceIdCol = 'LandownerContractCode';
+    getSysData(dataSource, dataSourceIdCol);
+    //if ($('.status').data('status') == 0) {
+    //    $('.triggerdetail').prop('disabled', 'true');
+    //}
+    $('.triggerdetail').on('change', function () {
+        var syscol = $(this)[0].className.split(' ');
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/updateSysData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                dataSource: dataSource,
+                filter: dataSourceIdCol,
+                selectedid: $('.selectedid').data('id'),
+                syscol: syscol[0],
+                syscolval: $(this).val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                getSysAllData(dataSource);
+            },
+            error: function () {
+                toastr.error('Error on Updating!');
+            }
+        })
+    })
+
+    //startdate
+    $('#startdate').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: 3001,
+        // autoApply: false,
+        // autoUpdateInput: false,
+        locale: {
+            cancelLabel: 'Clear',
+            format: 'MM/DD/YYYY'
+        }
+    });
+
+    $('#startdate').on('apply.daterangepicker', function(ev, picker) {
+    $(this).val(picker.startDate.format('MM/DD/YYYY'));
+    // console.log('startdate apply',$(this).val(picker.startDate.format('MM/DD/YYYY')));
+    // console.log('startdate apply1',picker.startDate.format('MM/DD/YYYY'));
+    });
+
+    $('#startdate').on('cancel.daterangepicker', function(ev, picker) {
+    $(this).val('');
+    });
+
+    enddate
+    $('#enddate').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: 3001,
+        // autoApply: false,
+        // autoUpdateInput: false,
+        locale: {
+            cancelLabel: 'Clear',
+            format: 'MM/DD/YYYY'
+        }
+    });
+
+    $('#enddate').on('apply.daterangepicker', function(ev, picker) {
+    $(this).val(picker.endDate.format('MM/DD/YYYY'));
+    console.log('enddate apply',$(this).val(picker.endDate.format('MM/DD/YYYY')));
+    });
+
+    $('#enddate').on('cancel.daterangepicker', function(ev, picker) {
+    $(this).val('');
+    });
+
+    // console.log('Start Date',$('#startdate').val());
+    // console.log('End Date',$('#enddate').val());
+</script>

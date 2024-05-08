@@ -1,0 +1,66 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                @*<div class="col-md-4">
+                    <label>Landowner Code</label>
+                    <input class="LandownerCode form-control form-control-sm triggerdetail" value="0" type="text" hidden>
+                </div>*@
+                <div class="col-md-6">
+                    <label>First Name</label>
+                    <input class="FirstName form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-6">
+                    <label>Last Name</label>
+                    <input class="LastName form-control form-control-sm triggerdetail" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Contact Number</label>
+                    <input class="ContactNumber form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-6">
+                    <label>Email Address</label>
+                    <input class="Email form-control form-control-sm triggerdetail" type="text">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Address</label>
+                    <textarea class="Address form-control form-control-sm triggerdetail"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label>Remarks</label>
+                    <textarea class="remarks form-control form-control-sm triggerdetail"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var dataSource = 'Landowner';
+    var dataSourceIdCol = 'LandownerCode';
+    getOptDataForAdd();
+    //var fields = $('.triggerdetail');
+    //var fieldID = [];
+    //for (var x in fields) {
+    //    if (fields[x].className != undefined) {
+    //        var y = fields[x].className.split(' ');
+    //        fieldID.push(y[0]);
+    //    }
+    //}
+    //for (var j in fieldID) {
+    //    if ($('.' + fieldID[j] + '.triggerdetail')[0].tagName == 'SELECT') {
+    //        var tagClasses = $('.' + fieldID[j] + '.triggerdetail')[0].className.split(' ');
+    //        var optSource = tagClasses[1];
+    //        var optName = tagClasses[2];
+    //    }
+    //}
+    //getOptDataForAdd(optSource, fieldID[j], optName);
+</script>

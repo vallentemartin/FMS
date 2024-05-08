@@ -1,0 +1,291 @@
+  <style>
+        .calculation-box {
+            height: 75px;
+            width: 150px;
+            position: absolute;
+            bottom: 40px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            text-align: center;
+        }
+
+      
+
+        #fade {
+            display: block;
+            position: relative;
+            margin: 0px auto;
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            font-size: 12px;
+            text-align: center;
+            color: #fff;
+            background: #ee8a65;
+        }
+
+        .map-overlay {
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            position: absolute;
+            width: 25%;
+            top: 0;
+            left: 0;
+            padding: 10px;
+        }
+
+        .map-overlay .map-overlay-inner {
+            background-color: #fff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .map-overlay h2 {
+            line-height: 24px;
+            display: block;
+            margin: 0 0 10px;
+        }
+
+        .map-overlay input {
+            background-color: transparent;
+            display: inline-block;
+            width: 100%;
+            position: relative;
+            margin: 0;
+            cursor: ew-resize;
+            text-align: center;
+            font-weight: normal;
+        }
+    </style>
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                @*<div class="col-md-4">
+                    <label>Landowner Title Code</label>
+                    <input class="LandTitleCode form-control form-control-sm triggerdetail" value="0" type="text" hidden>
+                </div>*@
+                <div class="col-md-6">
+                    <label>Land Title Number</label>
+                    <input class="LandTitleNo form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-6">
+                    <label>Landowner Code</label>
+                    <select class="LandownerCode LandownerCode Landowner form-control form-control-sm triggerdetail">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Land Address</label>
+                    <textarea class="LandAddress form-control form-control-sm triggerdetail"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Barangay</label>
+                    <input class="Barangay form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-3">
+                    <label>Municipality/Province</label>
+                    <input class="Province form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-3">
+                    <label>City</label>
+                    <input class="City form-control form-control-sm triggerdetail" type="text">
+                </div>
+                <div class="col-md-3">
+                    <label>Geo-Location</label>
+                    <input class="geoLocation form-control form-control-sm triggerdetail" type="text">
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Geo-Location</label>
+                    <input class="geoLocation form-control form-control-sm triggerdetail" type="text">
+                </div>
+            </div>
+        </div> -->
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Remarks</label>
+                    <textarea class="remarks form-control form-control-sm triggerdetail"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var dataSource = 'LandownerTitle';
+    var dataSourceIdCol = 'LandTitleCode';
+    getOptDataForAdd();
+//     function getRandomColor() {
+//     var letters = '0123456789ABCDEF';
+//     var color = '#';
+//     for (var i = 0; i < 6; i++) {
+//         color += letters[Math.floor(Math.random() * 16)];
+//     }
+//     return color;
+// }
+
+// var test = {};
+// var test1 = [];
+// var obj = {};
+// var longlat = [];
+// mapboxgl.accessToken =
+//     'pk.eyJ1IjoiamJ1cnFzIiwiYSI6ImNsbmNnN3psdzBqeGUyeG9hNzhjam5reGcifQ.fyErGg472qiTnQXjYGA3ag';
+// var map = new mapboxgl.Map({
+//     container: 'map', // container ID
+//     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+//     style: 'mapbox://styles/mapbox/light-v11', // style URL
+//     center: [125.647859, 7.134382], // starting position [lng, lat]
+//     zoom: 12 // starting zoom
+// });
+
+
+// var draw = new MapboxDraw({
+//     displayControlsDefault: false,
+//     // Select which mapbox-gl-draw control buttons to add to the map.
+//     controls: {
+//         polygon: true,
+//         trash: true
+//     },
+//     // Set mapbox-gl-draw to draw by default.
+//     // The user does not have to click the polygon control button first.
+//     defaultMode: 'draw_polygon'
+// });
+// map.addControl(draw);
+
+// map.on('draw.create', updateArea);
+// map.on('draw.delete', updateArea);
+// map.on('draw.update', updateArea);
+
+// function updateArea(e) {
+//     var data = draw.getAll();
+//     var fillid = 1;
+//     var counterlatlng = 1;
+//     for (let i = 0; i < data.features.length; i++) {
+
+
+//         var element = data.features[i];
+//         var coord = element.geometry.coordinates;
+
+//         for (let j = 0; j < coord.length; j++) {
+//             var element2 = coord[j];
+//             console.log(element2);
+//         }
+
+//         element.properties.type = 'Feature';
+//         element.id = fillid++;
+//         element.properties.id = element.id;
+//         console.log(element);
+//         element.properties.description =
+//             '<strong>Make it Mount Pleasant</strong><p>Make it Mount Pleasant is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>';
+
+//         var jsontest = {
+//             'type': 'geojson',
+//             'data': element
+//         }
+//     }
+//     test1.push(jsontest);
+//     var answer = document.getElementById('calculated-area');
+//     // if (data.features.length > 0) {
+//     //     var area = turf.area(data);
+//     //     // Restrict the area to 2 decimal points.
+//     //     var rounded_area = Math.round(area * 100) / 100;
+//     //     console.log(rounded_area);
+//     //     answer.innerHTML = `<p><strong>${rounded_area}</strong></p><p>square meters</p>`;
+
+//     // } else {
+//     //     answer.innerHTML = '';
+//     //     if (e.type !== 'draw.delete')
+//     //         alert('Click the map to draw a polygon.');
+//     // }
+
+// }
+// function saveLatlng() {
+//     var counterlatlng = 1;
+//     var data = 'mapsdetail';
+
+//     var geodata = [];
+//     var fields = $('.triggerdetail');
+//     var fieldID = [];
+//     var inputData = {};
+//     var inputDataCollection = {};
+//     for (var x in fields) {
+//         if (fields[x].className != undefined) {
+//             var y = fields[x].className.split(' ');
+//             fieldID.push(y[0]);
+//         }
+//     }
+//     console.log(test1);
+//     var coor = JSON.stringify(obj);
+//     for (let j = 0; j < test1.length; j++) {
+//         var arrcoor = test1[j];
+//         console.log(arrcoor.data.geometry.coordinates);
+//         for (let i = 0; i < arrcoor.data.geometry.coordinates[0].length; i++) {
+//             count = counterlatlng++;
+//             var newitem = arrcoor.data.geometry.coordinates[0][i];
+//             var obj = {
+//                 latitude: newitem[0],
+//                 longitude: newitem[1],
+//                 counter: i + 1,
+//                 id: arrcoor.data.id
+//             }
+//             var items = newitem.join(',');
+//             console.log(items);
+//             geodata.push(items);
+
+//         }
+
+//     }
+//     console.log(geodata.join('|'));
+//     geoloc = geodata.join('|');
+
+//     if (confirm('Save this data?')) {
+//         inputDataCollection['username'] = $("#username").val();
+//         inputDataCollection['token'] = $("#token").val();
+//         inputDataCollection['dataSource'] = 'LandownerTitle';
+//         inputDataCollection['sysapp'] = sysapp;
+//         inputData['polygon'] = geoloc;
+//         for (var j in fieldID) {
+//             inputData[fieldID[j]] = $('.triggerdetail.' + fieldID[j]).val();
+//             $('.triggerdetail.' + fieldID[j]).val('');
+//         }
+//         inputDataCollection['inputData'] = inputData;
+//         $.ajax({
+//             url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/saveSysData',
+//             type: 'post',
+//             dataType: 'json',
+//             data: JSON.stringify(inputDataCollection),
+//             contentType: "application/json; charset=utf-8",
+//             success: function (data) {
+//                 if (data.retval == 1) {
+//                     getSysAllData(dataSource);
+//                     toastr.success('Data added!');
+//                 } else {
+//                     toastr.error('Duplicate code!');
+//                     stopLoading();
+//                 }
+//             },
+//             error: function () {
+//                 toastr.error('Error on saving data!');
+//                 stopLoading();
+//             }
+//         })
+//     }
+
+// }
+</script>

@@ -1,0 +1,84 @@
+<style>
+.map-overlay {
+    font:
+        12px/20px 'Helvetica Neue',
+        Arial,
+        Helvetica,
+        sans-serif;
+    position: absolute;
+    width: 200px;
+    top: 0;
+    left: 0;
+    padding: 10px;
+}
+
+.map-overlay .map-overlay-inner {
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.map-overlay-inner fieldset {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+}
+
+.map-overlay-inner label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.map-overlay-inner .select-fieldset {
+    display: block;
+}
+
+.map-overlay-inner .select-fieldset label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.map-overlay-inner .select-fieldset select {
+    width: 100%;
+}
+
+</style>
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12" style="margin:20px 0px 0px 0px;">
+           <div class="row">
+                <label>Map</label>
+                <div class="col-md-12" id="map" style="border:solid 1px; position: relative; height:600px; top: 0; bottom: 0; width: 100%;"></div>
+                <div class="map-overlay top" style="margin-top:30px;">
+                    <div class="map-overlay-inner" style=" ">
+                        <!-- <fieldset class="select-fieldset">
+                            <label>Select Area</label>
+                            <select id="lightPreset" name="lightPreset">
+                                <option value="dawn">Dawn</option>
+                                <option value="day" selected="">Day</option>
+                                <option value="dusk">Dusk</option>
+                                <option value="night">Night</option>
+                            </select>
+                        </fieldset> -->
+                        <fieldset>
+                            <label for="ldms">LDMS - Landowner Titles</label>
+                            <input type="radio" name="polygon" value="1" >
+                        </fieldset>
+                        <fieldset>
+                            <label for="showPointOfInterestLabels">LDMS - Landowner Contracts</label>
+                            <input type="radio" name="polygon"  value="2" >
+                        </fieldset>
+                        <fieldset>
+                            <label for="showRoadLabels">Production</label>
+                            <input type="radio" name="polygon"  value="3" >
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Maps/maps.js"></script>

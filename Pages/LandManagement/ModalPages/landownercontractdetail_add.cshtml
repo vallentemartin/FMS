@@ -1,0 +1,104 @@
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+            <div class="row">
+                @*<div class="col-md-4">
+                    <label>Land Contract Detail Code</label>
+                    <input class="LandownerContractDetailCode form-control form-control-sm triggerdetail" type="text">
+                </div>
+                </div>*@
+                <div class="col-md-6">
+                    <label>Landowner Contract Code</label>
+                    <select class="LandownerContractCode name LandownerContract form-control form-control-sm triggerdetail">
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label>Land Title Number</label>
+                    <select class="LandownerTitleCode Title LandownerTitle form-control form-control-sm triggerdetail">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Landowner</label>
+                    <select class="LandownerCode FullName Landowner form-control form-control-sm triggerdetail">
+                    </select>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Effectivity Date:</label>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                            <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="EffectivityDate form-control form-control-sm float-right triggerdetail" id="effectivitydate">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Remarks</label>
+                    <textarea class="remarks form-control form-control-sm triggerdetail"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var dataSource = 'LandownerContractDetail';
+    var dataSourceIdCol = 'LandownerContractDetailCode';
+    getOptDataForAdd();
+
+     //Date range picker
+    // $('#contractsdaterange').daterangepicker({
+    //     showDropdowns: true
+    // })
+    //startdate
+    $('#effectivitydate').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: 3001,
+        // autoApply: false,
+        // autoUpdateInput: false,
+        locale: {
+            cancelLabel: 'Clear',
+            format: 'MM/DD/YYYY'
+        }
+    });
+
+    $('#effectivitydate').on('apply.daterangepicker', function(ev, picker) {
+    $(this).val(picker.startDate.format('MM/DD/YYYY'));
+    console.log('startdate apply',$(this).val(picker.startDate.format('MM/DD/YYYY')));
+    });
+
+    $('#effectivitydate').on('cancel.daterangepicker', function(ev, picker) {
+    $(this).val('');
+    });
+
+    console.log('Start Date',$('#effectivitydate').val());
+    // console.log($('#contractsdaterange').val().split(" - "));
+    //var fields = $('.triggerdetail');
+    //var fieldID = [];
+    //for (var x in fields) {
+    //    if (fields[x].className != undefined) {
+    //        var y = fields[x].className.split(' ');
+    //        fieldID.push(y[0]);
+    //    }
+    //}
+    //for (var j in fieldID) {
+    //    if ($('.' + fieldID[j] + '.triggerdetail')[0].tagName == 'SELECT') {
+    //        var tagClasses = $('.' + fieldID[j] + '.triggerdetail')[0].className.split(' ');
+    //        var optSource = tagClasses[1];
+    //        var optName = tagClasses[2];
+    //    }
+    //}
+    //getOptDataForAdd(optSource, fieldID[j], optName);
+</script>

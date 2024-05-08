@@ -1,0 +1,404 @@
+$('.HTML_container').ready(function () {
+    initDataTables('Landowner');
+    getSysAllData('Landowner');
+})
+
+// function getBlocks(dataSource, filter) {
+//     var data = $('.polygon').val();
+//     var fields = $('.triggerdetail');
+//     var fieldID = [];
+//     for (var x in fields) {
+//         if (fields[x].className != undefined) {
+//             var y = fields[x].className.split(' ');
+//             fieldID.push(y[0]);
+//         }
+//     }
+//     $.ajax({
+//         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getSysData',
+//         type: 'post',
+//         dataType: 'json',
+//         data: JSON.stringify({
+//             username: $("#username").val(),
+//             token: $("#token").val(),
+//             dataSource: dataSource,
+//             filter: filter,
+//             selectedID: $('.selectedid').data('id'),
+//             sysapp: sysapp
+//         }),
+//         contentType: "application/json; charset=utf-8",
+//         success: function (data) {
+//             for (var j in fieldID) {
+//                 if ($('.' + fieldID[j] + '.triggerdetail')[0].tagName == 'SELECT') {
+//                     var tagClasses = $('.' + fieldID[j] + '.triggerdetail')[0].className.split(' ');
+//                     var optSource = tagClasses[2];
+//                     var optFilter = optSource + 'Code';
+//                     var name = tagClasses[1];
+//                     getOptDataForUpdate(optSource, optFilter, fieldID[j], name, data[fieldID[j]]);
+//                 } else {
+//                     $('.' + fieldID[j]).val(data[fieldID[j]]);
+//                 }
+//             }
+//             if (Permission.includes(dataSource + "_update") || excempted.includes($("#username").val())) {
+//                 if ($('.status').data('status') == 0) {
+//                     $('.triggerdetail').prop('disabled', 'true');
+//                 }
+//             } else {
+//                 $('.triggerdetail').prop('disabled', 'true');
+//             }
+//             stopLoading();
+//             console.log(data.polygon);
+//             if (data.polygon == null || data.polygon == '') {
+//                 var json = null;
+//                 maps(json);
+//             }
+//             else {
+//                 var counter = 1;
+//                 items = data.polygon.split('|');
+//                 //  test = items.split(',');
+//                 dex = [];
+//                 for (var j = 0; j < items.length; j++) {
+//                     coordinate = items[j];
+//                     var coord = coordinate.split(',');
+//                     var coords = [];
+//                     for (let k = 0; k < coord.length; k++) {
+//                         const parsecoords = parseFloat(coord[k]);
+//                         coords.push(parsecoords);
+//                     }
+//                     dex.push(coords);
+//                 }
+//                 // var json = {
+//                 //     'type': 'geojson',
+//                 //     'data': {
+//                 //         'type': 'Feature',
+//                 //         'geometry': {
+//                 //             'type': 'Polygon',
+//                 //             // These coordinates outline Maine.
+//                 //             'coordinates': [
+//                 //                 dex
+//                 //             ]
+//                 //         },
+//                 //         'id': counter++,
+//                 //         'properties': {
+//                 //             'description': "<strong>LandTitleCode</strong>:" + data.LandTitleCode + "<br>" + data.LandTitleNo + "<br>" + data.City + "<br>" + data.Province + "<br>" + data.Barangay + "</br>"
+//                 //         }
+//                 //     }
+//                 // }
+//                 var json = {
+//                     "type": "FeatureCollection",
+//                     "features": [{
+//                         "type": "Feature",
+//                         "properties": {},
+//                         "geometry": {
+//                             "type": "Polygon",
+//                             "coordinates": [
+
+//                                 dex
+
+//                             ]
+//                         }
+//                     }]
+//                 };
+//                 // var json = {
+//                 //     "type": "FeatureCollection",
+//                 //     "features": [{
+//                 //         "id": "5f40595793fbe89303f6bd44f35d574d",
+//                 //         "type": "Feature",
+//                 //         'id': counter++,
+//                 //         'properties': {
+//                 //             'description': "<strong>LandTitleCode</strong>:" + data.LandTitleCode + "<br>" + data.LandTitleNo + "<br>" + data.City + "<br>" + data.Province + "<br>" + data.Barangay + "</br>"
+//                 //         },
+//                 //         "geometry": {
+//                 //             "type": 'Point',
+//                 //             "coordinates": [
+//                 //                 [
+//                 //                     dex
+//                 //                 ]
+//                 //             ],
+//                 //             "type": "Polygon"
+//                 //         }
+//                 //     }]
+//                 // }
+//                 //  jsondata.push(json);
+//                 maps(json);
+//             }
+//             // const myTimeout = setTimeout(myGreeting, 5000); // for map timeout
+//         }, error: function () {
+//             toastr.error('Data gathering error!');
+//             stopLoading();
+//         }
+//     })
+
+
+// }
+// function getRandomColor() {
+//     var letters = '0123456789ABCDEF';
+//     var color = '#';
+//     for (var i = 0; i < 6; i++) {
+//         color += letters[Math.floor(Math.random() * 16)];
+//     }
+//     return color;
+// }
+// function maps(json) {
+//     mapboxgl.accessToken = 'pk.eyJ1IjoiamJ1cnFzIiwiYSI6ImNsbmNnN3psdzBqeGUyeG9hNzhjam5reGcifQ.fyErGg472qiTnQXjYGA3ag';
+
+//     if (json != null) {
+//         var zoomcoord = '';
+//         zoomcoord = json.features[0].geometry.coordinates[0][0];
+//     }
+//     else {
+//         zoomcoord = [125.647859, 7.134382];
+//     }
+//     const map = new mapboxgl.Map({
+//         container: 'map', // container ID
+//         // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+//         //style: 'mapbox://styles/mapbox/light-v11',
+//         style: 'mapbox://styles/mapbox/satellite-v9',
+//         center: zoomcoord,
+//         // [125.647859, 7.134382], // starting position
+//         zoom: 13 // starting zoom
+//     });
+//     // console.log(json.features[0].geometry.coordinates[0]);
+//     var hoveredPolygonId = null;
+//     var sourceId = null;
+//     var draw = new MapboxDraw({
+//         displayControlsDefault: false,
+//         controls: {
+//             polygon: true,
+//             trash: true
+//         }
+//     });
+//     var test = e => {
+//         var geodata = [];
+//         console.log(e.features[0]);
+//         for (let i = 0; i < e.features[0].geometry.coordinates[0].length; i++) {
+//             const element = e.features[0].geometry.coordinates[0][i];
+
+//             var items = element.join(',');
+//             console.log(items);
+//             geodata.push(items);
+//         }
+//         var geoloc = geodata.join('|');
+//         $.ajax({
+//             url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/updateSysData',
+//             type: 'post',
+//             dataType: 'json',
+//             data: JSON.stringify({
+//                 username: $("#username").val(),
+//                 token: $("#token").val(),
+//                 dataSource: dataSource,
+//                 filter: dataSourceIdCol,
+//                 selectedid: $('.selectedid').data('id'),
+//                 syscol: 'polygon',
+//                 syscolval: geoloc,
+//                 sysapp: sysapp,
+//             }),
+//             contentType: "application/json; charset=utf-8",
+//             success: function () {
+//                 getSysAllData(dataSource);
+//             },
+//             error: function () {
+//                 toastr.error('Error on Updating!');
+//             }
+//         })
+//     }
+
+//     if (json != null) {
+//         map.addControl(draw);
+//         map.on('draw.create', test);
+//         map.on('draw.delete', e => { });
+//         map.on('draw.update', test);
+//         draw.add(json);
+
+
+//     }
+//     else {
+
+//         map.addControl(draw);
+//         map.on('draw.create', test);
+//         map.on('draw.delete', e => { });
+//         map.on('draw.update', test);
+
+//     }
+
+
+
+//     // console.log(json);
+//     // map.addControl(draw);
+//     // map.on('draw.create', test);
+//     // map.on('draw.delete', test);
+
+
+
+
+//     map.on('load', () => {
+//         map.resize();
+//         // Add a data source containing GeoJSON data.
+//         //     map.addSource(element.data.id + 'sourceid', json);
+
+//         //     // Add a new layer to visualize the polygon.
+//         //     // map.addLayer({
+//         //     //     'id': element.data.id + 'fill',
+//         //     //     'type': 'fill',
+//         //     //     'source': element.data.id + 'sourceid', // reference the data source
+//         //     //     'layout': {},
+//         //     //     'paint': {
+//         //     //         'fill-color': '#0080ff', // blue color fill
+//         //     //         'fill-opacity': 0.5
+//         //     //     }
+//         //     // });
+//         //     //Add a black outline around the polygon.
+//         //     map.addLayer({
+//         //         'id': element.data.id + 'outline',
+//         //         'type': 'line',
+//         //         'source': element.data.id + 'sourceid',
+//         //         'layout': {},
+//         //         'paint': {
+//         //             'line-color': '#000',
+//         //             'line-width': 3
+//         //         }
+//         //     });
+//         //     map.addLayer({
+//         //         'id': element.data.id + 'hover_fill',
+//         //         'type': 'fill',
+//         //         'source': element.data.id + 'sourceid',
+//         //         'layout': {},
+//         //         'paint': {
+//         //             'fill-color': getRandomColor(),
+//         //             'fill-opacity': [
+//         //                 'case',
+//         //                 ['boolean', ['feature-state', 'hover'], false],
+//         //                 1,
+//         //                 0.5
+//         //             ]
+//         //         }
+//         //     });
+//         //     var popup = new mapboxgl.Popup({
+//         //         closeButton: false,
+//         //         closeOnClick: false
+//         //     });
+//         //     map.on('mousemove', element.data.id + 'hover_fill', (e) => {
+//         //         map.getCanvas().style.cursor = 'Pointer';
+//         //         // // Copy coordinates array.
+//         //         var coordinates = e.features[0].geometry.coordinates.slice();
+//         //         var description = e.features[0].properties.description;
+
+//         //         // // Ensure that if the map is zoomed out such that multiple
+//         //         // // copies of the feature are visible, the popup appears
+//         //         // // over the copy being pointed to.
+//         //         popup.setLngLat(e.lngLat).setHTML(description).addTo(map);
+//         //         if (e.features.length > 0) {
+//         //             if (hoveredPolygonId !== null) {
+//         //                 map.setFeatureState({
+//         //                     source: sourceId,
+//         //                     id: hoveredPolygonId
+
+//         //                 }, {
+//         //                     hover: false
+//         //                 });
+//         //             }
+//         //             hoveredPolygonId = e.features[0].id;
+//         //             sourceId = e.features[0].source;
+//         //             map.setFeatureState({
+//         //                 source: sourceId,
+//         //                 id: hoveredPolygonId
+//         //             }, {
+//         //                 hover: true
+//         //             });
+//         //         }
+//         //     });
+
+//         //     //         map.on('mousemove', element.data.id + 'sourceid', (e) => {
+//         //     //         // Change the cursor style as a UI indicator.
+//         //     //          map.getCanvas().style.cursor = 'Pointer';
+//         //     //         // // Copy coordinates array.
+//         //     //          var coordinates = e.features[0].geometry.coordinates.slice();
+//         //     //          var description = e.features[0].properties.description;
+
+//         //     //         // // Ensure that if the map is zoomed out such that multiple
+//         //     //         // // copies of the feature are visible, the popup appears
+//         //     //         // // over the copy being pointed to.
+//         //     //    //  popup.setLngLat(e.lngLat).setHTML(description).addTo(map);
+//         //     //             console.log(e.features)
+//         //     //         map.setFeatureState(
+//         //     //             { source: element.data.id,id: element.data.id },
+//         //     //             { hover: true }
+//         //     //             );
+
+//         //     //         });
+
+
+//         //     //   map.on('mouseenter', 'states-layer', () => {
+//         //     //     map.getCanvas().style.cursor = 'pointer';
+//         //     //     });
+
+//         //     // Change the cursor back to a pointer
+//         //     // when it leaves the states layer.
+//         //     map.on('mouseleave', element.data.id + 'hover_fill', () => {
+//         //         map.getCanvas().style.cursor = '';
+//         //         popup.remove();
+//         //         if (hoveredPolygonId !== null) {
+//         //             map.setFeatureState({
+//         //                 source: sourceId,
+//         //                 id: hoveredPolygonId
+//         //             }, {
+//         //                 hover: false
+//         //             });
+//         //         }
+//         //         hoveredPolygonId = null;
+
+//         //     });
+
+//     });
+// }
+
+// function updateArea(e) {
+//     var draw = new MapboxDraw({
+//         displayControlsDefault: false,
+//         controls: {
+//             polygon: true,
+//             trash: true
+//         }
+//     });
+//     var data = draw.getAll();
+//     console.log(data);
+//     var fillid = 1;
+//     var counterlatlng = 1;
+//     for (let i = 0; i < data.features.length; i++) {
+
+
+//         var element = data.features[i];
+//         var coord = element.geometry.coordinates;
+
+//         for (let j = 0; j < coord.length; j++) {
+//             var element2 = coord[j];
+//             console.log(element2);
+//         }
+
+//         element.properties.type = 'Feature';
+//         element.id = fillid++;
+//         element.properties.id = element.id;
+//         console.log(element);
+//         element.properties.description =
+//             '<strong>Make it Mount Pleasant</strong><p>Make it Mount Pleasant is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>';
+
+//         var jsontest = {
+//             'type': 'geojson',
+//             'data': element
+//         }
+//     }
+//     test1.push(jsontest);
+//     var answer = document.getElementById('calculated-area');
+//     // if (data.features.length > 0) {
+//     //     var area = turf.area(data);
+//     //     // Restrict the area to 2 decimal points.
+//     //     var rounded_area = Math.round(area * 100) / 100;
+//     //     console.log(rounded_area);
+//     //     answer.innerHTML = `<p><strong>${rounded_area}</strong></p><p>square meters</p>`;
+
+//     // } else {
+//     //     answer.innerHTML = '';
+//     //     if (e.type !== 'draw.delete')
+//     //         alert('Click the map to draw a polygon.');
+//     // }
+
+// }

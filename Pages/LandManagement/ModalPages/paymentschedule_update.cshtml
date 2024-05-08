@@ -1,82 +1,206 @@
-<div class="card-body">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Lease Period</label>
-                        <input type="text" readonly
-                            class="LeasePeriod  form-control form-control-sm float-right triggerdetail ">
-                        <!-- <input type="text" readonly class="  form-control form-control-sm float-right " > -->
+<section>
+    <div class="container-fluid">
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title">Contract Information</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <!-- START: CONTRACT INFORMATION -->
+                <div class="col-md-12">
+                    <div class="col-md-12 bg-light headertext">
+                        <h5>Basic Information</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label>Landowner/Company</label>
+                            <span class="name form-control form-control-sm form-control-border border-width-2" readonly></span>
+                        </div>
+                        <div class="col-md-5">
+                            <label>Land Information/Document</label>
+                            <span class="landdocument form-control form-control-sm form-control-border border-width-2" readonly></span>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Lot Number</label>
+                            <span class="landlotnumber form-control form-control-sm form-control-border border-width-2" readonly></span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <label>Lease Term (Number of Years)</label>
-                    <input type="text" readonly
-                        class="LeaseTerm reservationdate form-control form-control-sm float-right triggerdetail">
+                <div class="col-md-12 hideCoOwner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Co-Owner</label>
+                            <textarea class="CoOwner form-control form-control-sm" placeholder="-" autocomplete="off" readonly></textarea>
+                        </div>
+                    </div>
                 </div>
-                <!-- <div class="col-md-4">
-                    <label>Lease Term</label>
-                    <input class="lease_type form-control form-control-sm triggerdetail" type="text">
-                </div> -->
-                <div class="col-md-4">
-                    <label>Advance Payment (Years)</label>
-                    <input readonly class="AdvancePayment form-control form-control-sm triggerdetail">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Province</label>
+                            <span class="province form-control form-control-sm form-control-border border-width-2" readonly></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Municipality/City</label>
+                            <span class="city form-control form-control-sm form-control-border border-width-2" readonly></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Barangay</label>
+                            <span class="barangay form-control form-control-sm form-control-border border-width-2" readonly></span>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Land Contracted Area<i> (sqm)</i></label>
+                            <span class="landcontractedarea form-control form-control-sm  form-control-border border-width-2 trigger" readonly></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Plantation</label>
+                            <span class="landplantation form-control form-control-sm form-control-border border-width-2" readonly></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Company</label>
+                            <span class="landcompany form-control form-control-sm  form-control-border border-width-2 trigger" readonly></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 hideRepresentativeLabel">
+                    <div class="col-md-12 bg-light headertext">
+                        <h5>Representative</h5>
+                    </div>
+                    <div class="col-md-12 ">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label>Name</label>
+                                <span class="RepName form-control form-control-sm  form-control-border border-width-2 trigger" readonly></span>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Contact Number</label>
+                                <span class="RepContactNumber form-control form-control-sm  form-control-border border-width-2 trigger" readonly></span>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Email</label>
+                                <span class="RepEmail form-control form-control-sm  form-control-border border-width-2 trigger" readonly></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: CONTRACT INFORMATION -->
             </div>
+            <!-- /.card-body -->
         </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-4">
-                    <label>Advance Payment Amount</label>
-                    <input readonly class="AmountOfAdvancePayment form-control form-control-sm triggerdetail">
+    </div>
+</section>
+<section>
+    <div class="container-fluid">
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title">Contract Payment</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    @*<button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                    </button>*@
                 </div>
-                <div class="col-md-4">
-                    <label> Start of Payment:</label>
-                    <input type="text" readonly
-                        class="StartOfPayment  form-control form-control-sm float-right triggerdetail">
-                </div>
-                <div class="col-md-4">
-                    <label>Payment Terms</label>
-                    <input type="text" readonly
-                        class="PaymentTerms  form-control form-control-sm float-right triggerdetail">
-                        
-                </div>
-                      <!-- <div class="col-md-4">
-                    <label>PaymentTermCode</label>
-                    <input type="text" readonly
-                        class="PaymentTermCode  form-control form-control-sm float-right triggerdetail">
-                        
-                </div> -->
             </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="card-body">
+                            <!-- insert: table starts here -->
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Lease Period</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text"
+                                            class="LeasePeriod form-control form-control-sm float-right triggerdetail" readonly
+                                            id="lease_period">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Lease Term </label>
+                                    <input type="text" disabled
+                                        class="LeaseTerm reservationdate form-control form-control-sm float-right triggerdetail" readonly
+                                        id="terms">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Years of Advance Payment</label>
+                                    <input class="AdvancePayment form-control form-control-sm triggerdetail" type="number" readonly
+                                        Placeholder="Input Number of Year(s)">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label> Start of Payment:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text"
+                                                class="StartOfPayment reservationdate form-control form-control-sm float-right triggerdetail" readonly
+                                                id="reservationdate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Payment Terms</label>
+                                    <input
+                                        class="PaymentTerms PaymentTerms PaymentTerms form-control form-control-sm triggerdetail" readonly
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input hidden type="text" id="StartDate">
+                                    <input hidden type="text" id="EndDate">
+                                    <input hidden type="text" id="LandContractCode">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="card-footer">
+                
+            </div> -->
         </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-4">
-                    <label>Total Contract Amount</label>
-                    <input readonly class="Total_Contract_Amount form-control form-control-sm triggerdetail">
-                </div>
-                <div class="col-md-4">
-                    <label>Plantation</label>
-                    <input readonly class="PlantationCode  form-control form-control-sm triggerdetail">
-                </div>
-                <div class="col-md-4">
-                    <label>Sqm</label>
-                    <input readonly class="LandContractedArea form-control form-control-sm triggerdetail">
-                </div>
-                <div class="col-md-4">
-                    <input hidden class="form-control form-control-sm" type="text" id="LandContractCode">
+    </div>
+</section>
+<section>
+    <div class="container-fluid">
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title">Contract Payment Schedule</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    @*<button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                    </button>*@
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-4">
-                    <label>Percentage of Amount Paid</label>
-                    <!-- <span id="percent-sign" style="{top: 8px; left: 45px;color: #555;position: absolute;z-index: 1;}">%</span> -->
-                    <input readonly class="Total_percentage_paid form-control form-control-sm triggerdetail">
-                </div>
-            </div>
+            <div class="card-body">
+    <div class="row">
             <div class="col-md-12">
                 <div class="row">
                     <div class="card-body">
@@ -93,6 +217,7 @@
                                     <th class="Cr_num">CR number</th>
                                     <th class="Posting_date">Date Posted</th>
                                     <th class="filename">Attachment</th>
+                                    <th class="file hide_column">test</th>
                                 </tr>
                             </thead>
                             <tbody id="tbl_Users-data">
@@ -109,20 +234,32 @@
                     <!-- <button type="button" style="margin:2px;" class="btn btn-success" onclick="updatetable()">Exit</button> -->
                 </div>
             </div>
-
-
+    </div>
+            <!-- <div class="card-footer">
+                
+            </div> -->
         </div>
     </div>
+</section>
+
 <script>
-    var dataSource = 'ContractTermTest';
+    var dataSource = 'ContractMain';
     var dataSourceIdCol = 'LandContractCode';
+    var sourceContract = 'ContractMain';
     var dataforsaving = [];
     var dataupload = [];
     initDataTablesPaymentSched();
     getSysData(dataSource, dataSourceIdCol);
+    viewContractInfoData(sourceContract, dataSourceIdCol);
     getPaymentSched();
     function initDataTablesPaymentSched() {
         var table = $('#tbl_PaymentSched').DataTable({
+            columnDefs:[
+                {
+                    targets:[7],
+                    className:"hide_column"
+                }
+            ],
             language: {
                 sSearch: "",
                 searchPlaceholder: "Search records"
@@ -171,55 +308,63 @@
                 console.log(data);
                 var tablerow = [];
                 $('#LandContractCode').val(data[0].LandContractCode);
+                 var table = $('#tbl_PaymentSched').DataTable();
+  
+  // Get the index of the last column
+  var lastColumnIndex = table.columns().indexes().length - 1;
+  
+  // Hide the last column
+  table.column(lastColumnIndex).visible(true);
                 $('#tbl_PaymentSched').DataTable().clear().draw();
                 for (var i in data) {
                     var tablearr = [];
                     data[i].id = id++;
-                    tablearr.push('<input type="text" disabled style="width: 100%;border:1px; background-color:#eaeaea;"  class="date_end  form-control form-control-sm updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date_end + '" value="' + data[i].Payment_date + '">');
+                    tablearr.push('<input type="text" disabled style="width: 100%;border:1px; background-color:#e9ecef;"  class="date_end  form-control form-control-sm updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date_end + '" value="' + data[i].Payment_date + '">');
                     if (data[i].remarks == 'Advance Payment Paid' && data[i].Amount != 0 && data[0].Cv_num == null) {
                         // tablearr.push('<input readonly style="border:1px; background-color:#eaeaea;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                        tablearr.push('<select style="border:1px; readonly background-color:#eaeaea;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Advance Payment Paid">Advance Payment Paid</option></select>');
-                        tablearr.push('<input type="number" readonly style="width: 100%;border:1px; background-color:#eaeaea;" class="amount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#D6DBDF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" >');
-                        tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#D6DBDF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
-                        tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#D6DBDF;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
+                        tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Advance Payment Paid">' + data[i].remarks + '</option></select>');
+                        // tablearr.push('<input readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="remarks updatedcell" data-rowid="' + data[i].id + '" value="Advance Payment Paid">');
+                        tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" >');
+                        tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
+                        tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
                     } else if (data[i].remarks == 'Advance Payment Paid' && data[i].Amount == 0) {
-                        tablearr.push('<input readonly style="border:1px; background-color:#eaeaea;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                        tablearr.push('<input type="number" readonly style="width: 100%;border:1px; background-color:#eaeaea; " class="amount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
+                        tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef; " class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
                         tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
                         tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
                         tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date"  >');
                         tablearr.push('<input readonly style="width: 100%; height:100%;border:1px;" class="Init_Filename form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="text" />');
                     }else if(data[i].remarks == 'Advance Payment Paid' && data[0].Cv_num != null)
                     {
-                        tablearr.push('<input readonly style="border:1px; background-color:#eaeaea;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                        tablearr.push('<input type="number"  readonly style="width: 100%;border:1px; background-color:#eaeaea;" class="amount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#eaeaea;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#eaeaea;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#eaeaea;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
+                        tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
+                        tablearr.push('<input type="text"  readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
+                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '">');
+                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
                         tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
 
                     
                     }else if (data[i].remarks == 'Paid') {
-                        tablearr.push('<input readonly style="border:1px; background-color:#eaeaea;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '" value="' + data[i].remarks + '">');
-                        tablearr.push('<input type="number" readonly style="width: 100%;border:1px;  background-color:#eaeaea;" class="amount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#eaeaea;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#eaeaea;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '" >');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#eaeaea;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
-                       tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
+                        tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '" value="' + data[i].remarks + '">');
+                        tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
+                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '" >');
+                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
+                        tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
                    } else {
 
-                        tablearr.push('<select style="border:1px; background-color:#eaeaea;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Paid">' + data[i].remarks + '</option><option data-remarks="' + data[i].remarks + '" value="Paid">Paid</option><option value="Unpaid">Unpaid</option></select>');
-                        tablearr.push('<input type="number" disabled style="width: 100%;border:1px;  background-color:#eaeaea;" class="amount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#D6DBDF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
-                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#D6DBDF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
-                        tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#D6DBDF;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
+                        tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Paid">' + data[i].remarks + '</option><option data-remarks="' + data[i].remarks + '" value="Paid">Paid</option><option value="Unpaid">Unpaid</option></select>');
+                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px;  background-color:#e9ecef;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
+                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num">');
+                        tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
                     }
                     // tablearr.push(data[i].modifiedby);
                     // tablearr.push(data[i].modifiedon);
                     // tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="status updatedcell " data-rowid="' + data[i].id + '" data-colid="status" value="' + data[i].status + '">');
                     tablearr.push('<input id="fileUploader"  class="Init_Filename form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="file" />');
-
+                    tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="file form-control form-control-sm updatedcell" id="fileupload"  data-rowid="' + data[i].id + '" data-colid="file" >');
                     tablerow.push(tablearr);
                 }
                 $('#tbl_PaymentSched').DataTable().rows.add(tablerow).draw();
@@ -235,12 +380,13 @@
 
     function saveData() {
 
+
         if (confirm('Do you want to save changes?')) {
-            for (var z in dataupload) {
-                console.log(dataupload[z].rowid);
-                // var test = $('[data-rowid=' + dataupload[z].rowid + '][data-colid="filename"]').val(dataupload[z].filename);
-                for (var x in dataforsaving) {
-                    console.log(dataforsaving[x]);
+            // var test = $('[data-rowid=' + dataupload[z].rowid + '][data-colid="filename"]').val(dataupload[z].filename);
+            for (var x in dataforsaving) {
+                if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="file"]').val() == '') {
+                    toastr.error("Please add attachement")
+                } else {
                     $.ajax({
                         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updatePaymentSchedule',
                         type: 'post',
@@ -254,25 +400,29 @@
                             Cr_num: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Cr_num"]').val(),
                             date: $('[data-rowid=' + dataforsaving[x] + ']').data('payment_date'),
                             Posting_date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Posting_date"]').val(),
-                            filename: dataupload[z].filename,
+                            filename: $('[data-rowid=' + dataforsaving[x] + '][data-colid="file"]').val(),
                             username: $("#username").val(),
                             token: $("#token").val(),
                             sysapp: sysapp
                         }),
                         contentType: "application/json; charset=utf-8",
-                        success: function (data) {}
+                        success: function (data) {
+                            toastr.success('Data Saved!');
+                            hideModal();
+                        },
+                        error: function () {
+                            toastr.error('Error on saving data!');
+                            stopLoading();
+                        }
                     })
                 }
+                
             }
-            toastr.success('Data Saved!');
-             hideModal();
-        }
-        else
-        {
+        } else {
             toastr.error('Cancelled!');
-            
+
         }
-        
+
     }
       $('#tbl_PaymentSched').on('change','#fileUploader' ,function() {
         // Get the selected file
@@ -304,7 +454,9 @@
                         var extension = data[i].extension;
                         console.log(dataId,name, filename, extension);
                         saveNewUploadedFile(name, filename,extension,dataSource);
-                        dataupload.push({rowid:dataId,filename:filename});
+                        $('#fileupload').val(filename);
+                        dataforsaving.push(dataId);
+                        console.log(dataforsaving);
                     }
                     console.log(dataupload);
                 },
@@ -319,8 +471,8 @@
 
     $('#tbl_PaymentSched').on('change', '.updatedcell', function () {
         var table = $('#tbl_PaymentSched').DataTable();
-        console.log(dataforsaving);
-        console.log($(this).data('rowid'));
+        // console.log(dataforsaving);
+        // console.log($(this).data('rowid'));
         if (jQuery.inArray(($(this).data('rowid')), dataforsaving) == -1) {
             dataforsaving.push($(this).data('rowid'));
         }
@@ -419,7 +571,89 @@ function saveNewUploadedFile(name, filename, extension,dataSource) {
         })
    // }
 }
+function viewContractInfoData(sourceContract, filter) {
 
+    startLoading();
+    var fields = $('.triggercontractinfoview');
+    var fieldID = [];
+    for (var x in fields) {
+        if (fields[x].className != undefined) {
+            var y = fields[x].className.split(' ');
+            fieldID.push(y[0]);
+        }
+    }
+    $.ajax({
+        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getSysData',
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+            username: $("#username").val(),
+            token: $("#token").val(),
+            dataSource: sourceContract,
+            filter: filter,
+            selectedID: $('.selectedid').data('id'),
+            sysapp: sysapp
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            var LandInformationCode = data.LandInformationCode;
+            // var LandContractCode = data.LandContractCode;
+            $.ajax({
+                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getContractInfoData',
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify({
+                    data: data,
+                    LandInformationCode: LandInformationCode,
+                    username: $("#username").val(),
+                    token: $("#token").val(),
+                    sysapp: sysapp
+                }),
+                contentType: "application/json; charset=utf-8",
+                success: function (viewdata) {
+                    viewContract = {
+                        contractdata: data,
+                        landinformationdata: viewdata    
+                    };
+                    console.log('view data', viewContract);
 
+                    //view contract data
+                    $('.name').text(viewContract.contractdata.Fullname);
+                    $('.landdocument').text(viewContract.landinformationdata.Document);
+                    $('.landlotnumber').text(viewContract.landinformationdata.LotNumber);
+                    
+                    if ( viewContract.landinformationdata.WithCoOwner == true ) {
+                        $('.hideCoOwner').show();
+                        $('.CoOwner').val(viewContract.landinformationdata.CoOwner);
+                    } else {
+                        $('.hideCoOwner').hide();
+                        $('.CoOwner').val('');
+                    }
 
+                    if ( viewContract.contractdata.RepresentativeName == '' ) {
+                        $('.hideRepresentativeLabel').hide();
+                    } else {
+                        $('.hideRepresentativeLabel').show();
+                        $('.RepName').text(viewContract.contractdata.RepresentativeName);
+                        $('.RepContactNumber').text(viewContract.contractdata.RepresentativeContactNumber);
+                        $('.RepEmail').text(viewContract.contractdata.RepresentativeEmail);
+                    }
+
+                    $('.province').text(viewContract.landinformationdata.provinceName);
+                    $('.city').text(viewContract.landinformationdata.cityName);
+                    $('.barangay').text(viewContract.landinformationdata.barangayName);
+                    $('.landtotalarea').text(viewContract.landinformationdata.Area);
+                    $('.landplantation').text(viewContract.contractdata.PlantationCode);
+                    $('.landcompany').text(viewContract.contractdata.CompanyCode + ' - ' + viewContract.contractdata.Companyname);
+                    $('.landcontractedarea').text(viewContract.contractdata.LandContractedArea);
+                }
+            })
+            stopLoading();
+        },
+        error: function () {
+            toastr.error('Data gathering error!');
+            stopLoading();
+        }
+    })
+}
 </script>

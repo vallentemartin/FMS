@@ -1,0 +1,549 @@
+getPolygon();
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+var test = {};
+var test1 = [];
+var obj = {};
+var longlat = [];
+var jsondata = [];
+mapboxgl.accessToken =
+    'pk.eyJ1IjoiamJ1cnFzIiwiYSI6ImNsbmNnN3psdzBqeGUyeG9hNzhjam5reGcifQ.fyErGg472qiTnQXjYGA3ag';
+var map = new mapboxgl.Map({
+    container: 'map', // container ID
+    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+    style: 'mapbox://styles/mapbox/light-v11', // style URL
+    center: [125.647859, 7.134382], // starting position [lng, lat]
+    zoom: 12 // starting zoom
+});
+
+
+// var draw = new MapboxDraw({
+//     displayControlsDefault: false,
+//     // Select which mapbox-gl-draw control buttons to add to the map.
+//     controls: {
+//         polygon: true,
+//         trash: true
+//     },
+//     // Set mapbox-gl-draw to draw by default.
+//     // The user does not have to click the polygon control button first.
+//     defaultMode: 'draw_polygon'
+// });
+// map.addControl(draw);
+
+// map.on('draw.create', e => {
+//     console.log(e.features[0]);
+// });
+// map.on('draw.delete', updateArea);
+// map.on('draw.update', updateArea);
+
+function updateArea(e) {
+    var data = draw.getAll();
+    console.log(data);
+
+    // var fillid = 1;
+    // var counterlatlng = 1;
+    // for (let i = 0; i < data.features.length; i++) {
+
+
+    //     var element = data.features[i];
+    //     var coord = element.geometry.coordinates;
+
+    //     for (let j = 0; j < coord.length; j++) {
+    //         var element2 = coord[j];
+    //         console.log(element2);
+    //     }
+
+    //     element.properties.type = 'Feature';
+    //     element.id = fillid++;
+    //     element.properties.id = element.id;
+    //     console.log(element);
+    //     element.properties.description =
+    //         '<strong>Make it Mount Pleasant</strong><p>Make it Mount Pleasant is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>';
+
+    //     var jsontest = {
+    //         'type': 'geojson',
+    //         'data': element
+    //     }
+    // }
+    // test1.push(jsontest);
+    // var answer = document.getElementById('calculated-area');
+    // if (data.features.length > 0) {
+    //     var area = turf.area(data);
+    //     // Restrict the area to 2 decimal points.
+    //     var rounded_area = Math.round(area * 100) / 100;
+    //     console.log(rounded_area);
+    //     answer.innerHTML = `<p><strong>${rounded_area}</strong></p><p>square meters</p>`;
+
+    // } else {
+    //     answer.innerHTML = '';
+    //     if (e.type !== 'draw.delete')
+    //         alert('Click the map to draw a polygon.');
+    // }
+
+}
+
+
+
+function saveLatlng() {
+    var counterlatlng = 1;
+    var data = 'mapsdetail';
+
+    var geodata = [];
+    var fields = $('.triggerdetail');
+    var fieldID = [];
+    var inputData = {};
+    var inputDataCollection = {};
+    for (var x in fields) {
+        if (fields[x].className != undefined) {
+            var y = fields[x].className.split(' ');
+            fieldID.push(y[0]);
+        }
+    }
+    console.log(test1);
+    var coor = JSON.stringify(obj);
+    for (let j = 0; j < test1.length; j++) {
+        var arrcoor = test1[j];
+        console.log(arrcoor.data.geometry.coordinates);
+        for (let i = 0; i < arrcoor.data.geometry.coordinates[0].length; i++) {
+            count = counterlatlng++;
+            var newitem = arrcoor.data.geometry.coordinates[0][i];
+            var obj = {
+                latitude: newitem[0],
+                longitude: newitem[1],
+                counter: i + 1,
+                id: arrcoor.data.id
+            }
+            var items = newitem.join(',');
+            console.log(items);
+            geodata.push(items);
+
+        }
+
+    }
+    console.log(geodata.join('|'));
+    geoloc = geodata.join('|');
+
+    if (confirm('Save this data?')) {
+        inputDataCollection['username'] = $("#username").val();
+        inputDataCollection['token'] = $("#token").val();
+        inputDataCollection['dataSource'] = 'LandownerTitle';
+        inputDataCollection['sysapp'] = sysapp;
+        inputDataCollection['polygon'] = geoloc;
+        for (var j in fieldID) {
+            inputData[fieldID[j]] = $('.triggerdetail.' + fieldID[j]).val();
+            $('.triggerdetail.' + fieldID[j]).val('');
+        }
+        inputDataCollection['inputData'] = inputData;
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/saveSysData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify(inputDataCollection),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.retval == 1) {
+                    getSysAllData(dataSource);
+                    toastr.success('Data added!');
+                } else {
+                    toastr.error('Duplicate code!');
+                    stopLoading();
+                }
+            },
+            error: function () {
+                toastr.error('Error on saving data!');
+                stopLoading();
+            }
+        })
+    }
+
+}
+
+// document.getElementById("fade").onclick = function () {
+//     myFunction()
+// };
+// document.getElementById("save").onclick = function () {
+//     saveLatlng()
+// };
+
+
+function myFunction() {
+    console.log(test1);
+    for (let j = 0; j < test1.length; j++) {
+        var element = test1[j];
+
+        console.log(element);
+        console.log(element.data.id);
+    }
+
+    mapboxgl.accessToken =
+        'pk.eyJ1IjoiamJ1cnFzIiwiYSI6ImNsbmNnN3psdzBqeGUyeG9hNzhjam5reGcifQ.fyErGg472qiTnQXjYGA3ag';
+    var map = new mapboxgl.Map({
+        container: 'map', // container ID
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/light-v11', // style URL
+        center: [125.647859, 7.134382], // starting position [lng, lat]
+        zoom: 12 // starting zoom
+    });
+
+    var hoveredPolygonId = null;
+    var sourceId = null;
+    map.on('load', () => {
+        // Add a data source containing GeoJSON data.
+        // console.log(map.addSource('maine',test));
+        // Update the data after the GeoJSON source was created
+        // Add a new layer to visualize the polygon.
+
+        for (let j = 0; j < test1.length; j++) {
+            var element = test1[j];
+
+            console.log(element);
+            console.log(element.data.id);
+
+            map.addSource(element.data.id + 'sourceid', test1[j]);
+
+            // map.addLayer({
+            //     'id': element.data.id,
+            //     'type': 'fill',
+            //     'source': element.data.id, // reference the data source
+            //     'layout': {},
+            //     'paint': {
+            //         'fill-color': '#ADD8E6', // blue color fill
+            //         'fill-opacity': 1, // 100% opaque
+            //         'fill-opacity-transition': {
+            //             duration: 500
+            //         } // 500 milliseconds = 1/2 seconds
+            //     }
+            // });
+            // Add a black outline around the polygon.
+            map.addLayer({
+                'id': element.data.id + 'outline',
+                'type': 'line',
+                'source': element.data.id + 'sourceid',
+                'layout': {},
+                'paint': {
+                    'line-color': '#000',
+                    'line-width': 3
+                }
+            });
+            map.addLayer({
+                'id': element.data.id + 'hover_fill',
+                'type': 'fill',
+                'source': element.data.id + 'sourceid',
+                'layout': {},
+                'paint': {
+                    'fill-color': getRandomColor(),
+                    'fill-opacity': [
+                        'case',
+                        ['boolean', ['feature-state', 'hover'], false],
+                        1,
+                        0.5
+                    ]
+                }
+            });
+            var popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false
+            });
+            map.on('mousemove', element.data.id + 'hover_fill', (e) => {
+                map.getCanvas().style.cursor = 'Pointer';
+                // // Copy coordinates array.
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+                // // Ensure that if the map is zoomed out such that multiple
+                // // copies of the feature are visible, the popup appears
+                // // over the copy being pointed to.
+                popup.setLngLat(e.lngLat).setHTML(description).addTo(map);
+                if (e.features.length > 0) {
+                    if (hoveredPolygonId !== null) {
+                        map.setFeatureState({
+                            source: sourceId,
+                            id: hoveredPolygonId
+
+                        }, {
+                            hover: false
+                        });
+                    }
+                    hoveredPolygonId = e.features[0].id;
+                    sourceId = e.features[0].source;
+                    map.setFeatureState({
+                        source: sourceId,
+                        id: hoveredPolygonId
+                    }, {
+                        hover: true
+                    });
+                }
+            });
+            //         map.on('mousemove', element.data.id + 'sourceid', (e) => {
+            //         // Change the cursor style as a UI indicator.
+            //          map.getCanvas().style.cursor = 'Pointer';
+            //         // // Copy coordinates array.
+            //          var coordinates = e.features[0].geometry.coordinates.slice();
+            //          var description = e.features[0].properties.description;
+
+            //         // // Ensure that if the map is zoomed out such that multiple
+            //         // // copies of the feature are visible, the popup appears
+            //         // // over the copy being pointed to.
+            //    //  popup.setLngLat(e.lngLat).setHTML(description).addTo(map);
+            //             console.log(e.features)
+            //         map.setFeatureState(
+            //             { source: element.data.id,id: element.data.id },
+            //             { hover: true }
+            //             );
+
+            //         });
+
+
+            //   map.on('mouseenter', 'states-layer', () => {
+            //     map.getCanvas().style.cursor = 'pointer';
+            //     });
+
+            // Change the cursor back to a pointer
+            // when it leaves the states layer.
+            map.on('mouseleave', element.data.id + 'hover_fill', () => {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+                if (hoveredPolygonId !== null) {
+                    map.setFeatureState({
+                        source: sourceId,
+                        id: hoveredPolygonId
+                    }, {
+                        hover: false
+                    });
+                }
+                hoveredPolygonId = null;
+
+            });
+
+            // Add a new layer to visualize the polygon.
+
+            // Add a black outline around the polygon.
+        }
+
+
+    });
+}
+
+
+function getPolygon() {
+    var index = [];
+    var count = [];
+    $.ajax({
+        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getBlocks',
+        type: "post",
+        dataType: 'json',
+        data: JSON.stringify({
+            username: $("#username").val(),
+            token: $("#token").val(),
+            sysapp: sysapp
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            var counter = 1;
+            for (var i = 0; i < data.length; i++) {
+                items = data[i].polygon.split('|');
+                console.log(data[i].City);
+                //  test = items.split(',');
+                dex = [];
+                for (var j = 0; j < items.length; j++) {
+                    coordinate = items[j];
+                    var coord = coordinate.split(',');
+                    var coords = [];
+                    for (let k = 0; k < coord.length; k++) {
+                        const parsecoords = parseFloat(coord[k]);
+                        coords.push(parsecoords);
+                    }
+                    dex.push(coords);
+                }
+
+                //   console.log(dex);
+                // for (let i = 0; i < data.length; i++) {
+                //     var element = data[i];
+                //     polygon = element.polygon.split('|');
+                //     arr = [];
+                //     arr.push(polygon);
+                //     // for (let j = 0; j < test.length; j++) {
+                //     //     const a = test[j];
+                //     //     c = parseFloat(a);
+                //     //     arr.push(c);
+                //     // }
+                //     // index.push(arr);
+
+                //     console.log(arr);
+                // }
+
+                console.log(dex);
+
+
+                // index.push(s);
+                // var s =[element.latitude,element.longitude];
+                //  index.push(s);     
+                var json = {
+                    'type': 'geojson',
+                    'data': {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Polygon',
+                            // These coordinates outline Maine.
+                            'coordinates': [
+                                dex
+                            ]
+                        },
+                        'id': counter++,
+                        'properties': {
+                            'description': "<strong>LandTitleCode</strong>:" + data[i].LandTitleCode + "<br>" + data[i].LandTitleNo + "<br>" + data[i].City + "<br>" + data[i].Province + "<br>" + data[i].Barangay + "</br>"
+                        }
+                    }
+                }
+                jsondata.push(json);
+
+            }
+            maps();
+
+        },
+        error: function (x) {
+            alert('message');
+            console.log(x);
+        }
+    });
+}
+function maps() {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiamJ1cnFzIiwiYSI6ImNsbmNnN3psdzBqeGUyeG9hNzhjam5reGcifQ.fyErGg472qiTnQXjYGA3ag';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: [125.647859, 7.134382], // starting position
+        zoom: 12 // starting zoom
+    });
+    var hoveredPolygonId = null;
+    var sourceId = null;
+    map.on('load', () => {
+        // Add a data source containing GeoJSON data.
+        for (let i = 0; i < jsondata.length; i++) {
+            const element = jsondata[i];
+            console.log(element.data.id);
+            map.addSource(element.data.id + 'sourceid', jsondata[i]);
+
+            // Add a new layer to visualize the polygon.
+            // map.addLayer({
+            //     'id': element.data.id + 'fill',
+            //     'type': 'fill',
+            //     'source': element.data.id + 'sourceid', // reference the data source
+            //     'layout': {},
+            //     'paint': {
+            //         'fill-color': '#0080ff', // blue color fill
+            //         'fill-opacity': 0.5
+            //     }
+            // });
+            //Add a black outline around the polygon.
+            map.addLayer({
+                'id': element.data.id + 'outline',
+                'type': 'line',
+                'source': element.data.id + 'sourceid',
+                'layout': {},
+                'paint': {
+                    'line-color': '#000',
+                    'line-width': 3
+                }
+            });
+            map.addLayer({
+                'id': element.data.id + 'hover_fill',
+                'type': 'fill',
+                'source': element.data.id + 'sourceid',
+                'layout': {},
+                'paint': {
+                    'fill-color': getRandomColor(),
+                    'fill-opacity': [
+                        'case',
+                        ['boolean', ['feature-state', 'hover'], false],
+                        1,
+                        0.5
+                    ]
+                }
+            });
+            var popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false
+            });
+            map.on('mousemove', element.data.id + 'hover_fill', (e) => {
+                map.getCanvas().style.cursor = 'Pointer';
+                // // Copy coordinates array.
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+                // // Ensure that if the map is zoomed out such that multiple
+                // // copies of the feature are visible, the popup appears
+                // // over the copy being pointed to.
+                popup.setLngLat(e.lngLat).setHTML(description).addTo(map);
+                if (e.features.length > 0) {
+                    if (hoveredPolygonId !== null) {
+                        map.setFeatureState({
+                            source: sourceId,
+                            id: hoveredPolygonId
+
+                        }, {
+                            hover: false
+                        });
+                    }
+                    hoveredPolygonId = e.features[0].id;
+                    sourceId = e.features[0].source;
+                    map.setFeatureState({
+                        source: sourceId,
+                        id: hoveredPolygonId
+                    }, {
+                        hover: true
+                    });
+                }
+            });
+            //         map.on('mousemove', element.data.id + 'sourceid', (e) => {
+            //         // Change the cursor style as a UI indicator.
+            //          map.getCanvas().style.cursor = 'Pointer';
+            //         // // Copy coordinates array.
+            //          var coordinates = e.features[0].geometry.coordinates.slice();
+            //          var description = e.features[0].properties.description;
+
+            //         // // Ensure that if the map is zoomed out such that multiple
+            //         // // copies of the feature are visible, the popup appears
+            //         // // over the copy being pointed to.
+            //    //  popup.setLngLat(e.lngLat).setHTML(description).addTo(map);
+            //             console.log(e.features)
+            //         map.setFeatureState(
+            //             { source: element.data.id,id: element.data.id },
+            //             { hover: true }
+            //             );
+
+            //         });
+
+
+            //   map.on('mouseenter', 'states-layer', () => {
+            //     map.getCanvas().style.cursor = 'pointer';
+            //     });
+
+            // Change the cursor back to a pointer
+            // when it leaves the states layer.
+            map.on('mouseleave', element.data.id + 'hover_fill', () => {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+                if (hoveredPolygonId !== null) {
+                    map.setFeatureState({
+                        source: sourceId,
+                        id: hoveredPolygonId
+                    }, {
+                        hover: false
+                    });
+                }
+                hoveredPolygonId = null;
+
+            });
+        }
+    });
+
+}
