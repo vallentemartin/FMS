@@ -157,7 +157,7 @@
                         <div class="col-md-6">
                             <label>Area to be contracted per <i>(has)</i></label>
                             <input type="text"
-                                class="Hectare form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
+                                class="Hectare  form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
                                 id="Hectares" step='0.01' min="1" placeholder='0.00' type="number" disabled>
                         </div>
                     </div>
@@ -339,7 +339,6 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label class="labelwidth">Rental Start:</label>
                                             <table id="tbl_summary" class="table table-bordered table-striped table-sm"
                                                 style="width:100%">
                                                 <thead>
@@ -368,7 +367,7 @@
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <label class="labelwidth">Advance Payment:</label>
-                                                                <input class="advance_payment_amount" style="border:1px solid #ced4da">
+                                                                <input class="advance_payment_amount maskAmount" style="border:1px solid #ced4da">
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <label class="labelwidth">Remaining Rental:</label>
@@ -382,6 +381,11 @@
                                                                 <label class="labelwidth">Payment Amount:</label>
                                                                 <span class="Payment_Amount"></span>
                                                             </div>
+                                                              <div class="col-md-12">
+                                                                <label class="labelwidth">Rental Start:</label>
+                                                                <span class="Payment_Amount"></span>
+                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </tfoot>
@@ -526,7 +530,7 @@
                 for (var i in data) {
                     var tablearr = [];
                     data[i].id = id++;
-                    tablearr.push(data[i].id);
+                    tablearr.push(data[i].term);
                     // tablearr.push('<input type="text" style="width: 100%;border:1px;" hidden  class="date updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date" value="' + moment(data[i].Payment_date ).format('MM/DD/YYYY') + '">');
                     tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="date_end updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date + '" value="' + data[i].date_of_payment + '">');
                     tablearr.push(data[i].remarks);
@@ -543,7 +547,6 @@
             }
         });
     }
-
     function generateEscalation() {
         $('.yrsdivided').prop('disabled',false);
         $('.advance_payment_amount').prop('disabled',false);
