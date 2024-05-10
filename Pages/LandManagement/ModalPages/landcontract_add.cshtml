@@ -157,7 +157,7 @@
                         <div class="col-md-6">
                             <label>Area to be contracted per <i>(has)</i></label>
                             <input type="text"
-                                class="Hectare form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
+                                class="Hectare  form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
                                 id="Hectares" step='0.01' min="1" placeholder='0.00' type="number" disabled>
                         </div>
                     </div>
@@ -339,7 +339,6 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label class="labelwidth">Rental Start:</label>
                                             <table id="tbl_summary" class="table table-bordered table-striped table-sm"
                                                 style="width:100%">
                                                 <thead>
@@ -368,7 +367,7 @@
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <label class="labelwidth">Advance Payment:</label>
-                                                                <input class="advance_payment_amount" style="border:1px solid #ced4da">
+                                                                <input class="advance_payment_amount maskAmount" style="border:1px solid #ced4da">
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <label class="labelwidth">Remaining Rental:</label>
@@ -382,6 +381,10 @@
                                                                 <label class="labelwidth">Payment Amount:</label>
                                                                 <span class="Payment_Amount"></span>
                                                             </div>
+                                                              <div class="col-md-12">
+                                                                <label class="labelwidth">Rental Start:</label>
+                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </tfoot>
@@ -526,15 +529,15 @@
                 for (var i in data) {
                     var tablearr = [];
                     data[i].id = id++;
-                    tablearr.push(data[i].id);
+                    tablearr.push(data[i].term);
                     // tablearr.push('<input type="text" style="width: 100%;border:1px;" hidden  class="date updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date" value="' + moment(data[i].Payment_date ).format('MM/DD/YYYY') + '">');
                     tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="date_end updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date + '" value="' + data[i].date_of_payment + '">');
                     tablearr.push(data[i].remarks);
                     console.log(data[i].remarks == 'Paid');
                     if (data[i].remarks == 'Advance Payment Paid') {
-                        tablearr.push('<input type="number" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount.toLocaleString() + '">');
                     } else {
-                        tablearr.push('<input type="number" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount.toLocaleString() + '">');
                     }
                     // tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="status updatedcell " data-rowid="' + data[i].id + '" data-colid="status" value="' + data[i].status + '">');
                     tablerow.push(tablearr);
@@ -543,7 +546,6 @@
             }
         });
     }
-
     function generateEscalation() {
         $('.yrsdivided').prop('disabled',false);
         $('.advance_payment_amount').prop('disabled',false);
@@ -586,10 +588,10 @@
                     var tablearr = [];
                     data[i].id = id++;
                     tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="StartTerm updatedcell " data-rowid="' + data[i].id + '" data-colid="startterm" data-startterm="' + data[i].StartTerm + '" value="' + data[i].date_of_payment + '">');
-                    tablearr.push('<input type="number"  style="width:100%; border:1px solid #ced4da" " id="amountNew" class="rate updatedcell " data-rowid="' + data[i].id + '" data-colid="rate" value="' + data[i].Rate + '">');
-                    tablearr.push('<input disabled type="number" style="border:none; text-align:center;" class="Num_of_has" data-rowid="' + data[i].id + '" data-colid="Num_of_has" value="' + data[i].Num_of_has + '">');
-                    tablearr.push('<input disabled type="number" style="border:none; text-align:center;" id="rateperyear" data-rowid="' + data[i].id + '" data-colid="Rate_per_year" >');
-                    tablearr.push('<input disabled type="number" style="border:none; text-align:center;"  data-rowid="' + data[i].id + '" data-colid="Total_rate" >');
+                    tablearr.push('<input type="text"  style="width:100%; border:1px solid #ced4da" " id="amountNew" class="rate maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="rate" value="' + data[i].Rate + '">');
+                    tablearr.push('<input disabled type="text" style="border:none; text-align:center;" class="Num_of_has" data-rowid="' + data[i].id + '" data-colid="Num_of_has" value="' + data[i].Num_of_has + '">');
+                    tablearr.push('<input disabled type="text" style="border:none; text-align:center;" id="rateperyear" data-rowid="' + data[i].id + '" data-colid="Rate_per_year" >');
+                    tablearr.push('<input disabled type="text" style="border:none; text-align:center;"  data-rowid="' + data[i].id + '" data-colid="Total_rate" >');
                     tablerow.push(tablearr);
                 }
                 $("#tbl_Escalation").DataTable().rows.add(tablerow).draw();
@@ -663,17 +665,18 @@
         var remaining_rental = 0;
         var Payment_Amount = 0;
         for (const x in dataforsaving) {
-            colval = $('[data-rowid=' + dataforsaving[x] + '][data-colid="rate"]').val();
-            total = colval * $('[data-rowid=' + dataforsaving[x] + '][data-colid="Num_of_has"]').val();
+            colval = $('[data-rowid=' + dataforsaving[x] + '][data-colid="rate"]').val().replace(/,/g, '');
 
-            $('[data-rowid=' + dataforsaving[x] + '][data-colid="Rate_per_year"]').val(total.toFixed(2));
+            total = colval * $('[data-rowid=' + dataforsaving[x] + '][data-colid="Num_of_has"]').val();
+            console.log(total.toLocaleString())
+            $('[data-rowid=' + dataforsaving[x] + '][data-colid="Rate_per_year"]').val(total.toLocaleString());
             total_rate = 5 * total.toFixed(2);
-            $('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val(total_rate.toFixed(2));
+            $('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val(total_rate.toLocaleString());
             console.log();
             sum += total_rate;
         }
         $('.Total_rental').val(sum);
-        $('.Total_rental').text(sum);
+        $('.Total_rental').text(sum.toLocaleString('en-US'));
        $('.advance_payment_amount').keyup(function () {
             if($('.advance_payment_amount').val() == 0)
             {
@@ -681,9 +684,9 @@
             }
             else
             {
-                remaining_rental = parseFloat($('.Total_rental').val()) - parseFloat($('.advance_payment_amount').val());
+                remaining_rental = parseFloat($('.Total_rental').val()) - parseFloat($('.advance_payment_amount').val().replace(/,/g, ''));
                 $('.Remaining_rental').val(remaining_rental.toFixed(2));
-                $('.Remaining_rental').text(remaining_rental.toFixed(2));
+                $('.Remaining_rental').text(remaining_rental.toLocaleString('en-US'));
             }
         });
         $('.yrsdivided').keyup(function () {
@@ -694,9 +697,9 @@
             }
             else
             {
-                Payment_Amount = parseFloat($('.Remaining_rental').val()) / parseFloat($('.yrsdivided').val())
-                $('.Payment_Amount').val(Payment_Amount.toFixed(2));
-                $('.Payment_Amount').text(Payment_Amount.toFixed(2));
+                Payment_Amount = parseFloat($('.Remaining_rental').val()) / parseFloat($('.yrsdivided').val());
+                $('.Payment_Amount').val(Payment_Amount.toLocaleString('en-US'));
+                $('.Payment_Amount').text(Payment_Amount.toLocaleString('en-US'));
             }
             
             $('.lease_period').val();

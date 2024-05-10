@@ -7,7 +7,7 @@ function stopLoading() {
     $('.overlay').addClass('invisible');
 }
 function startContentLoading(container) {
-    $('.'+container).append('<div class="overlay ' + this + '"><i class="fas fa-2x fa-sync fa-spin"></i> </div> ');
+    $('.' + container).append('<div class="overlay ' + this + '"><i class="fas fa-2x fa-sync fa-spin"></i> </div> ');
 }
 function stopContentLoading() {
     $(this).remove();
@@ -567,17 +567,17 @@ function getOptDataForAdd() {
     for (var j in fieldID) {
         if ($('.' + fieldID[j] + '.triggerdetail')[0].tagName == 'SELECT') {
             var tagClasses = $('.' + fieldID[j] + '.triggerdetail')[0].className.split(' ');
-            
+
             console.log(tagClasses);
             var optSource = tagClasses[2];
             var optId = tagClasses[0];
             var optName = tagClasses[1];
             var RAWHTML = '<option disabled selected>-</option>';
-            getOptDataForAddAppend(optSource,optId,optName,RAWHTML);
+            getOptDataForAddAppend(optSource, optId, optName, RAWHTML);
         }
     }
 }
-function getOptDataForAddAppend(optSource,optId,optName,RAWHTML){
+function getOptDataForAddAppend(optSource, optId, optName, RAWHTML) {
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getOptData',
         type: 'post',
@@ -774,8 +774,8 @@ function getSysAllData(dataSource) {
                         }
                     } else if (colid[j] == 'geoLocation') {
                         //dataarr.push('<div style="text-align:center"><a href="https://www.google.com/maps/place/' + data[i][colid[j]] + '" target="_blank">' + data[i][colid[j]] + '</a></div>');
-                        dataarr.push('<div style="text-align:center"><button class="btn btn-success-sm" onclick="showiFrame(\''+data[i][colid[j]]+'\')">' + data[i][colid[j]] + '</a></div>');
-                        
+                        dataarr.push('<div style="text-align:center"><button class="btn btn-success-sm" onclick="showiFrame(\'' + data[i][colid[j]] + '\')">' + data[i][colid[j]] + '</a></div>');
+
                     } else {
                         dataarr.push('<div style="text-align:center">' + data[i][colid[j]] + '</div>');
                     }
@@ -796,7 +796,7 @@ function showdatatablesLoader(addTo) {
     var add = 'tbl_' + addTo + '_wrapper';
     var spinnerHTML = '<div class="d-flex justify-content-center dtloader ' + addTo + '" style="position: absolute;width: 100%;height: 100%;">' +
         '<span class="fa-stack fa-lg">' +
-            '<i class="fa fa-spinner fa-spin fa-stack-2x fa-fw"></i>' +
+        '<i class="fa fa-spinner fa-spin fa-stack-2x fa-fw"></i>' +
         '</span>&nbsp;&nbsp;&nbsp;&nbsp;Processing ...' +
         '</div>';
     $('#' + add).prepend(spinnerHTML);
@@ -857,7 +857,7 @@ $(document).on('click', '.pagelink', function () {
             stopLoading();
         }
     })
-    
+
 })
 $(document).on('click', '.breadcrumblink', function () {
     routePagebyBC($(this).data('route_name'));
