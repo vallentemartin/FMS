@@ -1,0 +1,319 @@
+<section>
+    <div class="container">    
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title">Landowner Information</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <!-- START: LANDOWNER INFORMATION -->
+                    <div class="container">
+                        <div class="col-md-12">
+                            <!-- insert here -->
+                            <!-- COMPANY -->
+                            <div class="container-flui hideCompany">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Landowner Code</label>
+                                            <input class="LandownerCode form-control form-control-sm triggerlandowner" value="0" type="text" readonly>
+                                        </div>  
+                                        <div class="col-md-4">
+                                            <label>Company</label>
+                                            <input class="LastName form-control form-control-sm triggerlandowner" type="text" placeholder="-" autocomplete="off">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Contact Number</label>
+                                            <input class="ContactNumber form-control form-control-sm triggerlandowner" type="text" placeholder="(e.g 09XXXXXXXXX)" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Address</label>
+                                            <textarea class="Address form-control form-control-sm" autocomplete="off"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Remarks</label>
+                                            <textarea class="remarks form-control form-control-sm triggerlandowner" placeholder="-" autocomplete="off"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- INDIVIDUAL -->
+                            <div class="container-fluid hideIndividual">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Landowner Code</label>
+                                            <input class="LandownerCode form-control form-control-sm triggerlandowner" value="0" type="text" disabled>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>First Name</label>
+                                            <input class="FirstName form-control form-control-sm triggerlandowner" type="text" placeholder="-" autocomplete="off">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Middle Name</label>
+                                            <input class="MiddleName form-control form-control-sm triggerlandowner" type="text" placeholder="(e.g [D., Doe])" autocomplete="off">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Last Name</label>
+                                            <input class="LastName form-control form-control-sm triggerlandowner" type="text" placeholder="-" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label id="suffixLabel">Suffix</label>
+                                            <input class="Suffix form-control form-control-sm triggerlandowner" type="text" id="suffixInput" placeholder="(e.g. Jr., II)" autocomplete="off">
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label>Sex</label>
+                                            <select class="GenderCode GenderName Gender form-control form-control-sm triggerlandowner">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Date of Birth:</label>
+                                            <input type="date" class="Birthday form-control form-control-sm float-right triggerlandowner" autocomplete="off">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Country</label>
+                                            <select class="CountryCode en_short_name Country form-control form-control-sm triggerlandowner select2" id="countrySelect">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Civil Status</label>
+                                                <select class="CivilStatusCode CS_Name CivilStatus form-control form-control-sm triggerlandowner" id="civilStatus">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label id="addressLabel">Address</label>
+                                            <textarea class="Address form-control form-control-sm triggerlandowner" placeholder="(e.g Unit/Room No., Floor, Building Name, Lot No., Phase No., House No., Street Name)" id="addressTextArea" autocomplete="off"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" id="hideSelect">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label id="provinceLabel">Province</label>
+                                            <select class="provinceCode provinceName Province form-control form-control-sm triggerlandowner select2" onChange="clearSelection('.provinceUpdate')" type="text" id="provinceSelect">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label id="cityLabel">Municipality/City</label>
+                                            <select class="cityCode form-control form-control-sm triggerlandownerselect select2 provinceUpdate" onChange="clearSelection('.cityUpdate')" type="text" id="citySelect">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label id="barangayLabel">Barangay</label>
+                                            <select class="barangayCode form-control form-control-sm triggerlandownerselect select2 provinceUpdate cityUpdate" style="text-transform: uppercase;" type="text" id="barangaySelect">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Nationality</label>
+                                            <input class="Nationality form-control form-control-sm triggerlandowner" type="text" placeholder="(e.g Filipino, American)" autocomplete="off">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Contact Number</label>
+                                            <input class="ContactNumber form-control form-control-sm triggerlandowner" type="text" placeholder="(e.g 09XXXXXXXXX)" autocomplete="off">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Email Address</label>
+                                            <input class="Email form-control form-control-sm triggerlandowner" type="email" placeholder="ABC@xyz.com" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 showCoOwners">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Co-Owners</label>
+                                            <textarea class="CoOwner form-control form-control-sm triggerlandowner" placeholder="-" autocomplete="off"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Remarks</label>
+                                            <textarea class="remarks form-control form-control-sm triggerlandowner" placeholder="-" autocomplete="off"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- insert here: ends here -->
+                        </div>
+                    </div>
+                <!-- END: LANDOWNER INFORMATION -->
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+<script>
+    var sourceLandowner = 'Landowner';
+    var dataSourceIdCol = 'LandownerCode';
+    getSysLandownerData(sourceLandowner, dataSourceIdCol);
+    $('.triggerlandowner').on('change', function () {
+        var syscol = $(this)[0].className.split(' ');
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/updateSysData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                dataSource: sourceLandowner,
+                filter: dataSourceIdCol,
+                selectedid: $('.selectedid').data('id'),
+                syscol: syscol[0],
+                syscolval: $(this).val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                getSysAllLandownerData(sourceLandowner);
+            },
+            error: function () {
+                toastr.error('Error on Updating!');
+            }
+        })
+    })
+
+    $('.triggerlandownerselect').on('change', function () {
+        var syscol = $(this)[0].className.split(' ');
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/updateSysData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                dataSource: sourceLandowner,
+                filter: dataSourceIdCol,
+                selectedid: $('.selectedid').data('id'),
+                syscol: syscol[0],
+                syscolval: $(this).val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                getSysAllLandownerData(sourceLandowner);
+            },
+            error: function () {
+                // toastr.error('Error on Updating!');
+            }
+        })
+    })
+
+/////////////////////////////////////////////////////////////////////////////START: COUNTRY:SELECT/////////////////////////////////////////////////////////////////////////////
+    $('#countrySelect').change(function() {
+    //Check if the selected value is not Philippines then 'hide' || Country:Select
+    if ($('#countrySelect option:selected').val() != 608) { 
+        $('#addressLabel').hide();
+        $('#addressTextArea').hide();
+        $('#hideSelect').hide();
+        $('#addressTextArea').val('');
+        $('#provinceSelect').select2('destroy').val('').select2();
+        $('#citySelect').select2('destroy').val('').select2();
+        $('#barangaySelect').select2('destroy').val('').select2();
+    } else {
+        $('#addressLabel').show();
+        $('#addressTextArea').show();
+        $('#hideSelect').show();
+        $("#citySelect").attr('disabled','disabled');
+        $("#barangaySelect").attr('disabled','disabled');
+    } });
+/////////////////////////////////////////////////////////////////////////////END: COUNTRY:SELECT/////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////START: FETCH DATA OF PROVINCE, CITY, AND BARANGAY UPON UPDATE/////////////////////////////////////////////////////////
+    $('#provinceSelect').change(function() {
+        $("#barangaySelect").attr('disabled','disabled');
+        //START: PARAMETER: PROVINCECODE TO FETCH CITY
+            var provinceCode = $('#provinceSelect option:selected').val();
+            var CITYHTML = '<option value="-" selected disabled>SELECT CITY</option>';
+            $('.provinceUpdate').html('');
+            $('#citySelect').append('<option value="-">loading...</option>');
+            $.ajax({
+                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/getCityByProvince',
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify({  
+                    ProvinceCode: provinceCode,
+                    username: $("#username").val(),
+                    token: $("#token").val(),
+                    sysapp: sysapp
+                }),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if ( data.length !== 0 ) {
+                        for (var i in data) {
+                            CITYHTML += '<option value="' + data[i].cityCode + '">' + data[i].cityName + '</option>';
+                        }
+                        $('#citySelect').html(CITYHTML);					
+                    } else {
+                        // Handle the case when no data is returned
+                        console.log('No city data available.');
+                    }
+                }
+            })
+        // END: PARAMETER: PROVINCECODE TO FETCH CITY
+    });
+
+    $('#citySelect').change(function() {
+        $("#barangaySelect").removeAttr('disabled');
+        //START: PARAMETER: CITYICODE TO FETCH BARANGAY
+            var cityCode = $('#citySelect option:selected').val();
+            var BRGYHTML = '<option value="-" selected disabled>SELECT BARANGAY</option>';
+            $('.cityUpdate').html('');
+            $('#barangaySelect').append('<option value="-">loading...</option>');
+            $.ajax({
+                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/getBarangayByCity',
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify({
+                    CityCode: cityCode,
+                    username: $("#username").val(),
+                    token: $("#token").val(),
+                    sysapp: sysapp
+                }),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if ( data.length !== 0 ) {
+                        for (var i in data) {
+                            BRGYHTML += '<option value="' + data[i].barangayCode + '">' + data[i].barangayName + '</option>';
+                        }
+                        $('#barangaySelect').html(BRGYHTML);					
+                    } else {
+                        // Handle the case when no data is returned
+                        console.log('No barangay data available.');
+                    }    		
+                }
+            })
+            //END:  PARAMETER: CITYICODE TO FETCH BARANGAY
+            stopLoading();
+    });
+////////////////////////////////////////////////////////END: FETCH DATA OF PROVINCE, CITY, AND BARANGAY UPON UPDATE/////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////START: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN ///////////////////////////////////////////////////////
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+////////////////////////////////////////////////END: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN SEARCHING CSS//////////////////////////////////////////////////////
