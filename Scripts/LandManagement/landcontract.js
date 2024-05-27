@@ -124,7 +124,7 @@ function saveLandContractData(sourceContract) {
         inputDataCollection['dataSource'] = sourceContract;
         inputDataCollection['sysapp'] = sysapp;
         inputDataCollection['LeaseTerm'] = $(".terms").val(),
-        inputDataCollection['LandContractCode'] = landcontractcode;
+            inputDataCollection['LandContractCode'] = landcontractcode;
         inputDataCollection['PaymentTerms'] = $(".PaymentTermsCode").val();
         inputDataCollection['AdvancePayment'] = advancepayment;
         inputDataCollection['StartOfPayment'] = startpayment;
@@ -135,7 +135,7 @@ function saveLandContractData(sourceContract) {
         inputDataCollection['LandInformationCode'] = $('#viewLandInformation').val();
         inputDataCollection['LandContractedArea'] = $('.LandContractedArea').val();
 
-        if ( $('.RepName').val() == '' && $('.RepContactNumber').val() == '' && $('.RepEmail').val() == '' ) {
+        if ($('.RepName').val() == '' && $('.RepContactNumber').val() == '' && $('.RepEmail').val() == '') {
             inputDataCollection['RepresentativeName'] = null;
             inputDataCollection['RepresentativeContactNumber'] = null;
             inputDataCollection['RepresentativeEmail'] = null;
@@ -162,9 +162,10 @@ function saveLandContractData(sourceContract) {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 console.log(data);
-                if (data == 1) {
+                if (data) {
                     getSysAllContractInfoData(sourceContract);
                     saveNewFile(sourcefile);
+                    saveEscalation(data.LandContractCode);
                     toastr.success('Data added!');
                     hideModal();
                 } else {
@@ -179,31 +180,7 @@ function saveLandContractData(sourceContract) {
         })
     }
 }
-// function saveupdateddata() {
-//     console.log('datasaving');
-//     $('.savebtn').prop('disabled', true);
-//     alert("clicklerdsf");
-//     // for (var x in dataforsaving) {
-//     //     console.log($('[data-rowid=' + dataforsaving[x] + '][data-colid="Payment_date"]').val())
-//     //     $.ajax({
-//     //         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updateAmount',
-//     //         type: 'post',
-//     //         dataType: 'json',
-//     //         data: JSON.stringify({
-//     //             contract_code: 'CO_1',
-//     //             amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
-//     //             date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Payment_date"]').val(),
-//     //             username: $("#username").val(),
-//     //             token: $("#token").val(),
-//     //             sysapp: sysapp
-//     //         }),
-//     //         contentType: "application/json; charset=utf-8",
-//     //         success: function (data) {
 
-//     //         }
-//     //     })
-//     // }
-// }
 
 /**
  * Description: This function triggers the select:option of data input.
@@ -682,7 +659,7 @@ function viewContractInfoData(sourceContract, filter) {
                 success: function (viewdata) {
                     viewContract = {
                         contractdata: data,
-                        landinformationdata: viewdata    
+                        landinformationdata: viewdata
                     };
                     console.log('view data', viewContract);
 
@@ -690,8 +667,8 @@ function viewContractInfoData(sourceContract, filter) {
                     $('.name').text(viewContract.contractdata.Fullname);
                     $('.landdocument').text(viewContract.landinformationdata.Document);
                     $('.landlotnumber').text(viewContract.landinformationdata.LotNumber);
-                    
-                    if ( viewContract.landinformationdata.WithCoOwner == true ) {
+
+                    if (viewContract.landinformationdata.WithCoOwner == true) {
                         $('.hideCoOwner').show();
                         $('.CoOwner').val(viewContract.landinformationdata.CoOwner);
                     } else {
@@ -699,7 +676,7 @@ function viewContractInfoData(sourceContract, filter) {
                         $('.CoOwner').val('');
                     }
 
-                    if ( viewContract.contractdata.RepresentativeName == '' ) {
+                    if (viewContract.contractdata.RepresentativeName == '') {
                         $('.hideRepresentativeLabel').hide();
                     } else {
                         $('.hideRepresentativeLabel').show();
@@ -745,7 +722,7 @@ function saveNewFile(dataSource) {
     }
 
     // if (confirm('Save this data?')) {
-        
+
     // }
     // console.log(formData);
     $.ajax({
@@ -811,4 +788,42 @@ function saveNewUploadedFile(name, filename, extension, dataSource) {
 function clearSelection(e) {
     $(e).select2('destroy').val('').select2();
 }
+//Start Contract Payment
+
+function saveEscalation(LandContractCode) {
+    console.log($('#LandContractCode').val());
+    for (var x in dataforsaving) {
+        // console.log($('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val());
+        var escalation_term = $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val().split(' - ');
+        var start_term = escalation_term[0];
+        var end_term = escalation_term[1];
+        var start = new Date(start_term);
+        var end = new Date(end_term);
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveEscalation',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                LandContractCode: LandContractCode, // add contract_code value or landinformation code
+                // LandInformationCode:,
+                rate: $('[data-rowid=' + dataforsaving[x] + '][data-colid="rate"]').val(),
+                Rate_per_year: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Rate_per_year"]').val(),
+                Total_rate: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val(),
+                num_of_has: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Num_of_has"]').val(),
+                // date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val(),
+                startterm: start,
+                endterm: end,
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                // saveupdateddata();
+            }
+        })
+    }
+    // toastr.success('Data Saved!');
+}
+//End Contract Payment
 //END:
