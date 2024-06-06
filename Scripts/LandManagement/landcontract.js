@@ -153,7 +153,6 @@ function saveLandContractData(sourceContract) {
 
         // inputDataCollection['inputData'] = inputData;
         console.log('data', inputDataCollection);
-
         $.ajax({
             url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveLandContract',
             type: 'post',
