@@ -1,28 +1,30 @@
 <section>
-    <div class="container">    
+    <div class="container-fluid">    
         <div class="card card-lightblue">
             <div class="card-header">
-                <h3 class="card-title">Landowner Information</h3>
+                <h3 class="card-title"  id="selectType">
+                <!-- Landowner Information -->
+                </h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <!-- START: LANDOWNER INFORMATION -->
-                    <div class="container">
+                    <div class="container form">
                         <div class="col-md-12">
                             <!-- insert here -->
                             <!-- COMPANY -->
-                            <div class="container-flui hideCompany">
+                            <div class="container-fluid hideCompany">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-sm-12 col-md-4">
                                             <label>Landowner Code</label>
                                             <input class="LandownerCode form-control form-control-sm triggerlandowner" value="0" type="text" readonly>
                                         </div>  
-                                        <div class="col-md-4">
-                                            <label>Company</label>
+                                        <div class="col-sm-12 col-md-4">
+                                            <label>Company Name</label>
                                             <input class="LastName form-control form-control-sm triggerlandowner" type="text" placeholder="-" autocomplete="off">
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-sm-12 col-md-4">
                                             <label>Contact Number</label>
                                             <input class="ContactNumber form-control form-control-sm triggerlandowner" type="text" placeholder="(e.g 09XXXXXXXXX)" autocomplete="off">
                                         </div>
@@ -30,7 +32,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12 col-md-12">
                                             <label>Address</label>
                                             <textarea class="Address form-control form-control-sm" autocomplete="off"></textarea>
                                         </div>
@@ -38,7 +40,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12 col-md-12">
                                             <label>Remarks</label>
                                             <textarea class="remarks form-control form-control-sm triggerlandowner" placeholder="-" autocomplete="off"></textarea>
                                         </div>
@@ -49,54 +51,49 @@
                             <div class="container-fluid hideIndividual">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-sm-12 col-md-3">
                                             <label>Landowner Code</label>
                                             <input class="LandownerCode form-control form-control-sm triggerlandowner" value="0" type="text" disabled>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-sm-12 col-md-3">
                                             <label>First Name</label>
                                             <input class="FirstName form-control form-control-sm triggerlandowner" type="text" placeholder="-" autocomplete="off">
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-sm-12 col-md-3">
                                             <label>Middle Name</label>
                                             <input class="MiddleName form-control form-control-sm triggerlandowner" type="text" placeholder="(e.g [D., Doe])" autocomplete="off">
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-sm-12 col-md-3">
                                             <label>Last Name</label>
                                             <input class="LastName form-control form-control-sm triggerlandowner" type="text" placeholder="-" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-sm-12 col-md-4">
                                             <label id="suffixLabel">Suffix</label>
                                             <input class="Suffix form-control form-control-sm triggerlandowner" type="text" id="suffixInput" placeholder="(e.g. Jr., II)" autocomplete="off">
                                         </div>
-                                        <div class="col-md-3 form-group">
+                                        <div class="col-sm-12 col-md-4 form-group">
                                             <label>Sex</label>
-                                            <select class="GenderCode GenderName Gender form-control form-control-sm triggerlandowner">
+                                            <select class="GenderCode GenderName Gender form-control form-control-sm triggerlandowner select2">
                                             </select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-sm-12 col-md-4">
                                             <label>Date of Birth:</label>
-                                            <input type="date" class="Birthday form-control form-control-sm float-right triggerlandowner" autocomplete="off">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Country</label>
-                                            <select class="CountryCode en_short_name Country form-control form-control-sm triggerlandowner select2" id="countrySelect">
-                                            </select>
+                                            <input type="date" class="BirthDate form-control form-control-sm float-right triggerlandowner" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-sm-12 col-md-4">
                                             <div class="form-group">
                                                 <label>Civil Status</label>
-                                                <select class="CivilStatusCode CS_Name CivilStatus form-control form-control-sm triggerlandowner" id="civilStatus">
+                                                <select class="CivilStatusCode CS_Name CivilStatus form-control form-control-sm triggerlandowner select2" id="civilStatus">
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-sm-12 col-md-8">
                                             <label id="addressLabel">Address</label>
                                             <textarea class="Address form-control form-control-sm triggerlandowner" placeholder="(e.g Unit/Room No., Floor, Building Name, Lot No., Phase No., House No., Street Name)" id="addressTextArea" autocomplete="off"></textarea>
                                         </div>
@@ -104,34 +101,34 @@
                                 </div>
                                 <div class="col-md-12" id="hideSelect">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-sm-12 col-md-4">
                                             <label id="provinceLabel">Province</label>
                                             <select class="provinceCode provinceName Province form-control form-control-sm triggerlandowner select2" onChange="clearSelection('.provinceUpdate')" type="text" id="provinceSelect">
                                             </select>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-sm-12 col-md-4">
                                             <label id="cityLabel">Municipality/City</label>
                                             <select class="cityCode form-control form-control-sm triggerlandownerselect select2 provinceUpdate" onChange="clearSelection('.cityUpdate')" type="text" id="citySelect">
                                             </select>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-sm-12 col-md-4">
                                             <label id="barangayLabel">Barangay</label>
-                                            <select class="barangayCode form-control form-control-sm triggerlandownerselect select2 provinceUpdate cityUpdate" style="text-transform: uppercase;" type="text" id="barangaySelect">
+                                            <select class="barangayCode form-control form-control-sm triggerlandownerselect select2 provinceUpdate cityUpdate" type="text" id="barangaySelect">
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-sm-12 col-md-4">
                                             <label>Nationality</label>
                                             <input class="Nationality form-control form-control-sm triggerlandowner" type="text" placeholder="(e.g Filipino, American)" autocomplete="off">
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-sm-12 col-md-4">
                                             <label>Contact Number</label>
                                             <input class="ContactNumber form-control form-control-sm triggerlandowner" type="text" placeholder="(e.g 09XXXXXXXXX)" autocomplete="off">
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-sm-12 col-md-4">
                                             <label>Email Address</label>
                                             <input class="Email form-control form-control-sm triggerlandowner" type="email" placeholder="ABC@xyz.com" autocomplete="off">
                                         </div>
@@ -139,7 +136,7 @@
                                 </div>
                                 <div class="col-md-12 showCoOwners">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12 col-md-12">
                                             <label>Co-Owners</label>
                                             <textarea class="CoOwner form-control form-control-sm triggerlandowner" placeholder="-" autocomplete="off"></textarea>
                                         </div>
@@ -147,7 +144,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12 col-md-12">
                                             <label>Remarks</label>
                                             <textarea class="remarks form-control form-control-sm triggerlandowner" placeholder="-" autocomplete="off"></textarea>
                                         </div>
@@ -218,26 +215,6 @@
             }
         })
     })
-
-/////////////////////////////////////////////////////////////////////////////START: COUNTRY:SELECT/////////////////////////////////////////////////////////////////////////////
-    $('#countrySelect').change(function() {
-    //Check if the selected value is not Philippines then 'hide' || Country:Select
-    if ($('#countrySelect option:selected').val() != 608) { 
-        $('#addressLabel').hide();
-        $('#addressTextArea').hide();
-        $('#hideSelect').hide();
-        $('#addressTextArea').val('');
-        $('#provinceSelect').select2('destroy').val('').select2();
-        $('#citySelect').select2('destroy').val('').select2();
-        $('#barangaySelect').select2('destroy').val('').select2();
-    } else {
-        $('#addressLabel').show();
-        $('#addressTextArea').show();
-        $('#hideSelect').show();
-        $("#citySelect").attr('disabled','disabled');
-        $("#barangaySelect").attr('disabled','disabled');
-    } });
-/////////////////////////////////////////////////////////////////////////////END: COUNTRY:SELECT/////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////START: FETCH DATA OF PROVINCE, CITY, AND BARANGAY UPON UPDATE/////////////////////////////////////////////////////////
     $('#provinceSelect').change(function() {
