@@ -127,50 +127,45 @@ function saveLandownerData(sourceLandowner) {
         inputDataCollection['token'] = $("#token").val();
         inputDataCollection['dataSource'] = sourceLandowner;
         inputDataCollection['sysapp'] = sysapp;
-        inputData['LastName'] = lastname;
-        inputData['ContactNumber'] = '+' + contactnumber;
-        inputData['remarks'] = remarks;
+        inputDataIndividual['LastName'] = lastname;
+        inputDataIndividual['ContactNumber'] = '+' + contactnumber;
+        inputDataIndividual['remarks'] = remarks;
         // inputData['Suffix'] = suffix;
-        inputData['cityCode'] = $('.cityCode').val();
-        inputData['barangayCode'] = $('.barangayCode').val();
+        inputDataIndividual['cityCode'] = $('.cityCode').val();
+        inputDataIndividual['barangayCode'] = $('.barangayCode').val();
         inputDataCompany['LastName'] = lastname;
         inputDataCompany['ContactNumber'] = '+' + contactnumber;
         inputDataCompany['Address'] = address;
         inputDataCompany['remarks'] = remarks;
         for (var j in fieldID) {
-            inputData[fieldID[j]] = $('.triggerlandowner.' + fieldID[j]).val();
+            inputDataIndividual[fieldID[j]] = $('.triggerlandowner.' + fieldID[j]).val();
             $('.triggerlandowner.' + fieldID[j]).val('');
-            $('#idvllastname').val('');
-            $('#companylastname').val('');
-            $('#idvlcontactnumber').val('');
-            $('#companynumber').val('');
-            
         }
-        inputDataCollection['inputData'] = $('input[name=ownertypeRadio]:checked', '#selectownertype').val() == 'individual' ? inputData : inputDataCompany;
+        inputDataCollection['inputData'] = $('input[name=ownertypeRadio]:checked', '#selectownertype').val() == 'individual' ? inputDataIndividual : inputDataCompany;
         console.log('Landowner Data',inputDataCollection);
         
-        // $.ajax({
-        //     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/saveSysData',
-        //     type: 'post',
-        //     dataType: 'json',
-        //     data: JSON.stringify(inputDataCollection),
-        //     contentType: "application/json; charset=utf-8",
-        //     success: function (data) {
-        //         console.log(data);
-        //         if (data.retval == 1) {
-        //             getSysAllLandownerData(sourceLandowner);
-        //             toastr.success('Data added!');
-        //             hideModal();
-        //         } else {
-        //             toastr.error('Duplicate code!');
-        //             stopLoading();
-        //         }
-        //     },
-        //     error: function () {
-        //         toastr.error('Error on saving data!');
-        //         stopLoading();
-        //     }
-        // })
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/saveSysData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify(inputDataCollection),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log(data);
+                if (data.retval == 1) {
+                    getSysAllLandownerData(sourceLandowner);
+                    toastr.success('Data added!');
+                    hideModal();
+                } else {
+                    toastr.error('Duplicate code!');
+                    stopLoading();
+                }
+            },
+            error: function () {
+                toastr.error('Error on saving data!');
+                stopLoading();
+            }
+        })
     }
 }
 /**

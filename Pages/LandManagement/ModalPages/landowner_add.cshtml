@@ -16,11 +16,11 @@
                             <div class="col-md-12">
                                 <form id="selectownertype">
                                     <div class="form-group clearfix beforeSelect">
-                                        <div class="row d-flex text-center afterSelect">
-                                            <div class="col-sm-12 col-md-12">
+                                        <!-- <div class="row d-flex text-center afterSelect">
+                                            <div class="col-sm-12 col-md-12 hideSelect">
                                                 <h5>Select Owner Type</h5>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="row d-flex text-center">
                                             <div class="icheck-success d-inline col-sm-12 col-md-6 divIndividual">
                                                 <input class="ownertype" type="radio" name="ownertypeRadio" id="individual" value="individual">
@@ -183,11 +183,8 @@
     getOptDataForAddLandowner();
 
 /////////////////////////////////////////////////////////////////////////////START: HIDE AND DISABLE FIELDS UPON LOADING MODAL/////////////////////////////////////////////////////////////////////////////
-    $('.afterSelect').hide();
-    $('.hideindividual').hide();
-    $('.hidecompany').hide();
-    $("#citySelect").attr('disabled','disabled');
-    $("#barangaySelect").attr('disabled','disabled');
+    $('.afterSelect, .hideSelect, .hideindividual, .hidecompany').hide();
+    $("#citySelect, #barangaySelect").attr('disabled','disabled');
 /////////////////////////////////////////////////////////////////////////////END: HIDE AND DISABLE FIELDS UPON LOADING MODAL/////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////START: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN SEARCHING CSS/////////////////////////////////////////////////////////////////////////////
@@ -201,14 +198,22 @@
 /////////////////////////////////////////////////////////////////////////////END: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN SEARCHING CSS//////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////START: SELECTION OF LANDOWNER | INDIVIDUAL:COMPANY/////////////////////////////////////////////////////////////////////////////
-    
+
     $('.ownertype').on('change', function() {
-        console.log($(this).val());
-        $(this).val() == 'individual' ? $('.afterSelect').show() : $('.afterSelect').show();
-        $(this).val() == 'individual' ? $('.hideindividual').show() && $('.hidecompany').hide() : $('.hideindividual').hide() && $('.hidecompany').show();
-        $(this).val() == 'individual' ? $('#selectType').text('Individual Information') : $('#selectType').text('Company Information');
-        // $(this).val() == 'individual' ? $('.divIndividual').addClass("divRadio") && $('.divCompany').removeClass("divRadio") : $('.divIndividual').removeClass("divRadio") && $('.divCompany').addClass("divRadio");
+        var selectedValue = $(this).val();
+        $('.hideSelect, .afterSelect').show();
+
+        if (selectedValue === 'individual') {
+            $('.hideindividual').show();
+            $('.hidecompany').hide();
+            $('#selectType').text('Individual Information Form');
+        } else {
+            $('.hideindividual').hide();
+            $('.hidecompany').show();
+            $('#selectType').text('Company Information Form');
+        }
     });
+
 /////////////////////////////////////////////////////////////////////////////END: SELECTION OF LANDOWNER | INDIVIDUAL:COMPANY/////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////START: FETCH CITY FROM SELECTED PROVINCE/////////////////////////////////////////////////////////////////////////////
