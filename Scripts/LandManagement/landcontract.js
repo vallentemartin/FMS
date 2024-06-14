@@ -153,7 +153,6 @@ function saveLandContractData(sourceContract) {
 
         // inputDataCollection['inputData'] = inputData;
         console.log('data', inputDataCollection);
-
         $.ajax({
             url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveLandContract',
             type: 'post',
@@ -276,6 +275,7 @@ function getSysAllContractInfoData(sourceContract) {
                 var dataarr = [];
                 for (var j in colid) {
                     if (colid[j] == 'id') {
+
                         // dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
                         // dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;" disabled>-</buttons></div>');
                         dataarr.push('<div style="text-align:center"><button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 60px;">View</button></div>');
@@ -316,6 +316,7 @@ function getSysAllContractInfoData(sourceContract) {
 function updateLandownerData(data, id, name, status) {
     showModal();
     ModalSize('xl');
+
     var title = 'Update ' + data + ' <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >';
     $('.modal-title').html(title);
@@ -644,13 +645,14 @@ function viewContractInfoData(sourceContract, filter) {
         success: function (data) {
             var LandInformationCode = data.LandInformationCode;
             // var LandContractCode = data.LandContractCode;
+            console.log(LandInformationCode);
             $.ajax({
                 url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getContractInfoData',
                 type: 'post',
                 dataType: 'json',
                 data: JSON.stringify({
                     data: data,
-                    LandInformationCode: LandInformationCode,
+                    LandInformationCode: data.LandInformationCode,
                     username: $("#username").val(),
                     token: $("#token").val(),
                     sysapp: sysapp

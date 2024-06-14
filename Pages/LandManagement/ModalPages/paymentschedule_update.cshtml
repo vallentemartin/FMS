@@ -202,7 +202,7 @@
             <div class="card-body">
     <div class="row">
             <div class="col-md-12">
-                <div class="row">
+                <div class="row" style="overflow: auto;">
                     <div class="card-body">
                         <table id="tbl_PaymentSched" class="table table-bordered table-striped table-sm"
                             style="width:100%" data-editpage="pages/masterdata/modalpages/area_update"
@@ -212,10 +212,11 @@
                                     <!-- <th hidden class="id">Term</th> -->
                                     <th class="Payment_date" style="width:160px;">Payment Schedule</th>
                                     <th class="remarks"  style="width:160px;">Status</th>
-                                    <th class="Amount">Rate/Amount</th>
+                                    <th class="Amount">Gross Annual Rental</th>
+                                    <th class="Amount">Net Annual Rental</th>
                                     <th class="Cv_num">Check Voucher Number</th>
                                     <th class="Cr_num">CR number</th>
-                                    <th class="Posting_date">Date Posted</th>
+                                    <th class="Posting_date">Encashment Date</th>
                                     <th class="filename">Attachment</th>
                                     <th class="file hide_column">test</th>
                                 </tr>
@@ -257,7 +258,7 @@
         var table = $('#tbl_PaymentSched').DataTable({
             columnDefs:[
                 {
-                    targets:[7],
+                    targets:[8],
                     className:"hide_column"
                 }
             ],
@@ -325,42 +326,46 @@
                     var tablearr = [];
                     data[i].id = id++;
                     tablearr.push('<input type="text" disabled style="width: 100%;border:1px; background-color:#e9ecef;"  class="date_end  form-control form-control-sm updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date_end + '" value="' + data[i].Payment_date + '">');
-                    if (data[i].remarks == 'Advance Payment Paid' && data[i].Amount != 0 && data[0].Cv_num == null) {
-                        // tablearr.push('<input readonly style="border:1px; background-color:#eaeaea;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                        tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Advance Payment Paid">' + data[i].remarks + '</option></select>');
-                        // tablearr.push('<input readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="remarks updatedcell" data-rowid="' + data[i].id + '" value="Advance Payment Paid">');
-                        tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" >');
-                        tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
-                        // tablearr.push('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="far fa-calendar-alt"></i></span></div><input type="text" class="reservation reservationdate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date"></div>');
-                        tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost txtDate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
+                    // if (data[i].remarks == 'Advance Payment Paid' && data[i].Amount != 0 && data[0].Cv_num == null) {
+                    //     // tablearr.push('<input readonly style="border:1px; background-color:#eaeaea;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
+                    //     tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Advance Payment Paid">' + data[i].remarks + '</option></select>');
+                    //     // tablearr.push('<input readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="remarks updatedcell" data-rowid="' + data[i].id + '" value="Advance Payment Paid">');
+                    //     tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                    //     tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" >');
+                    //     tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
+                    //     // tablearr.push('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="far fa-calendar-alt"></i></span></div><input type="text" class="reservation reservationdate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date"></div>');
+                    //     tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost txtDate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
 
-                    } else if (data[i].remarks == 'Advance Payment Paid' && data[i].Amount == 0) {
-                        tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef; " class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
-                        tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="datepost form-control form-control-sm" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
-                        tablearr.push('<input readonly style="width: 100%; height:100%;border:1px;" class="Init_Filename form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="text" />');
-                    } else if (data[i].remarks == 'Advance Payment Paid' && data[0].Cv_num != null) {
-                        tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                        tablearr.push('<input type="text"  readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
-                        tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
+                    // } else if (data[i].remarks == 'Advance Payment Paid' && data[i].Amount == 0) {
+                    //     tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
+                    //     tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef; " class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                    //     tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
+                    //     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
+                    //     tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="datepost form-control form-control-sm" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
+                    //     tablearr.push('<input readonly style="width: 100%; height:100%;border:1px;" class="Init_Filename form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="text" />');
+                    // } else if (data[i].remarks == 'Advance Payment Paid' && data[0].Cv_num != null) {
+                    //     tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
+                    //     tablearr.push('<input type="text"  readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                    //     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
+                    //     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '">');
+                    //     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
+                    //     tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
 
 
-                    } else if (data[i].remarks == 'Paid') {
+                    // } else 
+                    
+                    if (data[i].remarks == 'Paid') {
                         tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '" value="' + data[i].remarks + '">');
                         tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" value="' + data[i].NetRental + '">');
                         tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
                         tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '" >');
                         tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;"  class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
                         tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
                     } else {
-                        tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Paid">' + data[i].remarks + '</option><option data-remarks="' + data[i].remarks + '" value="Paid">Paid</option><option value="Unpaid">Unpaid</option></select>');
-                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px;  background-color:#e9ecef;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Unpaid">Unpaid</option><option data-remarks="' + data[i].remarks + '" value="Paid">Paid</option></select>');
+                        tablearr.push('<input type="text"  style="width: 100%;border:1px;  background-color:#FFFFFF;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" placeholder="0.00">');
+                        tablearr.push('<input type="text"  style="width: 100%;border:1px;  background-color:#FFFFFF;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" placeholder="0.00">');
                         tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
                         tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num">');
                         // tablearr.push('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="far fa-calendar-alt"></i></span></div><input type="text" class="reservation form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date"></div>');
@@ -369,8 +374,8 @@
                     // tablearr.push(data[i].modifiedby);
                     // tablearr.push(data[i].modifiedon);
                     // tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="status updatedcell " data-rowid="' + data[i].id + '" data-colid="status" value="' + data[i].status + '">');
-                    tablearr.push('<input id="fileUploader"  class="Init_Filename form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="file" />');
-                    tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="file form-control form-control-sm updatedcell" id="fileupload"  data-rowid="' + data[i].id + '" data-colid="file" >');
+                    tablearr.push('<input class="file-input updatedcell form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="file" />');
+                    tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;"  class="fileUpload form-control form-control-sm updatedcell"  data-rowid="' + data[i].id + '" data-colid="file">');
                     tablerow.push(tablearr);
                 }
 
@@ -388,119 +393,297 @@
         })
     }
     function viewAttachment(file) {
-        window.open('http://uploads.lapanday.com:1263/' + file, 'ExampleWindow', 'width=1200, height=800');
+        window.open('http://uploads.lapanday.com:1263/' + file, 'View', 'width=1200, height=800');
         //  window.open('/F:/LDMS_Attachements/' + file , 'ExampleWindow', 'width=1200, height=800');
     }
 
-    function saveData() {
-        
-
+function savePayment()
+{
         if (confirm('Do you want to save changes?')) {
-            // var test = $('[data-rowid=' + dataupload[z].rowid + '][data-colid="filename"]').val(dataupload[z].filename);
-            for (var x in dataforsaving) {
-                if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="file"]').val() == '') 
-                {
-                    toastr.error("Please add attachement");
-                } else if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="Cr_num"]').val() == '') 
-                {
-                    toastr.error("Please add CR_num");
-                } else if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="Cv_num"]').val() == '') 
-                {
-                    toastr.error("Please add CV_num");
-                } else 
-                {
-                    $.ajax({
-                        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updatePaymentSchedule',
-                        type: 'post',
-                        dataType: 'json',
-                        data: JSON.stringify({
-                            LandContractCode: $('#LandContractCode').val(), // add contract_code value or landinformation code
-                            // LandInformationCode:,
-                            remarks: $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(),
-                            amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
-                            Cv_num: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Cv_num"]').val(),
-                            Cr_num: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Cr_num"]').val(),
-                            date: $('[data-rowid=' + dataforsaving[x] + ']').data('payment_date'),
-                            Posting_date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Posting_date"]').val(),
-                            filename: $('[data-rowid=' + dataforsaving[x] + '][data-colid="file"]').val(),
-                            username: $("#username").val(),
-                            token: $("#token").val(),
-                            sysapp: sysapp
-                        }),
-                        contentType: "application/json; charset=utf-8",
-                        success: function (data) {
-                            toastr.success('Data Saved!');
-                            hideModal();
-                        },
-                        error: function () {
-                            toastr.error('Error on saving data!');
-                            stopLoading();
-                        }
-                    })
+                // var test = $('[data-rowid=' + dataupload[z].rowid + '][data-colid="filename"]').val(dataupload[z].filename);
+                for (var x in dataforsaving) {
+                    // if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="file"]').val() == '') 
+                    // {
+                    //     toastr.error("Please add attachement");
+                    // } else if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="Cr_num"]').val() == '') 
+                    // {
+                    //     toastr.error("Please add CR_num");
+                    // } else if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="Cv_num"]').val() == '') 
+                    // {
+                    //     toastr.error("Please add CV_num");
+                    // } else 
+                    // {
+                        $.ajax({
+                            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updatePaymentSchedule',
+                            type: 'post',
+                            dataType: 'json',
+                            data: JSON.stringify({
+                                LandContractCode: $('#LandContractCode').val(), // add contract_code value or landinformation code
+                                // LandInformationCode:,
+                                remarks: $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(),
+                                amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
+                                Cv_num: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Cv_num"]').val(),
+                                Cr_num: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Cr_num"]').val(),
+                                date: $('[data-rowid=' + dataforsaving[x] + ']').data('payment_date'),
+                                Posting_date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Posting_date"]').val(),
+                                filename: $('[data-rowid=' + dataforsaving[x] + '][data-colid="file"]').val(),
+                                username: $("#username").val(),
+                                token: $("#token").val(),
+                                sysapp: sysapp
+                            }),
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                toastr.success('Data Saved!');
+                                hideModal();
+                            },
+                            error: function () {
+                                toastr.error('Error on saving data!');
+                                stopLoading();
+                            }
+                        });
+                    // }
+
+
                 }
 
-                
-            }
+            } else {
+            toastr.error('Cancelled!');
 
-        } else {
-        toastr.error('Cancelled!');
+        }
+}
+    function saveData() {
 
-    }
-    }
 
-      $('#tbl_PaymentSched').on('change','#fileUploader' ,function() {
-        // Get the selected file
-            var input = this.files;
-            // Get the data-id attribute
-            var dataId = $(this).data('rowid');
-            console.log(input && input.length > 0);
-            if (input && input.length > 0) {
-                var formData = new FormData();
-                for (var i = 0; i < input.length; i++) {
-                    console.log(input[i]);
-                    formData.append("file" + i, input[i]);
-                }
+        var fileuploaded = [];
+        var files = [];
+        
+        $('.file-input').each(function (index) {
+        var formData = new FormData();
+            var fileInput = this;
+            var file = fileInput.files[0];
+            var rowid  = $(this).data('rowid');
+            
+            if (file) {
+                // console.log(file);
+                // console.log(index);
+                formData.append('files[]', file, file.name);
                 formData.append('username', $("#username").val());
                 formData.append('token', $("#token").val());
-                formData.append('dataSource' , dataSource);
-                formData.append('sysapp' , sysapp);
-            }
-            $.ajax({
-                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
-                type: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    for (var i in data) {
-                        var name = data[i].name;
-                        var filename = data[i].filename;
-                        var extension = data[i].extension;
-                        console.log(dataId,name, filename, extension);
-                        saveNewUploadedFile(name, filename,extension,dataSource);
-                        $('#fileupload').val(filename);
-                        dataforsaving.push(dataId);
-                        console.log(dataforsaving);
-                    }
-                    console.log(dataupload);
-                },
-                error: function () {
-                    // File upload error handling
-                    console.log("err");
-                }
-            });
+                formData.append('dataSource', dataSource);
+                formData.append('sysapp', sysapp);
 
+
+                setTimeout(() => {
+                    $.ajax({
+                    url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        for (var i in data) {
+                            var name = data[i].name;
+                            var filename = data[i].filename;
+                            var extension = data[i].extension;
+                            // console.log(dataId, name, filename, extension);
+                            saveNewUploadedFile(name, filename,extension,dataSource);
+                            $('#fileupload').val(filename);
+                            dataforsaving.push(rowid);
+                            console.log(dataforsaving);
+                            savePayment();
+                        }
+                        console.log(rowid);
+                    },
+                    error: function () {
+                        // File upload error handling
+                        console.log("err");
+                    }
+                });
+
+                }, 2000);
+
+                
+                
+            }
+           
+            
         });
+        
+        
+       
+          
+
+
+        //     if (confirm('Do you want to save changes?')) {
+        //         // var test = $('[data-rowid=' + dataupload[z].rowid + '][data-colid="filename"]').val(dataupload[z].filename);
+        //         for (var x in dataforsaving) {
+        //             if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="file"]').val() == '') 
+        //             {
+        //                 toastr.error("Please add attachement");
+        //             } else if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="Cr_num"]').val() == '') 
+        //             {
+        //                 toastr.error("Please add CR_num");
+        //             } else if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="Cv_num"]').val() == '') 
+        //             {
+        //                 toastr.error("Please add CV_num");
+        //             } else 
+        //             {
+        //                 $.ajax({
+        //                     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updatePaymentSchedule',
+        //                     type: 'post',
+        //                     dataType: 'json',
+        //                     data: JSON.stringify({
+        //                         LandContractCode: $('#LandContractCode').val(), // add contract_code value or landinformation code
+        //                         // LandInformationCode:,
+        //                         remarks: $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(),
+        //                         amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
+        //                         Cv_num: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Cv_num"]').val(),
+        //                         Cr_num: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Cr_num"]').val(),
+        //                         date: $('[data-rowid=' + dataforsaving[x] + ']').data('payment_date'),
+        //                         Posting_date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Posting_date"]').val(),
+        //                         filename: $('[data-rowid=' + dataforsaving[x] + '][data-colid="file"]').val(),
+        //                         username: $("#username").val(),
+        //                         token: $("#token").val(),
+        //                         sysapp: sysapp
+        //                     }),
+        //                     contentType: "application/json; charset=utf-8",
+        //                     success: function (data) {
+        //                         toastr.success('Data Saved!');
+        //                         hideModal();
+        //                     },
+        //                     error: function () {
+        //                         toastr.error('Error on saving data!');
+        //                         stopLoading();
+        //                     }
+        //                 })
+        //             }
+
+
+        //         }
+
+        //     } else {
+        //     toastr.error('Cancelled!');
+
+        // }
+    }
+        // var upload = [];
+    //  $('#tbl_PaymentSched').on('change', '#fileUploader', function (){
+        
+
+    //     console.log($(this).data('rowid'));
+    //     // Get the selected file
+    //     var input = this.files;
+    //     // Get the data-id attribute
+    //     var dataId = $(this).data('rowid');
+
+    //     var formData = new FormData();
+    //     var arrupload = [];
+
+    //     if (input && input.length > 0) {
+
+    //         for (var i = 0; i < input.length; i++) {
+    //             // console.log(input[i]);
+    //             formData.append("file" + i, input[i]);
+    //             arrupload.push(input[i]);
+    //         }
+    //         console.log(formData);
+    //         upload.push(arrupload,dataId);
+
+    //         formData.append('username', $("#username").val());
+    //         formData.append('token', $("#token").val());
+    //         formData.append('dataSource', dataSource);
+    //         formData.append('sysapp', sysapp);
+    //     }
+    //     console.log(upload);
+    //     // $.ajax({
+    //     //     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
+    //     //     type: "POST",
+    //     //     data: formData,
+    //     //     processData: false,
+    //     //     contentType: false,
+    //     //     success: function (data) {
+    //     //         for (var i in data) {
+    //     //             var name = data[i].name;
+    //     //             var filename = data[i].filename;
+    //     //             var extension = data[i].extension;
+    //     //             console.log(dataId,name, filename, extension);
+    //     //             // saveNewUploadedFile(name, filename,extension,dataSource);
+    //     //             $('#fileupload').val(filename);
+    //     //             dataforsaving.push(dataId);
+    //     //             console.log(dataforsaving);
+    //     //         }
+    //     //         console.log(dataupload);
+    //     //     },
+    //     //     error: function () {
+    //     //         // File upload error handling
+    //     //         console.log("err");
+    //     //     }
+    //     // });
+    // });
+    //         console.log(rowid);
+    //     // Get the selected file
+    //         var input = this.files;
+    //         // Get the data-id attribute
+            
+    //         var dataId = rowid;
+            
+    //         var formData = new FormData();
+    //         var arrupload = [];
+            
+    //         if (input && input.length > 0) {
+                
+    //             for (var i = 0; i < input.length; i++) {
+    //                 // console.log(input[i]);
+    //                 formData.append("file" + i, input[i]);
+    //                 arrupload.push(input[i]);
+    //             }
+    //            upload.push(arrupload);
+             
+    //             formData.append('username', $("#username").val());
+    //             formData.append('token', $("#token").val());
+    //             formData.append('dataSource' , dataSource);
+    //             formData.append('sysapp' , sysapp);
+                
+    //         }
+    //         // $.ajax({
+    //         //     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
+    //         //     type: "POST",
+    //         //     data: formData,
+    //         //     processData: false,
+    //         //     contentType: false,
+    //         //     success: function (data) {
+    //         //         for (var i in data) {
+    //         //             var name = data[i].name;
+    //         //             var filename = data[i].filename;
+    //         //             var extension = data[i].extension;
+    //         //             console.log(dataId,name, filename, extension);
+    //         //             saveNewUploadedFile(name, filename,extension,dataSource);
+    //         //             $('#fileupload').val(filename);
+    //         //             dataforsaving.push(dataId);
+    //         //             console.log(dataforsaving);
+    //         //         }
+    //         //         console.log(dataupload);
+    //         //     },
+    //         //     error: function () {
+    //         //         // File upload error handling
+    //         //         console.log("err");
+    //         //     }
+    //         // });
+
+    //     };
 
 
     $('#tbl_PaymentSched').on('change', '.updatedcell', function () {
         var table = $('#tbl_PaymentSched').DataTable();
-        console.log(dataforsaving);
-        console.log($(this).data('rowid'));
+        // console.log(dataforsaving);
+        // console.log($(this).data('rowid'));
         if (jQuery.inArray(($(this).data('rowid')), dataforsaving) == -1) {
             dataforsaving.push($(this).data('rowid'));
         }
+            
+          
     });
+ 
 
 
 //END Save File To Directory

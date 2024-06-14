@@ -180,6 +180,35 @@
         </div>
     </div>
 </section>
+<!-- <section>
+    <div class="container-fluid">
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title">Contract File Upload</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div> -->
+<!-- /.card-header -->
+<!-- <div class="card-body"> -->
+<!-- START: CONTRACT INFORMATION -->
+<!-- <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="file">Attach Document</label>
+                            <input id="fileUploader" name="file"
+                                class="Init_Filename form-control form-control-sm triggerdetail" type="file" multiple />
+                        </div>
+                    </div>
+                </div> -->
+<!-- END: CONTRACT INFORMATION -->
+<!-- </div> -->
+<!-- /.card-body -->
+<!-- </div>
+    </div>
+</section> -->
 <section>
     <div class="container-fluid">
         <div class="card card-success">
@@ -226,11 +255,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                    <div class="col-md-4">
-                                    <label>Advance Payment Amount</label>
+                                <!-- <div class="col-md-4">
+                                        <label>Advance Payment Amount</label>
                                         <input class="advance_payment_amount maskAmount form-control form-control-sm float-right triggercontractinfo " >
-                                </div>
-                                <div class="col-md-4">
+                                    </div> -->
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label> Start of Payment:</label>
                                         <div class="input-group">
@@ -245,7 +274,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label>Payment Terms</label>
                                     <select
                                         class="PaymentTermsCode PaymentTerms PaymentTerms form-control form-control-sm triggercontractinfo"
@@ -264,56 +293,91 @@
                             </div>
                             <div class="row">
                                 <!-- insert table start -->
-                            <div class="col-md-12">
-                                <div class="row" style="overflow: auto;">
-                                    <label for="Escalation">Generate Escalation</label>
-                                    <table id="tbl_Escalation" class="table table-bordered table-striped table-sm"
-                                        style="width:100%">
-                                        <thead>
-                                            <tr style="text-align:center">
-                                                <!-- <th hidden class="Payment_date">Payment_date</th> -->
-                                                <th class="date_of_payment">Date</th>
-                                                <th class="years">Years</th>
-                                                <th class="Rate">Rate</th>
-                                                <th class="Num_of_has">Hectares</th>
-                                                <th class="Rate_per_year">Rate per year</th>
-                                                <th class="Total_rate">Total Rate</th>
-                                                <th class="deleteRow">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbl_Users-data">
-                                        </tbody>
-                                    </table>
-                                    <tfoot>
-                                        <div class="col-md-12">
-                                            <button type="button" class="btn btn-success" id="addRow">Add Row</button>
-                                        </div>
-                                    </tfoot>
-                                </div>
-                            </div>
-                            <!-- insert table end -->
-                            </div>
+                                <div class="col-md-12">
+                                    <div class="row" style="overflow: auto;">
+                                        <label for="Escalation">Generate Escalation</label>
+                                        <table id="tbl_Escalation" class="table table-bordered table-striped table-sm"
+                                            style="width:100%">
+                                            <thead>
+                                                <tr style="text-align:center">
+                                                    <!-- <th hidden class="Payment_date">Payment_date</th> -->
+                                                    <th class="date_of_payment">Date</th>
+                                                    <th class="years">Years</th>
+                                                    <th class="Rate">Rate</th>
+                                                    <th class="Num_of_has">Hectares</th>
+                                                    <th class="Rate_per_year">Annual Rate</th>
+                                                    <th class="Total_rate">Contract Rate</th>
+                                                    <th class="deleteRow">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_Users-data">
+                                            </tbody>
+                                        </table>
+                                        <tfoot>
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-success" id="addRow">Add Row</button>
+                                                <label class="" style="margin-left: 118px;">Total:</label>
+                                                        <span class="totalyrs"></span>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth" style="margin-top: 20px;">Total
+                                                            Rental:</label>
+                                                        <span class="Total_rental"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Less:Advance Payment:</label>
+                                                        <!-- <input class="advance_payment_amount maskAmount" style="border:1px solid #ced4da"> -->
+                                                        <input
+                                                            class="advance_payment_amount maskAmount triggercontractinfo ">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Remaining Rental:</label>
+                                                        <span class="Remaining_rental"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                    <label class="dividedyrs labelwidth" for="divided"></label>
+                                                    <input class="yrsdivided" style="border:1px solid #ced4da">
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="labelwidth">Gross Annual Rental:</label>
+                                                    <span class="Payment_Amount"></span>
+                                                </div>
+                                                    <!-- <div class="col-md-12">
+                                                    <label class="labelwidth">Rental Start:</label>
+                                                </div> -->
 
+                                                </div>
+                                            </div>
+                                        </tfoot>
+                                    </div>
+                                </div>
+                                <!-- insert table end -->
+                            </div>
                             <div class="row">
                                 <div class="col-md-12" style="margin-top: 20px;">
-                                 <button type="button"  class="view btn btn-success" onclick="generatePaymentSched()"> View Payment Schedule </button>
+                                    <button type="button" class="view btn btn-success" onclick="generatePaymentSched()">
+                                        View Payment Schedule </button>
                                 </div>
                             </div>
-                             <div class="row">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <!-- insert table start -->
                                     <div class="col-md-12">
                                         <div class="row" style="overflow: auto;">
                                             <div class="card-body">
-                                                <table id="tbl_ContractTerm" class="table table-bordered table-striped table-sm"
-                                                    style="width:100%" data-editpage="pages/masterdata/modalpages/area_update"
+                                                <table id="tbl_ContractTerm"
+                                                    class="table table-bordered table-striped table-sm"
+                                                    style="width:100%"
+                                                    data-editpage="pages/masterdata/modalpages/area_update"
                                                     data-addpage="pages/masterdata/modalpages/area_add">
                                                     <thead>
                                                         <tr style="text-align:center">
-                                                            <!-- <th hidden class="id">Term</th> -->
-                                                            <th class="Payment_date">Payment Schedule</th>
+                                                            <th class="id">#</th>
+                                                            <th class="Payment_date">Payment Schedule Date</th>
                                                             <th class="remarks">Status</th>
-                                                            <th class="amount">Rate/Amount</th>
+                                                            <th class="amount">Gross Annual Rental</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbl_Users-data">
@@ -325,7 +389,7 @@
                                     <!-- insert table end -->
                                 </div>
                             </div>
-                            
+
                             <!-- <div class="container">
                                 <div class="col-md-12">
                                     <div class="row">
@@ -387,7 +451,7 @@
                                     </div>
                                 </div>
                             </div> -->
-                            
+
                         </div>
                     </div>
                 </div>
@@ -496,6 +560,7 @@
                 for (var i in data) {
                     var tablearr = [];
                     data[i].id = id++;
+                    tablearr.push('<div style="text-align:center">' + data[i].id + '</div>');
                     // tablearr.push('<input type="text" style="width: 100%;border:1px;" hidden  class="date updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date" value="' + moment(data[i].Payment_date ).format('MM/DD/YYYY') + '">');
                     tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="date_end updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date + '" value="' + data[i].date_of_payment + '">');
                     tablearr.push(data[i].remarks);
@@ -625,61 +690,80 @@
         }
        
     });
-  
+    
+    $('#tbl_Escalation').on('change', '.totalrate', function () {
+        var testtotal = 0;
+        for (const x in dataforsaving) {
+
+            console.log($('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val().replace(/,/g, ''));
+            console.log(dataforsaving[x]);
+            // sum += parseInt($('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val());
+            testtotal += parseFloat($('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val().replace(/,/g, ''));
+
+
+        }
+        console.log(testtotal);
+        $('.Total_rental').val(testtotal);
+        $('.Total_rental').text(testtotal.toLocaleString('en-US'));
+    });
 
     $('#tbl_Escalation').on('change', '.updatedcell', function () {
         // var table = $('#tbl_Escalation').DataTable();
-        console.log($(this).data('rowid'));
-        console.log(dataforsaving);
+        // console.log($(this).data('rowid'));
+        // console.log(dataforsaving);
         // console.log($(this).data('rowid'));
         if (jQuery.inArray(($(this).data('rowid')), dataforsaving) == -1) {
             // console.log(jQuery.inArray($(this).data('rowid'), dataforsaving == 1));
             dataforsaving.push($(this).data('rowid'));
         }
-        // var nums = [];
-        // var sum = 0;
-        // var total = 0;
-        // var total_rate = 0;
-        // var totals = 0;
-        // var remaining_rental = 0;
-        // var Payment_Amount = 0;
-    //     for (const x in dataforsaving) {
-    //         colval = $('[data-rowid=' + dataforsaving[x] + '][data-colid="rate"]').val().replace(/,/g, '');
+        var nums = [];
+        var sum = 0;
+        var total = 0;
+        var total_rate = 0;
+        var totals = 0;
+        var remaining_rental = 0;
+        var Payment_Amount = 0;
+   
+        for (const x in dataforsaving) {
+            colval = parseFloat($('[data-rowid=' + dataforsaving[x] + '][data-colid="rate"]').val().replace(/,/g, ''));
 
-    //         total = colval * $('[data-rowid=' + dataforsaving[x] + '][data-colid="Num_of_has"]').val();
-    //         console.log(total.toLocaleString())
-    //         $('[data-rowid=' + dataforsaving[x] + '][data-colid="Rate_per_year"]').val(total.toLocaleString());
-    //         total_rate = 5 * total.toFixed(2);
-    //         $('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val(total_rate.toLocaleString());
-    //         console.log();
-    //         sum += total_rate;
-    //     }
-    //     $('.Total_rental').val(sum);
-    //     $('.Total_rental').text(sum.toLocaleString('en-US'));
-    //    $('.advance_payment_amount').keyup(function () {
-    //         if($('.advance_payment_amount').val() == 0)
-    //         {
-    //             $('.Remaining_rental').text('0');
-    //         }
-    //         else
-    //         {
-    //             remaining_rental = parseFloat($('.Total_rental').val()) - parseFloat($('.advance_payment_amount').val().replace(/,/g, ''));
-    //             $('.Remaining_rental').val(remaining_rental.toFixed(2));
-    //             $('.Remaining_rental').text(remaining_rental.toLocaleString('en-US'));
-    //         }
-    //     });
-        // $('.yrsdivided').keyup(function () {
-        //     if($('.yrsdivided').val() == '' || $('.yrsdivided').val() == 0)
-        //     {
-        //         $('.Payment_Amount').text('0');
-        //         $('.Payment_Amount').val(0);
-        //     }
-        //     else
-        //     {
-        //         Payment_Amount = parseFloat($('.Remaining_rental').val()) / parseFloat($('.yrsdivided').val());
-        //         $('.Payment_Amount').val(Payment_Amount.toLocaleString('en-US'));
-        //         $('.Payment_Amount').text(Payment_Amount.toLocaleString('en-US'));
-        //     }
+            total = colval * parseFloat($('[data-rowid=' + dataforsaving[x] + '][data-colid="Num_of_has"]').val());
+          
+            $('[data-rowid=' + dataforsaving[x] + '][data-colid="Rate_per_year"]').val(total.toLocaleString());
+            total_rate = $('[data-rowid=' + dataforsaving[x] + '][data-colid="yrs"]').val() * total.toFixed(2);
+            $('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val(total_rate.toLocaleString());
+            // console.log($('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val().replace(/,/g, ''));
+            // sum += parseInt($('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val());
+            sum += parseFloat($('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val().replace(/,/g, ''));
+
+        }
+        // console.log(sum);
+        $('.Total_rental').val(sum);
+        $('.Total_rental').text(sum.toLocaleString('en-US'));
+       $('.advance_payment_amount').keyup(function () {
+            if($('.advance_payment_amount').val() == 0)
+            {
+                $('.Remaining_rental').text('0');
+            }
+            else
+            {
+                remaining_rental = parseFloat($('.Total_rental').val()) - parseFloat($('.advance_payment_amount').val().replace(/,/g, ''));
+                $('.Remaining_rental').val(remaining_rental.toFixed(2));
+                $('.Remaining_rental').text(remaining_rental.toLocaleString('en-US'));
+            }
+        });
+        $('.yrsdivided').keyup(function () {
+            if($('.yrsdivided').val() == '' || $('.yrsdivided').val() == 0)
+            {
+                $('.Payment_Amount').text('0');
+                $('.Payment_Amount').val(0);
+            }
+            else
+            {
+                Payment_Amount = parseFloat($('.Remaining_rental').val()) / parseFloat($('.yrsdivided').val());
+                $('.Payment_Amount').val(Payment_Amount.toLocaleString('en-US'));
+                $('.Payment_Amount').text(Payment_Amount.toLocaleString('en-US'));
+            }
             
         //     $('.lease_period').val();
         //     var lease_period = $('#lease_period').val().split(' - ');
@@ -691,53 +775,123 @@
         //     $('.start_of_payment').text(start_of_payment.toString());
         //     $('.hectares').text(has.toString());
         //     $('.Payment_Amount').text(payment_amount.toString());
-        // });
+        });
     });
-    // $('.PaymentTermsCode').change(function () {
-    //     // Get the value of the selected option
-    //     var selectedValue = $(this).find('option:selected').text();
+    $('.PaymentTermsCode').change(function () {
+        // Get the value of the selected option
+        var selectedValue = $(this).find('option:selected').text();
         
-    //     if (selectedValue == 'Monthly') {
-    //         $('.yrsdivided').show();
-    //         $('.dividedyrs').show();
-    //         $("label[for='divided']").text("Divided by Months:");
-    //     } else if (selectedValue == 'Annual') {
-    //         $("label[for='divided']").text("Divided by Years:");
-    //         $('.dividedyrs').show();
-    //         $('.yrsdivided').show();
-    //     } else {
-    //         $("label[for='divided']").text("Divided by 5 Years:");
-    //         $('.dividedyrs').show();
-    //         $('.yrsdivided').show();
-    //     }
-    // });
+        if (selectedValue == 'Monthly') {
+            $('.yrsdivided').show();
+            $('.dividedyrs').show();
+            $("label[for='divided']").text("Divided by Months:");
+        } else if (selectedValue == 'Annual') {
+            $("label[for='divided']").text("Divided by Years:");
+            $('.dividedyrs').show();
+            $('.yrsdivided').show();
+        } else {
+            $("label[for='divided']").text("Divided by 5 Years:");
+            $('.dividedyrs').show();
+            $('.yrsdivided').show();
+        }
+    });
+    function initializeDateRangePicker(element, startDate, endDate) {
+         
+         var min_date = '';
+         if(rowId >= 2)
+            {
+                console.log(date[1]);
+                var end_term_date = date[1];
+                var mindate = new Date(end_term_date);
+                mindate.setDate(mindate.getDate()+ 1);
+                end_date = moment(mindate).format("MM/DD/YYYY"); // get the end date of the row above
+                
+                min_date = end_date;
+                max_date = endDate;
+            }
+            else
+            {
+                
+                min_date = startDate;
+                max_date = endDate;
+            }
+        
+     
+     element.daterangepicker({
+       startDate: min_date,
+       endDate: max_date,
+       maxDate:  max_date,
+        minDate:  min_date,
+       locale: {
+         format: 'MM/DD/YYYY'
+       }
+     });
 
+    }
     var rowId = 0;
     var total_years = 0;
     $("#addRow").on("click", function () {
-        console.log(total_years);
+           
+       
+        if(parseInt($('.totalyrs').val()) >= parseInt($('#terms').val()) || $('#terms').val() == '')
+        {
+            toastr.error("error");
+            return;
+        }
+        else if($('[data-rowid=' + rowId + '][data-colid="rate"]').val() == '')
+        {
+             toastr.error("Please Fill up the required field");
+             return;
+        }
+        else
+        {
+        rowId++;
         var rowCount = $('#tbl_Escalation tr').length - 1;
-        if ($('#terms').val() <= total_years || $('#terms').val() == '') {
-            toastr.error("Bawal Mu Sobra");
+        var newRow = $('<tr>').attr("id", rowId);
+        var lease_period = $('#lease_period').val().split(' - ');
+        newRow.append($('<td><div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="far fa-calendar-alt"></i></span></div><input type="text" id="date'+ rowId +'" class="StartTerm lease form-control form-control-sm float-right" data-rowid="' + rowId + '" data-colid="startterm"></div>'));
+        newRow.append($('<td><input type="text"  disabled style="border:none; text-align:center; width:50px; background-color:#e9ecef;"  class="years" data-rowid="' + rowId + '" data-colid="yrs" value="0">'));
+        newRow.append($('<td><input type="text" style="border:none; text-align:center; " " id="amountNew" class="rate maskAmount updatedcell " data-rowid="' + rowId + '" data-colid="rate">'));
+        newRow.append($('<td><input type="text" disabled style="border:none; text-align:center; width:50px; background-color:#e9ecef" class="Num_of_has" data-rowid="' + rowId + '" data-colid="Num_of_has" value="'+ $('#Hectares').val() +'" >'));
+        // newRow.append($('<td><input type="text" style="border:none; text-align:center;" id="rateperyear" data-rowid="' + rowId + '" data-colid="Rate_per_year" '));
+        newRow.append($('<td><input type="text" disabled style="border:none; text-align:center; background-color:#e9ecef" class="maskAmount" id="rateperyear" data-rowid="' + rowId + '" data-colid="Rate_per_year">'));
+        newRow.append($('<td><input type="text" disabled style="border:none; text-align:center; background-color:#e9ecef" class="maskAmount totalrate" data-rowid="' + rowId + '" data-colid="Total_rate" >'));
+        newRow.append($('<td><button class="deleteRow updatedcell btn btn-danger" data-rowid="' + rowId + '" data-colid="delete"><i class="fas fa-trash"></i></button>'));
+        // if ($('#terms').val() <= total_years || $('#terms').val() == '') {
+        //     toastr.error("Error");
     
-        } else {
-
-            var newRow = $('<tr>').attr("id", rowId);
-            var lease_period = $('#lease_period').val().split(' - ');
-            rowId++;
-            // newRow.append($('<td><input type="text" style="width: 100%;border:1px;"  class="StartTerm updatedcell " data-rowid="' + rowId + '" data-colid="startterm"  >'));
-            newRow.append($('<td><div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="far fa-calendar-alt"></i></span></div><input type="text" id="date'+ rowId +'" class="StartTerm lease form-control form-control-sm float-right" data-rowid="' + rowId + '" data-colid="startterm"></div>'));
-            newRow.append($('<td><input type="text" disabled style="border:none; text-align:center; width:50px; background-color:#e9ecef;"  class="years" data-rowid="' + rowId + '" data-colid="yrs" >'));
-            newRow.append($('<td><input type="text" style="border:none; text-align:center;" " id="amountNew" class="rate maskAmount updatedcell " data-rowid="' + rowId + '" data-colid="rate">'));
-            newRow.append($('<td><input type="text" style="border:none; text-align:center;" class="Num_of_has" data-rowid="' + rowId + '" data-colid="Num_of_has" value="'+ $('#Hectares').val() +'" >'));
-            // newRow.append($('<td><input type="text" style="border:none; text-align:center;" id="rateperyear" data-rowid="' + rowId + '" data-colid="Rate_per_year" '));
-            newRow.append($('<td><input type="text" style="border:none; text-align:center;" id="rateperyear" data-rowid="' + rowId + '" data-colid="Rate_per_year">'));
-            newRow.append($('<td><input type="text" style="border:none; text-align:center;"  data-rowid="' + rowId + '" data-colid="Total_rate" >'));
-            newRow.append($('<td><button class="deleteRow updatedcell btn btn-danger" data-rowid="' + rowId + '" data-colid="delete"><i class="fas fa-trash"></i></button>'));
-            $('#tbl_Escalation tbody').append(newRow);
+        // } else {
+        
+            if(rowId > 1 )
+            {
+               
+                if(rowId > 1 && $('[data-rowid="' +  (rowId - 1) + '"][data-colid="yrs"]').val() == '')
+                {
+                    toastr.error("error");
+                    rowId--;
+                    return;
+                }
+                else
+                {
+                    $('#tbl_Escalation tbody').append(newRow);
+                    initializeDateRangePicker($('#date'+ rowId +''),lease_period[0],lease_period[1]);
+                }
+               
+                
+            }
+            else
+            {
+                
+                
+                // newRow.append($('<td><input type="text" style="width: 100%;border:1px;"  class="StartTerm updatedcell " data-rowid="' + rowId + '" data-colid="startterm"  >'));
+                
+                $('#tbl_Escalation tbody').append(newRow);
+                initializeDateRangePicker($('#date'+ rowId +''),lease_period[0],lease_period[1]);
+            }
+        }
+          
                 // var tablerow = [];
-                // var tablearr = [];
-            
+                // var tablearr = [];            
                 // tablearr.push('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="far fa-calendar-alt"></i></span></div><input type="text" id="date'+ rowId +'" class="StartTerm lease form-control form-control-sm float-right" data-rowid="' + rowId + '" data-colid="startterm"></div>');
                 // tablearr.push('<input type="text" disabled style="border:none; text-align:center; width:50px; background-color:#e9ecef;"  class="years" data-rowid="' + rowId + '" data-colid="yrs" >');
                 // tablearr.push('<input type="text" style="border:none; text-align:center;" " id="amountNew" class="rate maskAmount updatedcell " data-rowid="' + rowId + '" data-colid="rate">');
@@ -747,82 +901,181 @@
                 // tablearr.push('<button class="deleteRow updatedcell btn btn-danger" data-rowid="' + rowId + '" data-colid="delete"><i class="fas fa-trash"></i></button>');
                 // tablerow.push(tablearr);
                 // $("#tbl_Escalation").DataTable().rows.add(tablerow).draw();
-            var min_date = '';
-            if(rowId >= 2)
-            {
+            // var min_date = '';
+            // if(rowId >= 2)
+            // {
                 
-                min_date = date[1];
-                max_date = lease_period[1];
-                console.log('true',max_date);
-                
-            }
-            else
-            {
-                min_date = lease_period[0];
-                max_date = lease_period[1];
-                console.log('false',max_date);
-            }
+            //     min_date = date[1];
+            //     max_date = dateadv[1];
+            //     console.log(dateadv[1]);
+            // }
+            // else
+            // {
+            //     min_date = lease_period[0];
+            //     max_date = lease_period[1];
+            // }
             
 
-            $('#date'+ rowId +'').daterangepicker({
-                showDropdowns: true,
-                minYear: 1950,
-                maxYear: 2500,
-                showAnim: 'slideDown',
-                selected: true,
-                paging: false,
-                lengthChange: false,
-                searching: false,
-                ordering: false,
-                info: false,
-                autoWidth: false,
-                responsive: true,
-                dateFormat: 'dd/mm/yyyy',
-                maxDate:  max_date,
-                minDate:  min_date
-                // endDate:max_date,
-                // startDate:min_date
+            // $('#date'+ rowId +'').daterangepicker({
+            //     showDropdowns: true,
+            //     minYear: 1950,
+            //     maxYear: 2500,
+            //     showAnim: 'slideDown',
+            //     selected: true,
+            //     paging: false,
+            //     lengthChange: false,
+            //     searching: false,
+            //     ordering: false,
+            //     info: false,
+            //     autoWidth: false,
+            //     responsive: true,
+            //     dateFormat: 'dd/mm/yyyy',
+            //     maxDate:  max_date,
+            //     minDate:  min_date,
+            //     endDate:max_date,
+            //     startDate:min_date
                 
-            });
+            // });
 
-        }
+            // date = $('#date'+  rowId +'').val().split(' - ');
+            // var start_term = date[0];
+            // var end_term = date[1];
+            // var start = new Date(start_term);
+            // var end = new Date(end_term);
+            // var diff = new Date(end - start);
+            // var days = diff / 1000 / 60 / 60 / 24;
+            // var years = parseInt(days / 365);
+            // $('[data-rowid="' + rowId+ '"][data-colid="yrs"]').val(years);
+            // total_years += $('[data-rowid="' + rowId+ '"][data-colid="yrs"]').val();
+        // }
     });
-    
-     $('#tbl_Escalation').on('apply.daterangepicker','.lease', function() {
-       
-        // for (const x in dataforsaving) {
-            console.log($('#date'+  $(this).data("rowid") +'').val());
-            // date_term = $('[data-rowid="' + $(this).data("rowid") + '"][data-colid="startterm"]').val().split(' - ');
-            date = $('#date'+  $(this).data("rowid")+'').val().split(' - ');
+    $('#lease_period').on('apply.daterangepicker', function() {
+        
+        $('#tbl_Escalation tbody').empty();
+        rowId = 0;
+    });
+    function totalYrs()
+    {
+        sum_yrs = 0;
+        for (var x in dataforsaving) {
             
+            if($('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]').val() == undefined)
+            {
+                $('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]').val(0);
+            }
+           sum_yrs += parseInt($('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]').val());
+           console.log(sum_yrs);
+           $('.totalyrs').val(parseInt(sum_yrs));
+            $('.totalyrs').text(sum_yrs);
+        }
+        // console.log($('.totalyrs').val());
+        
+    }
+  
+     $('#tbl_Escalation').on('apply.daterangepicker','.lease', function() {
+        var lease_period = $('#lease_period').val().split(' - ');
+         
+        
+         
+        // for (const x in dataforsaving) {
+            // console.log($('#date'+  $(this).data("rowid") +'').val());
+            // date_term = $('[data-rowid="' + $(this).data("rowid") + '"][data-colid="startterm"]').val().split(' - ');
+        // }  
+        var rowid = $(this).data("rowid") + 1;
+            // total_years += parseInt($('[data-rowid="' + $(this).data("rowid") + '"][data-colid="yrs"]').val());
+            // console.log(total_years);
+            // console.log($('#date'+  ($(this).data("rowid") + 1) +'').val());
+            // if($(this).data('rowid') == ($(this).data("rowid") + 1))
+            // {
+            //     dateadv = $('#date'+  ($(this).data("rowid") + 1) +'').val().split(' - ');
+            //     var end_term = dateadv[0];
+            //     var ends = dateadv[1];
+            //     console.log(ends);
+            // }
+           
+            date = $('#date'+  $(this).data("rowid") +'').val().split(' - ');
             var start_term = date[0];
             var end_term = date[1];
             var start = new Date(start_term);
             var end = new Date(end_term);
+            end.setDate(end.getDate()+ 1);
+             endate = moment(end).format("MM/DD/YYYY");
             var diff = new Date(end - start);
             var days = diff / 1000 / 60 / 60 / 24;
             var years = parseInt(days / 365);
             $('[data-rowid="' + $(this).data("rowid") + '"][data-colid="yrs"]').val(years);
-        // }  
-            total_years += parseInt($('[data-rowid="' + $(this).data("rowid") + '"][data-colid="yrs"]').val());
-            console.log(date,end_term);
+            // $('[data-rowid="' + rowid + '"][data-colid="startterm"]').val(endate + ' - ' +  lease_period[1]);
+            var total_rate = $('[data-rowid=' + $(this).data("rowid") + '][data-colid="yrs"]').val() *  $('[data-rowid=' + $(this).data("rowid") + '][data-colid="Rate_per_year"]').val();
+            $('[data-rowid=' + $(this).data("rowid") + '][data-colid="Total_rate"]').val(total_rate);
+            rowId = rowId -  $('#tbl_Escalation tr:gt('+ (rowid - 1) +')').length;
+            $('#tbl_Escalation tr:gt('+ (rowid - 1) +')').remove();
+            totalYrs();
+            
+            
+           
+        //    if($(this).data('rowid') >= 1 )
+        //    {
+        //     alert(2);
+        //     dateadv = $('#date'+  ($(this).data("rowid") + 1) +'').val().split(' - ');
+        //     var end_term = dateadv[0];
+        //     var ends = dateadv[1];
+        //      $('[data-rowid="' + rowid + '"][data-colid="startterm"]').val(end_term + ' - ' +  ends);
+
+                
+        //    }
+                
+
+           
+           
+            
+                // console.log('startdate', startdate,$('[data-rowid="' + rowid + '"][data-colid="startterm"]').val(end_term + ' - ' +  startdate));
+                // $('[data-rowid="' + rowid + '"][data-colid="startterm"]').val(end_term + ' - ' +  lease_period[1]);
+
+                // $('[data-rowid="' + rowid + '"][data-colid="yrs"]').val(years);
+           
+            
+            
+           
+            // console.log($('[data-rowid="' + rowid + '"][data-colid="startterm"]').val(end_term + ' - ' +  lease_period[1]));
+            
+            
+            
     });
 
     $('#tbl_Escalation').on('click','.deleteRow', function(){
-        var table = $('#tbl_Escalation').DataTable();
-        console.log($(this).data("rowid"));
-        total_years -= $('[data-rowid="' + $(this).data("rowid") + '"][data-colid="yrs"]').val();
-        $(this).closest('tr').remove();
-        rowId--;
-        console.log( $('#date'+ rowId +'').val());
-        console.log($(this).data("rowid"));
-        date = $('#date'+  rowId +'').val().split(' - ');
-            
-            var start_term = date[0];
-            var end_term = date[1];
-            console.log(end_term,date);
-
-
+        if($(this).data('rowid') <= 1)
+        {
+            rowId = 0;
+            $('#tbl_Escalation tr:gt(0)').remove();
+            $('.totalyrs').val(0);
+            $('.totalyrs').text(0); 
+        }
+        date = $('#date'+  ($(this).data("rowid") -1) +'').val().split(' - ');
+        var start_term = date[0];
+        var end_term = date[1];
+        console.log(date[1]);
+        var yrsdiff  = parseInt($('.totalyrs').val()) - parseInt($('[data-rowid="' + $(this).data("rowid") + '"][data-colid="yrs"]').val());
+        if(yrsdiff <= 0)
+        {
+            $('.totalyrs').val(0);
+            $('.totalyrs').text(0);
+        }
+        else
+        {
+            $('.totalyrs').val(yrsdiff);
+            $('.totalyrs').text(yrsdiff);
+        }
+        console.log('rowid',  $(this).data('rowid'));
+         rowId = rowId -  $('#tbl_Escalation tr:gt('+ ($(this).data('rowid') - 1) +')').length;
+        $('#tbl_Escalation tr:gt('+ ($(this).data('rowid') -1) +')').remove();
+        // $(this).closest('tr').remove();
+        $('.yrsdivided').prop('disabled',false);
+        $('.advance_payment_amount').prop('disabled',false);
+        $('.Total_rental').text(''); 
+        $('.advance_payment_amount').val(''); 
+        $('.Remaining_rental').text(''); 
+        $('.yrsdivided').val(''); 
+        $('.Payment_Amount').text('');
     });
     /////////////////////////////////////////////////////////////////////////////END: INITIALIZE CONTRACT PAYMENT TABLE/////////////////////////////////////////////////////////////////////////////
 
@@ -848,7 +1101,7 @@
                 success: function (data) {
 
                 }
-            })
+            });
         }
         // toastr.success('Amount Saved!');
     }
