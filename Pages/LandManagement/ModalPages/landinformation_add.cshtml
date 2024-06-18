@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="card card-success">
             <div class="card-header">
-                <h3 class="card-title">Land Information</h3>
+                <h3 class="card-title">Land Information Form</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -328,7 +328,33 @@
     });
 
     function verifyButton() {
-        alert('Hindi ko na po maalala your Honor, Lumaki po ako sa Farm T.T');
+        if ( $('.DocumentNumber').val() !== '' ) {
+            var documentnumber = $('.DocumentNumber').val();
+            $.ajax({
+                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/checkDocumentNumber',
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify({
+                    DocumentNumber: documentnumber,
+                    username: $("#username").val(),
+                    token: $("#token").val(),
+                    sysapp: sysapp
+                }),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    console.log('Check Document Number', data);
+                    if ( data.length !== 0 && data.DocumentNumber == $('.DocumentNumber').val()) {
+                        toastr.error('Document Number already exist!');
+                    } else {
+                        toastr.success('Document Number is available!');
+                    }
+                }
+            })
+        } else {
+            toastr.error('Please enter Document Number!');
+        }
+
+       
     }
 /////////////////////////////////////////////////////////////////////////////END: SQM CONVERTION INTO HAS/////////////////////////////////////////////////////////////////////////////
 
