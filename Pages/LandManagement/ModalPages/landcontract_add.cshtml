@@ -1,6 +1,6 @@
 <section>
     <div class="container-fluid">
-        <div class="card card-lightblue">
+        <div class="card card-success">
             <div class="card-header">
                 <h3 class="card-title">Contract Information</h3>
                 <div class="card-tools">
@@ -15,177 +15,163 @@
             <!-- /.card-header -->
             <div class="card-body">
                 <!-- START: CONTRACT INFORMATION -->
-                <div class="col-md-12">
+                <div class="container-fluid form">
                     <div class="col-md-12 bg-light headertext">
-                        <h5>Basic Information</h5>
+                        <h5>Owner Information</h5>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <label>Landowner/Company</label>
+                        <div class="col-sm-12 col-md-4">
+                            <label>Landowner</label>
                             <!-- <input type="text" class="form-control form-control-sm form-control-border border-width-2" id="viewLandowner" readonly> -->
                             <select
-                                class="LandownerCode FullName Landowner form-control form-control-sm triggercontractinfo select2"
+                                class="LandownerCode FullName Landowner form-control form-control-sm triggercontractinfo select2 LandownerData"
                                 type="text" id="viewLandowner" onChange="clearSelection('.plantationClear')">
                             </select>
                         </div>
-                        <div class="col-md-2">
-                            <span class="form-control form-control-sm form-control-border border-width-2"
-                                style="border-color: white;"></span>
-                            <span class="form-control form-control-sm form-control-border border-width-2"
-                                id="viewWithCoOwner"></span>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-sm-12 col-md-4">
                             <label>Land Information/Document</label>
                             <select class="LandInformationCode form-control form-control-sm" type="text"
                                 id="viewLandInformation" disabled>
                             </select>
                         </div>
-                        <div class="col-md-2">
-                            <label>Lot Number</label>
-                            <span class="form-control form-control-sm form-control-border border-width-2"
-                                id="viewLotNumber"></span>
-                            <!-- <input type="text" class="form-control form-control-sm form-control-border border-width-2" id="viewLotNumber" readonly> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 hideCoOwner">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label>Co-Owner</label>
-                            <textarea class="CoOwner form-control form-control-sm" placeholder="-" autocomplete="off"
-                                id="viewCoOwner" readonly></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Province</label>
-                            <span class="form-control form-control-sm form-control-border border-width-2"
-                                id="viewProvince"></span>
-                            <!-- <input type="text" class="form-control form-control-sm form-control-border border-width-2" id="viewProvince" readonly> -->
-                        </div>
-                        <div class="col-md-4">
-                            <label>Municipality/City</label>
-                            <span class="form-control form-control-sm form-control-border border-width-2"
-                                id="viewCity"></span>
-                            <!-- <input type="text" class="form-control form-control-sm form-control-border border-width-2" id="viewCity" readonly> -->
-                        </div>
-                        <div class="col-md-4">
-                            <label>Barangay</label>
-                            <span class="form-control form-control-sm form-control-border border-width-2"
-                                id="viewBarangay"></span>
-                            <!-- <input type="text" class="form-control form-control-sm form-control-border border-width-2" id="viewBarangay" readonly> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Total Area<i> (sqm)</i></label>
-                            <span class="form-control form-control-sm form-control-border border-width-2"
-                                id="viewArea"></span>
-                            <!-- <input type="text" class="form-control form-control-sm form-control-border border-width-2" id="viewArea" disabled> -->
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-sm-12 col-md-4">
                             <label>Plantation</label>
                             <select
                                 class="username PlantationCode PlantationMapping form-control form-control-sm trigger select2 plantationClear"
-                                id="plantationSelect">
+                                id="plantationSelect" disabled>
                             </select>
                         </div>
-                        <div class="col-md-4">
-                            <label>Company</label>
-                            <span class="form-control form-control-sm  form-control-border border-width-2 trigger"
-                                id="CompanyCode"></span>
-                            <!-- <input disabled  class="form-control form-control-sm trigger" type="text" id="CompanyCode"> -->
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Name :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <p class="infoLandownerName form-control form-control-sm form-control-border border-width-2"></p>
+                        </div>
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Contact Number :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <p class="infoContactNumber form-control form-control-sm form-control-border border-width-2"></p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <br>
-                    <div class="col-md-12 bg-light headertext">
-                        <h5>Representative</h5>
+                    <div class="row hideCoOwner">
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Co-Owner :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-10">
+                            <p class="infoCoOwner form-control form-control-sm form-control-border border-width-2"></p>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 hideRepresentative">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group clearfix">
-                                                <div class="icheck-lightblue d-inline">
-                                                    <input type="checkbox" id="isRep" class="checkRepresentative">
-                                                    <label for="isRep">is the Landowner same as the Authorize
-                                                        Representative?</label>
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Address :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-10">
+                            <p class="infoAddress form-control form-control-sm form-control-border border-width-2"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Lot Number :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <p class="infoLotNumber form-control form-control-sm form-control-border border-width-2"></p>
+                        </div>
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Total Area :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <p class="infoTotalArea form-control form-control-sm form-control-border border-width-2"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Company :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-10">
+                            <p class="infoCompanyName form-control form-control-sm form-control-border border-width-2"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <br>
+                        <div class="col-md-12 bg-light headertext">
+                            <h5>Representative</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 hideRepresentative">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group clearfix">
+                                                    <div class="icheck-success d-inline">
+                                                        <input type="checkbox" id="isRep" class="checkRepresentative">
+                                                        <label for="isRep">is the Landowner same as the Authorize Representative?</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12 hideRepresentativeLabel">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label>Name</label>
-                                            <input type="text" class="RepName form-control form-control-sm">
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <label>Contact Number</label>
-                                            <input type="text" class="RepContactNumber form-control form-control-sm">
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <label>Email</label>
-                                            <input type="text" class="RepEmail form-control form-control-sm">
+                                    <div class="col-md-12 hideRepresentativeLabel">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4">
+                                                <label>Name</label>
+                                                <input type="text" class="RepName form-control form-control-sm">
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <label>Contact Number</label>
+                                                <input type="text" class="RepContactNumber form-control form-control-sm">
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <label>Email</label>
+                                                <input type="text" class="RepEmail form-control form-control-sm">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <br>
-                    <div class="col-md-12 bg-light headertext">
-                        <h5>Area to be Contracted</h5>
-                    </div>
-                    <div class="row flort-right">
-                        <div class="col-md-6">
-                            <label>Total Area Remaining <i>(sqm)</i></label>
-                            <input type="text"
-                                class="Hectare form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
-                                id="Remaining" step='0.01' min="1" placeholder='0.00' type="number" disabled>
-                        </div>
-                        <div class="col-md-6">
-                            <label>Area to be contracted per <i>(has)</i></label>
-                            <input type="text"
-                                class="Hectare  form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
-                                id="Hectares" step='0.01' min="1" placeholder='0.00' type="number" disabled>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label>Area to be contracted per <i>(sqm)</i></label>
-                            <input type="text"
-                                class="LandContractedArea form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
-                                id="Sqm" step='0.01' min="1" max="1000000" placeholder='0.00' type="number"
-                                onkeyup=imposeMinMax(this) disabled>
-                        </div>
-                        <br>
+                    <div class="col-md-12">
                         <br>
                         <div class="col-md-12 bg-light headertext">
-                            <h5>Attachment</h5>
+                            <h5>Lease Area</h5>
                         </div>
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label for="file">Attach Document</label>
-                                    <input id="fileUploader" name="file"
-                                        class="Init_Filename form-control form-control-sm triggerdetail" type="file"
-                                        multiple />
-                                </div>
+                        <div class="row flort-right">
+                            <div class="col-md-6">
+                                <label>Lease Contracted <i>(sqm)</i></label>
+                                <input type="text"
+                                    class="LandContractedArea form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
+                                    id="Sqm" step='0.01' min="1" max="1000000" placeholder='0.00' type="number"
+                                    onkeyup=imposeMinMax(this)>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Lease Contracted <i>(has)</i></label>
+                                <input type="text"
+                                    class="Hectare  form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
+                                    id="Hectares" step='0.01' min="1" placeholder='0.00' type="number" disabled>
                             </div>
                         </div>
-
+                            <br>
+                            <br>
+                            <div class="col-md-12 bg-light headertext">
+                                <h5>Attachment</h5>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- <label for="file">Attach Document</label> -->
+                                        <input id="fileUploader" name="file"
+                                            class="Init_Filename form-control form-control-sm triggerdetail border-0" type="file" multiple />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
                 <!-- END: CONTRACT INFORMATION -->
@@ -194,7 +180,6 @@
         </div>
     </div>
 </section>
-
 <!-- <section>
     <div class="container-fluid">
         <div class="card card-lightblue">
@@ -224,10 +209,9 @@
 <!-- </div>
     </div>
 </section> -->
-
 <section>
     <div class="container-fluid">
-        <div class="card card-lightblue">
+        <div class="card card-success">
             <div class="card-header">
                 <h3 class="card-title">Contract Payment</h3>
                 <div class="card-tools">
@@ -1158,7 +1142,7 @@
         $("#plantationSelect").removeAttr('disabled');
         $("#repTextArea").removeAttr('disabled');
         $("#Sqm").removeAttr('disabled');
-        $("#viewCoOwner").removeAttr('disabled');
+        // $("#viewCoOwner").removeAttr('disabled');
         var landinformationcode = $("#viewLandInformation option:selected").val();
         $.ajax({
             url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/viewLandInformationSelected',
@@ -1172,13 +1156,8 @@
             }),
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                console.log('data', data);
+                console.log('Land information data', data);
                 if (data) {
-                    if (data.WithCoOwner == true) {
-                        $('.hideCoOwner').show();
-                        $('#viewWithCoOwner').text(', ET. AL.');
-                    }
-
                     LandInformation = {
                         LIContact: data.ContactNumber,
                         LIName: data.name,
@@ -1189,18 +1168,24 @@
                         LIBarangayName: data.barangayName,
                         LIArea: data.Area,
                         LIAvailableArea: data.availableArea,
-                        LICoOwner: data.CoOwner
+                        LICoOwner: data.CoOwner,
+                        LIFullname: data.Fullname
                     };
 
-                    console.log('Land Information Data JSON', LandInformation)
-                    // Selected Land Information Data
-                    $('#viewLotNumber').text(LandInformation.LILotNumber);
-                    $('#viewProvince').text(LandInformation.LIProvince);
-                    $('#viewCity').text(LandInformation.LICityName);
-                    $('#viewBarangay').text(LandInformation.LIBarangayName);
-                    $('#viewArea').text(LandInformation.LIArea);
-                    $('#Remaining').val(LandInformation.LIAvailableArea);
-                    $('#viewCoOwner').val(LandInformation.LICoOwner);
+                    if (data.WithCoOwner == true) {
+                        $('.hideCoOwner').show();
+                        $('.infoLandownerName').text(LandInformation.LIFullname);
+                        $('.infoAddress').text(LandInformation.LIProvince + ', ' + LandInformation.LICityName + ', ' +  LandInformation.LIBarangayName);
+                        // $('#viewWithCoOwner').text(', ET. AL.');
+                    } else {
+                        $('.hideCoOwner').hide();
+                        $('.infoLandownerName').text(LandInformation.LIFullname);
+                        $('.infoAddress').text(LandInformation.LIProvince + ', ' + LandInformation.LICityName + ', ' +  LandInformation.LIBarangayName);
+                    }
+
+                    $('.infoLotNumber').text(LandInformation.LILotNumber);
+                    $('.infoTotalArea').text(LandInformation.LIArea);
+                    $('.infoCoOwner').text(LandInformation.LICoOwner);
                 } else {
                     console.log('No Land Information data available.');
                 }
@@ -1209,6 +1194,12 @@
     });
     /////////////////////////////////////////////////////////////////////////////END: VIEW LAND INFORMATION OF SPECIFIED LANDOWNER/////////////////////////////////////////////////////////////////////////////
     //END
+
+    //START:
+    $("#plantationSelect").change(function (e) {
+        $('.infoCompanyName').text($("#plantationSelect :selected").val());
+    });
+    //END:
 
     /////////////////////////////////////////////////////////////////////////////START: MINIMUM INPUT OF AREA TO BE CONTRACTED/////////////////////////////////////////////////////////////////////////////
     function imposeMinMax(input) {
@@ -1262,32 +1253,57 @@
     }
 
     function getOptDataForPlantationAppend(optSource, optId, optName, RAWHTML) {
-        $.ajax({
-            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getOptDataPlantation',
-            type: 'post',
-            dataType: 'json',
-            data: JSON.stringify({
-                username: $("#username").val(),
-                token: $("#token").val(),
-                dataSource: optSource,
-                id: optId,
-                name: optName,
-                sysapp: sysapp
-            }),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                for (var i in data) {
-                    RAWHTML += '<option value="' + data[i].PlantationCode + '" data-company="' + data[i]
-                        .CompanyCode + '">' + data[i].PlantationCode + '</option>';
-                }
-                $('.' + optSource + '.trigger').html(RAWHTML);
+            console.log('data', plantations);
+            var data = [];
 
-            },
-            error: function () {
-                toastr.error('Error on gathering Options!');
-                stopLoading();
+            for (var i in plantations) {
+                data.push({ PlantationCode: plantations[i] });
             }
-        })
+
+            for (var j in data) {
+                RAWHTML += '<option value="' + data[j].PlantationCode + '">' + data[j].PlantationCode + '</option>';
+            }
+            $('.' + optSource + '.trigger').html(RAWHTML);
+
+            console.log('Plantation Code', data);
+            console.log('RAWHTML', RAWHTML);
+            
+
+            // for (var i in plantations) {
+            //     RAWHTML += '<option value="' + plantations[i].PlantationCode + '" data-company="' + plantations[i]
+            //     .CompanyCode + '">' + plantations[i].PlantationCode + '</option>';
+            // }
+            // // $('.' + optSource + '.trigger').html(RAWHTML);
+            // console.log('0', RAWHTML);
+            // console.log('1', $('.' + optSource + '.trigger').html(RAWHTML));
+
+            
+        // $.ajax({
+        //     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getOptDataPlantation',
+        //     type: 'post',
+        //     dataType: 'json',
+        //     data: JSON.stringify({
+        //         username: $("#username").val(),
+        //         token: $("#token").val(),
+        //         dataSource: optSource,
+        //         id: optId,
+        //         name: optName,
+        //         sysapp: sysapp
+        //     }),
+        //     contentType: "application/json; charset=utf-8",
+        //     success: function (data) {
+        //         for (var i in data) {
+        //             RAWHTML += '<option value="' + data[i].PlantationCode + '" data-company="' + data[i]
+        //                 .CompanyCode + '">' + data[i].PlantationCode + '</option>';
+        //         }
+        //         $('.' + optSource + '.trigger').html(RAWHTML);
+
+        //     },
+        //     error: function () {
+        //         toastr.error('Error on gathering Options!');
+        //         stopLoading();
+        //     }
+        // })
     }
     $('.trigger').on('change', function () {
         selectedData = $('.trigger').find(':selected').data('company');
@@ -1309,7 +1325,7 @@
     /////////////////////////////////////////////////////////////////////////////END: SQM CONVERTION INTO HAS/////////////////////////////////////////////////////////////////////////////
     
     //START:
-    $(".LandownerCode").change(function (e) {
+    $(".LandownerData").change(function (e) {
         LOcode = $('.LandownerCode option:selected').val();
         console.log('LandownerCode', LOcode);
         $.ajax({
@@ -1325,6 +1341,22 @@
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 console.log('Landowner Info', data);
+
+                Landowner = {
+                    LOname: data.name,
+                    LOcontactnumber: data.ContactNumber
+                };
+
+                // show the data of the selected landowner
+                $('.infoLandownerName').text(Landowner.LOname);
+                $('.infoContactNumber').text(Landowner.LOcontactnumber);
+                // remove the data of the previous selected owner
+                $('.infoAddress').text('');
+                $('.infoLotNumber').text('');
+                $('.infoTotalArea').text('');
+                $('.infoCoOwner').text('');
+                $('.infoCompanyName').text('');
+
 
                 // is Representative Data
                 $("#isRep").change(function (e) {

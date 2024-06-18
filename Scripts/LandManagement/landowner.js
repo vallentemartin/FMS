@@ -112,14 +112,15 @@ function saveLandownerData(sourceLandowner) {
     console.log('fields', fields);
     console.log('fields ID', fieldID);
 
-    lastname = $('#idvllastname').val() == '' ? $('#company').val() : $('#idvllastname').val();
+    lastname = $('#idvllastname').val() == '' ? $('#companylastname').val() : $('#idvllastname').val();
     contactnumber = $('#idvlcontactnumber').val() == '' ? $('#companynumber').val() : $('#idvlcontactnumber').val();
-    address = $('.idvladdress').val() == '' ? $('.companyaddress').val() : $('.idvladdress').val();
+    address = $('#idvladdress').val() == '' ? $('#companyaddress').val() : $('#idvladdress').val();
     remarks = $('#idvlremarks').val() == '' ? $('#companyremarks').val() : $('#idvlremarks').val();
     console.log('last name', lastname);
     console.log('contact number', contactnumber);
     console.log('remarks', remarks);
     console.log('address', address);
+    // console.log('suffix', suffix);
 
     if (confirm('Save Landowner data?')) {
         inputDataCollection['username'] = $("#username").val();
@@ -127,41 +128,49 @@ function saveLandownerData(sourceLandowner) {
         inputDataCollection['dataSource'] = sourceLandowner;
         inputDataCollection['sysapp'] = sysapp;
         inputData['LastName'] = lastname;
-        inputData['ContactNumber'] = contactnumber;
+        inputData['ContactNumber'] = '+' + contactnumber;
         inputData['remarks'] = remarks;
+        // inputData['Suffix'] = suffix;
         inputData['cityCode'] = $('.cityCode').val();
         inputData['barangayCode'] = $('.barangayCode').val();
         inputDataCompany['LastName'] = lastname;
-        inputDataCompany['ContactNumber'] = contactnumber;
+        inputDataCompany['ContactNumber'] = '+' + contactnumber;
         inputDataCompany['Address'] = address;
         inputDataCompany['remarks'] = remarks;
         for (var j in fieldID) {
             inputData[fieldID[j]] = $('.triggerlandowner.' + fieldID[j]).val();
             $('.triggerlandowner.' + fieldID[j]).val('');
+            $('#idvllastname').val('');
+            $('#companylastname').val('');
+            $('#idvlcontactnumber').val('');
+            $('#companynumber').val('');
+            
         }
-        inputDataCollection['inputData'] = $('.checkCompany').is(":checked") == false ? inputData : inputDataCompany
+        inputDataCollection['inputData'] = $('input[name=ownertypeRadio]:checked', '#selectownertype').val() == 'individual' ? inputData : inputDataCompany;
         console.log('Landowner Data',inputDataCollection);
-        $.ajax({
-            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/saveSysData',
-            type: 'post',
-            dataType: 'json',
-            data: JSON.stringify(inputDataCollection),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                if (data.retval == 1) {
-                    getSysAllLandownerData(sourceLandowner);
-                    toastr.success('Data added!');
-                    hideModal();
-                } else {
-                    toastr.error('Duplicate code!');
-                    stopLoading();
-                }
-            },
-            error: function () {
-                toastr.error('Error on saving data!');
-                stopLoading();
-            }
-        })
+        
+        // $.ajax({
+        //     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/saveSysData',
+        //     type: 'post',
+        //     dataType: 'json',
+        //     data: JSON.stringify(inputDataCollection),
+        //     contentType: "application/json; charset=utf-8",
+        //     success: function (data) {
+        //         console.log(data);
+        //         if (data.retval == 1) {
+        //             getSysAllLandownerData(sourceLandowner);
+        //             toastr.success('Data added!');
+        //             hideModal();
+        //         } else {
+        //             toastr.error('Duplicate code!');
+        //             stopLoading();
+        //         }
+        //     },
+        //     error: function () {
+        //         toastr.error('Error on saving data!');
+        //         stopLoading();
+        //     }
+        // })
     }
 }
 /**
@@ -365,16 +374,12 @@ function getSysLandownerData(sourceLandowner, filter) {
         success: function (data) {
             console.log('data update', data);
 
-            if ( data.CountryCode != 608 ) {
-                $('#addressLabel').hide();
-                $('#addressTextArea').hide();
-                $('#hideSelect').hide();
-            }
-
             if ( data.FirstName == null ) {
+                $('#selectType').text('Company Information')
                 $('.hideIndividual').hide()
                 $('.hideCompany').show()
             } else {
+                $('#selectType').text('Individual Information')
                 $('.hideIndividual').show()
                 $('.hideCompany').hide()
             }
