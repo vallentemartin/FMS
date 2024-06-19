@@ -100,7 +100,7 @@ function saveLandContractData(sourceContract) {
     var inputDataNewContract = {};
     var inputDataRenewContract = {};
     var inputDataPreTermination = {};
-    
+
     for (var x in fields) {
         if (fields[x].className != undefined) {
             var y = fields[x].className.split(' ');
@@ -131,11 +131,12 @@ function saveLandContractData(sourceContract) {
             inputDataNewContract['StartDate'] = start_lease;
             inputDataNewContract['EndDate'] = end_lease;
             inputDataNewContract['LeaseTerm'] = $(".terms").val(),
-            inputDataNewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
+                inputDataNewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
             inputDataNewContract['AdvancePayment'] = advancepayment;
             inputDataNewContract['StartOfPayment'] = startpayment;
             inputDataNewContract['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
-
+            inputDataNewContract['YearsDivided'] = $(".yrsdivided").val();
+            inputDataNewContract['Payment_Amount'] = $('.Payment_Amount').val();
             console.log('new contract', inputDataCollection);
             for (var j in fieldID) {
                 inputDataNewContract[fieldID[j]] = $('.triggercontractinfo.' + fieldID[j]).val();
@@ -161,11 +162,12 @@ function saveLandContractData(sourceContract) {
             inputDataRenewContract['StartDate'] = start_lease;
             inputDataRenewContract['EndDate'] = end_lease;
             inputDataRenewContract['LeaseTerm'] = $(".terms").val(),
-            inputDataRenewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
+                inputDataRenewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
             inputDataRenewContract['AdvancePayment'] = advancepayment;
             inputDataRenewContract['StartOfPayment'] = startpayment;
             inputDataRenewContract['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
-
+            inputDataRenewContract['YearsDivided'] = $(".yrsdivided").val();
+            inputDataRenewContract['Payment_Amount'] = $('.Payment_Amount').val();
             console.log('renew contract', inputDataCollection);
             for (var j in fieldID) {
                 inputDataRenewContract[fieldID[j]] = $('.triggercontractinfo.' + fieldID[j]).val();

@@ -438,6 +438,7 @@
                                     <input hidden type="text" id="LandContractCode">
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <!-- insert table start -->
                                 <div class="col-md-12">
@@ -707,7 +708,7 @@
                     if (data[i].remarks == 'Advance Payment Paid') {
                         tablearr.push('<input type="text" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" >');
                     } else {
-                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" >');
+                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="'+data[i].Amount+'" >');
                     }
                     tablerow.push(tablearr);
                 }
