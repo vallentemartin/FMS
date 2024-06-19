@@ -438,6 +438,7 @@
                                     <input hidden type="text" id="LandContractCode">
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <!-- insert table start -->
                                 <div class="col-md-12">
@@ -707,7 +708,7 @@
                     if (data[i].remarks == 'Advance Payment Paid') {
                         tablearr.push('<input type="text" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" >');
                     } else {
-                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" >');
+                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="'+data[i].Amount+'" >');
                     }
                     tablerow.push(tablearr);
                 }
@@ -932,7 +933,6 @@
          var min_date = '';
          if(rowId >= 2)
             {
-                console.log(date[1]);
                 var end_term_date = date[1];
                 var mindate = new Date(end_term_date);
                 mindate.setDate(mindate.getDate()+ 1);
@@ -963,8 +963,6 @@
     var rowId = 0;
     var total_years = 0;
     $("#addRow").on("click", function () {
-           
-       
         if(parseInt($('.totalyrs').val()) >= parseInt($('#terms').val()) || $('#terms').val() == '')
         {
             toastr.error("error");
@@ -989,11 +987,6 @@
         newRow.append($('<td><input type="text" disabled style="border:none; text-align:center; background-color:#e9ecef" class="maskAmount" id="rateperyear" data-rowid="' + rowId + '" data-colid="Rate_per_year">'));
         newRow.append($('<td><input type="text" disabled style="border:none; text-align:center; background-color:#e9ecef" class="maskAmount totalrate" data-rowid="' + rowId + '" data-colid="Total_rate" >'));
         newRow.append($('<td><button class="deleteRow updatedcell btn btn-danger" data-rowid="' + rowId + '" data-colid="delete"><i class="fas fa-trash"></i></button>'));
-        // if ($('#terms').val() <= total_years || $('#terms').val() == '') {
-        //     toastr.error("Error");
-    
-        // } else {
-        
             if(rowId > 1 )
             {
                
@@ -1090,7 +1083,6 @@
     {
         sum_yrs = 0;
         for (var x in dataforsaving) {
-            
             if($('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]').val() == undefined)
             {
                 $('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]').val(0);
@@ -1100,15 +1092,10 @@
            $('.totalyrs').val(parseInt(sum_yrs));
             $('.totalyrs').text(sum_yrs);
         }
-        // console.log($('.totalyrs').val());
         
     }
-  
      $('#tbl_Escalation').on('apply.daterangepicker','.lease', function() {
         var lease_period = $('#lease_period').val().split(' - ');
-         
-        
-         
         // for (const x in dataforsaving) {
             // console.log($('#date'+  $(this).data("rowid") +'').val());
             // date_term = $('[data-rowid="' + $(this).data("rowid") + '"][data-colid="startterm"]').val().split(' - ');
