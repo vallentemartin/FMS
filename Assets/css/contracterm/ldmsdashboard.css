@@ -1,0 +1,18 @@
+.elevation-1:hover {
+    /* transform: rotate(45deg); */
+    transition: 0.70s ease-in-out;
+    -webkit-transition: 0.70s;
+    -moz-transition: 0.70s;
+    -ms-transition: 0.70s;
+    -o-transition: 0.70s;
+    animation: roll 3s infinite;
+}
+
+@keyframes roll {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

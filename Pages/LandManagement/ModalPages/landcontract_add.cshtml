@@ -47,7 +47,6 @@
                         <div class="card-header">
                             <h3 class="card-title">
                             <i class="fas fa-info"></i>
-                            <!-- <i class="fas fa-info-circle"></i> -->
                             Information Reference
                             </h3>
                             <div class="card-tools">
@@ -350,7 +349,28 @@
                     </div>
                 </div>
                 <div class="container-fluid form viewPTC">
-                    <h1>Lumaki po kasi ako sa farm >.<</h1>
+                    <div class="col-sm-12 col-md-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                                <label>Select Land Contract</label>
+                                <select class="PTCLandContractCode form-control form-control-sm select2" type="text" id="LandContracCodeSelect"
+                                    onChange="clearSelection('.plantationClear')">
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2">
+                                <label class="form-control form-control-sm border-0">Name:</label>
+                            </div>
+                            <div class="col-sm-12 col-md-10">
+                                <p
+                                    class="PTCName form-control form-control-sm form-control-border border-width-2">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div> 
             </div>
             <!-- END: CONTRACT INFORMATION -->
@@ -1667,12 +1687,13 @@
             $('#selectType').text('New Contract Information Form');
             // THIS IS TO REMOVE THE VALUE GIVEN ON THE RENEW CONTRACT FORM
             $('.infoLandownerName, .infoContactNumber, .infoCoOwner, .infoAddress, .infoLotNumber, .infoTotalArea, .infoCompanyName').text('');
+            $('.refLandownerName, .refContactNumber, .refCoOwner, .refAddress, .refLotNumber, .refTotalArea, .refCompanyName, .refPlantation, .refDocumentNumber, .refDocumentType').text('');
             $('#LandContracCodeSelect').select2('destroy').val('').select2();
             $('#viewLandownerRNC, #viewLandInformationRNC, #plantationSelectRNC').select2('destroy').val('').select2().prop('disabled',true);
         } else if (selectedValue === 'renewcontract') {
             $('.viewRNC, .viewRNCPayment').show();
             $('#selectType').text('Renew Contract Information Form');
-            // THIS IS TO REMOVE THE VALUE GIVEN ON THE NEW CONTRACT FORM
+            // THIS IS TO REMOVE THE VALUE GIVEN ON THE NEW CONTRACT FORM   
             $('.infoLandownerName, .infoContactNumber, .infoCoOwner, .infoAddress, .infoLotNumber, .infoTotalArea, .infoCompanyName').text('');
             $('#viewLandownerNC').select2('destroy').val('').select2();
             $('#viewLandInformationNC, #plantationSelectNC').select2('destroy').val('').select2().prop('disabled',true);
@@ -1705,6 +1726,12 @@
         } else if (selectedValue === 'pretermination') {
             $('.hideContract').hide();
             $('.viewPTC').show();
+            $('.infoLandownerName, .infoContactNumber, .infoCoOwner, .infoAddress, .infoLotNumber, .infoTotalArea, .infoCompanyName').text('');
+            $('.refLandownerName, .refContactNumber, .refCoOwner, .refAddress, .refLotNumber, .refTotalArea, .refCompanyName, .refPlantation, .refDocumentNumber, .refDocumentType').text('');
+            // $('#viewLandownerNC').select2('destroy').val('').select2();
+            // $('#viewLandInformationNC, #plantationSelectNC').select2('destroy').val('').select2().prop('disabled',true);
+            // $('#LandContracCodeSelect').select2('destroy').val('').select2();
+            // $('#viewLandownerRNC, #viewLandInformationRNC, #plantationSelectRNC').select2('destroy').val('').select2().prop('disabled',true);
             $('#selectType').text('Pre-Termination Form');
         }
     });

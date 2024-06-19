@@ -1,0 +1,21 @@
+.headertext {
+    padding: 5px 10px 5px 10px; 
+    border-top-left-radius: .25rem; 
+    border-top-right-radius: .25rem;
+    margin-bottom: 2rem;
+    margin-top: 10px;
+}
+.boxiconActive {
+    background-color: rgb(130,218,92);
+}
+.boxiconExpiring {
+    background-color: rgb(255,177,129);
+}
+.boxiconInactive {
+    background-color: rgb(255,120,129);
+}
+.form {
+    border: 1px solid #ced4da;
+    padding: 20px;
+    border-radius: 1.25rem;
+}
