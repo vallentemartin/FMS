@@ -1206,52 +1206,63 @@
 
     /////////////////////////////////////////////////////////////////////////////START: SAVE UPDATE DATA/////////////////////////////////////////////////////////////////////////////
     function saveupdateddata(LandContractCode) {
-    paymentdata = [];
+        paymentdata = [];
 
-    for (var x in dataforsaving) {
-        paymentdata.push({
-            LandContractCode: LandContractCode, // add contract_code value or landinformation code
-            amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
-            date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Payment_date_end"]').data('payment_date'),
-            remarks: $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(),
-            username: $("#username").val(),
-            token: $("#token").val(),
-            sysapp: sysapp
-
-        });
-        // var test = JSON.stringify({
-        //     LandContractCode: $('#LandContractCode').val(), // add contract_code value or landinformation code
-        //     // LandInformationCode:,
-        //     amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
-        //     date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Payment_date_end"]').data('payment_date'),
-        //     remarks: $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(),
-        //     username: $("#username").val(),
-        //     token: $("#token").val(),
-        //     sysapp: sysapp
-        // });
-        console.log(paymentdata);
-        // $('[data-rowid=' + dataforsaving[x] + '][data-colid="Posting_date"]').val()
-        // $.ajax({
-        //     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveAmount',
-        //     type: 'post',
-        //     dataType: 'json',
-        //     data: JSON.stringify({
-        //         LandContractCode: $('#LandContractCode').val(), // add contract_code value or landinformation code
-        //         // LandInformationCode:,
+        // for (var x in dataforsaving) {
+        //     paymentdata.push({
+        //         LandContractCode: LandContractCode, // add contract_code value or landinformation code
         //         amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
         //         date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Payment_date_end"]').data('payment_date'),
         //         remarks: $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(),
-        //         username: $("#username").val(),
-        //         token: $("#token").val(),
-        //         sysapp: sysapp
-        //     }),
-        //     contentType: "application/json; charset=utf-8",
-        //     success: function (data) {
 
-        //     }
-        // });
+
+        //     });
+
+
+        //     // var test = JSON.stringify({
+        //     //     LandContractCode: $('#LandContractCode').val(), // add contract_code value or landinformation code
+        //     //     // LandInformationCode:,
+        //     //     amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
+        //     //     date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Payment_date_end"]').data('payment_date'),
+        //     //     remarks: $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(),
+        //     //     username: $("#username").val(),
+        //     //     token: $("#token").val(),
+        //     //     sysapp: sysapp
+        //     // });
+        //     // console.log(paymentdata);
+        //     // $('[data-rowid=' + dataforsaving[x] + '][data-colid="Posting_date"]').val()
+        // }
+        $('.date_end').each(function (index) {
+
+            var Paymentdate = $('[data-rowid=' + index + '][data-colid="Payment_date_end"]').val();
+            var terms = Paymentdate.split(' - ');
+            var start = terms[0];
+            var end = terms[1];
+
+            paymentdata.push({
+                LandContractCode: LandContractCode, // add contract_code value or landinformation code
+                amount: $('[data-rowid=' + index + '][data-colid="amount"]').val(),
+                start: start,
+                end: end,
+                remarks: $('[data-rowid=' + index + '] option:selected').val(),
+            });
+        })
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveAmount',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp,
+                inputData: paymentdata
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+            }
+        });
     }
-}
     /////////////////////////////////////////////////////////////////////////////END: SAVE UPDATE DATA///////////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////////////////START: VIEW LAND INFORMATION OF SPECIFIED LANDOWNER/////////////////////////////////////////////////////////////////////////////

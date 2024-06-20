@@ -124,6 +124,7 @@ function saveLandContractData(sourceContract) {
             // New Contract Data
             inputDataNewContract['LandInformationCode'] = $('#viewLandInformationNC').val();
             inputDataNewContract['PlantationCode'] = $('.PlantationCode option:selected').val();
+            inputDataNewContract['Status'] = 6;
             inputDataNewContract['RepresentativeName'] = $('.RepName').val();
             inputDataNewContract['RepresentativeContactNumber'] = $('#isRep').is(":checked") !== true ? '+' + $('.RepContactNumber').val() : $('.textRepContactNumber').text();
             inputDataNewContract['RepresentativeEmail'] = $('.RepEmail').val();
@@ -838,40 +839,40 @@ function clearSelection(e) {
 //Start Contract Payment
 
 function saveEscalation(LandContractCode) {
-    console.log($('#LandContractCode').val());
     for (var x in dataforsaving) {
-        // console.log($('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val());
-        // var escalation_term = $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val().split(' - ');
-        // var start_term = escalation_term[0];
-        // var end_term = escalation_term[1];
-        var start = $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val().split(' - ')[0];
-        var end = $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val().split(' - ')[1];
+        var termValue = $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val();
 
-        $.ajax({
-            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveEscalation',
-            type: 'post',
-            dataType: 'json',
-            data: JSON.stringify({
-                LandContractCode: LandContractCode, // add contract_code value or landinformation code
-                // LandInformationCode:,
-                rate: $('[data-rowid=' + dataforsaving[x] + '][data-colid="rate"]').val(),
-                Rate_per_year: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Rate_per_year"]').val(),
-                Total_rate: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val(),
-                num_of_has: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Num_of_has"]').val(),
-                // date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val(),
-                startterm: start,
-                endterm: end,
-                username: $("#username").val(),
-                token: $("#token").val(),
-                sysapp: sysapp
-            }),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                // saveupdateddata();
-            }
-        })
+        if (termValue) {
+            var terms = termValue.split(' - ');
+            var start = terms[0];
+            var end = terms[1];
+
+            $.ajax({
+                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveEscalation',
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify({
+                    LandContractCode: LandContractCode, // add contract_code value or landinformation code
+                    // LandInformationCode:,
+                    rate: $('[data-rowid=' + dataforsaving[x] + '][data-colid="rate"]').val(),
+                    Rate_per_year: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Rate_per_year"]').val(),
+                    Total_rate: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val(),
+                    num_of_has: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Num_of_has"]').val(),
+                    // date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val(),
+                    startterm: start,
+                    endterm: end,
+                    username: $("#username").val(),
+                    token: $("#token").val(),
+                    sysapp: sysapp
+                }),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    // saveupdateddata();
+                }
+            });
+        }
+        // toastr.success('Data Saved!');
     }
-    // toastr.success('Data Saved!');
 }
 
 
