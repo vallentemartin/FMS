@@ -198,9 +198,11 @@ function saveLandContractData(sourceContract) {
             success: function (data) {
                 console.log(data);
                 if (data) {
+                    saveupdateddata(data.LandContractCode);
                     getSysAllContractInfoData(sourceContract);
                     saveNewFile(sourcefile);
                     saveEscalation(data.LandContractCode);
+
                     toastr.success('Data added!');
                     hideModal();
                 } else {
@@ -839,11 +841,12 @@ function saveEscalation(LandContractCode) {
     console.log($('#LandContractCode').val());
     for (var x in dataforsaving) {
         // console.log($('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val());
-        var escalation_term = $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val().split(' - ');
-        var start_term = escalation_term[0];
-        var end_term = escalation_term[1];
-        var start = new Date(start_term);
-        var end = new Date(end_term);
+        // var escalation_term = $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val().split(' - ');
+        // var start_term = escalation_term[0];
+        // var end_term = escalation_term[1];
+        var start = $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val().split(' - ')[0];
+        var end = $('[data-rowid=' + dataforsaving[x] + '][data-colid="startterm"]').val().split(' - ')[1];
+
         $.ajax({
             url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveEscalation',
             type: 'post',
@@ -870,5 +873,7 @@ function saveEscalation(LandContractCode) {
     }
     // toastr.success('Data Saved!');
 }
+
+
 //End Contract Payment
 //END:
