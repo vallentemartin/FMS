@@ -515,11 +515,9 @@
                                     <div class="col-md-12">
                                         <div class="row" style="overflow: auto;">
                                             <div class="card-body">
-                                                <table id="tbl_ContractTerm"
+                                                <table id="tbl_PaymentSchedule"
                                                     class="table table-bordered table-striped table-sm"
-                                                    style="width:100%"
-                                                    data-editpage="pages/masterdata/modalpages/area_update"
-                                                    data-addpage="pages/masterdata/modalpages/area_add">
+                                                    style="width:100%">
                                                     <thead>
                                                         <tr style="text-align:center">
                                                             <th class="id">#</th>
@@ -616,7 +614,7 @@
     var LOName = '';
     var LOEmail = '';
     getOptDataForAddContractInfo();
-    initDataTablesContract();
+    initDataTablesPaymentSched();
     getOptDataForPlantation();
     $('.afterSelect, .hideSelect, .hideCoOwner, .yrsdivided, .hideContract, .viewNC, .viewRNC, .viewPTC, .hideRepresentativeNumber').hide();
     /////////////////////////////////////////////////////////////////////////////START: LEASE PERIOD/////////////////////////////////////////////////////////////////////////////
@@ -691,7 +689,7 @@
             data: JSON.stringify(inputDataCollection),
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                $('#tbl_ContractTerm').DataTable().clear().draw();
+                $('#tbl_PaymentSchedule').DataTable().clear().draw();
                 var id = 0;
                 var tablerow = [];
                 //landcontractcode   
@@ -702,77 +700,77 @@
                     data[i].id = id++;
                     tablearr.push('<div style="text-align:center">' + data[i].id + '</div>');
                     // tablearr.push('<input type="text" style="width: 100%;border:1px;" hidden  class="date updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date" value="' + moment(data[i].Payment_date ).format('MM/DD/YYYY') + '">');
-                    tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="date_end updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date + '" value="' + data[i].date_of_payment + '">');
-                    tablearr.push(data[i].remarks);
+                    tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="date_end updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date_end + '" value="' + data[i].date_of_payment + '">');
+                    tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Unpaid">Unpaid</option><option value="Paid">Paid</option><option value="Paid">Advance Payment Paid</option></select>');
+
+                    // tablearr.push(data[i].remarks);
                     console.log(data[i].remarks == 'Paid');
-                    if (data[i].remarks == 'Advance Payment Paid') {
-                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" >');
-                    } else {
-                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="'+data[i].Amount+'" >');
-                    }
+                    
+                    tablearr.push('<input type="text" style="width: 100%;border:1px; " id="amountNew" class="amount updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" >');
+    
                     tablerow.push(tablearr);
                 }
-                $("#tbl_ContractTerm").DataTable().rows.add(tablerow).draw();
+                $("#tbl_PaymentSchedule").DataTable().rows.add(tablerow).draw();
             }
         });
     }
-    function generateEscalation() {
-        $('.yrsdivided').prop('disabled',false);
-        $('.advance_payment_amount').prop('disabled',false);
-        $('.Total_rental').text(''); 
-        $('.advance_payment_amount').val(''); 
-        $('.Remaining_rental').text(''); 
-        $('.yrsdivided').val(''); 
-        $('.Payment_Amount').text('');
-        $('.view').show();
-        var lease_period = $('#lease_period').val().split(' - ');
-        var start_lease = lease_period[0];
-        var end_lease = lease_period[1];
-        var inputDataCollection = {};
-        inputDataCollection['username'] = $("#username").val();
-        inputDataCollection['token'] = $("#token").val();
-        inputDataCollection['sysapp'] = sysapp;
-        inputDataCollection['start_of_payment'] = $(".start_of_payment").val();
-        inputDataCollection['advance_payment'] = $(".advance_payment").val();
-        inputDataCollection['PaymentTerms'] = $(".PaymentTermsCode").val();
-        inputDataCollection['start_lease'] = start_lease;
-        inputDataCollection['end_lease'] = end_lease;
-        inputDataCollection['advance_payment_amount'] = $(".advance_payment_amount").val();
-        inputDataCollection['Num_of_has'] = $('#Hectares').val();
-        console.log(inputDataCollection);
-        $.ajax({
-            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/generateEscalation',
-            type: 'post',
-            dataType: 'json',
-            data: JSON.stringify(inputDataCollection),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                $('#tbl_Escalation').DataTable().clear().draw();
-                $('#tbl_ContractTerm').DataTable().clear().draw();
-                var id = 0;
-                var tablerow = [];
-                //landcontractcode   
-                $('#LandContractCode').val(data[0].LandContractCode);
-                $('.total_contract_amount').val(data[0].Amount);
-                for (var i in data) {
-                    var tablearr = [];
-                    data[i].id = id++;
-                    tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="StartTerm updatedcell " data-rowid="' + data[i].id + '" data-colid="startterm" data-startterm="' + data[i].StartTerm + '" value="' + data[i].date_of_payment + '">');
-                    tablearr.push('<input type="text"  style="width:100%; border:1px solid #ced4da" " id="amountNew" class="rate maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="rate" value="' + data[i].Rate + '">');
-                    tablearr.push('<input disabled type="text" style="border:none; text-align:center;" class="Num_of_has" data-rowid="' + data[i].id + '" data-colid="Num_of_has" value="' + data[i].Num_of_has + '">');
-                    tablearr.push('<input disabled type="text" style="border:none; text-align:center;" id="rateperyear" data-rowid="' + data[i].id + '" data-colid="Rate_per_year" >');
-                    tablearr.push('<input disabled type="text" style="border:none; text-align:center;"  data-rowid="' + data[i].id + '" data-colid="Total_rate" >');
-                    tablerow.push(tablearr);
-                }
-                $("#tbl_Escalation").DataTable().rows.add(tablerow).draw();
-            }
-        });
-    }
+    // function generateEscalation() {
+    //     $('.yrsdivided').prop('disabled',false);
+    //     $('.advance_payment_amount').prop('disabled',false);
+    //     $('.Total_rental').text(''); 
+    //     $('.advance_payment_amount').val(''); 
+    //     $('.Remaining_rental').text(''); 
+    //     $('.yrsdivided').val(''); 
+    //     $('.Payment_Amount').text('');
+    //     $('.view').show();
+    //     var lease_period = $('#lease_period').val().split(' - ');
+    //     var start_lease = lease_period[0];
+    //     var end_lease = lease_period[1];
+    //     var inputDataCollection = {};
+    //     inputDataCollection['username'] = $("#username").val();
+    //     inputDataCollection['token'] = $("#token").val();
+    //     inputDataCollection['sysapp'] = sysapp;
+    //     inputDataCollection['start_of_payment'] = $(".start_of_payment").val();
+    //     inputDataCollection['advance_payment'] = $(".advance_payment").val();
+    //     inputDataCollection['PaymentTerms'] = $(".PaymentTermsCode").val();
+    //     inputDataCollection['start_lease'] = start_lease;
+    //     inputDataCollection['end_lease'] = end_lease;
+    //     inputDataCollection['advance_payment_amount'] = $(".advance_payment_amount").val();
+    //     inputDataCollection['Num_of_has'] = $('#Hectares').val();
+    //     console.log(inputDataCollection);
+    //     $.ajax({
+    //         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/generateEscalation',
+    //         type: 'post',
+    //         dataType: 'json',
+    //         data: JSON.stringify(inputDataCollection),
+    //         contentType: "application/json; charset=utf-8",
+    //         success: function (data) {
+    //             $('#tbl_Escalation').DataTable().clear().draw();
+    //             $('#tbl_PaymentSchedule').DataTable().clear().draw();
+    //             var id = 0;
+    //             var tablerow = [];
+    //             //landcontractcode   
+    //             $('#LandContractCode').val(data[0].LandContractCode);
+    //             $('.total_contract_amount').val(data[0].Amount);
+    //             for (var i in data) {
+    //                 var tablearr = [];
+    //                 data[i].id = id++;
+    //                 tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="StartTerm updatedcell " data-rowid="' + data[i].id + '" data-colid="startterm" data-startterm="' + data[i].StartTerm + '" value="' + data[i].date_of_payment + '">');
+    //                 tablearr.push('<input type="text"  style="width:100%; border:1px solid #ced4da" " id="amountNew" class="rate maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="rate" value="' + data[i].Rate + '">');
+    //                 tablearr.push('<input disabled type="text" style="border:none; text-align:center;" class="Num_of_has" data-rowid="' + data[i].id + '" data-colid="Num_of_has" value="' + data[i].Num_of_has + '">');
+    //                 tablearr.push('<input disabled type="text" style="border:none; text-align:center;" id="rateperyear" data-rowid="' + data[i].id + '" data-colid="Rate_per_year" >');
+    //                 tablearr.push('<input disabled type="text" style="border:none; text-align:center;"  data-rowid="' + data[i].id + '" data-colid="Total_rate" >');
+    //                 tablerow.push(tablearr);
+    //             }
+    //             $("#tbl_Escalation").DataTable().rows.add(tablerow).draw();
+    //         }
+    //     });
+    // }
     /////////////////////////////////////////////////////////////////////////////END: GENERATE PAYMENT SCHEDULE/////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////////////////START: INITIALIZE CONTRACT PAYMENT TABLE///////////////////////////////////////////////////////////////////
-    function initDataTablesContract() {
-        var table = $('#tbl_ContractTerm').DataTable({
+    function initDataTablesPaymentSched() {
+        var table = $('#tbl_PaymentSchedule').DataTable({
             language: {
                 sSearch: "",
                 searchPlaceholder: "Search records"
@@ -789,9 +787,9 @@
                 [10, 25, 50, 100],
                 ['10 rows', '25 rows', '50 rows', '100 rows']
             ],
-        }).buttons().container().appendTo('#tbl_ContractTerm' + '_wrapper .col-md-6:eq(0)');
-        $('#tbl_ContractTerm' + '_paginate').css('font-size', 'smaller').css('float', 'right');
-        $('#tbl_ContractTerm' + '_filter').css('float', 'right');
+        }).buttons().container().appendTo('#tbl_PaymentSchedule' + '_wrapper .col-md-6:eq(0)');
+        $('#tbl_PaymentSchedule' + '_paginate').css('font-size', 'smaller').css('float', 'right');
+        $('#tbl_PaymentSchedule' + '_filter').css('float', 'right');
     }
 
     function initDataTablesEscalation() {
@@ -1077,6 +1075,7 @@
     $('#lease_period').on('apply.daterangepicker', function() {
         
         $('#tbl_Escalation tbody').empty();
+        $('.totalyrs').val(0);
         rowId = 0;
     });
     function totalYrs()
@@ -1196,33 +1195,63 @@
         $('.yrsdivided').val(''); 
         $('.Payment_Amount').text('');
     });
+     $('#tbl_PaymentSchedule').on('change', '.updatedcell', function () {
+        var table = $('#tbl_PaymentSchedule').DataTable();
+        console.log($(this).data('rowid'));
+        if (jQuery.inArray(($(this).data('rowid')), dataforsaving) == -1) {
+            dataforsaving.push($(this).data('rowid'));
+        }
+     });
     /////////////////////////////////////////////////////////////////////////////END: INITIALIZE CONTRACT PAYMENT TABLE/////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////////////////START: SAVE UPDATE DATA/////////////////////////////////////////////////////////////////////////////
-    function saveupdateddata() {
-        for (var x in dataforsaving) {
-            console.log($('[data-rowid=' + dataforsaving[x] + '][data-colid="Payment_date"]').data());
-            $.ajax({
-                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveAmount',
-                type: 'post',
-                dataType: 'json',
-                data: JSON.stringify({
-                    LandContractCode: $('#LandContractCode').val(), // add contract_code value or landinformation code
-                    // LandInformationCode:,
-                    amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
-                    date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Payment_date_end"]')
-                        .data('payment_date'),
-                    username: $("#username").val(),
-                    token: $("#token").val(),
-                    sysapp: sysapp
-                }),
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
+    function saveupdateddata(LandContractCode) {
+    paymentdata = [];
 
-                }
-            });
-        }
+    for (var x in dataforsaving) {
+        paymentdata.push({
+            LandContractCode: LandContractCode, // add contract_code value or landinformation code
+            amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
+            date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Payment_date_end"]').data('payment_date'),
+            remarks: $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(),
+            username: $("#username").val(),
+            token: $("#token").val(),
+            sysapp: sysapp
+
+        });
+        // var test = JSON.stringify({
+        //     LandContractCode: $('#LandContractCode').val(), // add contract_code value or landinformation code
+        //     // LandInformationCode:,
+        //     amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
+        //     date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Payment_date_end"]').data('payment_date'),
+        //     remarks: $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(),
+        //     username: $("#username").val(),
+        //     token: $("#token").val(),
+        //     sysapp: sysapp
+        // });
+        console.log(paymentdata);
+        // $('[data-rowid=' + dataforsaving[x] + '][data-colid="Posting_date"]').val()
+        // $.ajax({
+        //     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveAmount',
+        //     type: 'post',
+        //     dataType: 'json',
+        //     data: JSON.stringify({
+        //         LandContractCode: $('#LandContractCode').val(), // add contract_code value or landinformation code
+        //         // LandInformationCode:,
+        //         amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
+        //         date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Payment_date_end"]').data('payment_date'),
+        //         remarks: $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(),
+        //         username: $("#username").val(),
+        //         token: $("#token").val(),
+        //         sysapp: sysapp
+        //     }),
+        //     contentType: "application/json; charset=utf-8",
+        //     success: function (data) {
+
+        //     }
+        // });
     }
+}
     /////////////////////////////////////////////////////////////////////////////END: SAVE UPDATE DATA///////////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////////////////START: VIEW LAND INFORMATION OF SPECIFIED LANDOWNER/////////////////////////////////////////////////////////////////////////////
