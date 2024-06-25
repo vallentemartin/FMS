@@ -328,34 +328,39 @@
     });
 
     function verifyButton() {
-        if ( $('.DocumentNumber').val() !== '' ) {
-            var documentnumber = $('.DocumentNumber').val();
-            $.ajax({
-                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/checkDocumentNumber',
-                type: 'post',
-                dataType: 'json',
-                data: JSON.stringify({
-                    DocumentNumber: documentnumber,
-                    username: $("#username").val(),
-                    token: $("#token").val(),
-                    sysapp: sysapp
-                }),
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    console.log('Check Document Number', data);
-                    if ( data.length !== 0 && data.DocumentNumber == $('.DocumentNumber').val()) {
-                        toastr.error('Document Number already exist!');
-                    } else {
-                        toastr.success('Document Number is available!');
-                    }
+    var documentNumberInput = $('.DocumentNumber');
+    var documentNumber = documentNumberInput.val();
+    
+    if (documentNumber !== '') {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/checkDocumentNumber',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                DocumentNumber: documentNumber,
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log('Check Document Number', data);
+                console.log('result', data[""]);
+                if (data.length !== 0 && data[""] === 1) {
+                    toastr.error('Document Number already exists!');
+                } else {
+                    toastr.success('Document Number is available!');
                 }
-            })
-        } else {
-            toastr.error('Please enter Document Number!');
-        }
-
-       
+            },
+            error: function (xhr, status, error) {
+                toastr.error('Error checking Document Number. Please try again later.');
+            }
+        });
+    } else {
+        toastr.error('Please enter Document Number!');
     }
+}
+
 /////////////////////////////////////////////////////////////////////////////END: SQM CONVERTION INTO HAS/////////////////////////////////////////////////////////////////////////////
 
 </script>

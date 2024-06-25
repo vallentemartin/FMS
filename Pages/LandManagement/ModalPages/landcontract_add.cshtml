@@ -19,18 +19,14 @@
                         <div class="form-group clearfix beforeSelect">
                             <div class="row d-flex text-center">
                                 <div class="icheck-success d-inline col-sm-12 col-md-4 divNewContract">
-                                    <!-- <input class="contracttype" type="radio" name="contracttypeRadio" id="newcontract"
-                                        value="newcontract" onChange="clearSelection('#LandContracCodeSelect, #viewLandownerRNC, #viewLandInformationRNC, #plantationSelectRNC')"> -->
                                     <input class="contracttype" type="radio" name="contracttypeRadio" id="newcontract"
                                         value="newcontract">
                                     <label for="newcontract">New Contract</label>
                                 </div>
                                 <div class="icheck-success d-inline col-sm-12 col-md-4 divRenewContract">
-                                    <!-- <input class="contracttype" type="radio" name="contracttypeRadio" id="renewcontract"
-                                        value="renewcontract" onChange="clearSelection('#viewLandownerNC, #viewLandInformationNC, #plantationSelectNC')"> -->
                                     <input class="contracttype" type="radio" name="contracttypeRadio" id="renewcontract"
                                         value="renewcontract">
-                                    <label for="renewcontract">Renew Contract</label>
+                                    <label for="renewcontract">Contract Renewal</label>
                                 </div>
                                 <div class="icheck-success d-inline col-sm-12 col-md-4 divPreTerm">
                                     <input class="contracttype" type="radio" name="contracttypeRadio" id="preterm"
@@ -47,7 +43,6 @@
                         <div class="card-header">
                             <h3 class="card-title">
                             <i class="fas fa-info"></i>
-                            <!-- <i class="fas fa-info-circle"></i> -->
                             Information Reference
                             </h3>
                             <div class="card-tools">
@@ -329,7 +324,7 @@
                             <div class="col-md-6">
                                 <label>Lease Contracted <i>(has)</i></label>
                                 <input type="text"
-                                    class="Hectare  form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
+                                    class="Hectare form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
                                     id="Hectares" step='0.01' min="1" placeholder='0.00' type="number" disabled>
                             </div>
                         </div>
@@ -350,7 +345,28 @@
                     </div>
                 </div>
                 <div class="container-fluid form viewPTC">
-                    <h1>Lumaki po kasi ako sa farm >.<</h1>
+                    <div class="col-sm-12 col-md-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                                <label>Select Land Contract</label>
+                                <select class="PTCLandContractCode form-control form-control-sm select2" type="text" id="LandContracCodeSelect"
+                                    onChange="clearSelection('.plantationClear')">
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2">
+                                <label class="form-control form-control-sm border-0">Name:</label>
+                            </div>
+                            <div class="col-sm-12 col-md-10">
+                                <p
+                                    class="PTCName form-control form-control-sm form-control-border border-width-2">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div> 
             </div>
             <!-- END: CONTRACT INFORMATION -->
@@ -1695,9 +1711,9 @@
                 console.log('refLandContractData',refLandContractData);
                 
                 if (refLandContractData.WithCoOwner == true) {
-                    $(''.hideRefCoOwner).show();
+                    $('.hideRefCoOwner').show();
                 } else {
-                    $(''.hideRefCoOwner).hide();
+                    $('.hideRefCoOwner').hide();
                 }
 
                 $('.refLandownerName').text(refLandContractData.Fullname);
@@ -1724,48 +1740,63 @@
         if (selectedValue === 'newcontract') {
             $('.viewNC').show();
             $('#selectType').text('New Contract Information Form');
-            // THIS IS TO REMOVE THE VALUE GIVEN ON THE RENEW CONTRACT FORM
-            $('.infoLandownerName, .infoContactNumber, .infoCoOwner, .infoAddress, .infoLotNumber, .infoTotalArea, .infoCompanyName').text('');
-            $('#LandContracCodeSelect').select2('destroy').val('').select2();
-            $('#viewLandownerRNC, #viewLandInformationRNC, #plantationSelectRNC').select2('destroy').val('').select2().prop('disabled',true);
+            clearReNewContractInfo('.refLandownerName, .refContactNumber, .refCoOwner, .refAddress, .refLotNumber, .refTotalArea, .refCompanyName, .refPlantation, .refDocumentNumber, .refDocumentType');
+            disableSelect2(['#viewLandInformationRNC', '#plantationSelectRNC']);
         } else if (selectedValue === 'renewcontract') {
             $('.viewRNC, .viewRNCPayment').show();
             $('#selectType').text('Renew Contract Information Form');
-            // THIS IS TO REMOVE THE VALUE GIVEN ON THE NEW CONTRACT FORM
-            $('.infoLandownerName, .infoContactNumber, .infoCoOwner, .infoAddress, .infoLotNumber, .infoTotalArea, .infoCompanyName').text('');
-            $('#viewLandownerNC').select2('destroy').val('').select2();
-            $('#viewLandInformationNC, #plantationSelectNC').select2('destroy').val('').select2().prop('disabled',true);
-            // FETCH DATA OF ACTIVE AND EXPIRING CONTRACTS
-            $('#LandContracCodeSelect').append('<option value="-">Loading</option>');
-            var LCHTML = '<option value="-" selected disabled>-</option>';
-            $.ajax({
-                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getLandContractsByStatus',
-                type: 'post',
-                dataType: 'json',
-                data: JSON.stringify({
-                    username: $("#username").val(),
-                    token: $("#token").val(),
-                    sysapp: sysapp
-                }),
-                contentType: "application/json; charset=utf-8",
-                success: function (viewActiveExpiringContracts) {
-                    console.log('viewActiveExpiringContracts',viewActiveExpiringContracts);
-                    if ( viewActiveExpiringContracts.length !== 0 ) {
-                    for (var i in viewActiveExpiringContracts) {
-                        LCHTML += '<option value="' + viewActiveExpiringContracts[i].LandContractCode + '">' + viewActiveExpiringContracts[i].LandContractCode + '</option>';
-                    }
-                        $('#LandContracCodeSelect').html(LCHTML);
-                        // $("#LandContracCodeSelect").removeAttr('disabled');					
-                    } else {
-                        console.log('No Land Contract Code data available.');
-                    }
-                }
-            })
+            clearNewContractInfo('.infoLandownerName, .infoContactNumber, .infoCoOwner, .infoAddress, .infoLotNumber, .infoTotalArea, .infoCompanyName');
+            disableSelect2(['#viewLandownerNC', '#viewLandInformationNC', '#plantationSelectNC']);
+            fetchActiveExpiringContracts();
         } else if (selectedValue === 'pretermination') {
             $('.hideContract').hide();
             $('.viewPTC').show();
+            clearReNewContractInfo('.refLandownerName, .refContactNumber, .refCoOwner, .refAddress, .refLotNumber, .refTotalArea, .refCompanyName, .refPlantation, .refDocumentNumber, .refDocumentType');
+            clearNewContractInfo('.infoLandownerName, .infoContactNumber, .infoCoOwner, .infoAddress, .infoLotNumber, .infoTotalArea, .infoCompanyName');
+            disableSelect2(['#viewLandownerNC', '#viewLandInformationNC', '#LandContracCodeSelect']);
             $('#selectType').text('Pre-Termination Form');
         }
     });
+
+    function clearNewContractInfo(e) {
+        $(e).val('');
+        $(e).text('');
+    }
+
+    function clearReNewContractInfo(e) {
+        $(e).val('');
+        $(e).text('');
+    }
+
+    function disableSelect2(selectors) {
+        $(selectors.join(', ')).select2('destroy').val('').select2().prop('disabled', true);
+    }
+
+    function fetchActiveExpiringContracts() {
+        $('#LandContracCodeSelect').append('<option value="-" disabled>Loading...</option>').select2();
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getLandContractsByStatus',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (viewActiveExpiringContracts) {
+                console.log('viewActiveExpiringContracts',viewActiveExpiringContracts);
+                if ( viewActiveExpiringContracts.length !== 0 ) {
+                    var LCHTML = '<option value="-" selected disabled>-</option>';
+                    for (var i in viewActiveExpiringContracts) {
+                        LCHTML += '<option value="' + viewActiveExpiringContracts[i].LandContractCode + '">' + viewActiveExpiringContracts[i].LandContractCode + '</option>';
+                    }
+                    $('#LandContracCodeSelect').html(LCHTML);			
+                } else {
+                    console.log('No Land Contract Code data available.');
+                }
+            }
+        })
+    }
     /////////////////////////////////////////////////////////////////////////////////END: INITIALIZATION OF FORMS UPOL SELECTION OF CONTRACT TYPE///////////////////////////////////////////////////////////////////////////////
 </script>

@@ -121,7 +121,7 @@ function saveLandContractData(sourceContract) {
             inputDataNewContract['dataSource'] = sourceContract;
             inputDataNewContract['sysapp'] = sysapp;
 
-            // New Contract Data
+            // New Contract Data [Status: Pending]
             inputDataNewContract['LandInformationCode'] = $('#viewLandInformationNC').val();
             inputDataNewContract['PlantationCode'] = $('.PlantationCode option:selected').val();
             inputDataNewContract['Status'] = 6;
@@ -132,7 +132,7 @@ function saveLandContractData(sourceContract) {
             inputDataNewContract['StartDate'] = start_lease;
             inputDataNewContract['EndDate'] = end_lease;
             inputDataNewContract['LeaseTerm'] = $(".terms").val(),
-                inputDataNewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
+            inputDataNewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
             inputDataNewContract['AdvancePayment'] = advancepayment;
             inputDataNewContract['StartOfPayment'] = startpayment;
             inputDataNewContract['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
@@ -163,7 +163,7 @@ function saveLandContractData(sourceContract) {
             inputDataRenewContract['StartDate'] = start_lease;
             inputDataRenewContract['EndDate'] = end_lease;
             inputDataRenewContract['LeaseTerm'] = $(".terms").val(),
-                inputDataRenewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
+            inputDataRenewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
             inputDataRenewContract['AdvancePayment'] = advancepayment;
             inputDataRenewContract['StartOfPayment'] = startpayment;
             inputDataRenewContract['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
@@ -183,7 +183,7 @@ function saveLandContractData(sourceContract) {
             inputDataCollection['sysapp'] = sysapp;
 
             // Pre-Termination Data
-            inputDataRenewContract['Status'] = 4; // Status: Renewed
+            inputDataRenewContract['Status'] = 4; // Status: Pre Termination
 
             inputDataCollection['inputData'] = inputDataPreTermination;
         }
@@ -315,16 +315,45 @@ function getSysAllContractInfoData(sourceContract) {
                 var dataarr = [];
                 for (var j in colid) {
                     if (colid[j] == 'id') {
-
-                        // dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
-                        // dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;" disabled>-</buttons></div>');
-                        dataarr.push('<div style="text-align:center"><button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 60px;">View</button></div>');
-                    } else if (colid[j] == 'isactive') {
-                        if (data[i][colid[j]]) {
-                            dataarr.push('<div style="text-align:center;color:green"><b>Enabled</b></div>');
+                        if (data[i].Status === 7) {
+                            dataarr.push(
+                                '<div style="text-align:center">' + 
+                                '<button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button>' + 
+                                '<button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 80px; margin-left: 10px; margin-right: 10px;" id="updateButton">Update</button>' + 
+                                '</div>');
                         } else {
-                            dataarr.push('<div style="text-align:center;color:red"><b>Disabled</b></div>');
+                            dataarr.push('<div style="text-align:center"><button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button></div>');
                         }
+                    } else if (colid[j] == 'Status') {
+                        switch (data[i].Status) {
+                            case 0:
+                                dataarr.push('<div style="text-align:center;color:#088C08"><b>Active</b></div>');
+                                break;
+                            case 1:
+                                dataarr.push('<div style="text-align:center;color:#FF6308"><b>Expiring</b></div>');
+                                break;
+                            case 2:
+                                dataarr.push('<div style="text-align:center;color:#FF0808"><b>Expired</b></div>');
+                                break;
+                            case 3:
+                                dataarr.push('<div style="text-align:center;color:#72918E"><b>Renewed</b></div>');
+                                break;
+                            case 4:
+                                dataarr.push('<div style="text-align:center;color:#68233D"><b>Pre-Term</b></div>');
+                                break;
+                            case 5:
+                                dataarr.push('<div style="text-align:center;color:#080808"><b>Terminated</b></div>');
+                                break;
+                            case 6:
+                                dataarr.push('<div style="text-align:center;color:#077A88"><b>Pending</b></div>');
+                                break;
+                            case 7:
+                                dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Returned</b></div>');
+                                break;
+                            default:
+                                dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Error Status</b></div>');
+                                break;
+                        }   
                     } else if (colid[j] == 'geoLocation') {
                         //dataarr.push('<div style="text-align:center"><a href="https://www.google.com/maps/place/' + data[i][colid[j]] + '" target="_blank">' + data[i][colid[j]] + '</a></div>');
                         dataarr.push('<div style="text-align:center"><button class="btn btn-success-sm" onclick="showiFrame(\'' + data[i][colid[j]] + '\')">' + data[i][colid[j]] + '</a></div>');
@@ -357,7 +386,8 @@ function updateLandownerData(data, id, name, status) {
     showModal();
     ModalSize('xl');
 
-    var title = 'Update ' + data + ' <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
+    // var title = 'Update ' + data + ' <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
+    var title = 'Update Land Contract <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
@@ -393,7 +423,7 @@ function viewLandcontractData(data, id, name, status) {
     console.log('trouble view land contract data 3', status);
     showModal();
     ModalSize('xl');
-    var title = 'View ' + data + ' <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
+    var title = 'View Contract <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
@@ -715,13 +745,14 @@ function viewContractInfoData(sourceContract, filter) {
                     $('.name').text(viewContract.contractdata.Fullname);
                     $('.landdocument').text(viewContract.landinformationdata.Document);
                     $('.landlotnumber').text(viewContract.landinformationdata.LotNumber);
+                    $('.LandContractCode').text(viewContract.contractdata.LandContractCode);
 
                     if (viewContract.landinformationdata.WithCoOwner == true) {
                         $('.hideCoOwner').show();
-                        $('.CoOwner').val(viewContract.landinformationdata.CoOwner);
+                        $('.CoOwner').text(viewContract.landinformationdata.CoOwner);
                     } else {
                         $('.hideCoOwner').hide();
-                        $('.CoOwner').val('');
+                        $('.CoOwner').text('');
                     }
 
                     if (viewContract.contractdata.RepresentativeName == '') {
