@@ -721,7 +721,7 @@
                     tablearr.push('<div style="text-align:center">' + data[i].id + '</div>');
                     // tablearr.push('<input type="text" style="width: 100%;border:1px;" hidden  class="date updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date" value="' + moment(data[i].Payment_date ).format('MM/DD/YYYY') + '">');
                     tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="date_end updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date_end + '" value="' + data[i].date_of_payment + '">');
-                    tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Unpaid">Unpaid</option><option value="Paid">Paid</option><option value="Paid">Advance Payment Paid</option></select>');
+                    tablearr.push('<select style="border:1px; background-color:#FFFFFF; width: 175px;" class="remarks selection updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Unpaid">Unpaid</option><option value="Paid">Paid</option><option value="Advance Payment Paid">Advance Payment Paid</option></select>');
 
                     // tablearr.push(data[i].remarks);
                     console.log(data[i].remarks == 'Paid');
@@ -731,6 +731,7 @@
                     tablerow.push(tablearr);
                 }
                 $("#tbl_PaymentSchedule").DataTable().rows.add(tablerow).draw();
+                $('.selection').select2();
             }
         });
     }
