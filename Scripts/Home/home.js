@@ -151,7 +151,7 @@ function approvedContractmodal(sourceContract, id, name) {
     console.log('modal name', name);
 
     showModal();
-    ModalSize('xl');
+    ModalSize('m');
     var title = 'Approve Remarks';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
                  '<button type="button" class="btn btn-success" onclick="approveRemarks(\'' + sourceContract + '\',\'' + id + '\')"> Save' + '</button >';
@@ -197,8 +197,58 @@ function approveRemarks(sourceContract, id) {
         }
     })
 }
-function returnedContractmodal() {
-    alert('returned');
+function returnedContractmodal(sourceContract, id, name) {
+    console.log('modal sourcedata', sourceContract);
+    console.log('modal id', id);
+    console.log('modal name', name);
+
+    showModal();
+    ModalSize('m');
+    var title = 'Return Remarks';
+    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
+                 '<button type="button" class="btn btn-success" onclick="returnRemarks(\'' + sourceContract + '\',\'' + id + '\')"> Save' + '</button >';
+    $('.modal-title').html(title);
+    $('.modal-footer').html(footer);
+    $.ajax({
+        url: $('#tbl_' + sourceContract).data('returnpage'),
+        type: 'post',
+        dataType: 'html',
+        success: function (htmlreturn) {
+            $('.modal-body').html(htmlreturn);
+            $('#name').text(name);
+        },
+        error: function () {
+            toastr.error('Error on fetching modal view!');
+        }
+    })
+}
+function returnRemarks(sourceContract, id) {
+    var status = 7;
+
+    $.ajax({
+        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updatePendingContracts',
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+            username: $("#username").val(),
+            token: $("#token").val(),
+            dataSource: sourceContract,
+            sysapp: sysapp,
+            Status: status,
+            LandContractCode: id,
+            approvedRemarks: $('#returnRemarks').val()
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            console.log('return',data);
+            hideModal();
+            getSysAllContractInfoData(sourceContract);
+        },
+        error: function () {
+            toastr.error('Error on updating data!');
+            stopLoading();
+        }
+    })
 }
 function viewLandcontractData(data, id, name, status) {
     showModal();

@@ -132,7 +132,7 @@ function saveLandContractData(sourceContract) {
             inputDataNewContract['StartDate'] = start_lease;
             inputDataNewContract['EndDate'] = end_lease;
             inputDataNewContract['LeaseTerm'] = $(".terms").val(),
-                inputDataNewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
+            inputDataNewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
             inputDataNewContract['AdvancePayment'] = advancepayment;
             inputDataNewContract['StartOfPayment'] = startpayment;
             inputDataNewContract['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
@@ -163,7 +163,7 @@ function saveLandContractData(sourceContract) {
             inputDataRenewContract['StartDate'] = start_lease;
             inputDataRenewContract['EndDate'] = end_lease;
             inputDataRenewContract['LeaseTerm'] = $(".terms").val(),
-                inputDataRenewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
+            inputDataRenewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
             inputDataRenewContract['AdvancePayment'] = advancepayment;
             inputDataRenewContract['StartOfPayment'] = startpayment;
             inputDataRenewContract['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
@@ -315,10 +315,15 @@ function getSysAllContractInfoData(sourceContract) {
                 var dataarr = [];
                 for (var j in colid) {
                     if (colid[j] == 'id') {
-
-                        // dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
-                        // dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;" disabled>-</buttons></div>');
-                        dataarr.push('<div style="text-align:center"><button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 60px;">View</button></div>');
+                        if (data[i].Status === 7) {
+                            dataarr.push(
+                                '<div style="text-align:center">' + 
+                                '<button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button>' + 
+                                '<button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 80px; margin-left: 10px; margin-right: 10px;" id="updateButton">Update</button>' + 
+                                '</div>');
+                        } else {
+                            dataarr.push('<div style="text-align:center"><button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button></div>');
+                        }
                     } else if (colid[j] == 'Status') {
                         switch (data[i].Status) {
                             case 0:
@@ -381,7 +386,8 @@ function updateLandownerData(data, id, name, status) {
     showModal();
     ModalSize('xl');
 
-    var title = 'Update ' + data + ' <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
+    // var title = 'Update ' + data + ' <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
+    var title = 'Update Land Contract <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
