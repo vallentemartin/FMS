@@ -1081,18 +1081,39 @@
     });
     function totalYrs()
     {
-        sum_yrs = 0;
+        // sum_yrs = 0;
+        // for (var x in dataforsaving) {
+        //     if($('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]').val() == undefined)
+        //     {
+        //         $('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]').val(0);
+        //     }
+        //    sum_yrs += parseInt($('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]').val());
+        //    console.log(sum_yrs);
+        //    $('.totalyrs').val(parseInt(sum_yrs));
+        //     $('.totalyrs').text(sum_yrs);
+        // }
+        var sum_yrs = 0;
+
         for (var x in dataforsaving) {
-            if($('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]').val() == undefined)
-            {
-                $('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]').val(0);
+            // Select the element based on data-rowid and data-colid attributes
+            var elem = $('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]');
+
+            // Check if the element exists and get its value, otherwise set to 0
+            var val = elem.val();
+            if (val === undefined || val === '') {
+                elem.val(0);
+                val = '0'; // Ensure val is a string '0' for parsing
             }
-           sum_yrs += parseInt($('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]').val());
-           console.log(sum_yrs);
-           $('.totalyrs').val(parseInt(sum_yrs));
+            // Parse the value as an integer
+            var intVal = parseInt(val);
+            if (isNaN(intVal)) {
+                intVal = 0; // Default to 0 if parsing failed
+            }
+            sum_yrs += intVal;
+            console.log(sum_yrs);
+            $('.totalyrs').val(sum_yrs);
             $('.totalyrs').text(sum_yrs);
         }
-        
     }
      $('#tbl_Escalation').on('apply.daterangepicker','.lease', function() {
         var lease_period = $('#lease_period').val().split(' - ');
@@ -1156,9 +1177,6 @@
             
            
             // console.log($('[data-rowid="' + rowid + '"][data-colid="startterm"]').val(end_term + ' - ' +  lease_period[1]));
-            
-            
-            
     });
 
     $('#tbl_Escalation').on('click','.deleteRow', function(){
