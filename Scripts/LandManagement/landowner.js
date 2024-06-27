@@ -94,7 +94,7 @@ function addLandownerData(data) {
 function saveLandownerData(sourceLandowner) {
     var fields = $('.triggerlandowner');
     var fieldID = [];
-    var inputData = {};
+    var inputDataIndividual = {};
     var inputDataCollection = {};
     var inputDataCompany = {};
     var lastname = '';
@@ -111,36 +111,39 @@ function saveLandownerData(sourceLandowner) {
 
     console.log('fields', fields);
     console.log('fields ID', fieldID);
+    console.log($('#companynumber').val());
 
-    lastname = $('#idvllastname').val() == '' ? $('#company').val() : $('#idvllastname').val();
-    contactnumber = $('#idvlcontactnumber').val() == '' ? $('#companynumber').val() : $('#idvlcontactnumber').val();
-    address = $('.idvladdress').val() == '' ? $('.companyaddress').val() : $('.idvladdress').val();
+    lastname = $('#idvllastname').val() == '' ? $('#companylastname').val() : $('#idvllastname').val();
+    address = $('#idvladdress').val() == '' ? $('#companyaddress').val() : $('#idvladdress').val();
     remarks = $('#idvlremarks').val() == '' ? $('#companyremarks').val() : $('#idvlremarks').val();
     console.log('last name', lastname);
-    console.log('contact number', contactnumber);
     console.log('remarks', remarks);
     console.log('address', address);
+    // console.log('suffix', suffix);
 
     if (confirm('Save Landowner data?')) {
+        console.log('save lastname',lastname);
         inputDataCollection['username'] = $("#username").val();
         inputDataCollection['token'] = $("#token").val();
         inputDataCollection['dataSource'] = sourceLandowner;
         inputDataCollection['sysapp'] = sysapp;
-        inputData['LastName'] = lastname;
-        inputData['ContactNumber'] = contactnumber;
-        inputData['remarks'] = remarks;
-        inputData['cityCode'] = $('.cityCode').val();
-        inputData['barangayCode'] = $('.barangayCode').val();
+        inputDataIndividual['LastName'] = lastname;
+        inputDataIndividual['ContactNumber'] = '+' + $('#idvlcontactnumber').val();
+        inputDataIndividual['remarks'] = remarks;
+        // inputData['Suffix'] = suffix;
+        inputDataIndividual['cityCode'] = $('.cityCode').val();
+        inputDataIndividual['barangayCode'] = $('.barangayCode').val();
         inputDataCompany['LastName'] = lastname;
-        inputDataCompany['ContactNumber'] = contactnumber;
+        inputDataCompany['ContactNumber'] = '+' + $('#companynumber').val();
         inputDataCompany['Address'] = address;
         inputDataCompany['remarks'] = remarks;
         for (var j in fieldID) {
-            inputData[fieldID[j]] = $('.triggerlandowner.' + fieldID[j]).val();
+            inputDataIndividual[fieldID[j]] = $('.triggerlandowner.' + fieldID[j]).val();
             $('.triggerlandowner.' + fieldID[j]).val('');
         }
-        inputDataCollection['inputData'] = $('.checkCompany').is(":checked") == false ? inputData : inputDataCompany
+        inputDataCollection['inputData'] = $('input[name=ownertypeRadio]:checked', '#selectownertype').val() == 'individual' ? inputDataIndividual : inputDataCompany;
         console.log('Landowner Data',inputDataCollection);
+        
         $.ajax({
             url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/saveSysData',
             type: 'post',
@@ -148,9 +151,12 @@ function saveLandownerData(sourceLandowner) {
             data: JSON.stringify(inputDataCollection),
             contentType: "application/json; charset=utf-8",
             success: function (data) {
+                console.log(data);
                 if (data.retval == 1) {
                     getSysAllLandownerData(sourceLandowner);
                     toastr.success('Data added!');
+                    clearSelection('.GenderCode, .CivilStatusCode, .provinceCode, .cityCode, .barangayCode');
+                    $('.LastName, .ContactNumber, .Address, .remarks, .FirstName, .MiddleName, .Suffix, .BirthDate, .Nationality, .Email').val('');
                     hideModal();
                 } else {
                     toastr.error('Duplicate code!');
@@ -163,6 +169,9 @@ function saveLandownerData(sourceLandowner) {
             }
         })
     }
+}
+function clearSelection(e) {
+    $(e).select2('destroy').val('').select2();
 }
 /**
  * Description: This function triggers the select:option of data input.
@@ -365,16 +374,12 @@ function getSysLandownerData(sourceLandowner, filter) {
         success: function (data) {
             console.log('data update', data);
 
-            if ( data.CountryCode != 608 ) {
-                $('#addressLabel').hide();
-                $('#addressTextArea').hide();
-                $('#hideSelect').hide();
-            }
-
             if ( data.FirstName == null ) {
+                $('#selectType').text('Company Information')
                 $('.hideIndividual').hide()
                 $('.hideCompany').show()
             } else {
+                $('#selectType').text('Individual Information')
                 $('.hideIndividual').show()
                 $('.hideCompany').hide()
             }

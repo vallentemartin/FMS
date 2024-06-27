@@ -114,9 +114,8 @@
             </div>
             <div class="card-body">
                 <div class="col-md-12">
-                    <div class="row">
+                    <div class="row" style="overflow: auto;" >
                         <div class="card-body">
-                            <!-- insert: table starts here -->
                             <div class="row">
                                 <div class="col-md-4 form-group">
                                     <label>Lease Period</label>
@@ -167,14 +166,94 @@
                                 </div>
                             </div>
                             <div class="row">
-                            </div>
-                            <div class="row">
                                 <div class="col-md-12">
                                     <input hidden type="text" id="StartDate">
                                     <input hidden type="text" id="EndDate">
                                     <input hidden type="text" id="LandContractCode">
                                 </div>
                             </div>
+                            <div class="row">
+                                <!-- insert table start -->
+                                <div class="col-md-12">
+                                    <label for="Escalation">Payment Escalation</label>
+                                    <table id="tbl_Escalation" class="table table-bordered table-striped table-sm"
+                                        style="width:100%">
+                                        <thead>
+                                            <tr style="text-align:center">
+                                                <!-- <th hidden class="Payment_date">Payment_date</th> -->
+                                                <th class="date_of_payment">Date</th>
+                                                <th class="years">Years</th>
+                                                <th class="Rate">Rate</th>
+                                                <th class="Num_of_has">Hectares</th>
+                                                <th class="Rate_per_year">Annual Rate</th>
+                                                <th class="Total_rate">Contract Rate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbl_Users-data">
+                                        </tbody>
+                                    </table>
+                                    <tfoot>
+                                        <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth" style="margin-top: 20px;">Total
+                                                            Rental:</label>
+                                                        <span class="Total_rental"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Advance Payment:</label>
+                                                        <span class="advance_payment_amount"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Remaining Rental:</label>
+                                                        <span class="Remaining_rental"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Years Divided:</label>
+                                                        <span class="yrsdivided"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Gross Annual Rental:</label>
+                                                        <span class="Payment_Amount"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </tfoot>
+                                </div>
+                            </div>
+                                <!-- insert table end -->
+                           
+                               <div class="row" style="margin-top:40px;">
+                                   <!-- insert table start -->
+                                   <div class="col-md-12">
+                                       <label for="PaymentSched">Payment Schedule</label>
+                                       <table id="tbl_PaymentSched" class="table table-bordered table-striped table-sm"
+                                           style="width:100%">
+                                           <thead>
+                                               <tr style="text-align:center">
+                                                   <!-- <th hidden class="id">Term</th> -->
+                                                   <th class="Payment_date" style="width:160px;">Payment Schedule</th>
+                                                   <th class="remarks" style="width:160px;">Status</th>
+                                                   <th class="Amount">Gross Annual Rental</th>
+                                                   <th class="Amount">Net Annual Rental</th>
+                                                   <th class="Cv_num">Check Voucher Number</th>
+                                                   <th class="Cr_num">CR number</th>
+                                                   <th class="Posting_date">Encashment Date</th>
+                                                   <!-- <th class="filename">Attachment</th>
+                                                   <th class="file hide_column">test</th> -->
+                                               </tr>
+                                           </thead>
+                                           <tbody id="tbl_Users-data">
+                                           </tbody>
+                                       </table>
+                                       <tfoot>
+                                           <!-- <button type="button" style="margin:2px;" class="btn btn-success"
+                                               onclick="saveData()"> Save</button> -->
+                                       </tfoot>
+                                   </div>
+                                   <!-- insert table end -->
+                               </div>
+                              
                         </div>
                     </div>
                 </div>
@@ -185,63 +264,7 @@
         </div>
     </div>
 </section>
-<section>
-    <div class="container-fluid">
-        <div class="card card-lightblue">
-            <div class="card-header">
-                <h3 class="card-title">Contract Payment Schedule</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    @*<button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>*@
-                </div>
-            </div>
-            <div class="card-body">
-    <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="card-body">
-                        <table id="tbl_PaymentSched" class="table table-bordered table-striped table-sm"
-                            style="width:100%" data-editpage="pages/masterdata/modalpages/area_update"
-                            data-addpage="pages/masterdata/modalpages/area_add">
-                            <thead>
-                                <tr style="text-align:center">
-                                    <!-- <th hidden class="id">Term</th> -->
-                                    <th class="Payment_date" style="width:160px;">Payment Schedule</th>
-                                    <th class="remarks"  style="width:160px;">Status</th>
-                                    <th class="Amount">Rate/Amount</th>
-                                    <th class="Cv_num">Check Voucher Number</th>
-                                    <th class="Cr_num">CR number</th>
-                                    <th class="Posting_date">Date Posted</th>
-                                    <th class="filename">Attachment</th>
-                                    <th class="file hide_column">test</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbl_Users-data">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="row">
-                    <button type="button" style="margin:2px;" class="btn btn-success" onclick="saveData()">
-                        Save</button>
-                    <!-- <button type="button" style="margin:2px;" class="btn btn-success" onclick="updatetable()"> Edit</button> -->
-                    <!-- <button type="button" style="margin:2px;" class="btn btn-success" onclick="updatetable()">Exit</button> -->
-                </div>
-            </div>
-    </div>
-            <!-- <div class="card-footer">
-                
-            </div> -->
-           
-        </div>
-    </div>
-</section>
+
 
 <script>
     var dataSource = 'ContractMain';
@@ -250,17 +273,21 @@
     var dataforsaving = [];
     var dataupload = [];
     initDataTablesPaymentSched();
+    initDataTablesEscalation();
     getSysData(dataSource, dataSourceIdCol);
     viewContractInfoData(sourceContract, dataSourceIdCol);
     getPaymentSched();
+    getEscalation();
+    $('.yrsdivided').prop('disabled', false);
+
     function initDataTablesPaymentSched() {
         var table = $('#tbl_PaymentSched').DataTable({
-            columnDefs:[
-                {
-                    targets:[7],
-                    className:"hide_column"
-                }
-            ],
+            // columnDefs:[
+            //     {
+            //         targets:[8],
+            //         className:"hide_column"
+            //     }
+            // ],
             language: {
                 sSearch: "",
                 searchPlaceholder: "Search records"
@@ -281,6 +308,71 @@
         }).buttons().container().appendTo('#tbl_PaymentSched' + '_wrapper .col-md-6:eq(0)');
         $('#tbl_PaymentSched' + '_paginate').css('font-size', 'smaller').css('float', 'right');
         $('#tbl_PaymentSched' + '_filter').css('float', 'right');
+    }
+
+    function initDataTablesEscalation() {
+        var table = $('#tbl_Escalation').DataTable({
+            language: {
+                sSearch: "",
+                searchPlaceholder: "Search records"
+            },
+            selected: true,
+            paging: false,
+            lengthChange: false,
+            searching: false,
+            ordering: true,
+            info: false,
+            autoWidth: false,
+            responsive: true,
+            lengthMenu: [
+                [10, 25, 50, 100],
+                ['10 rows', '25 rows', '50 rows', '100 rows']
+            ],
+
+        }).buttons().container().appendTo('#tbl_PaymentSched' + '_wrapper .col-md-6:eq(0)');
+        $('#tbl_Escalation' + '_paginate').css('font-size', 'smaller').css('float', 'right');
+        $('#tbl_Escalation' + '_filter').css('float', 'right');
+    }
+
+    function getEscalation() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getLDMSescalation',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                LandContractCode: $('.selectedid').data('id'),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log('sakpan', data);
+                var datarow = [];
+                $('#tbl_Escalation').DataTable().clear().draw();
+                $('.Total_rental').text(data[0].Rent_Total.toLocaleString());
+                $('.advance_payment_amount').text(data[0].AmountOfAdvancePayment.toLocaleString());
+                $('.Remaining_rental').text(data[0].Remaining_Rental.toLocaleString());
+                $('.yrsdivided').text(data[0].YearsDivided);
+                $('.Payment_Amount').text(data[0].Gross_Annual_Payment.toLocaleString());
+                for (var i in data) {
+                    var dataarr = [];
+                    dataarr.push('<div style="text-align:center">' + data[i].TermDate + '</div>');
+                    dataarr.push('<div style="text-align:center">' + data[i].Years + '</div>');
+                    dataarr.push('<div style="text-align:center">' + data[i].Rate + '</div>');
+                    dataarr.push('<div style="text-align:center">' + data[i].Num_of_has + '</div>');
+                    dataarr.push('<div style="text-align:center">' + data[i].Rate_per_year + '</div>');
+                    dataarr.push('<div style="text-align:center">' + data[i].Total_rate + '</div>');
+                    datarow.push(dataarr);
+                }
+                $('#tbl_Escalation').DataTable().rows.add(datarow).draw();
+                // hidedatatablesLoader(sourceContract);
+            },
+            error: function () {
+                toastr.error('Error on Fetching Data!');
+                hidedatatablesLoader(sourceContract);
+            }
+        })
     }
 
     function getPaymentSched() {
@@ -310,9 +402,9 @@
                 var month = dtToday.getMonth() + 1;
                 var day = dtToday.getDate();
                 var year = dtToday.getFullYear();
-                if(month < 10)
+                if (month < 10)
                     month = '0' + month.toString();
-                if(day < 10)
+                if (day < 10)
                     day = '0' + day.toString();
                 var maxDate = year + '-' + month + '-' + day;
 
@@ -325,57 +417,76 @@
                     var tablearr = [];
                     data[i].id = id++;
                     tablearr.push('<input type="text" disabled style="width: 100%;border:1px; background-color:#e9ecef;"  class="date_end  form-control form-control-sm updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date_end + '" value="' + data[i].Payment_date + '">');
-                    if (data[i].remarks == 'Advance Payment Paid' && data[i].Amount != 0 && data[0].Cv_num == null) {
-                        // tablearr.push('<input readonly style="border:1px; background-color:#eaeaea;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                        tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Advance Payment Paid">' + data[i].remarks + '</option></select>');
-                        // tablearr.push('<input readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="remarks updatedcell" data-rowid="' + data[i].id + '" value="Advance Payment Paid">');
-                        tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" >');
-                        tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
-                        // tablearr.push('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="far fa-calendar-alt"></i></span></div><input type="text" class="reservation reservationdate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date"></div>');
-                        tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost txtDate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
+                    // if (data[i].remarks == 'Advance Payment Paid' && data[i].Amount != 0 && data[0].Cv_num == null) {
+                    //     // tablearr.push('<input readonly style="border:1px; background-color:#eaeaea;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
+                    //     tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Advance Payment Paid">' + data[i].remarks + '</option></select>');
+                    //     // tablearr.push('<input readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="remarks updatedcell" data-rowid="' + data[i].id + '" value="Advance Payment Paid">');
+                    //     tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                    //     tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" >');
+                    //     tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
+                    //     // tablearr.push('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="far fa-calendar-alt"></i></span></div><input type="text" class="reservation reservationdate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date"></div>');
+                    //     tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost txtDate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
 
-                    } else if (data[i].remarks == 'Advance Payment Paid' && data[i].Amount == 0) {
-                        tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef; " class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
-                        tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="datepost form-control form-control-sm" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
-                        tablearr.push('<input readonly style="width: 100%; height:100%;border:1px;" class="Init_Filename form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="text" />');
-                    } else if (data[i].remarks == 'Advance Payment Paid' && data[0].Cv_num != null) {
+                    // } else 
+                    if (data[i].modifiedby) {
+                        console.log(data[i].modifiedby);
+                        // tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
+                        // tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef; " class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        // tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
+                        // tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
+                        // tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="datepost form-control form-control-sm" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
+                        // tablearr.push('<input readonly style="width: 100%; height:100%;border:1px;" class="Init_Filename form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="text" />');
                         tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
                         tablearr.push('<input type="text"  readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" value="' + data[i].NetRental + '">');
                         tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
                         tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '">');
                         tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
-                        tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
-
-
+                        // tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
+                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px; background-color:#e9ecef;">');
+                    // } else  if (data[i].remarks == 'Paid') {
+                    //     console.log(data[i].Posting_date);
+                    //     tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
+                    //     tablearr.push('<input type="text"  readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                    //     tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" value="' + data[i].NetRental + '">');
+                    //     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
+                    //     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '">');
+                    //     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
+                    //     // tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
+                    //     tablearr.push('<input type="text" disabled style="width: 100%;border:1px; background-color:#e9ecef;">');
                     } else if (data[i].remarks == 'Paid') {
                         tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '" value="' + data[i].remarks + '">');
                         tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '" >');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;"  class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
-                        tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
+                        tablearr.push('<input type="text"  style="width: 100%;border:1px;  background-color:#FFFFFF;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" placeholder="0.00">');
+                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
+                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num">');
+                        tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost txtDate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
+                       // tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
+                        // tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '" >');
+                        // tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;"  class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
+                        // tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
                     } else {
-                        tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Paid">' + data[i].remarks + '</option><option data-remarks="' + data[i].remarks + '" value="Paid">Paid</option><option value="Unpaid">Unpaid</option></select>');
-                        tablearr.push('<input type="text" disabled style="width: 100%;border:1px;  background-color:#e9ecef;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<select style="border:1px; background-color:#FFFFFF; width: 175px;" class="remarks selection updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Unpaid">Unpaid</option><option data-remarks="' + data[i].remarks + '" value="Paid">Paid</option></select>');
+                        tablearr.push('<input type="text"  style="width: 100%;border:1px;  background-color:#FFFFFF;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" placeholder="0.00">');
+                        tablearr.push('<input type="text"  style="width: 100%;border:1px;  background-color:#FFFFFF;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" placeholder="0.00">');
                         tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
                         tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num">');
                         // tablearr.push('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="far fa-calendar-alt"></i></span></div><input type="text" class="reservation form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date"></div>');
                         tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost txtDate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
-                    }
+                                          
+                   }
+                    
                     // tablearr.push(data[i].modifiedby);
                     // tablearr.push(data[i].modifiedon);
                     // tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="status updatedcell " data-rowid="' + data[i].id + '" data-colid="status" value="' + data[i].status + '">');
-                    tablearr.push('<input id="fileUploader"  class="Init_Filename form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="file" />');
-                    tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="file form-control form-control-sm updatedcell" id="fileupload"  data-rowid="' + data[i].id + '" data-colid="file" >');
+                    // tablearr.push('<input class="file-input updatedcell form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="file" />');
+                    // tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;"  class="fileUpload form-control form-control-sm updatedcell"  data-rowid="' + data[i].id + '" data-colid="file">');
                     tablerow.push(tablearr);
                 }
 
                 $('#tbl_PaymentSched').DataTable().rows.add(tablerow).draw();
                 $('.txtDate').attr('max', maxDate);
+                $('.selection').select2(); 
                 // $('.reservation').daterangepicker({
                 //     singleDatePicker: true,
                 //     showDropdowns: true,
@@ -387,28 +498,23 @@
             }
         })
     }
+
     function viewAttachment(file) {
-        window.open('http://uploads.lapanday.com:1263/' + file, 'ExampleWindow', 'width=1200, height=800');
+        window.open('http://uploads.lapanday.com:1263/' + file, 'View', 'width=1200, height=800');
         //  window.open('/F:/LDMS_Attachements/' + file , 'ExampleWindow', 'width=1200, height=800');
     }
 
     function saveData() {
-        
-
         if (confirm('Do you want to save changes?')) {
             // var test = $('[data-rowid=' + dataupload[z].rowid + '][data-colid="filename"]').val(dataupload[z].filename);
             for (var x in dataforsaving) {
-                if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="file"]').val() == '') 
-                {
+                if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="file"]').val() == '') {
                     toastr.error("Please add attachement");
-                } else if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="Cr_num"]').val() == '') 
-                {
+                } else if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="Cr_num"]').val() == '') {
                     toastr.error("Please add CR_num");
-                } else if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="Cv_num"]').val() == '') 
-                {
+                } else if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="Cv_num"]').val() == '') {
                     toastr.error("Please add CV_num");
-                } else 
-                {
+                } else {
                     $.ajax({
                         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updatePaymentSchedule',
                         type: 'post',
@@ -420,9 +526,9 @@
                             amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
                             Cv_num: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Cv_num"]').val(),
                             Cr_num: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Cr_num"]').val(),
+                            netrental: $('[data-rowid=' + dataforsaving[x] + '][data-colid="netrental"]').val(),
                             date: $('[data-rowid=' + dataforsaving[x] + ']').data('payment_date'),
                             Posting_date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Posting_date"]').val(),
-                            filename: $('[data-rowid=' + dataforsaving[x] + '][data-colid="file"]').val(),
                             username: $("#username").val(),
                             token: $("#token").val(),
                             sysapp: sysapp
@@ -438,93 +544,37 @@
                         }
                     })
                 }
-
-                
             }
-
         } else {
-        toastr.error('Cancelled!');
-
+            toastr.error('Cancelled!');
+        }
     }
-    }
-
-      $('#tbl_PaymentSched').on('change','#fileUploader' ,function() {
-        // Get the selected file
-            var input = this.files;
-            // Get the data-id attribute
-            var dataId = $(this).data('rowid');
-            console.log(input && input.length > 0);
-            if (input && input.length > 0) {
-                var formData = new FormData();
-                for (var i = 0; i < input.length; i++) {
-                    console.log(input[i]);
-                    formData.append("file" + i, input[i]);
-                }
-                formData.append('username', $("#username").val());
-                formData.append('token', $("#token").val());
-                formData.append('dataSource' , dataSource);
-                formData.append('sysapp' , sysapp);
-            }
-            $.ajax({
-                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
-                type: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    for (var i in data) {
-                        var name = data[i].name;
-                        var filename = data[i].filename;
-                        var extension = data[i].extension;
-                        console.log(dataId,name, filename, extension);
-                        saveNewUploadedFile(name, filename,extension,dataSource);
-                        $('#fileupload').val(filename);
-                        dataforsaving.push(dataId);
-                        console.log(dataforsaving);
-                    }
-                    console.log(dataupload);
-                },
-                error: function () {
-                    // File upload error handling
-                    console.log("err");
-                }
-            });
-
-        });
-
-
     $('#tbl_PaymentSched').on('change', '.updatedcell', function () {
         var table = $('#tbl_PaymentSched').DataTable();
-        console.log(dataforsaving);
-        console.log($(this).data('rowid'));
+        // console.log(dataforsaving);
+        // console.log($(this).data('rowid'));
         if (jQuery.inArray(($(this).data('rowid')), dataforsaving) == -1) {
             dataforsaving.push($(this).data('rowid'));
         }
     });
 
 
-//END Save File To Directory
-
-// Safe File To Database by dgcastillo
-
-function saveNewUploadedFile(name, filename, extension,dataSource) {
-    var fields = $('.triggerdetail');
-    var fieldID = [];
-    var inputData = {};
-    var inputDataCollection = {};
-    //var file_name = $('input[type=file]')[0].files;
-    inputDataCollection['username'] = $("#username").val();
-    inputDataCollection['token'] = $("#token").val();
-    inputDataCollection['dataSource'] = dataSource;
-    inputDataCollection['sysapp'] = sysapp;
-    // inputData['username'] = $("#username").val(),
-    //inputData['route_code']  = $('.pagelink.active').data('bcrumbs');
-    inputData['Init_Filename'] = name;
-    inputData['Sys_Filename'] = filename;
-    inputData['extension'] = extension;
-    inputData['Sys_AppsId'] = sysapp;
-    inputData['route_code'] = $('.pagelink.active').attr("class").split(' ')[1];
-    // if (confirm('Save this data?')) {
+    // Safe File To Database by dgcastillo
+    function saveNewUploadedFile(name, filename, extension, dataSource) {
+        var fields = $('.triggerdetail');
+        var fieldID = [];
+        var inputData = {};
+        var inputDataCollection = {};
+        inputDataCollection['username'] = $("#username").val();
+        inputDataCollection['token'] = $("#token").val();
+        inputDataCollection['dataSource'] = dataSource;
+        inputDataCollection['sysapp'] = sysapp;
+        inputData['Init_Filename'] = name;
+        inputData['Sys_Filename'] = filename;
+        inputData['extension'] = extension;
+        inputData['Sys_AppsId'] = sysapp;
+        inputData['route_code'] = $('.pagelink.active').attr("class").split(' ')[1];
+        // if (confirm('Save this data?')) {
         inputDataCollection['inputData'] = inputData;
 
         console.log(inputDataCollection);
@@ -542,98 +592,401 @@ function saveNewUploadedFile(name, filename, extension,dataSource) {
                     toastr.error('Duplicate code!');
                     stopLoading();
                 }
-               // getSysAllDataUploads();
+                // getSysAllDataUploads();
             },
             error: function () {
                 toastr.error('Error on saving data!');
                 stopLoading();
             }
         })
-   // }
-}
-function viewContractInfoData(sourceContract, filter) {
-
-    startLoading();
-    var fields = $('.triggercontractinfoview');
-    var fieldID = [];
-    for (var x in fields) {
-        if (fields[x].className != undefined) {
-            var y = fields[x].className.split(' ');
-            fieldID.push(y[0]);
-        }
+        // }
     }
-    $.ajax({
-        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getSysData',
-        type: 'post',
-        dataType: 'json',
-        data: JSON.stringify({
-            username: $("#username").val(),
-            token: $("#token").val(),
-            dataSource: sourceContract,
-            filter: filter,
-            selectedID: $('.selectedid').data('id'),
-            sysapp: sysapp
-        }),
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-            var LandInformationCode = data.LandInformationCode;
-            // var LandContractCode = data.LandContractCode;
-            $.ajax({
-                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getContractInfoData',
-                type: 'post',
-                dataType: 'json',
-                data: JSON.stringify({
-                    data: data,
-                    LandInformationCode: LandInformationCode,
-                    username: $("#username").val(),
-                    token: $("#token").val(),
-                    sysapp: sysapp
-                }),
-                contentType: "application/json; charset=utf-8",
-                success: function (viewdata) {
-                    viewContract = {
-                        contractdata: data,
-                        landinformationdata: viewdata    
-                    };
-                    console.log('view data', viewContract);
 
-                    //view contract data
-                    $('.name').text(viewContract.contractdata.Fullname);
-                    $('.landdocument').text(viewContract.landinformationdata.Document);
-                    $('.landlotnumber').text(viewContract.landinformationdata.LotNumber);
-                    
-                    if ( viewContract.landinformationdata.WithCoOwner == true ) {
-                        $('.hideCoOwner').show();
-                        $('.CoOwner').val(viewContract.landinformationdata.CoOwner);
-                    } else {
-                        $('.hideCoOwner').hide();
-                        $('.CoOwner').val('');
-                    }
+    function viewContractInfoData(sourceContract, filter) {
 
-                    if ( viewContract.contractdata.RepresentativeName == '' ) {
-                        $('.hideRepresentativeLabel').hide();
-                    } else {
-                        $('.hideRepresentativeLabel').show();
-                        $('.RepName').text(viewContract.contractdata.RepresentativeName);
-                        $('.RepContactNumber').text(viewContract.contractdata.RepresentativeContactNumber);
-                        $('.RepEmail').text(viewContract.contractdata.RepresentativeEmail);
-                    }
-
-                    $('.province').text(viewContract.landinformationdata.provinceName);
-                    $('.city').text(viewContract.landinformationdata.cityName);
-                    $('.barangay').text(viewContract.landinformationdata.barangayName);
-                    $('.landtotalarea').text(viewContract.landinformationdata.Area);
-                    $('.landplantation').text(viewContract.contractdata.PlantationCode);
-                    $('.landcompany').text(viewContract.contractdata.CompanyCode + ' - ' + viewContract.contractdata.Companyname);
-                    $('.landcontractedarea').text(viewContract.contractdata.LandContractedArea);
-                }
-            })
-            stopLoading();
-        },
-        error: function () {
-            toastr.error('Data gathering error!');
-            stopLoading();
+        startLoading();
+        var fields = $('.triggercontractinfoview');
+        var fieldID = [];
+        for (var x in fields) {
+            if (fields[x].className != undefined) {
+                var y = fields[x].className.split(' ');
+                fieldID.push(y[0]);
+            }
         }
-    })
-}
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getSysData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                dataSource: sourceContract,
+                filter: filter,
+                selectedID: $('.selectedid').data('id'),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var LandInformationCode = data.LandInformationCode;
+                // var LandContractCode = data.LandContractCode;
+                $.ajax({
+                    url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getContractInfoData',
+                    type: 'post',
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        data: data,
+                        LandInformationCode: LandInformationCode,
+                        username: $("#username").val(),
+                        token: $("#token").val(),
+                        sysapp: sysapp
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (viewdata) {
+                        viewContract = {
+                            contractdata: data,
+                            landinformationdata: viewdata
+                        };
+                        console.log('view data', viewContract);
+
+                        //view contract data
+                        $('.name').text(viewContract.contractdata.Fullname);
+                        $('.landdocument').text(viewContract.landinformationdata.Document);
+                        $('.landlotnumber').text(viewContract.landinformationdata.LotNumber);
+
+                        if (viewContract.landinformationdata.WithCoOwner == true) {
+                            $('.hideCoOwner').show();
+                            $('.CoOwner').val(viewContract.landinformationdata.CoOwner);
+                        } else {
+                            $('.hideCoOwner').hide();
+                            $('.CoOwner').val('');
+                        }
+
+                        if (viewContract.contractdata.RepresentativeName == '') {
+                            $('.hideRepresentativeLabel').hide();
+                        } else {
+                            $('.hideRepresentativeLabel').show();
+                            $('.RepName').text(viewContract.contractdata.RepresentativeName);
+                            $('.RepContactNumber').text(viewContract.contractdata.RepresentativeContactNumber);
+                            $('.RepEmail').text(viewContract.contractdata.RepresentativeEmail);
+                        }
+
+                        $('.province').text(viewContract.landinformationdata.provinceName);
+                        $('.city').text(viewContract.landinformationdata.cityName);
+                        $('.barangay').text(viewContract.landinformationdata.barangayName);
+                        $('.landtotalarea').text(viewContract.landinformationdata.Area);
+                        $('.landplantation').text(viewContract.contractdata.PlantationCode);
+                        $('.landcompany').text(viewContract.contractdata.CompanyCode + ' - ' + viewContract.contractdata.Companyname);
+                        $('.landcontractedarea').text(viewContract.contractdata.LandContractedArea);
+                    }
+                })
+                stopLoading();
+            },
+            error: function () {
+                toastr.error('Data gathering error!');
+                stopLoading();
+            }
+        })
+    }
+
+
+
+
+
+
+////////////////////////////// uploading ///////////////////////
+
+// async function saveUpload() {
+    //     var fileInput = $('.file-input');
+    //     var dataforsaving = [];
+    //     var delay = 2000; // Delay in milliseconds (e.g., 1000ms = 1 second)
+
+    //     for (var i = 0; i < fileInput.length; i++) {
+    //         var formData = new FormData();
+    //         var file = fileInput[i].files[0];
+
+    //         if (file) {
+    //             formData.append('files[]', file, file.name);
+    //             formData.append('username', $("#username").val());
+    //             formData.append('token', $("#token").val());
+    //             formData.append('dataSource', dataSource);
+    //             formData.append('sysapp', sysapp);
+
+    //             try {
+    //                 await new Promise((resolve) => setTimeout(resolve, delay)); // Delay between requests
+
+    //                 $.ajax({
+    //                     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
+    //                     type: "POST",
+    //                     data: formData,
+    //                     processData: false,
+    //                     contentType: false,
+    //                     success: function (data) {
+    //                         for (var j in data) {
+    //                             var name = data[j].name;
+    //                             var filename = data[j].filename;
+    //                             var extension = data[j].extension;
+    //                             saveNewUploadedFile(name, filename,extension,dataSource);
+    //                             $('#fileupload').val(filename);
+    //                             dataforsaving.push(rowid);
+    //                             savePayment(filename);
+    //                             console.log(rowid);
+    //                         }
+                             
+    //                     },
+    //                     error: function () {
+    //                         console.log("err");
+    //                     }
+    //                 });
+    //             } catch (error) {
+    //                 console.error('Error in processing request:', error);
+    //             }
+    //         }
+    //     }
+    // }
+  
+    //     var fileuploaded = [];
+    //     var files = [];
+    //     var form = [];
+    //     var fileInput = $('.file-input');
+    //     // var file = fileInput.files[0];
+     
+    //     for (var i = 0; i < fileInput.length; i++) {
+    //         var formData = new FormData();
+    //         var file = fileInput[i].files[0];
+    //         var rowid  = $(this).data('rowid');
+    //         if(file)
+    //         {
+    //                  formData.append('files[]', file, file.name);
+    //                 formData.append('username', $("#username").val());
+    //                 formData.append('token', $("#token").val());
+    //                 formData.append('dataSource', dataSource);
+    //                 formData.append('sysapp', sysapp);
+
+    //                 $.ajax({
+    //                 url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
+    //                 type: "POST",
+    //                 data: formData,
+    //                 processData: false,
+    //                 contentType: false,
+    //                 success: function (data) {
+    //                     for (var i in data) {
+    //                         var name = data[i].name;
+    //                         var filename = data[i].filename;
+    //                         var extension = data[i].extension;
+    //                         // console.log(dataId, name, filename, extension);
+    //                         // saveNewUploadedFile(name, filename,extension,dataSource);
+    //                         $('#fileupload').val(filename);
+    //                         dataforsaving.push(rowid);
+    //                         console.log(dataforsaving);
+    //                         // savePayment();
+    //                     }
+    //                     console.log(rowid);
+    //                 },
+    //                 error: function () {
+    //                     // File upload error handling
+    //                     console.log("err");
+    //                 }
+    //             });  
+    //         }
+            
+    //     }
+        
+//         for (let j = 0; j < fileuploaded.length; j++) {
+//             const test = fileuploaded[j];
+//                 setTimeout(function() {
+//     // Your API call or other action here
+//     $.ajax({
+//                     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
+//                     type: "POST",
+//                     data: test,
+//                     processData: false,
+//                     contentType: false,
+//                     success: function (data) {
+//                         console.log(data);
+//                         // for (var i in data) {
+//                         //     var name = data[i].name;
+//                         //     var filename = data[i].filename;
+//                         //     var extension = data[i].extension;
+//                         //     // console.log(dataId, name, filename, extension);
+//                         //     // saveNewUploadedFile(name, filename,extension,dataSource);
+//                         //     $('#fileupload').val(filename);
+//                         //     dataforsaving.push(rowid);
+//                         //     console.log(dataforsaving);
+//                         //     // savePayment();
+//                         // }
+//                         // console.log(rowid);
+//                     },
+//                     error: function () {
+//                         // File upload error handling
+//                         console.log("err");
+//                     }
+//                 });  
+// }, 5000);
+                
+//         }
+        
+
+
+
+        // var fileuploaded = [];
+        // var files = [];
+        // var form = [];
+        // $('.file-input').each(function (index) {
+          
+            
+        //     var fileInput = this;
+        //     var file = fileInput.files[0];
+        //     var rowid  = $(this).data('rowid');
+        //     if (file) {
+        //          console.log(file);
+        //         // console.log(index);
+        //         var formData = new FormData();
+        //         formData.append('files[]', file, file.name);
+        //         formData.append('username', $("#username").val());
+        //         formData.append('token', $("#token").val());
+        //         formData.append('dataSource', dataSource);
+        //         formData.append('sysapp', sysapp);
+        //         form.push(formData);
+                
+        //         for (var i in form) {
+        //         $.ajax({
+        //             url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
+        //             type: "POST",
+        //             data: form[i],
+        //             processData: false,
+        //             contentType: false,
+        //             success: function (data) {
+        //                 for (var i in data) {
+        //                     var name = data[i].name;
+        //                     var filename = data[i].filename;
+        //                     var extension = data[i].extension;
+        //                     // console.log(dataId, name, filename, extension);
+        //                     // saveNewUploadedFile(name, filename,extension,dataSource);
+        //                     $('#fileupload').val(filename);
+        //                     dataforsaving.push(rowid);
+        //                     console.log(dataforsaving);
+        //                     // savePayment();
+        //                 }
+        //                 console.log(rowid);
+        //             },
+        //             error: function () {
+        //                 // File upload error handling
+        //                 console.log("err");
+        //             }
+        //         });  
+        //         }
+                
+        //     }
+        // });
+       
+          
+
+
+            
+        // var upload = [];
+    //  $('#tbl_PaymentSched').on('change', '#fileUploader', function (){
+        
+
+    //     console.log($(this).data('rowid'));
+    //     // Get the selected file
+    //     var input = this.files;
+    //     // Get the data-id attribute
+    //     var dataId = $(this).data('rowid');
+
+    //     var formData = new FormData();
+    //     var arrupload = [];
+
+    //     if (input && input.length > 0) {
+
+    //         for (var i = 0; i < input.length; i++) {
+    //             // console.log(input[i]);
+    //             formData.append("file" + i, input[i]);
+    //             arrupload.push(input[i]);
+    //         }
+    //         console.log(formData);
+    //         upload.push(arrupload,dataId);
+
+    //         formData.append('username', $("#username").val());
+    //         formData.append('token', $("#token").val());
+    //         formData.append('dataSource', dataSource);
+    //         formData.append('sysapp', sysapp);
+    //     }
+    //     console.log(upload);
+    //     // $.ajax({
+    //     //     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
+    //     //     type: "POST",
+    //     //     data: formData,
+    //     //     processData: false,
+    //     //     contentType: false,
+    //     //     success: function (data) {
+    //     //         for (var i in data) {
+    //     //             var name = data[i].name;
+    //     //             var filename = data[i].filename;
+    //     //             var extension = data[i].extension;
+    //     //             console.log(dataId,name, filename, extension);
+    //     //             // saveNewUploadedFile(name, filename,extension,dataSource);
+    //     //             $('#fileupload').val(filename);
+    //     //             dataforsaving.push(dataId);
+    //     //             console.log(dataforsaving);
+    //     //         }
+    //     //         console.log(dataupload);
+    //     //     },
+    //     //     error: function () {
+    //     //         // File upload error handling
+    //     //         console.log("err");
+    //     //     }
+    //     // });
+    // });
+    //         console.log(rowid);
+    //     // Get the selected file
+    //         var input = this.files;
+    //         // Get the data-id attribute
+            
+    //         var dataId = rowid;
+            
+    //         var formData = new FormData();
+    //         var arrupload = [];
+            
+    //         if (input && input.length > 0) {
+                
+    //             for (var i = 0; i < input.length; i++) {
+    //                 // console.log(input[i]);
+    //                 formData.append("file" + i, input[i]);
+    //                 arrupload.push(input[i]);
+    //             }
+    //            upload.push(arrupload);
+             
+    //             formData.append('username', $("#username").val());
+    //             formData.append('token', $("#token").val());
+    //             formData.append('dataSource' , dataSource);
+    //             formData.append('sysapp' , sysapp);
+                
+    //         }
+    //         // $.ajax({
+    //         //     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
+    //         //     type: "POST",
+    //         //     data: formData,
+    //         //     processData: false,
+    //         //     contentType: false,
+    //         //     success: function (data) {
+    //         //         for (var i in data) {
+    //         //             var name = data[i].name;
+    //         //             var filename = data[i].filename;
+    //         //             var extension = data[i].extension;
+    //         //             console.log(dataId,name, filename, extension);
+    //         //             saveNewUploadedFile(name, filename,extension,dataSource);
+    //         //             $('#fileupload').val(filename);
+    //         //             dataforsaving.push(dataId);
+    //         //             console.log(dataforsaving);
+    //         //         }
+    //         //         console.log(dataupload);
+    //         //     },
+    //         //     error: function () {
+    //         //         // File upload error handling
+    //         //         console.log("err");
+    //         //     }
+    //         // });
+
+    //     };
+
 </script>

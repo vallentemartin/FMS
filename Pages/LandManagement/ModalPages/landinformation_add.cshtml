@@ -1,8 +1,8 @@
 <section>
     <div class="container-fluid">
-        <div class="card card-lightblue">
+        <div class="card card-success">
             <div class="card-header">
-                <h3 class="card-title">Land Information</h3>
+                <h3 class="card-title">Land Information Form</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -12,119 +12,155 @@
                             <!-- insert here -->
                             <div class="viewCompany">
                                 <div class="col-md-12 bg-light headertext">
-                                    <h5>Basic Information</h5>
+                                    <h5>Owner Information</h5>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Company Name</label>
-                                        <span class="CompanyName form-control form-control-sm form-control-border border-width-2" readonly></span>
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Name :</label>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label>Contact Number</label>
-                                        <span class="CompanyContactNumber form-control form-control-sm form-control-border border-width-2" readonly></span>
+                                    <div class="col-sm-12 col-md-10">
+                                        <p class="CompanyName form-control form-control-sm form-control-border border-width-2"></p>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label>Address</label>
-                                        <textarea class="CompanyAddress form-control form-control-sm" autocomplete="off" readonly></textarea>
-                                        <!-- <span class="CompanyAddress form-control form-control-sm form-control-border border-width-2" readonly></span> -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Contact Number :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-10">
+                                        <p class="CompanyContactNumber form-control form-control-sm form-control-border border-width-2"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Address :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-10">
+                                        <p class="CompanyAddress form-control form-control-sm form-control-border border-width-2"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="viewIndividual">
                                 <div class="col-md-12 bg-light headertext">
-                                    <h5>Basic Information</h5>
+                                    <h5>Owner Information</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Name :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-10">
+                                        <p class="IdvlFullName form-control form-control-sm form-control-border border-width-2"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Contact Number :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-10">
+                                        <p class="IdvlContactNumber form-control form-control-sm form-control-border border-width-2"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Address :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-10">
+                                        <p class="IdvlAddress form-control form-control-sm form-control-border border-width-2"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <br> -->
+                            <div class="container form">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label id="selectOwnerInformation">Landowner</label>
+                                            <select class="LandownerCode FullName Landowner form-control form-control-sm triggerlandinformation select2" data-placeholder="Select Landowner" name="LandownermultipleSelect" id="LandownerMultiple">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Document Presented</label>
+                                        <select class="DocumentTypeCode Description DocumentType form-control form-control-sm triggerlandinformation select2" id="DocumentTypeSelect">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Document Number</label>
+                                        <!-- <input class="DocumentNumber form-control form-control-sm triggerlandinformation autoCaps" type="text" placeholder="-" autocomplete="off"> -->
+                                        <div class="input-group input-group-sm">
+                                            <!-- <input type="text" class="form-control"> -->
+                                            <input class="DocumentNumber form-control form-control-sm triggerlandinformation autoCaps" type="text" placeholder="-" autocomplete="off">
+                                            <span class="input-group-append">
+                                                <button type="button" class="btn btn-primary btn-flat" onclick="verifyButton()">Verify</button>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label>FullName</label>
-                                        <span class="IdvlFullName form-control form-control-sm form-control-border border-width-2" readonly></span>
+                                        <label>Lot Number</label>
+                                        <input class="LotNumber form-control form-control-sm triggerlandinformation autoCaps" type="text" placeholder="-"  autocomplete="off">
+                                    </div>
+                                    <!-- <div class="col-md-4">
+                                        <label>Total Area <i>(sqm)</i></label>
+                                        <input class="Area form-control form-control-sm triggerlandinformation" step='0.01' placeholder='0.00' type="number">
+                                    </div> -->
+                                    <div class="col-md-4">
+                                        <label>Total Area <i>(sqm)</i></label>
+                                        <input type="text"
+                                            class="Area form-control form-control-sm form-control-border border-width-2 triggerlandinformation"
+                                            id="Sqm" step='0.01' min="1" max="1000000" placeholder='0.00' type="number">
                                     </div>
                                     <div class="col-md-4">
-                                        <label>Contact Number</label>
-                                        <span class="IdvlContactNumber form-control form-control-sm form-control-border border-width-2" readonly></span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Address</label>
-                                        <textarea class="IdvlAddress form-control form-control-sm" autocomplete="off" readonly></textarea>
-                                        <!-- <span class="IdvlAddress form-control form-control-sm form-control-border border-width-2" readonly></span> -->
+                                        <label>Total Area <i>(has)</i></label>
+                                        <input type="text"
+                                            class="Hectare form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
+                                            id="Hectares" step='0.01' min="1" placeholder='0.00' type="number" disabled>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="break">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                            <label id="provinceLabel">Province</label>
+                                            <select class="provinceCode provinceName Province form-control form-control-sm triggerlandinformation select2" type="text" placeholder="-" id="provinceSelect">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label id="cityLabel">Municipality/City</label>
+                                            <select class="cityCode form-control form-control-sm select2" type="text" placeholder="-" id="citySelect" disabled>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label id="barangayLabel">Barangay</label>
+                                            <select class="barangayCode form-control form-control-sm select2" style="text-transform: uppercase;" type="text" placeholder="-" id="barangaySelect" disabled>
+                                            </select>
+                                        </div>
+                                </div>
                                 <br>
-                                <hr>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Landowner/Company</label>
-                                        <select class="LandownerCode FullName Landowner form-control form-control-sm triggerlandinformation select2" data-placeholder="Select Landowner" name="LandownermultipleSelect" id="LandownerMultiple">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Document Presented</label>
-                                    <select class="DocumentTypeCode Description DocumentType form-control form-control-sm triggerlandinformation" id="DocumentTypeSelect">
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Document Number</label>
-                                    <input class="DocumentNumber form-control form-control-sm triggerlandinformation autoCaps" type="text" placeholder="-" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Lot Number</label>
-                                    <input class="LotNumber form-control form-control-sm triggerlandinformation autoCaps" type="text" placeholder="-"  autocomplete="off">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Total Area <i>(sqm)</i></label>
-                                    <input class="Area form-control form-control-sm triggerlandinformation" step='0.01' placeholder='0.00' type="number">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                        <label id="provinceLabel">Province</label>
-                                        <select class="provinceCode provinceName Province form-control form-control-sm triggerlandinformation select2" type="text" placeholder="-" id="provinceSelect">
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label id="cityLabel">Municipality/City</label>
-                                        <select class="cityCode form-control form-control-sm select2" type="text" placeholder="-" id="citySelect" disabled>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label id="barangayLabel">Barangay</label>
-                                        <select class="barangayCode form-control form-control-sm select2" style="text-transform: uppercase;" type="text" placeholder="-" id="barangaySelect" disabled>
-                                        </select>
-                                    </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-12 hideCoOwner">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group clearfix">
-                                                <div class="icheck-lightblue d-inline">
-                                                    <input type="checkbox" id="checkbox2"  class="checkCoOwners">
-                                                    <label for="checkbox2">Co-Owners</label>
+                                <div class="row">
+                                    <div class="col-md-12 hideCoOwner">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group clearfix">
+                                                    <div class="icheck-lightblue d-inline">
+                                                        <input type="checkbox" id="checkbox2"  class="checkCoOwners">
+                                                        <label for="checkbox2">Co-Owners</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <textarea class="CoOwner form-control form-control-sm autoCaps" placeholder="-" autocomplete="off" id="textareaCoOwner" disabled></textarea>
+                                            <div class="col-md-10">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <textarea class="CoOwner form-control form-control-sm autoCaps" placeholder="-" autocomplete="off" id="textareaCoOwner" disabled></textarea>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row" id="remarksTextArea">
-                                <div class="col-md-12">
-                                    <label>Remarks</label>
-                                    <textarea class="remarks form-control form-control-sm triggerlandinformation" placeholder="-"></textarea  autocomplete="off">
+                                <div class="row" id="remarksTextArea">
+                                    <div class="col-md-12">
+                                        <label>Remarks</label>
+                                        <textarea class="remarks form-control form-control-sm triggerlandinformation" placeholder="-"></textarea  autocomplete="off">
+                                    </div>
                                 </div>
                             </div>
                             <!-- insert here: ends here -->
@@ -142,7 +178,6 @@
     getOptDataForAddLandInformationMultiple();
 
     // hide class upon load
-    $('.viewIndividual').hide();
     $('.viewCompany').hide();
     $('.break').hide();
 
@@ -159,7 +194,7 @@
     //START: OTHERS SELECT
     $('#remarksTextArea').hide();
     $('#DocumentTypeSelect').change(function () {
-        if( $('#DocumentTypeSelect').val() == 3 ) {
+        if( $('#DocumentTypeSelect').val() == 4 ) {
             $('#remarksTextArea').show();
         } else {
             $('#remarksTextArea').hide();
@@ -259,7 +294,7 @@
             }),
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                console.log('Landowner Info', data);
+                console.log('Landowner Info', data);     
 
                 if ( data.FirstName == null || data.FirstName == '' ) {
                     $('.viewCompany').show();
@@ -267,7 +302,7 @@
                     $('.viewIndividual').hide();
                     $('.CompanyName').text(data.LastName);
                     $('.CompanyContactNumber').text(data.ContactNumber);
-                    $('.CompanyAddress').val(data.Address);
+                    $('.CompanyAddress').text(data.Address);
                 } else {
                     $('.viewIndividual').show();
                     $('.break').show();
@@ -275,10 +310,57 @@
                     address = data.provinceName == null ? data.Address : data.barangayName + ', ' + data.cityName + ', ' + data.provinceName 
                     $('.IdvlFullName').text(data.Fullname);
                     $('.IdvlContactNumber').text(data.ContactNumber);
-                    $('.IdvlAddress').val(address);
+                    $('.IdvlAddress').text(address);
                 }
             }
         })
     });
 /////////////////////////////////////////////////////////////////////////////START: VIEW LANDOWNER INFORMATION ////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////START: SQM CONVERTION INTO HAS/////////////////////////////////////////////////////////////////////////////
+    $("#Sqm").keyup(function () {
+        const hectares = $('#Sqm').val() / 10000;
+        $('#Hectares').val(hectares);
+    });
+
+    $("#Hectares").keyup(function () {
+        const squareMeters = $('#Hectares').val() * 10000;
+        $('#Sqm').val(squareMeters);
+    });
+
+    function verifyButton() {
+    var documentNumberInput = $('.DocumentNumber');
+    var documentNumber = documentNumberInput.val();
+    
+    if (documentNumber !== '') {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/checkDocumentNumber',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                DocumentNumber: documentNumber,
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log('Check Document Number', data);
+                console.log('result', data[""]);
+                if (data.length !== 0 && data[""] === 1) {
+                    toastr.error('Document Number already exists!');
+                } else {
+                    toastr.success('Document Number is available!');
+                }
+            },
+            error: function (xhr, status, error) {
+                toastr.error('Error checking Document Number. Please try again later.');
+            }
+        });
+    } else {
+        toastr.error('Please enter Document Number!');
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////END: SQM CONVERTION INTO HAS/////////////////////////////////////////////////////////////////////////////
+
 </script>

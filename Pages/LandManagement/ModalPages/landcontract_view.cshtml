@@ -13,21 +13,35 @@
             <div class="card-body">
                 <!-- START: CONTRACT INFORMATION -->
                 <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label class="form-control form-control-sm border-0">Land Contract Code</label>
+                            <p
+                                class="LandContractCode form-control form-control-sm" title="Land Contract Code" style="text-align: center;" readonly>
+                            </p>
+                        </div>
+                    </div>
                     <div class="col-md-12 bg-light headertext">
-                        <h5>Basic Information</h5>
+                        <h5>Owner Information</h5>
                     </div>
                     <div class="row">
                         <div class="col-md-5">
                             <label>Landowner/Company</label>
-                            <span class="name form-control form-control-sm form-control-border border-width-2" readonly></span>
+                            <p
+                                class="name form-control form-control-sm form-control-border border-width-2">
+                            </p>
                         </div>
                         <div class="col-md-5">
                             <label>Land Information/Document</label>
-                            <span class="landdocument form-control form-control-sm form-control-border border-width-2" readonly></span>
+                            <p
+                                class="landdocument form-control form-control-sm form-control-border border-width-2">
+                            </p>
                         </div>
                         <div class="col-md-2">
                             <label>Lot Number</label>
-                            <span class="landlotnumber form-control form-control-sm form-control-border border-width-2" readonly></span>
+                            <p
+                                class="landlotnumber form-control form-control-sm form-control-border border-width-2">
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -35,7 +49,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label>Co-Owner</label>
-                            <textarea class="CoOwner form-control form-control-sm" placeholder="-" autocomplete="off" readonly></textarea>
+                            <p
+                                class="CoOwner form-control form-control-sm form-control-border border-width-2">
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -43,15 +59,21 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label>Province</label>
-                            <span class="province form-control form-control-sm form-control-border border-width-2" readonly></span>
+                            <p
+                                class="province form-control form-control-sm form-control-border border-width-2">
+                            </p>
                         </div>
                         <div class="col-md-4">
                             <label>Municipality/City</label>
-                            <span class="city form-control form-control-sm form-control-border border-width-2" readonly></span>
+                            <p
+                                class="city form-control form-control-sm form-control-border border-width-2">
+                            </p>
                         </div>
                         <div class="col-md-4">
                             <label>Barangay</label>
-                            <span class="barangay form-control form-control-sm form-control-border border-width-2" readonly></span>
+                            <p
+                                class="barangay form-control form-control-sm form-control-border border-width-2">
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -59,15 +81,21 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label>Land Contracted Area<i> (sqm)</i></label>
-                            <span class="landcontractedarea form-control form-control-sm  form-control-border border-width-2 trigger" readonly></span>
+                            <p
+                                class="landcontractedarea form-control form-control-sm  form-control-border border-width-2 trigger">
+                            </p>
                         </div>
                         <div class="col-md-4">
                             <label>Plantation</label>
-                            <span class="landplantation form-control form-control-sm form-control-border border-width-2" readonly></span>
+                            <p
+                                class="landplantation form-control form-control-sm form-control-border border-width-2">
+                            </p>
                         </div>
                         <div class="col-md-4">
                             <label>Company</label>
-                            <span class="landcompany form-control form-control-sm  form-control-border border-width-2 trigger" readonly></span>
+                            <p
+                                class="landcompany form-control form-control-sm  form-control-border border-width-2 trigger">
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -79,15 +107,21 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label>Name</label>
-                                <span class="RepName form-control form-control-sm  form-control-border border-width-2 trigger" readonly></span>
+                                <p
+                                    class="RepName form-control form-control-sm  form-control-border border-width-2 trigger">
+                                </p>
                             </div>
                             <div class="col-sm-4">
                                 <label>Contact Number</label>
-                                <span class="RepContactNumber form-control form-control-sm  form-control-border border-width-2 trigger" readonly></span>
+                                <p
+                                    class="RepContactNumber form-control form-control-sm  form-control-border border-width-2 trigger">
+                                </p>
                             </div>
                             <div class="col-sm-4">
                                 <label>Email</label>
-                                <span class="RepEmail form-control form-control-sm  form-control-border border-width-2 trigger" readonly></span>
+                                <p
+                                    class="RepEmail form-control form-control-sm  form-control-border border-width-2 trigger">
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -98,8 +132,319 @@
         </div>
     </div>
 </section>
+<section>
+    <div class="container-fluid">
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title">Contract Payment</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    @*<button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                    </button>*@
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div class="row" style="overflow: auto;" >
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Lease Period</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text"
+                                            class="LeasePeriod form-control form-control-sm float-right triggerdetail" readonly
+                                            id="lease_period">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Lease Term </label>
+                                    <input type="text" disabled
+                                        class="LeaseTerm reservationdate form-control form-control-sm float-right triggerdetail" readonly
+                                        id="terms">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Years of Advance Payment</label>
+                                    <input class="AdvancePayment form-control form-control-sm triggerdetail" type="number" readonly
+                                        Placeholder="Input Number of Year(s)">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label> Start of Payment:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text"
+                                                class="StartOfPayment reservationdate form-control form-control-sm float-right triggerdetail" readonly
+                                                id="reservationdate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Payment Terms</label>
+                                    <input
+                                        class="PaymentTerms PaymentTerms PaymentTerms form-control form-control-sm triggerdetail" readonly
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input hidden type="text" id="StartDate">
+                                    <input hidden type="text" id="EndDate">
+                                    <input hidden type="text" id="LandContractCode">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- insert table start -->
+                                <div class="col-md-12">
+                                    <label for="Escalation">Payment Escalation</label>
+                                    <table id="tbl_Escalation" class="table table-bordered table-striped table-sm"
+                                        style="width:100%">
+                                        <thead>
+                                            <tr style="text-align:center">
+                                                <!-- <th hidden class="Payment_date">Payment_date</th> -->
+                                                <th class="date_of_payment">Date</th>
+                                                <th class="years">Years</th>
+                                                <th class="Rate">Rate</th>
+                                                <th class="Num_of_has">Hectares</th>
+                                                <th class="Rate_per_year">Annual Rate</th>
+                                                <th class="Total_rate">Contract Rate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbl_Users-data">
+                                        </tbody>
+                                    </table>
+                                    <tfoot>
+                                        <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth" style="margin-top: 20px;">Total
+                                                            Rental:</label>
+                                                        <span class="Total_rental"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Advance Payment:</label>
+                                                        <span class="advance_payment_amount"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Remaining Rental:</label>
+                                                        <span class="Remaining_rental"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Years Divided:</label>
+                                                        <span class="yrsdivided"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Gross Annual Rental:</label>
+                                                        <span class="Payment_Amount"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </tfoot>
+                                </div>
+                            </div>
+                                <!-- insert table end -->
+                           
+                               <div class="row" style="margin-top:40px;">
+                                   <!-- insert table start -->
+                                   <div class="col-md-12">
+                                       <label for="PaymentSched">Payment Schedule</label>
+                                       <table id="tbl_PaymentSched" class="table table-bordered table-striped table-sm"
+                                           style="width:100%">
+                                           <thead>
+                                               <tr style="text-align:center">
+                                                   <!-- <th hidden class="id">Term</th> -->
+                                                   <th class="Payment_date" style="width:160px;">Payment Schedule</th>
+                                                   <th class="remarks" style="width:160px;">Status</th>
+                                                   <th class="Amount">Gross Annual Rental</th>
+                                                   <th class="Amount">Net Annual Rental</th>
+                                                   <th class="Cv_num">Check Voucher Number</th>
+                                                   <th class="Cr_num">CR number</th>
+                                                   <th class="Posting_date">Encashment Date</th>
+                                               </tr>
+                                           </thead>
+                                           <tbody id="tbl_Users-data">
+                                           </tbody>
+                                       </table>
+                                       <tfoot>
+                                       </tfoot>
+                                   </div>
+                                   <!-- insert table end -->
+                               </div>
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="card-footer">
+                
+            </div> -->
+        </div>
+    </div>
+</section>
 <script>
     var sourceContract = 'ContractMain';
     var dataSourceIdCol = 'LandContractCode';
     viewContractInfoData(sourceContract, dataSourceIdCol);
+    initDataTablesPaymentSched();
+    initDataTablesEscalation();
+    getSysData(sourceContract, dataSourceIdCol);
+    getPaymentSched();
+    getEscalation();
+
+    function initDataTablesPaymentSched() {
+        var table = $('#tbl_PaymentSched').DataTable({
+            language: {
+                sSearch: "",
+                searchPlaceholder: "Search records"
+            },
+            selected: true,
+            paging: false,
+            lengthChange: false,
+            searching: false,
+            ordering: true,
+            info: false,
+            autoWidth: false,
+            responsive: true,
+            lengthMenu: [
+                [10, 25, 50, 100],
+                ['10 rows', '25 rows', '50 rows', '100 rows']
+            ],
+
+        }).buttons().container().appendTo('#tbl_PaymentSched' + '_wrapper .col-md-6:eq(0)');
+        $('#tbl_PaymentSched' + '_paginate').css('font-size', 'smaller').css('float', 'right');
+        $('#tbl_PaymentSched' + '_filter').css('float', 'right');
+    }
+
+    function initDataTablesEscalation() {
+        var table = $('#tbl_Escalation').DataTable({
+            language: {
+                sSearch: "",
+                searchPlaceholder: "Search records"
+            },
+            selected: true,
+            paging: false,
+            lengthChange: false,
+            searching: false,
+            ordering: true,
+            info: false,
+            autoWidth: false,
+            responsive: true,
+            lengthMenu: [
+                [10, 25, 50, 100],
+                ['10 rows', '25 rows', '50 rows', '100 rows']
+            ],
+
+        }).buttons().container().appendTo('#tbl_PaymentSched' + '_wrapper .col-md-6:eq(0)');
+        $('#tbl_Escalation' + '_paginate').css('font-size', 'smaller').css('float', 'right');
+        $('#tbl_Escalation' + '_filter').css('float', 'right');
+    }
+
+    function getEscalation() {
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getLDMSescalation',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                LandContractCode: $('.selectedid').data('id'),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log('sakpan', data);
+                var datarow = [];
+                $('#tbl_Escalation').DataTable().clear().draw();
+                $('.Total_rental').text(data[0].Rent_Total.toLocaleString());
+                $('.advance_payment_amount').text(data[0].AmountOfAdvancePayment.toLocaleString());
+                $('.Remaining_rental').text(data[0].Remaining_Rental.toLocaleString());
+                $('.yrsdivided').text(data[0].YearsDivided);
+                $('.Payment_Amount').text(data[0].Gross_Annual_Payment.toLocaleString());
+                for (var i in data) {
+                    var dataarr = [];
+                    dataarr.push('<div style="text-align:center">' + data[i].TermDate + '</div>');
+                    dataarr.push('<div style="text-align:center">' + data[i].Years + '</div>');
+                    dataarr.push('<div style="text-align:center">' + data[i].Rate + '</div>');
+                    dataarr.push('<div style="text-align:center">' + data[i].Num_of_has + '</div>');
+                    dataarr.push('<div style="text-align:center">' + data[i].Rate_per_year + '</div>');
+                    dataarr.push('<div style="text-align:center">' + data[i].Total_rate + '</div>');
+                    datarow.push(dataarr);
+                }
+                $('#tbl_Escalation').DataTable().rows.add(datarow).draw();
+            },
+            error: function () {
+                toastr.error('Error on Fetching Data!');
+                hidedatatablesLoader(sourceContract);
+            }
+        })
+    }
+
+    function getPaymentSched() {
+        var headcol = $('#tbl_PaymentSched' + ' thead tr th');
+        var colid = [];
+        var inputDataCollection = {};
+        for (var x in headcol) {
+            if (headcol[x].className != undefined) {
+                var y = headcol[x].className.split(' ');
+                colid.push(y[0]);
+            }
+        }
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getGeneratedSchedule',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                LandContractCode: $('.selectedid').data('id'),
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                var dtToday = new Date();
+                var month = dtToday.getMonth() + 1;
+                var day = dtToday.getDate();
+                var year = dtToday.getFullYear();
+                if (month < 10)
+                    month = '0' + month.toString();
+                if (day < 10)
+                    day = '0' + day.toString();
+                var maxDate = year + '-' + month + '-' + day;
+
+                var id = 0;
+                var tablerow = [];
+                $('#LandContractCode').val(data[0].LandContractCode);
+                var table = $('#tbl_PaymentSched').DataTable();
+                $('#tbl_PaymentSched').DataTable().clear().draw();
+                for (var i in data) {
+                    var tablearr = [];
+                    data[i].id = id++;
+                    tablearr.push('<input type="text" disabled style="width: 100%;border:1px; background-color:#e9ecef;"  class="date_end  form-control form-control-sm updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date_end + '" value="' + data[i].Payment_date + '">');
+                    tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '" value="' + data[i].remarks + '">');
+                    tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                    tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" value="' + data[i].NetRental + '">');
+                    tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
+                    tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '" >');
+                    tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;"  class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + data[i].Posting_date + '" >');
+                    tablerow.push(tablearr);
+                }
+                $('#tbl_PaymentSched').DataTable().rows.add(tablerow).draw();
+                $('.txtDate').attr('max', maxDate);
+            }
+        })
+    }
 </script>

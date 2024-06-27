@@ -1,0 +1,29 @@
+/* .divRadio {
+    border: solid 2px #ced4da;
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.divIndividual {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.divCompany {
+    padding-top: 10px;
+    padding-bottom: 10px;
+} */
+.hideindividual {
+    border: 1px solid #ced4da;
+    padding: 20px;
+    border-radius: 1.25rem;
+}
+.hidecompany {
+    border: 1px solid #ced4da;
+    padding: 20px;
+    border-radius: 1.25rem;
+}
+.form {
+    border: 1px solid #ced4da;
+    padding: 20px;
+    border-radius: 1.25rem;
+}

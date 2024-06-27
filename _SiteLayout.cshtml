@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="~/Assets/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="~/Assets/css/contracterm/contracterm.css">
     <link rel="stylesheet" href="~/Assets/css/contracterm/landcontract.css">
+    <link rel="stylesheet" href="~/Assets/css/contracterm/landinformation.css">
+    <link rel="stylesheet" href="~/Assets/css/contracterm/landowner.css">
+    <link rel="stylesheet" href="~/Assets/css/contracterm/ldmsdashboard.css">
     <script src="~/Assets/jspdf.umd.min.js"></script>
     <script src="~/Assets/html2canvas.min.js"></script>
     <script src="~/Assets/jquery/jquery.min.js"></script>
@@ -50,6 +53,11 @@
     <script src="~/Assets/bootstrap-switch/js/bootstrap-switch.min.js"></script>
     <script src="~/Assets/select2/js/select2.full.min.js"></script>
     <script src="~/Assets/jquery.mask.js"></script>
+    <script src="~/Assets/jquery-knob/jquery.knob.min.js"></script>
+    <!-- ChartJS -->
+    <script src="~/Assets/chart.js/Chart.min.js"></script>
+    <!-- Dropzone -->
+    <script src="~/Assets/dropzone/min/dropzone.min.js"></script>
 
     <script>
         var Permission = [];
@@ -66,17 +74,17 @@
                 if ("@HttpContext.Current.Session["empid"]" != "") {
                     empid = "@HttpContext.Current.Session["empid"]";
                 }
-                $.ajax({
-                    url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Helper/GetUserPictureData/' + empid,
-                    type: 'get',
-                    success: function (data) {
-                        $('#userAvatarImg').html('<img src="data:image/png;base64,' + data.photo + '" class="elevation-2" style="width: 50px;" alt="UserImg">');
-                    },
-                    error: function () {
-                        toastr.error('Something went wrong while fetching your avatar');
-                        stopLoading();
-                    }
-                })
+                // $.ajax({
+                //     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Helper/GetUserPictureData/' + empid,
+                //     type: 'get',
+                //     success: function (data) {
+                //         $('#userAvatarImg').html('<img src="data:image/png;base64,' + data.photo + '" class="elevation-2" style="width: 50px;" alt="UserImg">');
+                //     },
+                //     error: function () {
+                //         toastr.error('Something went wrong while fetching your avatar');
+                //         stopLoading();
+                //     }
+                // })
                 toastr.info('You are login as @HttpContext.Current.Session["name"]');
                 $.ajax({
                     url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getRoutesbyCreds',
