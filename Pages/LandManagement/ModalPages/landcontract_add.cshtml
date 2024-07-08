@@ -40,109 +40,121 @@
                 <div class="container-fluid form hideContract">
                     <div class="card-container viewRNC">
                         <div class="card card-info">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                            <i class="fas fa-info"></i>
-                            Information Reference
-                            </h3>
-                            <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="col-sm-12 col-md-4">
-                                <label>Select Land Contract</label>
-                                <select class="RNCLandContractCode form-control form-control-sm select2" type="text" id="LandContracCodeSelect"
-                                    onChange="clearSelection('.plantationClear')">
-                                </select>
-                            </div>
-                            <br>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-2">
-                                    <label class="form-control form-control-sm border-0">Name :</label>
-                                </div>
-                                <div class="col-sm-12 col-md-4">
-                                    <p
-                                        class="refLandownerName form-control form-control-sm form-control-border border-width-2">
-                                    </p>
-                                </div>
-                                <div class="col-sm-12 col-md-2">
-                                    <label class="form-control form-control-sm border-0">Contact Number :</label>
-                                </div>
-                                <div class="col-sm-12 col-md-4">
-                                    <p
-                                        class="refContactNumber form-control form-control-sm form-control-border border-width-2">
-                                    </p>
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-info"></i>
+                                    Information Reference
+                                </h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="row hideRefCoOwner">
-                                <div class="col-sm-12 col-md-2">
-                                    <label class="form-control form-control-sm border-0">Co-Owner :</label>
+                            <div class="card-body">
+                                <div class="col-sm-12 col-md-4">
+                                    <label>Select Land Contract</label>
+                                    <select class="RNCLandContractCode form-control form-control-sm select2" type="text"
+                                        id="LandContracCodeSelect" onChange="clearSelection('.plantationClear')">
+                                    </select>
                                 </div>
-                                <div class="col-sm-12 col-md-10">
-                                    <p class="refCoOwner form-control form-control-sm form-control-border border-width-2"></p>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Name :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refLandownerName form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Contact Number :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refContactNumber form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row hideRefCoOwner">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Co-Owner :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-10">
+                                        <p
+                                            class="refCoOwner form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Address :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-10">
+                                        <p
+                                            class="refAddress form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0"
+                                            style="height: 29px; width: 166px;">Document Presented:</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refDocumentType form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Document Number:</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refDocumentNumber form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Lot Number :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refLotNumber form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Leased Area
+                                            <i>(sqm)</i>:</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refTotalArea form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Plantation :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refPlantation form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Company :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refCompanyName form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-2">
-                                    <label class="form-control form-control-sm border-0">Address :</label>
-                                </div>
-                                <div class="col-sm-12 col-md-10">
-                                    <p class="refAddress form-control form-control-sm form-control-border border-width-2"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-2">
-                                    <label class="form-control form-control-sm border-0" style="height: 29px; width: 166px;">Document Presented:</label>
-                                </div>
-                                <div class="col-sm-12 col-md-4">
-                                    <p class="refDocumentType form-control form-control-sm form-control-border border-width-2">
-                                    </p>
-                                </div>
-                                <div class="col-sm-12 col-md-2">
-                                    <label class="form-control form-control-sm border-0">Document Number:</label>
-                                </div>
-                                <div class="col-sm-12 col-md-4">
-                                    <p class="refDocumentNumber form-control form-control-sm form-control-border border-width-2">
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-2">
-                                    <label class="form-control form-control-sm border-0">Lot Number :</label>
-                                </div>
-                                <div class="col-sm-12 col-md-4">
-                                    <p class="refLotNumber form-control form-control-sm form-control-border border-width-2">
-                                    </p>
-                                </div>
-                                <div class="col-sm-12 col-md-2">
-                                    <label class="form-control form-control-sm border-0">Leased Area <i>(sqm)</i>:</label>
-                                </div>
-                                <div class="col-sm-12 col-md-4">
-                                    <p class="refTotalArea form-control form-control-sm form-control-border border-width-2">
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-2">
-                                    <label class="form-control form-control-sm border-0">Plantation :</label>
-                                </div>
-                                <div class="col-sm-12 col-md-4">
-                                    <p class="refPlantation form-control form-control-sm form-control-border border-width-2">
-                                    </p>
-                                </div>
-                                <div class="col-sm-12 col-md-2">
-                                    <label class="form-control form-control-sm border-0">Company :</label>
-                                </div>
-                                <div class="col-sm-12 col-md-4">
-                                    <p class="refCompanyName form-control form-control-sm form-control-border border-width-2">
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
                     <div class="col-md-12 bg-light headertext viewNC">
@@ -158,14 +170,14 @@
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label>Land Information/Document</label>
-                            <select class="LandInformationCode viewLandInformationNC form-control form-control-sm select2" type="text"
-                                id="viewLandInformationNC" disabled>
+                            <select
+                                class="LandInformationCode viewLandInformationNC form-control form-control-sm select2"
+                                type="text" id="viewLandInformationNC" disabled>
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label>Plantation</label>
-                            <select
-                                class="PlantationCode form-control form-control-sm trigger select2 plantationClear"
+                            <select class="PlantationCode form-control form-control-sm trigger select2 plantationClear"
                                 id="plantationSelectNC" disabled>
                             </select>
                         </div>
@@ -183,14 +195,14 @@
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label>Land Information/Document</label>
-                            <select class="LandInformationCode viewLandInformationRNC form-control form-control-sm select2" type="text"
-                                id="viewLandInformationRNC" disabled>
+                            <select
+                                class="LandInformationCode viewLandInformationRNC form-control form-control-sm select2"
+                                type="text" id="viewLandInformationRNC" disabled>
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label>Plantation</label>
-                            <select
-                                class="PlantationCode form-control form-control-sm trigger select2 plantationClear"
+                            <select class="PlantationCode form-control form-control-sm trigger select2 plantationClear"
                                 id="plantationSelectRNC" disabled>
                             </select>
                         </div>
@@ -288,12 +300,14 @@
                                                 <label>Contact Number</label>
                                                 <!-- <input type="text"
                                                     class="RepContactNumber form-control form-control-sm"> -->
-                                                <input class="RepContactNumber form-control form-control-sm" 
-                                                    id="companynumber" type="number" step="1" pattern="\d+" value="63" autocomplete="off">
+                                                <input class="RepContactNumber form-control form-control-sm"
+                                                    id="companynumber" type="number" step="1" pattern="\d+" value="63"
+                                                    autocomplete="off">
                                             </div>
                                             <div class="col-sm-12 col-md-4 hideRepresentativeNumber">
                                                 <label>Contact Number</label>
-                                                <p class="textRepContactNumber form-control form-control-sm" readonly></p>
+                                                <p class="textRepContactNumber form-control form-control-sm" readonly>
+                                                </p>
                                             </div>
                                             <div class="col-sm-12 col-md-4">
                                                 <label>Email</label>
@@ -319,7 +333,8 @@
                                     onkeyup=imposeMinMax(this)>
                                 <input type="text"
                                     class="availableArea form-control form-control-sm form-control-border border-width-2"
-                                    id="remaining" step='0.01' min="1" max="1000000" placeholder='0.00' type="number" hidden>
+                                    id="remaining" step='0.01' min="1" max="1000000" placeholder='0.00' type="number"
+                                    hidden>
                             </div>
                             <div class="col-md-6">
                                 <label>Lease Contracted <i>(has)</i></label>
@@ -349,8 +364,8 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-3">
                                 <label>Select Land Contract</label>
-                                <select class="PTCLandContractCode form-control form-control-sm select2" type="text" id="LandContracCodeSelect"
-                                    onChange="clearSelection('.plantationClear')">
+                                <select class="PTCLandContractCode form-control form-control-sm select2" type="text"
+                                    id="LandContracCodeSelect" onChange="clearSelection('.plantationClear')">
                                 </select>
                             </div>
                         </div>
@@ -361,18 +376,17 @@
                                 <label class="form-control form-control-sm border-0">Name:</label>
                             </div>
                             <div class="col-sm-12 col-md-10">
-                                <p
-                                    class="PTCName form-control form-control-sm form-control-border border-width-2">
+                                <p class="PTCName form-control form-control-sm form-control-border border-width-2">
                                 </p>
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
             <!-- END: CONTRACT INFORMATION -->
-            </div>
-            <!-- /.card-body -->
         </div>
+        <!-- /.card-body -->
+    </div>
     </div>
 </section>
 <section class="viewNC viewRNCPayment">
@@ -454,7 +468,7 @@
                                     <input hidden type="text" id="LandContractCode">
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <!-- insert table start -->
                                 <div class="col-md-12">
@@ -479,9 +493,10 @@
                                         </table>
                                         <tfoot>
                                             <div class="col-md-12">
-                                                <button type="button" class="btn btn-success" id="addRow">Add Row</button>
+                                                <button type="button" class="btn btn-success" id="addRow">Add
+                                                    Row</button>
                                                 <label class="" style="margin-left: 118px;">Total:</label>
-                                                        <span class="totalyrs"></span>
+                                                <span class="totalyrs"></span>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="row">
@@ -501,13 +516,13 @@
                                                         <span class="Remaining_rental"></span>
                                                     </div>
                                                     <div class="col-md-12">
-                                                    <label class="dividedyrs labelwidth" for="divided"></label>
-                                                    <input class="yrsdivided" style="border:1px solid #ced4da">
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label class="labelwidth">Gross Annual Rental:</label>
-                                                    <span class="Payment_Amount"></span>
-                                                </div>
+                                                        <label class="dividedyrs labelwidth" for="divided"></label>
+                                                        <input class="yrsdivided" style="border:1px solid #ced4da">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Gross Annual Rental:</label>
+                                                        <span class="Payment_Amount"></span>
+                                                    </div>
                                                     <!-- <div class="col-md-12">
                                                     <label class="labelwidth">Rental Start:</label>
                                                 </div> -->
@@ -1392,8 +1407,6 @@
             }),
             contentType: "application/json; charset=utf-8",
             success: function (viewPlantation) {
-                console.log('plantation selected', viewPlantation);
-
                 $('.infoCompanyName').text(viewPlantation.CompanyCode + '-' + viewPlantation.Companyname);
             },
             error: function () {
@@ -1708,6 +1721,7 @@
             }),
             contentType: "application/json; charset=utf-8",
             success: function (refLandContractData) {
+                alert(2);
                 console.log('refLandContractData',refLandContractData);
                 
                 if (refLandContractData.WithCoOwner == true) {
@@ -1715,7 +1729,7 @@
                 } else {
                     $('.hideRefCoOwner').hide();
                 }
-
+                
                 $('.refLandownerName').text(refLandContractData.Fullname);
                 $('.refContactNumber').text(refLandContractData.ContactNumber);
                 $('.refCoOwner').text(refLandContractData.CoOwner);

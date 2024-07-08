@@ -1,9 +1,57 @@
 $('.HTML_container').ready(function () {
-    initDataTables('ContractMain');
+    initDataTablesPaymentSchedule('PaymentSchedule');
     getSysAllDataContract('ContractMain');
 })
+var dataSource = 'PaymentSchedule';
+function initDataTablesPaymentSchedule(Data) {
+    $('#tbl_' + Data).DataTable({
+        language: {
+            sSearch: "",
+            searchPlaceholder: "Search records"
+        },
+        paging: true,
+        lengthChange: false,
+        searching: true,
+        ordering: true,
+        info: true,
+        autoWidth: false,
+        responsive: true,
+        lengthMenu: [
+            [10, 25, 50, 100],
+            ['10 rows', '25 rows', '50 rows', '100 rows']
+        ],
+        buttons: [
+            "pageLength",
+            "colvis",
+            {
+                extend: 'excelHtml5',
+                title: Data + ' Export'
+            }
+        ]
+    }).buttons().container().appendTo('#tbl_' + Data + '_wrapper .col-md-6:eq(0)');
+    $('#tbl_' + Data + '_paginate').css('font-size', 'smaller').css('float', 'right');
+    $('#tbl_' + Data + '_filter').css('float', 'right');
+    if (Data != 'SysUsers' && Data != 'Period' && Data != 'Calendar') {
+        var htmlFilter = ' <datatablefilterbox><input type="checkbox" class="statusFilter statusFilter' + Data + '"' +
+            'checked ' +
+            'data-bootstrap-switch ' +
+            'data-off-color="danger" ' +
+            'data-on-color="success" ' +
+            'data-on-text="Enabled" ' +
+            'data-off-text="Disabled"></datatablefilterbox> <button class="btn btn-info btn-sm" onclick="getSysAllData(\'' + Data + '\')" title="Reload Table"><i class="fas fa-redo-alt"></i> Reload</button>';
+        $('#tbl_' + Data + '_filter').prepend(htmlFilter);
+        $("input[data-bootstrap-switch]").each(function () {
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        })
+    }
+    console.log(Data);
+    console.log(Permission.includes(Data + "_add") || excempted.includes($("#username").val()));
+    if (Permission.includes(Data + "_add") || excempted.includes($("#username").val())) {
+        $('#tbl_' + Data + '_filter').append(' <button class="btn btn-outline-success btn-sm addData" onclick="addData(\'' + Data + '\')"><i class="fas fa-plus"></i> Add</button>');
+    }
+}
 
-function getSysAllDataContract(dataSource) {
+function getSysAllDataContract(Source) {
     showdatatablesLoader(dataSource);
     var headcol = $('#tbl_' + dataSource + ' thead tr th');
     var colid = [];
@@ -20,7 +68,7 @@ function getSysAllDataContract(dataSource) {
         data: JSON.stringify({
             username: $("#username").val(),
             token: $("#token").val(),
-            dataSource: dataSource,
+            dataSource: Source,
             isactive: $('.statusFilter').is(':checked'),
             sysapp: sysapp
         }),

@@ -439,7 +439,7 @@
                     tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" value="' + data[i].NetRental + '">');
                     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
                     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '" >');
-                    tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;"  class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + data[i].Posting_date + '" >');
+                    tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;"  class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
                     tablerow.push(tablearr);
                 }
                 $('#tbl_PaymentSched').DataTable().rows.add(tablerow).draw();
