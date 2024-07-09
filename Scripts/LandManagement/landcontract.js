@@ -372,7 +372,6 @@ function getSysAllContractInfoData(sourceContract) {
         }
     })
 }
-
 //UPDATE MODAL
 /**
  * Description: To update data of the specific table.

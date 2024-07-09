@@ -1,0 +1,205 @@
+<div class="contariner">
+    <section>
+        <div class="container-fluid">    
+            <div class="card card-lightblue">
+                <div class="card-header">
+                    <h3 class="card-title"  id="selectType">
+                    <!-- Landowner Information -->
+                    </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <!-- START: LANDOWNER INFORMATION -->
+                        <div class="container form">
+                            <div class="col-md-12">
+                                <!-- insert here -->
+                                <!-- COMPANY -->
+                                <div class="container-fluid hideCompany">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4">
+                                                <label>Landowner Code</label>
+                                                <p
+                                                    class="LandownerCode form-control form-control-sm" readonly>
+                                                </p>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <label>Company Name</label>
+                                                <p
+                                                    class="LastName form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label>Contact Number</label>
+                                                <p
+                                                    class="ContactNumber form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <label>Address</label>
+                                                <p 
+                                                    class="Address form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <label>Remarks</label>
+                                                <p 
+                                                    class="remarks form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- INDIVIDUAL -->
+                                <div class="container-fluid hideIndividual">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-3">
+                                                <label>Landowner Code</label>
+                                                <p 
+                                                    class="LandownerCode form-control form-control-sm form-control-border border-width-2" readonly>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-3">
+                                                <label>First Name</label>
+                                                <p 
+                                                    class="FirstName form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <label>Middle Name</label>
+                                                <p 
+                                                    class="MiddleName form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <label>Last Name</label>
+                                                <p 
+                                                    class="LastName form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <label id="suffixLabel">Suffix</label>
+                                                <p 
+                                                    class="Suffix form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-3 form-group">
+                                                <label>Sex</label>
+                                                <p 
+                                                    class="GenderName form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <label>Date of Birth:</label>
+                                                <p 
+                                                    class="BirthDate form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <label>Nationality</label>
+                                                <p 
+                                                    class="Nationality form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label>Civil Status</label>
+                                                    <p 
+                                                        class="CS_Name form-control form-control-sm form-control-border border-width-2">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <label id="addressLabel">Address</label>
+                                                <p 
+                                                    class="Address form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" id="hideSelect">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4">
+                                                <label id="provinceLabel">Province</label>
+                                                <p 
+                                                    class="provinceName form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <label id="cityLabel">Municipality/City</label>
+                                                <p 
+                                                    class="cityName form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <label id="barangayLabel">Barangay</label>
+                                                <p 
+                                                    class="barangayName form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <label>Contact Number</label>
+                                                <p 
+                                                    class="ContactNumber form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label>Email Address</label>
+                                                <p 
+                                                    class="Email form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <label>Remarks</label>
+                                                <p 
+                                                    class="remarks form-control form-control-sm form-control-border border-width-2">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- insert here: ends here -->
+                            </div>
+                        </div>
+                    <!-- END: LANDOWNER INFORMATION -->
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+    viewLandownerInfoData();
+</script>
+
+
+
