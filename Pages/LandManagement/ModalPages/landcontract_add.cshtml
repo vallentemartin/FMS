@@ -1147,6 +1147,7 @@
 
                 $('.infoCompanyName').text(viewPlantation.CompanyCode + '-' + viewPlantation
                     .Companyname);
+
             },
             error: function () {
                 toastr.error('Error on gathering Options!');
@@ -1465,14 +1466,12 @@
             }),
             contentType: "application/json; charset=utf-8",
             success: function (refLandContractData) {
-                console.log('refLandContractData', refLandContractData);
-
                 if (refLandContractData.WithCoOwner == true) {
                     $('.hideRefCoOwner').show();
                 } else {
                     $('.hideRefCoOwner').hide();
                 }
-
+                
                 $('.refLandownerName').text(refLandContractData.Fullname);
                 $('.refContactNumber').text(refLandContractData.ContactNumber);
                 $('.refCoOwner').text(refLandContractData.CoOwner);
