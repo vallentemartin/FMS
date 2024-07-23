@@ -3,17 +3,26 @@ $('.HTML_container').ready(function () {
     getSysAllLandownerData('Landowner_Float');
     initDataContractInfo('ContractMain');
     getSysAllContractInfoData('ContractMain');
+
 })
 
+
 $('.role').ready(function () {
-    console.log(1,Permission);
-    setTimeout(function() {
+    console.log(1, Permission);
+    setTimeout(function () {
         loadHomeContent();
+        getPaymentOverdue();
         console.log('load na');
+
     }, 1000);
-    console.log(3,Permission);
+    console.log(3, Permission);
     getLDMSDashboardData();
+
+
+
 })
+
+
 /**
  * Description: This function initialize the data table set by ID.
  * 
@@ -103,12 +112,12 @@ function getSysAllLandownerData(sourceLandowner) {
                     console.log('float data landowner', data[i].LandownerCode);
                     console.log('float status', data[i].Status);
                     if (colid[j] == 'id') {
-                        if ( Permission.includes('Landowner_viewButtonsLDMS') || excempted.includes($("#username").val()) ) {
+                        if (Permission.includes('Landowner_viewButtonsLDMS') || excempted.includes($("#username").val())) {
                             dataarr.push('<div style="text-align:center">' +
-                            '<button type="button" onclick="viewLandownerData(\'' + sourceLandowner + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 50px;" title="View"><i class="fas fa-eye"></i></button>' +
-                            '<button type="button" onclick="approvedLandownermodal(\'' + sourceLandowner + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandownerCode + '\')" class="btn btn-outline-success btn-xs" style="width: 50px; margin-left: 10px; margin-right: 10px;" title="Approve"><i class="far fa-thumbs-up"></i></button>' +
-                            '<button type="button" onclick="returnedLandownermodal(\'' + sourceLandowner + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandownerCode + '\')" class="btn btn-outline-danger btn-xs" style="width: 50px;" title="Return"><i class="fas fa-undo"></i></buttons>' +
-                            '</div>');
+                                '<button type="button" onclick="viewLandownerData(\'' + sourceLandowner + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 50px;" title="View"><i class="fas fa-eye"></i></button>' +
+                                '<button type="button" onclick="approvedLandownermodal(\'' + sourceLandowner + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandownerCode + '\')" class="btn btn-outline-success btn-xs" style="width: 50px; margin-left: 10px; margin-right: 10px;" title="Approve"><i class="far fa-thumbs-up"></i></button>' +
+                                '<button type="button" onclick="returnedLandownermodal(\'' + sourceLandowner + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandownerCode + '\')" class="btn btn-outline-danger btn-xs" style="width: 50px;" title="Return"><i class="fas fa-undo"></i></buttons>' +
+                                '</div>');
                         }
                         // dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceLandowner + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
                     } else if (colid[j] == 'floatStatus') {
@@ -127,7 +136,7 @@ function getSysAllLandownerData(sourceLandowner) {
                                 break;
                         }
                     } else if (colid[j] == 'geoLocation') {
-                        dataarr.push('<div style="text-align:center"><button class="btn btn-success-sm" onclick="showiFrame(\''+data[i][colid[j]]+'\')">' + data[i][colid[j]] + '</a></div>');
+                        dataarr.push('<div style="text-align:center"><button class="btn btn-success-sm" onclick="showiFrame(\'' + data[i][colid[j]] + '\')">' + data[i][colid[j]] + '</a></div>');
                     } else {
                         dataarr.push('<div style="text-align:center">' + data[i][colid[j]] + '</div>');
                     }
@@ -218,9 +227,9 @@ function getSysAllContractInfoData(sourceContract) {
                 var dataarr = [];
                 for (var j in colid) {
                     if (colid[j] == 'id') {
-                        if ( Permission.includes('Contracts_viewButtonsLDMS') || excempted.includes($("#username").val())) {
+                        if (Permission.includes('Contracts_viewButtonsLDMS') || excempted.includes($("#username").val())) {
                             dataarr.push('<div style="text-align:center">' +
-                                '<button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 50px;" title="View"><i class="fas fa-eye"></i></button>' + 
+                                '<button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 50px;" title="View"><i class="fas fa-eye"></i></button>' +
                                 '<button type="button" onclick="approvedContractmodal(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\')" class="btn btn-outline-success btn-xs" style="width: 50px; margin-left: 10px; margin-right: 10px;" title="Approve"><i class="far fa-thumbs-up"></i></button>' +
                                 '<button type="button" onclick="returnedContractmodal(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\')" class="btn btn-outline-danger btn-xs" style="width: 50px;" title="Return"><i class="fas fa-undo"></i></buttons>' +
                                 '</div>');
@@ -256,7 +265,7 @@ function getSysAllContractInfoData(sourceContract) {
                             default:
                                 dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Error Status</b></div>');
                                 break;
-                        }                        
+                        }
                     } else if (colid[j] == 'geoLocation') {
                         dataarr.push('<div style="text-align:center"><button class="btn btn-success-sm" onclick="showiFrame(\'' + data[i][colid[j]] + '\')">' + data[i][colid[j]] + '</a></div>');
                     } else {
@@ -283,8 +292,8 @@ function approvedLandownermodal(sourceLandowner, id, name, LandownerCode) {
     showModal();
     ModalSize('m');
     var title = 'Approve Remarks';
-    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
-                 '<button type="button" class="btn btn-success" onclick="approvelandownerRemarks(\'' + sourceLandowner + '\',\'' + id + '\',\'' + LandownerCode + '\')"> Save' + '</button >';
+    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' +
+        '<button type="button" class="btn btn-success" onclick="approvelandownerRemarks(\'' + sourceLandowner + '\',\'' + id + '\',\'' + LandownerCode + '\')"> Save' + '</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     $.ajax({
@@ -318,7 +327,7 @@ function approvelandownerRemarks(sourceLandowner, id, LandownerCode) {
         }),
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            console.log('approved landowner',data);
+            console.log('approved landowner', data);
             hideModal();
             getSysAllLandownerData(sourceLandowner);
         },
@@ -337,8 +346,8 @@ function returnedLandownermodal(sourceLandowner, id, name, LandownerCode) {
     showModal();
     ModalSize('m');
     var title = 'Return Remarks';
-    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
-                 '<button type="button" class="btn btn-success" onclick="returnLandownerRemarks(\'' + sourceLandowner + '\',\'' + id + '\',\'' + LandownerCode + '\')"> Save' + '</button >';
+    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' +
+        '<button type="button" class="btn btn-success" onclick="returnLandownerRemarks(\'' + sourceLandowner + '\',\'' + id + '\',\'' + LandownerCode + '\')"> Save' + '</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     $.ajax({
@@ -371,7 +380,7 @@ function returnLandownerRemarks(sourceLandowner, id, LandownerCode) {
         }),
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            console.log('return',data);
+            console.log('return', data);
             hideModal();
             getSysAllLandownerData(sourceLandowner);
         },
@@ -389,8 +398,8 @@ function approvedContractmodal(sourceContract, id, name) {
     showModal();
     ModalSize('m');
     var title = 'Approve Remarks';
-    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
-                 '<button type="button" class="btn btn-success" onclick="approvecontractsRemarks(\'' + sourceContract + '\',\'' + id + '\')"> Save' + '</button >';
+    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' +
+        '<button type="button" class="btn btn-success" onclick="approvecontractsRemarks(\'' + sourceContract + '\',\'' + id + '\')"> Save' + '</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     $.ajax({
@@ -423,7 +432,7 @@ function approvecontractsRemarks(sourceContract, id) {
         }),
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            console.log('approved',data);
+            console.log('approved', data);
             hideModal();
             getSysAllContractInfoData(sourceContract);
         },
@@ -441,8 +450,8 @@ function returnedContractmodal(sourceContract, id, name) {
     showModal();
     ModalSize('m');
     var title = 'Return Remarks';
-    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
-                 '<button type="button" class="btn btn-success" onclick="returncontractRemarks(\'' + sourceContract + '\',\'' + id + '\')"> Save' + '</button >';
+    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' +
+        '<button type="button" class="btn btn-success" onclick="returncontractRemarks(\'' + sourceContract + '\',\'' + id + '\')"> Save' + '</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     $.ajax({
@@ -476,7 +485,7 @@ function returncontractRemarks(sourceContract, id) {
         }),
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            console.log('return',data);
+            console.log('return', data);
             hideModal();
             getSysAllContractInfoData(sourceContract);
         },
@@ -615,13 +624,14 @@ function viewContractInfoData(sourceContract, filter) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////Start: LOAD LDMS CONTEXT//////////////////////////////////////////////////////////////////////////////////////////
-function loadHomeContent(){
+function loadHomeContent() {
     var section = '';
     // var LDMSheader = '';
     var LDMSREPORT = Permission.includes('LDMSDashboard_role'); // if role exsist
     section = LDMSREPORT === true ? $('#LDMSDashboard_role').show() : $('#LDMSDashboard_role').hide(); // hide/show role
     // LDMSheader = $('#LDMSchartbutton').data().card('widget') == 'collapse' ? $('hideLDMSheader').show() : $('hideLDMSheader').hide()
-    console.log(2,Permission);
+    console.log(2, Permission);
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////End: LOAD LDMS CONTEXT//////////////////////////////////////////////////////////////////////////////////////////
 
@@ -669,53 +679,53 @@ function getLDMSDashboardData() {
                     // Get context with jQuery - using jQuery's .get() method.
                     var barChartCanvas = $('#barChart').get(0).getContext('2d')
                     var barData = {
-                    labels  : barPlantationCode,
-                    datasets: [
-                        {
-                        label               : 'Expiring',
-                        backgroundColor     : 'rgb(255,177,129)',
-                        borderColor         : 'rgb(255,177,129)',
-                        pointRadius          : false,
-                        pointColor          : '#FFFF93',
-                        pointStrokeColor    : '#FFFF93',
-                        pointHighlightFill  : 'rgb(255,177,129)',
-                        pointHighlightStroke: 'rgb(255,177,129)',
-                        data                : barExpiringContracts
-                        },
-                        {
-                        label               : 'Active',
-                        backgroundColor     : 'rgb(130,218,92)',
-                        borderColor         : 'rgb(130,218,92)',
-                        pointRadius         : false,
-                        pointColor          : 'rgb(130,218,92)',
-                        pointStrokeColor    : 'rgb(130,218,92)',
-                        pointHighlightFill  : 'rgb(130,218,92)',
-                        pointHighlightStroke: 'rgb(130,218,92)',
-                        data                : barActiveContracts
-                        },
-                        // {
-                        // label               : 'Inactive',
-                        // backgroundColor     : 'rgb(255,120,129)',
-                        // borderColor         : 'rgb(255,120,129)',
-                        // pointRadius         : false,
-                        // pointColor          : 'rgb(255,120,129)',
-                        // pointStrokeColor    : 'rgb(255,120,129)',
-                        // pointHighlightFill  : 'rgb(255,120,129)',
-                        // pointHighlightStroke: 'rgb(255,120,129)',
-                        // data                : barInactiveContracts
-                        // },
-                        {
-                        label               : 'Terminated',
-                        backgroundColor     : 'rgb(255,120,129)',
-                        borderColor         : 'rgb(255,120,129)',
-                        pointRadius         : false,
-                        pointColor          : 'rgb(255,120,129)',
-                        pointStrokeColor    : 'rgb(255,120,129)',
-                        pointHighlightFill  : 'rgb(255,120,129)',
-                        pointHighlightStroke: 'rgb(255,120,129)',
-                        data                : barTerminatedContracts
-                        },
-                    ]
+                        labels: barPlantationCode,
+                        datasets: [
+                            {
+                                label: 'Expiring',
+                                backgroundColor: 'rgb(255,177,129)',
+                                borderColor: 'rgb(255,177,129)',
+                                pointRadius: false,
+                                pointColor: '#FFFF93',
+                                pointStrokeColor: '#FFFF93',
+                                pointHighlightFill: 'rgb(255,177,129)',
+                                pointHighlightStroke: 'rgb(255,177,129)',
+                                data: barExpiringContracts
+                            },
+                            {
+                                label: 'Active',
+                                backgroundColor: 'rgb(130,218,92)',
+                                borderColor: 'rgb(130,218,92)',
+                                pointRadius: false,
+                                pointColor: 'rgb(130,218,92)',
+                                pointStrokeColor: 'rgb(130,218,92)',
+                                pointHighlightFill: 'rgb(130,218,92)',
+                                pointHighlightStroke: 'rgb(130,218,92)',
+                                data: barActiveContracts
+                            },
+                            // {
+                            // label               : 'Inactive',
+                            // backgroundColor     : 'rgb(255,120,129)',
+                            // borderColor         : 'rgb(255,120,129)',
+                            // pointRadius         : false,
+                            // pointColor          : 'rgb(255,120,129)',
+                            // pointStrokeColor    : 'rgb(255,120,129)',
+                            // pointHighlightFill  : 'rgb(255,120,129)',
+                            // pointHighlightStroke: 'rgb(255,120,129)',
+                            // data                : barInactiveContracts
+                            // },
+                            {
+                                label: 'Terminated',
+                                backgroundColor: 'rgb(255,120,129)',
+                                borderColor: 'rgb(255,120,129)',
+                                pointRadius: false,
+                                pointColor: 'rgb(255,120,129)',
+                                pointStrokeColor: 'rgb(255,120,129)',
+                                pointHighlightFill: 'rgb(255,120,129)',
+                                pointHighlightStroke: 'rgb(255,120,129)',
+                                data: barTerminatedContracts
+                            },
+                        ]
                     }
 
                     // var areaChartOptions = {
@@ -756,18 +766,18 @@ function getLDMSDashboardData() {
                     barChartData.datasets[1] = temp0
 
                     var barChartOptions = {
-                    responsive              : true,
-                    maintainAspectRatio     : false,
-                    datasetFill             : false
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        datasetFill: false
                     }
 
                     new Chart(barChartCanvas, {
-                    type: 'bar',
-                    data: barChartData,
-                    // data: barData,
-                    options: barChartOptions
+                        type: 'bar',
+                        data: barChartData,
+                        // data: barData,
+                        options: barChartOptions
                     })
-                    
+
                     stopLoading();
                 },
                 error: function () {
@@ -805,33 +815,33 @@ function getLDMSDashboardData() {
             //-------------
             // Get context with jQuery - using jQuery's .get() method.
             var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-            var donutData        = {
-            labels: [
-                labelAContracts,
-                labelEContracts,
-                // labelIContracts,
-                labelTContracts
-            ],
-            datasets: [
-                {
-                data: [data.ActiveContracts,data.ExpiringContracts,data.TerminatedContracts],
-                backgroundColor : [
-                    'rgb(130,218,92)',
-                    'rgb(255,177,129)',
-                    'rgb(255,120,129)'],
-                }
-            ]
+            var donutData = {
+                labels: [
+                    labelAContracts,
+                    labelEContracts,
+                    // labelIContracts,
+                    labelTContracts
+                ],
+                datasets: [
+                    {
+                        data: [data.ActiveContracts, data.ExpiringContracts, data.TerminatedContracts],
+                        backgroundColor: [
+                            'rgb(130,218,92)',
+                            'rgb(255,177,129)',
+                            'rgb(255,120,129)'],
+                    }
+                ]
             }
-            var donutOptions     = {
-            maintainAspectRatio : false,
-            responsive : true,
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
             }
             //Create pie or douhnut chart
             // You can switch between pie and douhnut using the method below.
             new Chart(donutChartCanvas, {
-            type: 'doughnut',
-            data: donutData,
-            options: donutOptions
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
             })
         },
         error: function () {
@@ -926,3 +936,43 @@ function viewLandownerInfoData() {
     })
 }
 //END: LANDOWNER FLOAT VIEW MODAL
+
+
+//Start: Payment Monitoring Dashboard
+
+
+function getPaymentOverdue() {
+    console.log('Permission', Permission, Permission.includes('LDMSDashboard_paymentsched'));
+    var PaymentPermission = Permission.includes('LDMSDashboard_paymentsched');
+    if (Permission.includes('LDMSDashboard_paymentsched') === true) {
+        $('#LDMSDashboard_paymentsched').show();
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getDashboardPaymentMonitoring',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                console.log(data);
+                $('#forpayment').text(data.ForPayment);
+                $('#overdue').text(data.Overdue);
+            },
+            error: function () {
+                toastr.error('Data gathering error!');
+                stopLoading();
+            }
+
+        })
+    }
+    else {
+        $('#LDMSDashboard_paymentsched').hide();
+    }
+
+}
+
+//End: Payment Monitoring Dashboard
