@@ -142,7 +142,7 @@
                                                 <div class="form-group clearfix">
                                                     <div class="icheck-success d-inline">
                                                         <input type="checkbox" id="checkbox2"  class="checkCoOwners">
-                                                        <label for="checkbox2">Co-Owners</label>
+                                                        <label for="checkbox2">Co-Owners <em>(optional)</em></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -344,12 +344,11 @@
             }),
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                console.log('Check Document Number', data);
-                console.log('result', data[""]);
-                if (data.length !== 0 && data[""] === 1) {
-                    toastr.error('Document Number already exists!');
+                console.log('Check Document Number', data.DocumentNumber);
+                if (data.DocumentNumber === undefined) {
+                    toastr.success('Document Number is available!'); 
                 } else {
-                    toastr.success('Document Number is available!');
+                    toastr.error('Document Number already exists!'); 
                 }
             },
             error: function (xhr, status, error) {
