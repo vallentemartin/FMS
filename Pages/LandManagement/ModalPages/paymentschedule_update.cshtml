@@ -114,7 +114,7 @@
             </div>
             <div class="card-body">
                 <div class="col-md-12">
-                    <div class="row" style="overflow: auto;" >
+                    <div class="row" style="overflow-x: auto;" >
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4 form-group">
@@ -235,6 +235,9 @@
                                                    <th class="Payment_date" style="width:160px;">Payment Schedule</th>
                                                    <th class="remarks" style="width:160px;">Status</th>
                                                    <th class="Amount">Gross Annual Rental</th>
+                                                   <th class="rpt">RPT</th>
+                                                   <th class="withtax">With Holding Tax</th>
+                                                   <th class="other">Other Deduction</th>
                                                    <th class="Amount">Net Annual Rental</th>
                                                    <th class="Cv_num">Check Voucher Number</th>
                                                    <th class="Cr_num">CR number</th>
@@ -309,7 +312,29 @@
         $('#tbl_PaymentSched' + '_paginate').css('font-size', 'smaller').css('float', 'right');
         $('#tbl_PaymentSched' + '_filter').css('float', 'right');
     }
+    $('#tbl_PaymentSched').on('keyup', '.updatedcell', function () {
 
+        $('#tbl_PaymentSched > tbody > tr').each(function (index) {
+            var grossannual = parseFloat($('[data-rowid=' + index + '][data-colid="amount"]').val().replace(/,/g, ''));
+            var rpt = parseFloat($('[data-rowid=' + index + '][data-colid="rpt"]').val());
+            var withtax = parseFloat($('[data-rowid=' + index + '][data-colid="withtax"]').val());
+            var others = parseFloat($('[data-rowid=' + index + '][data-colid="others"]').val());
+            // Check for NaN values and set them to 0
+            grossannual = isNaN(grossannual) ? 0 : grossannual;
+            rpt = isNaN(rpt) ? 0 : rpt;
+            withtax = isNaN(withtax) ? 0 : withtax;
+            others = isNaN(others) ? 0 : others;
+            // Calculate netannual
+            var netannual = grossannual + rpt + withtax + others;
+            // If rpt, withtax, and others are all 0, set netannual to 0
+            if (rpt === 0 && withtax === 0 && others === 0) {
+                netannual = 0.00;
+            }
+            $('[data-rowid=' + index + '][data-colid="netrental"]').val(netannual.toLocaleString());
+           
+        });
+
+    });
     function initDataTablesEscalation() {
         var table = $('#tbl_Escalation').DataTable({
             language: {
@@ -416,71 +441,41 @@
                 for (var i in data) {
                     var tablearr = [];
                     data[i].id = id++;
-                    tablearr.push('<input type="text" disabled style="width: 100%;border:1px; background-color:#e9ecef;"  class="date_end  form-control form-control-sm updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date_end + '" value="' + data[i].Payment_date + '">');
-                    // if (data[i].remarks == 'Advance Payment Paid' && data[i].Amount != 0 && data[0].Cv_num == null) {
-                    //     // tablearr.push('<input readonly style="border:1px; background-color:#eaeaea;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                    //     tablearr.push('<select style="border:1px; background-color:#FFFFFF;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Advance Payment Paid">' + data[i].remarks + '</option></select>');
-                    //     // tablearr.push('<input readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="remarks updatedcell" data-rowid="' + data[i].id + '" value="Advance Payment Paid">');
-                    //     tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                    //     tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" >');
-                    //     tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
-                    //     // tablearr.push('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="far fa-calendar-alt"></i></span></div><input type="text" class="reservation reservationdate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date"></div>');
-                    //     tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost txtDate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
-
-                    // } else 
-                    if (data[i].modifiedby) {
-                        console.log(data[i].modifiedby);
-                        // tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                        // tablearr.push('<input type="text" readonly style="width: 100%;border:1px; background-color:#e9ecef; " class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        // tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
-                        // tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" >');
-                        // tablearr.push('<input type="text" readonly  style="width: 100%; height:100%;border:1px;" class="datepost form-control form-control-sm" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
-                        // tablearr.push('<input readonly style="width: 100%; height:100%;border:1px;" class="Init_Filename form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="text" />');
-                        tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                        tablearr.push('<input type="text"  readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" value="' + data[i].NetRental + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '">');
+                    tablearr.push('<input type="text" disabled style="width: 175px; border:1px; background-color:#e9ecef;"  class="date_end  form-control form-control-sm updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date_end + '" value="' + data[i].Payment_date + '">');
+                    if (data[i].Posting_date) {
+                        console.log('modified by', data[i].Posting_date);
+                       tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
+                        tablearr.push('<input type="text" readonly style="width: 100px; border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount.toLocaleString() + '">');
+                        tablearr.push('<input type="text" readonly style="width: 90px; height:100%;border:1px; background-color:#e9ecef;" class="form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="rpt"  value="' + data[i].rpt + '">');
+                        tablearr.push('<input type="text" readonly style="width: 90px; height:100%;border:1px; background-color:#e9ecef;" class="form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="withtax"  value="' + data[i].withtax + '">');
+                        tablearr.push('<input type="text" readonly style="width: 90px; height:100%;border:1px; background-color:#e9ecef;" class="form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="others"  value="' + data[i].others + '">');
+                        tablearr.push('<input type="text" readonly style="width:90px;border:1px;  background-color:#e9ecef;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" value="' + data[i].NetRental.toLocaleString() + '">');
+                        tablearr.push('<input type="text" readonly style="width: 90px; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
+                        tablearr.push('<input type="text" readonly style="width: 90px; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '">');
                         tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
-                        // tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
                         tablearr.push('<input type="text" disabled style="width: 100%;border:1px; background-color:#e9ecef;">');
-                    // } else  if (data[i].remarks == 'Paid') {
-                    //     console.log(data[i].Posting_date);
-                    //     tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks form-control form-control-sm" value="' + data[i].remarks + '">');
-                    //     tablearr.push('<input type="text"  readonly style="width: 100%;border:1px; background-color:#e9ecef;" class="amount maskAmount updatedcell " data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                    //     tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" value="' + data[i].NetRental + '">');
-                    //     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
-                    //     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '">');
-                    //     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
-                    //     // tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
-                    //     tablearr.push('<input type="text" disabled style="width: 100%;border:1px; background-color:#e9ecef;">');
-                    } else if (data[i].remarks == 'Paid') {
-                        tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '" value="' + data[i].remarks + '">');
-                        tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
-                        tablearr.push('<input type="text"  style="width: 100%;border:1px;  background-color:#FFFFFF;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" placeholder="0.00">');
-                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
-                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num">');
+                     } else if (data[i].remarks == 'Paid' || data[i].remarks == 'Advance Payment Paid') {
+                        tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '" data-colid="remarks"  value="' + data[i].remarks + '">');
+                        tablearr.push('<input type="text" readonly style="width: 100px;border:1px;  background-color:#e9ecef;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<input type="text"  style="width: 90px; height:100%;border:1px; background-color:#FFFFFF;" class="form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="rpt">');
+                        tablearr.push('<input type="text"  style="width: 90px; height:100%;border:1px; background-color:#FFFFFF;" class="form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="withtax">');
+                        tablearr.push('<input type="text"  style="width: 90px; height:100%;border:1px; background-color:#FFFFFF;" class="form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="others">');
+                        tablearr.push('<input type="text" readonly style="width: 90px;border:1px;  background-color:#e9ecef;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" placeholder="0.00">');
+                        tablearr.push('<input type="text"  style="width: 90px; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
+                        tablearr.push('<input type="text"  style="width: 90px; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num">');
                         tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost txtDate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
-                       // tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
-                        // tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '" >');
-                        // tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;"  class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + moment(data[i].Posting_date).format("MM/DD/YYYY") + '" >');
-                        // tablearr.push('<button type="button" class="btnview btn btn-success" onclick="viewAttachment(\'' + data[i].filename + '\')">View Attachment</button >');
-                    } else {
+                 } else {
                         tablearr.push('<select style="border:1px; background-color:#FFFFFF; width: 175px;" class="remarks selection updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '"><option disabled selected value="Unpaid">Unpaid</option><option data-remarks="' + data[i].remarks + '" value="Paid">Paid</option></select>');
-                        tablearr.push('<input type="text"  style="width: 100%;border:1px;  background-color:#FFFFFF;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" placeholder="0.00">');
-                        tablearr.push('<input type="text"  style="width: 100%;border:1px;  background-color:#FFFFFF;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" placeholder="0.00">');
-                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
-                        tablearr.push('<input type="text"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num">');
-                        // tablearr.push('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="far fa-calendar-alt"></i></span></div><input type="text" class="reservation form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date"></div>');
-                        tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost txtDate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
+                        tablearr.push('<input type="text" readonly style="width: 100px;border:1px;  background-color:#e9ecef;" class="amount maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="amount" value="' + data[i].Amount + '">');
+                        tablearr.push('<input type="text"  style="width: 90px; height:100%;border:1px; background-color:#FFFFFF;" class="form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="rpt">');
+                        tablearr.push('<input type="text"  style="width: 90px; height:100%;border:1px; background-color:#FFFFFF;" class="form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="withtax">');
+                        tablearr.push('<input type="text"  style="width: 90px; height:100%;border:1px; background-color:#FFFFFF;" class="form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="others">');
+                       tablearr.push('<input type="text" readonly style="width: 90px;border:1px;  background-color:#e9ecef;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" placeholder="0.00">');
+                        tablearr.push('<input type="text"  style="width: 90px; height:100%;border:1px; background-color:#FFFFFF;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num">');
+                        tablearr.push('<input type="text"  style="width: 90px; height:100%;border:1px; background-color:#FFFFFF;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num">');
+                      tablearr.push('<input type="date"  style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;" class="datepost txtDate form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" >');
                                           
                    }
-                    
-                    // tablearr.push(data[i].modifiedby);
-                    // tablearr.push(data[i].modifiedon);
-                    // tablearr.push('<input type="text" style="width: 100%;border:1px;" disabled  class="status updatedcell " data-rowid="' + data[i].id + '" data-colid="status" value="' + data[i].status + '">');
-                    // tablearr.push('<input class="file-input updatedcell form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="filename" type="file" />');
-                    // tablearr.push('<input type="text" style="width: 100%; height:100%;border:1px; background-color:#FFFFFF;"  class="fileUpload form-control form-control-sm updatedcell"  data-rowid="' + data[i].id + '" data-colid="file">');
                     tablerow.push(tablearr);
                 }
 
@@ -515,6 +510,17 @@
                 } else if ($('[data-rowid=' + dataforsaving[x] + '][data-colid="Cv_num"]').val() == '') {
                     toastr.error("Please add CV_num");
                 } else {
+                        var selectedValue = $('[data-rowid=' + dataforsaving[x] + '] option:selected').val();
+                        var val = '';
+                        if (selectedValue === undefined) {
+                           val =  $('[data-rowid=' + dataforsaving[x] + '][data-colid="remarks"]').val();
+                           console.log($('[data-rowid=' + dataforsaving[x] + '][data-colid="remarks"]').val());
+                        }
+                        else
+                        {
+                            val = $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(); 
+                            console.log(val);
+                        }
                     $.ajax({
                         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updatePaymentSchedule',
                         type: 'post',
@@ -522,10 +528,13 @@
                         data: JSON.stringify({
                             LandContractCode: $('#LandContractCode').val(), // add contract_code value or landinformation code
                             // LandInformationCode:,
-                            remarks: $('[data-rowid=' + dataforsaving[x] + '] option:selected').val(),
+                            remarks: val,
                             amount: $('[data-rowid=' + dataforsaving[x] + '][data-colid="amount"]').val(),
                             Cv_num: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Cv_num"]').val(),
                             Cr_num: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Cr_num"]').val(),
+                            rpt: $('[data-rowid=' + dataforsaving[x] + '][data-colid="rpt"]').val(),
+                            withtax: $('[data-rowid=' + dataforsaving[x] + '][data-colid="withtax"]').val(),
+                            others: $('[data-rowid=' + dataforsaving[x] + '][data-colid="others"]').val(),
                             netrental: $('[data-rowid=' + dataforsaving[x] + '][data-colid="netrental"]').val(),
                             date: $('[data-rowid=' + dataforsaving[x] + ']').data('payment_date'),
                             Posting_date: $('[data-rowid=' + dataforsaving[x] + '][data-colid="Posting_date"]').val(),

@@ -432,6 +432,8 @@
                 $('#tbl_PaymentSched').DataTable().clear().draw();
                 for (var i in data) {
                     var tablearr = [];
+                    const formattedDate = moment(data[i].Posting_date).format("MM/DD/YYYY");
+                    const displayDate = moment(data[i].Posting_date).isValid() ? formattedDate : "-";
                     data[i].id = id++;
                     tablearr.push('<input type="text" disabled style="width: 100%;border:1px; background-color:#e9ecef;"  class="date_end  form-control form-control-sm updatedcell " data-rowid="' + data[i].id + '" data-colid="Payment_date_end" data-payment_date="' + data[i].Payment_date_end + '" value="' + data[i].Payment_date + '">');
                     tablearr.push('<input readonly style="border:1px; background-color:#e9ecef;" class="remarks updatedcell form-control form-control-sm" data-rowid="' + data[i].id + '" value="' + data[i].remarks + '">');
@@ -439,7 +441,7 @@
                     tablearr.push('<input type="text" readonly style="width: 100%;border:1px;  background-color:#e9ecef;" class="netrental maskAmount form-control form-control-sm updatedcell unpaid" data-rowid="' + data[i].id + '" data-colid="netrental" value="' + data[i].NetRental + '">');
                     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cv  form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cv_num" value="' + data[i].Cv_num + '">');
                     tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;" class="cr form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Cr_num" value="' + data[i].Cr_num + '" >');
-                    tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;"  class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="' + data[i].Posting_date + '" >');
+                    tablearr.push('<input type="text" readonly style="width: 100%; height:100%;border:1px; background-color:#e9ecef;"  class="datepost form-control form-control-sm updatedcell" data-rowid="' + data[i].id + '" data-colid="Posting_date" value="'+ displayDate +'" >');
                     tablerow.push(tablearr);
                 }
                 $('#tbl_PaymentSched').DataTable().rows.add(tablerow).draw();

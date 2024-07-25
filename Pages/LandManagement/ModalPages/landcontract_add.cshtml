@@ -523,39 +523,34 @@
                                 </div>
                                 <!-- insert table end -->
                             </div>
-                            <div class="row">
-                                <div class="col-md-12" style="margin-top: 20px;">
-                                    <button type="button" class="view btn btn-success" onclick="generatePaymentSched()">
-                                        View Payment Schedule </button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <!-- insert table start -->
-                                    <div class="col-md-12">
-                                        <div class="row" style="overflow: auto;">
-                                            <div class="card-body">
-                                                <table id="tbl_PaymentSchedule"
-                                                    class="table table-bordered table-striped table-sm"
-                                                    style="width:100%">
-                                                    <thead>
-                                                        <tr style="text-align:center">
-                                                            <th class="id">#</th>
-                                                            <th class="Payment_date">Payment Schedule Date</th>
-                                                            <th class="remarks">Status</th>
-                                                            <th class="amount">Gross Annual Rental</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="tbl_Users-data">
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12" style="margin-top: 20px;">
+                                        <button type="button" class="view btn btn-success" onclick="generatePaymentSched()">
+                                            View Payment Schedule </button>
                                     </div>
-                                    <!-- insert table end -->
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12" style="margin-top: 20px;">
+                                        <table id="tbl_PaymentSchedule"
+                                            class="table table-bordered table-striped table-sm"
+                                            style="width:100%">
+                                            <thead>
+                                                <tr style="text-align:center">
+                                                    <th class="id">#</th>
+                                                    <th class="Payment_date">Payment Schedule Date</th>
+                                                    <th class="remarks">Status</th>
+                                                    <th class="amount">Gross Annual Rental</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_Users-data">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -666,7 +661,7 @@
                         '<select style="border:1px; background-color:#FFFFFF; width: 175px;" class="remarks selection updatedcell form-control form-control-sm" data-rowid="' +
                         data[i].id +
                         '"><option disabled selected value="Unpaid">Unpaid</option><option value="Paid">Paid</option><option value="Advance Payment Paid">Advance Payment Paid</option></select>'
-                        );
+                    );
 
                     // tablearr.push(data[i].remarks);
                     console.log(data[i].remarks == 'Paid');
@@ -678,7 +673,7 @@
                     tablerow.push(tablearr);
                 }
                 $("#tbl_PaymentSchedule").DataTable().rows.add(tablerow).draw();
-                $('.selection').select2();
+                // $('.selection').select2();
             }
         });
     }
@@ -706,6 +701,7 @@
         }).buttons().container().appendTo('#tbl_PaymentSchedule' + '_wrapper .col-md-6:eq(0)');
         $('#tbl_PaymentSchedule' + '_paginate').css('font-size', 'smaller').css('float', 'right');
         $('#tbl_PaymentSchedule' + '_filter').css('float', 'right');
+         $('.selection').select2();
     }
 
     function initDataTablesEscalation() {
@@ -778,18 +774,20 @@
                 /,/g, ''));
 
             total = colval * parseFloat($('[data-rowid=' + dataforsaving[x] + '][data-colid="Num_of_has"]')
-            .val());
+                .val());
 
             $('[data-rowid=' + dataforsaving[x] + '][data-colid="Rate_per_year"]').val(total.toLocaleString());
             total_rate = $('[data-rowid=' + dataforsaving[x] + '][data-colid="yrs"]').val() * total.toFixed(2);
             $('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val(total_rate
-        .toLocaleString());
+                .toLocaleString());
             // console.log($('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val().replace(/,/g, ''));
             // sum += parseInt($('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val());
             sum += parseFloat($('[data-rowid=' + dataforsaving[x] + '][data-colid="Total_rate"]').val().replace(
                 /,/g, ''));
 
         }
+
+        
         // console.log(sum);
         $('.Total_rental').val(sum);
         $('.Total_rental').text(sum.toLocaleString('en-US'));
@@ -924,25 +922,27 @@
         $('#tbl_Escalation tbody').empty();
         $('.totalyrs').val(0);
         rowId = 0;
+        $('#tbl_PaymentSchedule').DataTable().clear().draw();
+        $('.Total_rental').text(0);
+        $('.advance_payment_amount').val(0);
+        $('.Remaining_rental').text(0);
+        $('.yrsdivided').val(0);
+        $('.Payment_Amount').text(0);
     });
 
     function totalYrs() {
         var sum_yrs = 0;
 
         for (var x in dataforsaving) {
-            // Select the element based on data-rowid and data-colid attributes
             var elem = $('[data-rowid="' + dataforsaving[x] + '"][data-colid="yrs"]');
-
-            // Check if the element exists and get its value, otherwise set to 0
             var val = elem.val();
             if (val === undefined || val === '') {
                 elem.val(0);
-                val = '0'; // Ensure val is a string '0' for parsing
+                val = '0'; 
             }
-            // Parse the value as an integer
             var intVal = parseInt(val);
             if (isNaN(intVal)) {
-                intVal = 0; // Default to 0 if parsing failed
+                intVal = 0; 
             }
             sum_yrs += intVal;
             console.log(sum_yrs);
@@ -1004,6 +1004,7 @@
         $('.Remaining_rental').text('');
         $('.yrsdivided').val('');
         $('.Payment_Amount').text('');
+        $('#tbl_PaymentSchedule').DataTable().clear().draw();
     });
     $('#tbl_PaymentSchedule').on('change', '.updatedcell', function () {
         var table = $('#tbl_PaymentSchedule').DataTable();
@@ -1147,6 +1148,7 @@
 
                 $('.infoCompanyName').text(viewPlantation.CompanyCode + '-' + viewPlantation
                     .Companyname);
+
             },
             error: function () {
                 toastr.error('Error on gathering Options!');
@@ -1465,8 +1467,6 @@
             }),
             contentType: "application/json; charset=utf-8",
             success: function (refLandContractData) {
-                console.log('refLandContractData', refLandContractData);
-
                 if (refLandContractData.WithCoOwner == true) {
                     $('.hideRefCoOwner').show();
                 } else {
@@ -1500,14 +1500,14 @@
             $('#selectType').text('New Contract Information Form');
             clearReNewContractInfo(
                 '.refLandownerName, .refContactNumber, .refCoOwner, .refAddress, .refLotNumber, .refTotalArea, .refCompanyName, .refPlantation, .refDocumentNumber, .refDocumentType'
-                );
+            );
             disableSelect2(['#viewLandInformationRNC', '#plantationSelectRNC']);
         } else if (selectedValue === 'renewcontract') {
             $('.viewRNC, .viewRNCPayment').show();
             $('#selectType').text('Renew Contract Information Form');
             clearNewContractInfo(
                 '.infoLandownerName, .infoContactNumber, .infoCoOwner, .infoAddress, .infoLotNumber, .infoTotalArea, .infoCompanyName'
-                );
+            );
             disableSelect2(['#viewLandownerNC', '#viewLandInformationNC', '#plantationSelectNC']);
             fetchActiveExpiringContracts();
         } else if (selectedValue === 'pretermination') {
@@ -1515,10 +1515,10 @@
             $('.viewPTC').show();
             clearReNewContractInfo(
                 '.refLandownerName, .refContactNumber, .refCoOwner, .refAddress, .refLotNumber, .refTotalArea, .refCompanyName, .refPlantation, .refDocumentNumber, .refDocumentType'
-                );
+            );
             clearNewContractInfo(
                 '.infoLandownerName, .infoContactNumber, .infoCoOwner, .infoAddress, .infoLotNumber, .infoTotalArea, .infoCompanyName'
-                );
+            );
             disableSelect2(['#viewLandownerNC', '#viewLandInformationNC', '#LandContracCodeSelect']);
             $('#selectType').text('Pre-Termination Form');
         }
