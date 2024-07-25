@@ -11,7 +11,7 @@ $('.role').ready(function () {
     console.log(1, Permission);
     setTimeout(function () {
         loadHomeContent();
-        getPaymentOverdue();
+        getDashboardPaymentMonitoring();
         console.log('load na');
 
     }, 1000);
@@ -941,7 +941,7 @@ function viewLandownerInfoData() {
 //Start: Payment Monitoring Dashboard
 
 
-function getPaymentOverdue() {
+function getDashboardPaymentMonitoring() {
     console.log('Permission', Permission, Permission.includes('LDMSDashboard_paymentsched'));
     var PaymentPermission = Permission.includes('LDMSDashboard_paymentsched');
     if (Permission.includes('LDMSDashboard_paymentsched') === true) {
