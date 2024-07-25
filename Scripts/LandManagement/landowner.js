@@ -581,7 +581,7 @@ $(function () {
         // alert( "Form successful submitted!" );
       }
     });
-    $('#landownerForm').validate({
+    $('#individualValidation').validate({
       rules: {
         email: {
           required: true,

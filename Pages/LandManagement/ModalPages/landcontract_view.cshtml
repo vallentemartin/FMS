@@ -17,7 +17,7 @@
                         <div class="col-md-2">
                             <label class="form-control form-control-sm border-0">Land Contract Code</label>
                             <p
-                                class="LandContractCode form-control form-control-sm" title="Land Contract Code" style="text-align: center;" readonly>
+                                class="LandContractCode form-control form-control-sm" title="Land Contract Code" style="text-align: center;" id="tbl_LandContractCode" readonly>
                             </p>
                         </div>
                     </div>
@@ -295,8 +295,8 @@
     </div>
 </section>
 <script>
-    var sourceContract = 'ContractMain';
-    var dataSourceIdCol = 'LandContractCode';
+    var sourceContract = 'ContractMain_Float';
+    var dataSourceIdCol = 'FloatLCID';
     viewContractInfoData(sourceContract, dataSourceIdCol);
     initDataTablesPaymentSched();
     initDataTablesEscalation();
@@ -427,7 +427,7 @@
 
                 var id = 0;
                 var tablerow = [];
-                $('#LandContractCode').val(data[0].LandContractCode);
+                $('#LandContractCode').text();
                 var table = $('#tbl_PaymentSched').DataTable();
                 $('#tbl_PaymentSched').DataTable().clear().draw();
                 for (var i in data) {

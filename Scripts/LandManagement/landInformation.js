@@ -101,7 +101,7 @@ function saveLandInformationData(sourceLandInformation) {
     if (confirm('Save Landowner data?')) {
         inputDataCollection['username'] = $("#username").val();
         inputDataCollection['token'] = $("#token").val();
-        inputDataCollection['dataSource'] = sourceLandInformation;
+        inputDataCollection['dataSource'] = sourceLandInformation + '_Float';
         inputDataCollection['sysapp'] = sysapp;
         inputData['cityCode'] = $('.cityCode').val();
         inputData['barangayCode'] = $('.barangayCode').val();
@@ -128,13 +128,9 @@ function saveLandInformationData(sourceLandInformation) {
                 }),
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    if (data.length !== 0 && data[""] === 1) {
-                        toastr.error('Document Number already exists!');
-                        // clearSelection('.LandownerCode, .DocumentTypeCode, .provinceCode, .cityCode, .barangayCode');
-                        // $('.Hectare').val('');
-                    } else {
+                    if (data.DocumentNumber === undefined) {
                         $.ajax({
-                            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/saveSysData',
+                            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveLDMSData',
                             type: 'post',
                             dataType: 'json',
                             data: JSON.stringify(inputDataCollection),
@@ -154,6 +150,10 @@ function saveLandInformationData(sourceLandInformation) {
                                 stopLoading();
                             }
                         })
+                    } else {
+                        toastr.error('Document Number already exists!');
+                        // clearSelection('.LandownerCode, .DocumentTypeCode, .provinceCode, .cityCode, .barangayCode');
+                        // $('.Hectare').val('');
                     }
                 },
                 error: function (xhr, status, error) {
@@ -361,7 +361,6 @@ function updateLandInformationData(data, id, name, status) {
 
 //DATA CRUD start
 function getSysLandInformationData(sourceLandInformation, filter) {
-    
     startLoading();
     var fields = $('.triggerlandinformation');
     var fieldID = [];
@@ -387,11 +386,11 @@ function getSysLandInformationData(sourceLandInformation, filter) {
         success: function (data) {
             console.log('land information update', data);
 
-            if ( data.WithCoOwner == false) {
-                $('.hideCoOwner').hide();
-            } else {
-                $('.hideCoOwner').show();
-            }
+            // if ( data.WithCoOwner == false) {
+            //     $('.hideCoOwner').hide();
+            // } else {
+            //     $('.hideCoOwner').show();
+            // }
 
             if ( data.DocumentTypeCode != 3 ) {
                 $('#hideRemarks').hide();

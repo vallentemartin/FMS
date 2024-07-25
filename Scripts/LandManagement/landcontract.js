@@ -118,7 +118,7 @@ function saveLandContractData(sourceContract) {
         if (selectedValue === 'newcontract') {
             inputDataNewContract['username'] = $("#username").val();
             inputDataNewContract['token'] = $("#token").val();
-            inputDataNewContract['dataSource'] = sourceContract;
+            inputDataNewContract['dataSource'] = sourceContract + '_Float';
             inputDataNewContract['sysapp'] = sysapp;
 
             // New Contract Data [Status: Pending]
@@ -148,7 +148,7 @@ function saveLandContractData(sourceContract) {
         } else if (selectedValue === 'renewcontract') {
             inputDataRenewContract['username'] = $("#username").val();
             inputDataRenewContract['token'] = $("#token").val();
-            inputDataRenewContract['dataSource'] = sourceContract;
+            inputDataRenewContract['dataSource'] = sourceContract + '_Float';
             inputDataRenewContract['sysapp'] = sysapp;
 
             // Renew Contract Data
@@ -179,7 +179,7 @@ function saveLandContractData(sourceContract) {
         } else if (selectedValue === 'pretermination') {
             inputDataCollection['username'] = $("#username").val();
             inputDataCollection['token'] = $("#token").val();
-            inputDataCollection['dataSource'] = sourceContract;
+            inputDataCollection['dataSource'] = sourceContract + '_Float';
             inputDataCollection['sysapp'] = sysapp;
 
             // Pre-Termination Data
@@ -347,12 +347,18 @@ function getSysAllContractInfoData(sourceContract) {
                             case 6:
                                 dataarr.push('<div style="text-align:center;color:#077A88"><b>Pending</b></div>');
                                 break;
-                            case 7:
-                                dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Returned</b></div>');
-                                break;
+                            // case 7:
+                            //     dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Returned</b></div>');
+                            //     break;
                             default:
                                 dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Error Status</b></div>');
                                 break;
+                        }   
+                    } else if (colid[j] == 'isactive') {
+                        if (data[i][colid[j]]) {
+                            dataarr.push('<div style="text-align:center;color:green"><b>Enabled</b></div>');
+                        } else {
+                            dataarr.push('<div style="text-align:center;color:red"><b>Disabled</b></div>');
                         }   
                     } else if (colid[j] == 'geoLocation') {
                         //dataarr.push('<div style="text-align:center"><a href="https://www.google.com/maps/place/' + data[i][colid[j]] + '" target="_blank">' + data[i][colid[j]] + '</a></div>');

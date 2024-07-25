@@ -18,19 +18,33 @@
                 </div>
                 <div class="card-body">
                     <div class="container">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label>History Remarks</label>
+                                    <!-- <p class="historyremarks form-control form-control-sm" placeholder="-" autocomplete="off" id="historyremarks" readonly></p> -->
+                                    <ul class="historyremarks"></ul>
+                                    <!-- <textarea class="historyremarks form-control form-control-sm" placeholder="-" autocomplete="off" id="historyremarks" readonly></textarea> -->
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-12 hideCompany">
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
-                                    <label>Remarks</label>
-                                    <textarea class="remarks form-control form-control-sm triggerlandowner autoCaps" placeholder="-" autocomplete="off" id="cmpnyremarks"></textarea>
+                                    <label>Remarks *<em style="font-weight: normal;">remove input to add new remarks</em></label>
+                                    <textarea class="remarks form-control form-control-sm triggerlandowner clear autoCaps" placeholder="-" autocomplete="off" id="cmpnyremarks"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12 hideIndividual">
                             <div class="row">
+                                <!-- <div class="col-sm-12 col-md-12">
+                                    <button type="button" class="btn btn-outline-danger btn-xs float-left" onclick="clearRemarks()" style="width: 80px; margin-bottom: 10px;" title="Clear Input"><i class="fas fa-eraser"></i>Clear</button>
+                                </div> -->
                                 <div class="col-sm-12 col-md-12">
-                                    <label>Remarks</label>
-                                    <textarea class="remarks form-control form-control-sm triggerlandowner autoCaps" placeholder="-" autocomplete="off" id="idvlremarks"></textarea>
+                                    <label>Remarks *<em style="font-weight: normal;">remove input to add new remarks</em></label>
+                                    <!-- <label>Remarks</label> -->
+                                    <textarea class="remarks form-control form-control-sm triggerlandowner clear autoCaps" placeholder="-" autocomplete="off" id="idvlremarks"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +106,7 @@
                                         <div class="row">
                                             <div class="col-sm-12 col-md-3">
                                                 <label>Landowner Code</label>
-                                                <input class="LandownerCode form-control form-control-sm triggerlandowner" value="0" type="text" disabled>
+                                                <input class="LandownerCode form-control form-control-sm triggerlandowner" value="0" type="text" id="LandownerCode" disabled>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -188,7 +202,7 @@
 </div>
 <script>
     var sourceLandowner = 'Landowner_Float';
-    var dataSourceIdCol = 'FloatLandowner';
+    var dataSourceIdCol = 'FloatLOID';
     getSysLandownerFloatingData(sourceLandowner, dataSourceIdCol);
 
     function updateLOData() {
@@ -225,7 +239,7 @@
                     token: $("#token").val(),
                     dataSource: sourceLandowner,
                     filter: dataSourceIdCol,
-                    FloatLandowner: $('.selectedid').data('id'),
+                    FloatLOID: $('.selectedid').data('id'),
                     sysapp,
                 };
                 console.log('INDIVIDUAL');
@@ -255,7 +269,7 @@
                     token: $("#token").val(),
                     dataSource: sourceLandowner,
                     filter: dataSourceIdCol,
-                    FloatLandowner: $('.selectedid').data('id'),
+                    FloatLOID: $('.selectedid').data('id'),
                     sysapp,
                 };
                 console.log('COMPANY');
@@ -274,28 +288,29 @@
                 console.log('company selection', inputDataCompany);
                 inputDataCollection = inputDataCompany; 
             }
-        }   
-            console.log('update inputDataCollection', inputDataCollection);
-        $.ajax({
-            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updateSysLDMSData',
-            type: 'post',
-            dataType: 'json',
-            data: JSON.stringify(inputDataCollection),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                console.log('landowner data update',data);
-                if (data == 0) {
-                    toastr.info('Data added for approval!');
-                    getSysAllLandownerData(sourceLandowner, dataSourceIdCol);
-                    hideModal();
-                } else {
+            $.ajax({
+                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updateSysLDMSLandownerData',
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify(inputDataCollection),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    console.log('landowner data update',data);
+                    if (data == 0) {
+                        toastr.info('Data added for approval!');
+                        getSysAllLandownerData(sourceLandowner, dataSourceIdCol);
+                        hideModal();
+                    } else {
+                        toastr.error('Error on Updating!');
+                    }
+                },
+                error: function () {
                     toastr.error('Error on Updating!');
                 }
-            },
-            error: function () {
-                toastr.error('Error on Updating!');
-            }
-        })
+            })
+        } else {
+            toastr.error('Error on Updating!');
+        }
     }
     
 ////////////////////////////////////////////////////////START: FETCH DATA OF PROVINCE, CITY, AND BARANGAY UPON UPDATE/////////////////////////////////////////////////////////
@@ -376,3 +391,6 @@
       theme: 'bootstrap4'
     })
 ////////////////////////////////////////////////END: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN SEARCHING CSS//////////////////////////////////////////////////////
+// function clearRemarks() {
+//     $('.clear').val('');
+// }
