@@ -1,15 +1,75 @@
-<section>
-    <!-- insert here -->
-</section>
+<div class="container">
+    <section>
+        <div class="container-fluid">    
+            <div class="card card-lightblue">
+                <div class="card-header">
+                    <h3 class="card-title">
+                    Land Contract Information
+                    </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <!-- START: LAND CONTRACT INFORMATION -->
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12 bg-light headertext">
+                                    <h5>Owner Information</h5>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label>Landowner</label>
+                                    <select
+                                        class="LandownerCode FullName Landowner form-control form-control-sm select2"
+                                        id="viewLandowner">
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label>Land Information/Document</label>
+                                    <select class="LandInformationCode form-control form-control-sm select2"
+                                        id="viewLandInformation" disabled>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label>Plantation</label>
+                                    <select
+                                        class="PlantationCode form-control form-control-sm select2"
+                                        id="">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- END: LAND CONTRACT INFORMATION -->
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </section>
+</div>
 <script>
     var sourceContract = 'ContractMain';
     var dataSourceIdCol = 'LandContractCode';
-    getSysContractInfoData(sourceContract, dataSourceIdCol);
+    viewContractInfoDataUpdate(sourceContract, dataSourceIdCol);
+    /////////////////////////////////////////////////////////////////////////////START: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN SEARCHING CSS/////////////////////////////////////////////////////////////////////////////
+    //Initialize Select2 Elements
+    $('.select2').select2()
 
-    $('.triggercontractinfo').on('change', function () {
-        var syscol = $(this)[0].className.split(' ');
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    })
+    /////////////////////////////////////////////////////////////////////////////END: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN SEARCHING CSS/////////////////////////////////////////////////////////////////////////////
+
+    function viewContractInfoDataUpdate(sourceContract, dataSourceIdCol) {
+        startLoading();
+        var fields = $('.triggercontractinfoview');
+        var fieldID = [];
+        for (var x in fields) {
+            if (fields[x].className != undefined) {
+                var y = fields[x].className.split(' ');
+                fieldID.push(y[0]);
+            }
+        }
         $.ajax({
-            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/updateSysData',
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getSysData',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
@@ -17,18 +77,107 @@
                 token: $("#token").val(),
                 dataSource: sourceContract,
                 filter: dataSourceIdCol,
-                selectedid: $('.selectedid').data('id'),
-                syscol: syscol[0],
-                syscolval: $(this).val(),
+                selectedID: $('.selectedid').data('id'),
                 sysapp: sysapp
             }),
             contentType: "application/json; charset=utf-8",
-            success: function () {
-                getSysAllContractInfoData(sourceContract);
+            success: function (LandContractData) {
+                console.log('Land Information data troubleshoot', LandContractData);
+                var LandInformationCode = LandContractData.LandInformationCode;
+                console.log('view LICode', LandInformationCode);
+                getContractInforData(LandContractData, LandInformationCode);
+                stopLoading();
             },
             error: function () {
-                toastr.error('Error on Updating!');
+                toastr.error('Data gathering error!');
+                stopLoading();
             }
         })
-    })
+    }
+
+    function getContractInforData(LandContractData, LandInformationCode) {
+        console.log('view LICode 1', LandContractData);
+        console.log('view LICode 2', LandInformationCode);
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getContractInfoData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                LandContractData: LandContractData,
+                LandInformationCode: LandInformationCode,
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (viewdata) {
+                viewContractinfo = {
+                    contractdata: LandContractData,
+                    landinformationdata: viewdata
+                };
+                console.log('view data', viewContractinfo);
+                getlandownerSelection(viewContractinfo);
+                // //view contract data
+                // $('.name').text(viewContract.contractdata.Fullname);
+                // $('.landdocument').text(viewContract.landinformationdata.Document);
+                // $('.landlotnumber').text(viewContract.landinformationdata.LotNumber);
+                // $('.LandContractCode').text(viewContract.contractdata.LandContractCode);
+
+                // if (viewContract.landinformationdata.WithCoOwner == true) {
+                //     $('.hideCoOwner').show();
+                //     $('.CoOwner').text(viewContract.landinformationdata.CoOwner);
+                // } else {
+                //     $('.hideCoOwner').hide();
+                //     $('.CoOwner').text('');
+                // }
+
+                // if (viewContract.contractdata.RepresentativeName == '') {
+                //     $('.hideRepresentativeLabel').hide();
+                // } else {
+                //     $('.hideRepresentativeLabel').show();
+                //     $('.RepName').text(viewContract.contractdata.RepresentativeName);
+                //     $('.RepContactNumber').text(viewContract.contractdata.RepresentativeContactNumber);
+                //     $('.RepEmail').text(viewContract.contractdata.RepresentativeEmail);
+                // }
+
+                // $('.province').text(viewContract.landinformationdata.provinceName);
+                // $('.city').text(viewContract.landinformationdata.cityName);
+                // $('.barangay').text(viewContract.landinformationdata.barangayName);
+                // $('.landtotalarea').text(viewContract.landinformationdata.Area);
+                // $('.landplantation').text(viewContract.contractdata.PlantationCode);
+                // $('.landcompany').text(viewContract.contractdata.CompanyCode + ' - ' + viewContract.contractdata.Companyname);
+                // $('.landcontractedarea').text(viewContract.contractdata.LandContractedArea);
+            }
+        })
+    }
+
+    function getlandownerSelection(viewContractinfo) {
+        console.log('get landowner function', viewContractinfo);
+        // FETCH DATA OF ACTIVE AND EXPIRING CONTRACTS
+        $('#viewLandowner').append('<option value="-">Loading...</option>');
+        
+        var LOHTML = '<option value="'+ viewContractinfo.contractdata.LandownerCode +'" selected disabled>'+ viewContractinfo.contractdata.Fullname +'</option>';
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getLandowner',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $("#username").val(),
+                token: $("#token").val(),
+                sysapp: sysapp
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (getLandownerData) {
+                if ( getLandownerData.length !== 0 ) {
+                for (var i in getLandownerData) {
+                    LOHTML += '<option value="' + getLandownerData[i].LandownerCode + '">' + getLandownerData[i].Fullname + '</option>';
+                }
+                    $('#viewLandowner').html(LOHTML);			
+                } else {
+                    console.log('No Landowner data available.');
+                }
+            }
+        })
+    }
+
 </script>

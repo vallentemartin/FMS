@@ -1,8 +1,276 @@
-<ul>
-    <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
-    <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
-    <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
-    <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
-</ul>
+<div class="role">
+    <section id="LDMSDashboard_role">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Land Data Management</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row" id="hideLDMSheader">
+                                    <div class="col-sm-4">
+                                        <div class="info-box mb-3">
+                                            <span class="info-box-icon boxiconActive"><i class="far fa-file-alt"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text" id="activeContracts"></span>
+                                                <span class="info-box-number activeContracts"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="info-box mb-3">
+                                            <span class="info-box-icon boxiconExpiring"><i class="far fa-file-alt"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text" id="expiringContracts"></span>
+                                                <span class="info-box-number expiringContracts"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-sm-4">
+                                        <div class="info-box mb-3">
+                                            <span class="info-box-icon boxiconInactive"><i class="far fa-file-alt"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text" id="inactiveContracts"></span>
+                                                <span class="info-box-number inactiveContracts"></span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-sm-4">
+                                        <div class="info-box mb-3">
+                                            <span class="info-box-icon boxiconInactive"><i class="far fa-file-alt"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text" id="terminatedContracts"></span>
+                                                <span class="info-box-number terminatedContracts"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix hidden-md-up"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-5">
+                                <div class="card card-primary">
+                                <!-- <div class="card card-success card-outline"> -->
+                                    <div class="card-header">
+                                    <h3 class="card-title"><i class="far fa-chart-bar"></i> Donut Chart - Contract Status</h3>
+                                    
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" id="LDMSchartbutton">
+                                        <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    </div>
+                                    <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                    <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 315px;" width="315" height="250" class="chartjs-render-monitor"></canvas>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-7">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                    <h3 class="card-title"><i class="far fa-chart-bar"></i> Bar Chart - Contract Status</h3>
 
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    </div>
+                                    <div class="card-body" style="display: block;">
+                                        <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 672px;" width="672" height="250" class="chartjs-render-monitor"></canvas>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-lightblue">
+                            <div class="card-header">
+                                <h3 class="card-title">List Of Landowner</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    @*<button type="button" class="btn btn-tool" data-card-widget="remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>*@
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table id="tbl_Landowner_Float" class="table table-bordered table-striped table-sm" style="width:100%" data-viewpage="pages/landmanagement/modalpages/landowner_view" data-approvepage="pages/home/modalpages/ldms_approveremarks" data-returnpage="pages/home/modalpages/ldms_returnremarks" data-disapprovepage="pages/home/modalpages/ldms_disapproveremarks">
+                                    <thead>
+                                        <tr style="text-align:center">
+                                            <th class="LandownerCode">Landowner Code</th>
+                                             <th class="Fullname">Landowner Name</th>
+                                            <!-- <th class="ContactNumber">Contact Number</th> -->
+                                            <!-- <th class="Email">Email Address</th> -->
+                                            <th class="floatStatus">Status</th>
+                                            <th class="createdby">Created By</th>
+                                            <th class="createdon">Created On</th>
+                                            <th class="id">Actions</th>
+                                            <!-- <th class="modifiedby">Last Modified By</th>
+                                            <th class="modifiedon">Last Modified</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbl_Users-data">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-lightblue">
+                            <div class="card-header">
+                                <h3 class="card-title">List Of Land Information</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    @*<button type="button" class="btn btn-tool" data-card-widget="remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>*@
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table id="tbl_LandInformation_Float" class="table table-bordered table-striped table-sm" style="width:100%" data-viewpage="pages/landmanagement/modalpages/landinformation_view" data-approvepage="pages/home/modalpages/ldms_approveremarks" data-returnpage="pages/home/modalpages/ldms_returnremarks" data-disapprovepage="pages/home/modalpages/ldms_disapproveremarks">
+                                    <thead>
+                                        <tr style="text-align:center">
+                                            <!-- <th class="LandInformationCode">Land Information Code</th> -->
+                                            <th class="name">Fullname</th>
+                                            <th class="Document">Document</th>
+                                            <th class="Address">Address</th>
+                                            <!-- <th class="provinceName">Province</th>
+                                            <th class="cityName">City</th>
+                                            <th class="barangayName">Barangay</th> -->
+                                            <th class="Area">Area</th>
+                                            <!-- <th class="geoLocation">Geo-Location</th> -->
+                                            <th class="floatStatus">Status</th>
+                                            <th class="createdby">Created By</th>
+                                            <th class="createdon">Created On</th>
+                                            <th class="id">Actions</th>
+                                            <!-- <th class="modifiedby">Last Modified By</th>
+                                            <th class="modifiedon">Last Modified</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbl_Users-data">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-lightblue">
+                            <div class="card-header">
+                                <h3 class="card-title">List Of Land Contracts</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    @*<button type="button" class="btn btn-tool" data-card-widget="remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>*@
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table id="tbl_ContractMain_Float" class="table table-bordered table-striped table-sm" style="width:100%" data-viewpage="pages/landmanagement/modalpages/landcontract_view" data-approvepage="pages/home/modalpages/ldms_approveremarks" data-returnpage="pages/home/modalpages/ldms_returnremarks" data-disapprovepage="pages/home/modalpages/ldms_disapproveremarks">
+                                    <thead>
+                                        <tr style="text-align:center">
+                                            <th class="LandContractCode">Land Contract Code</th>
+                                            <th class="PlantationCode">Plantation Code</th>
+                                            <th class="PaymentTerms">Payment Term</th>
+                                            <th class="floatStatus">Status</th>
+                                            <th class="createdby">Created By</th>
+                                            <th class="createdon">Created On</th>
+                                            <th class="id">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbl_Users-data">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="LDMSDashboard_paymentsched">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Payment Schedule Monitoring</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="info-box mb-3">
+                                            <span class="info-box-icon boxiconActive"><i class="fas fa-file-invoice"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text forpayment">For Payment</span>
+                                                <span class="info-box-number" id="forpayment"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-sm-4">
+                                        <div class="info-box mb-3">
+                                            <span class="info-box-icon boxiconExpiring"><i class="far fa-file-alt"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text" id="expiringContracts"></span>
+                                                <span class="info-box-number expiringContracts"></span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-sm-6">
+                                        <div class="info-box mb-3">
+                                            <span class="info-box-icon boxiconInactive"><i class="far fa-file-alt"></i></span>
+                                            <div class="info-box-content">
+                                                
+                                                <span class="info-box-text overdue">Overdue</span>
+                                                <span class="info-box-number" id="overdue"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix hidden-md-up"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 <script src="~/Scripts/Home/home.js"></script>
