@@ -15,9 +15,18 @@
                                     <label>Landowner Title Code</label>
                                     <input class="LandInformationCode form-control form-control-sm triggerlandinformation" type="text" disabled>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Landowner/Company</label>
+                                        <select class="LandownerCode FullName Landowner form-control form-control-sm triggerlandinformation select2" data-placeholder="Select Landowner" name="LandownermultipleSelect" id="LandownerMultiple">
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
                                     <label>Document Presented</label>
-                                    <select class="DocumentTypeCode Description DocumentType form-control form-control-sm triggerlandinformation">
+                                    <select class="DocumentTypeCode Description DocumentType form-control form-control-sm triggerlandinformation select2">
                                     </select>
                                 </div>
                                 <div class="col-md-4">
@@ -26,20 +35,13 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label>Lot Number</label>
                                     <input class="LotNumber form-control form-control-sm triggerlandinformation" type="text" placeholder="-"  autocomplete="off">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label>Total Area<i> (sqm)</i></label>
                                     <input class="Area form-control form-control-sm triggerlandinformation" step='0.01' placeholder='0.00' type="number">
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Landowner/Company</label>
-                                        <select class="LandownerCode FullName Landowner form-control form-control-sm triggerlandinformation select2" data-placeholder="Select Landowner" name="LandownermultipleSelect" id="LandownerMultiple">
-                                        </select>
-                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -63,7 +65,7 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label>Co-Owner</label>
+                                            <label>Co-Owner <em>(optional)</em></label>
                                             <textarea class="CoOwner form-control form-control-sm triggerlandinformation autoCaps" placeholder="-" autocomplete="off" id="textareaCoOwner"></textarea>
                                         </div>
                                     </div>

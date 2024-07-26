@@ -1,0 +1,11 @@
+.labelwidth{
+    width: 150px;
+}
+.rental {
+    border: solid 1px ;
+    
+    padding: 5px;
+    width: 100px;
+    border-right: none;
+    text-align:center;
+}
