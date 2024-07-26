@@ -87,8 +87,8 @@ function getSysAllLandInformation(sourceLandInformation) {
                 var dataarr = [];
                 for (var j in colid) {
                     if (colid[j] == 'id') {
-                        if ( data[i].floatStatus == 1) {
-                            dataarr.push('<div style="text-align:center">' +  
+                        if (data[i].floatStatus == 1) {
+                            dataarr.push('<div style="text-align:center">' +
                                 '<button type="button" onclick="viewLandInfomodal(\'' + sourceLandInformation + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">Views</button>' +
                                 '<button type="button" onclick="updateLandInfomodal(\'' + sourceLandInformation + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].floatStatus + '\')" class="btn btn-outline-info btn-xs" style="width: 80px; margin-left: 10px; margin-right: 10px;">Update</button>' +
                                 '</div>');
@@ -115,7 +115,7 @@ function getSysAllLandInformation(sourceLandInformation) {
                                 break;
                         }
                     } else if (colid[j] == 'geoLocation') {
-                        dataarr.push('<div style="text-align:center"><button class="btn btn-success-sm" onclick="showiFrame(\''+data[i][colid[j]]+'\')">' + data[i][colid[j]] + '</a></div>');
+                        dataarr.push('<div style="text-align:center"><button class="btn btn-success-sm" onclick="showiFrame(\'' + data[i][colid[j]] + '\')">' + data[i][colid[j]] + '</a></div>');
                     } else {
                         dataarr.push('<div style="text-align:center">' + data[i][colid[j]] + '</div>');
                     }
@@ -218,18 +218,18 @@ function viewLandInformationData() {
 }
 //END: LAND INFORMATION FLOAT VIEW MODAL
 //START: LAND INFORMATION FLOAT VIEW REMARKS
-function getLandInformationRemarks(LandownerCode) {
-    console.log('LandownerCode', LandownerCode);
+function getLandInformationRemarks(LandInformationCode) {
+    console.log('LandInformationCode', LandInformationCode);
     var inputDataCollection = {
-        LandownerCode: LandownerCode,
+        LandInformationCode: LandInformationCode,
         username: $("#username").val(),
         token: $("#token").val(),
         dataSource: sourceLandInformation,
         filter: dataSourceIdCol,
         FloatLIID: $('.selectedid').data('id'),
         sysapp,
-        };
-        console.log('test', inputDataCollection);
+    };
+    console.log('test', inputDataCollection);
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getLandInformationRemarks',
         type: 'post',
@@ -237,10 +237,10 @@ function getLandInformationRemarks(LandownerCode) {
         data: JSON.stringify(inputDataCollection),
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            console.log('land information remarks1',data);
+            console.log('land information remarks1', data);
             for (var i in data) {
                 console.log('remarks', data[i].remarks);
-                if ( data[i].remarks == '' ) {
+                if (data[i].remarks == '') {
                     // var createdon = data[i].createdon + ' - '
                     // var remarks = data[i].remarks + '\n'
                 } else {
@@ -301,7 +301,7 @@ function updateLandInfomodal(data, id, name, status) {
 }
 //DATA CRUD start
 function getSysLandInfoFloatingData(sourceLandInformation, filter) {
-    
+
     startLoading();
     var fields = $('.triggerlandinformation');
     var fieldID = [];
@@ -361,7 +361,7 @@ function getSysLandInfoFloatingData(sourceLandInformation, filter) {
             //START: PARAMETER: PROVINCECODE TO FETCH CITY
             var provinceCode = data.provinceCode;
             $('#citySelect').append('<option value="-">loading...</option>');
-            var CITYHTML = '<option value="'+data.cityCode+'" selected disabled>'+data.cityName+'</option>';
+            var CITYHTML = '<option value="' + data.cityCode + '" selected disabled>' + data.cityName + '</option>';
             $.ajax({
                 url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/getCityByProvince',
                 type: 'post',
@@ -375,11 +375,11 @@ function getSysLandInfoFloatingData(sourceLandInformation, filter) {
                 }),
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    if ( data.length !== 0 ) {
+                    if (data.length !== 0) {
                         for (var i in data) {
                             CITYHTML += '<option value="' + data[i].cityCode + '">' + data[i].cityName + '</option>';
                         }
-                        $('#citySelect').html(CITYHTML);					
+                        $('#citySelect').html(CITYHTML);
                     }
                 }
             })
@@ -388,7 +388,7 @@ function getSysLandInfoFloatingData(sourceLandInformation, filter) {
             //START: PARAMETER: CITYICODE TO FETCH BARANGAY
             var cityCode = data.cityCode;
             $('#barangaySelect').append('<option value="-">loading...</option>');
-            var BRGYHTML = '<option value="'+data.barangayCode+'" selected disabled>'+data.barangayName+'</option>';
+            var BRGYHTML = '<option value="' + data.barangayCode + '" selected disabled>' + data.barangayName + '</option>';
             $.ajax({
                 url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'common/getBarangayByCity',
                 type: 'post',
@@ -401,11 +401,11 @@ function getSysLandInfoFloatingData(sourceLandInformation, filter) {
                 }),
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    if ( data.length !== 0 ) {
+                    if (data.length !== 0) {
                         for (var i in data) {
                             BRGYHTML += '<option value="' + data[i].barangayCode + '">' + data[i].barangayName + '</option>';
                         }
-                        $('#barangaySelect').html(BRGYHTML);				
+                        $('#barangaySelect').html(BRGYHTML);
                     } else {
                         // Handle the case when no data is returned
                         console.log('No barangay data available.');
@@ -413,7 +413,7 @@ function getSysLandInfoFloatingData(sourceLandInformation, filter) {
                 }
             })
             //END:  PARAMETER: CITYICODE TO FETCH BARANGAY
-            getLandInformationRemarks(data.LandownerCode);
+            getLandInformationRemarks(data.LandInformationCode);
             stopLoading();
         },
         error: function () {
