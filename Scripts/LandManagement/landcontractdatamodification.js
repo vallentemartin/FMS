@@ -191,7 +191,7 @@ function updateLandContractmodal(data, id, name, status, LandContractCode) {
         type: 'post',
         dataType: 'html',
         success: function (htmlreturn) {
-            getLandContractDataforUpdate( id, status, LandContractCode);
+            getLandContractDataforUpdate(id, status, LandContractCode);
             $('.modal-body').html(htmlreturn);
         },
         error: function () {
@@ -230,7 +230,7 @@ function getOptDataForPlantationAppend(optSource, optId, optName, RAWHTML, plant
             PlantationName: plantations[i]
         });
     }
-        var RAWHTML = '<option value="' + plantationcode + '">' + plantationname + '</option>'
+    var RAWHTML = '<option value="' + plantationcode + '">' + plantationname + '</option>'
     for (var j in data) {
         RAWHTML += '<option value="' + data[j].PlantationCode + '">' + data[j].PlantationName + '</option>';
     }
@@ -281,7 +281,7 @@ function getLandContractDataforUpdate(id, status, LandContractCode) {
 
             $('.infoLandownerName').text(LandContractData.name);
             $('.infoContactNumber').text(LandContractData.ContactNumber);
-            
+
             if (LandContractData.CoOwner === '') {
                 $('.hideCoOwner').hide();
             } else {
@@ -296,7 +296,7 @@ function getLandContractDataforUpdate(id, status, LandContractCode) {
             console.log('Fullname', LandContractData.Fullname);
             console.log('repname', LandContractData.RepresentativeName);
 
-            if ( LandContractData.Fullname === LandContractData.RepresentativeName ) {
+            if (LandContractData.Fullname === LandContractData.RepresentativeName) {
                 $("#isRep").prop('checked', true);
                 $('.RepName').prop('disabled', true);
                 $('.RepContactNumber').prop('disabled', true);
@@ -327,7 +327,7 @@ function getLandContractDataforUpdate(id, status, LandContractCode) {
             }
 
             getOptDataForAddLandownerSelectionUpdate(LandownerCode, Fullname);
-            getOptDataForAddPaymentTermsSelectionUpdate(PaymentTermCode,PaymentTerms);
+            getOptDataForAddPaymentTermsSelectionUpdate(PaymentTermCode, PaymentTerms);
             getOptDataForPlantation(plantationcode, plantationname);
 
             $.ajax({
@@ -346,14 +346,14 @@ function getLandContractDataforUpdate(id, status, LandContractCode) {
                     if (data) {
                         // $('.viewLandInformationNC').select2();
                         // $('.viewLandInformationNC').html('');
-                        var LTHTML = '<option value="'+ LandContractData.LandInformationCode +'" selected>'+ LandContractData.DocumentDescription + ' - (' + LandContractData.DocumentNumber + ')' +'</option>';
+                        var LTHTML = '<option value="' + LandContractData.LandInformationCode + '" selected>' + LandContractData.DocumentDescription + ' - (' + LandContractData.DocumentNumber + ')' + '</option>';
                         for (var i in data) {
                             LTHTML += '<option value="' + data[i].LandInformationCode + '">' + data[i]
                                 .Description + ' - (' + data[i].DocumentNumber + ')' + '</option>';
                         }
                         $('.viewLandInformationNC').html(LTHTML);
                         // $('.viewLandInformationNC option[value="' + LandContractData.LandInformationCode + '"]').hide();
-                        
+
                     } else {
                         toastr.error('Error fetching Land Information!');
                     }
@@ -382,7 +382,7 @@ function getOptDataForAddLandownerSelectionUpdate(LandownerCode, Fullname) {
             var optId = tagClasses[0];
             var optName = tagClasses[1];
             var RAWHTML = '<option value="' + LandownerCode + '" disabled>' + Fullname + '</option>';
-            getOptDataForAddLandownerUpdateAppend(optSource,optId,optName,RAWHTML);
+            getOptDataForAddLandownerUpdateAppend(optSource, optId, optName, RAWHTML);
         }
     }
 }
@@ -394,7 +394,7 @@ function getOptDataForAddLandownerSelectionUpdate(LandownerCode, Fullname) {
  * @param {*} optName 
  * @param {*} RAWHTML 
  */
-function getOptDataForAddLandownerUpdateAppend(optSource,optId,optName,RAWHTML){
+function getOptDataForAddLandownerUpdateAppend(optSource, optId, optName, RAWHTML) {
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getOptData',
         type: 'post',
@@ -442,7 +442,8 @@ function getOptDataForAddPaymentTermsSelectionUpdate(PaymentTermCode, PaymentTer
             var optSource = tagClasses[2];
             var optId = tagClasses[0];
             var optName = tagClasses[1];
-            getOptDataForAddPaymentTermsUpdateAppend(optSource,optId,optName,PaymentTermCode,PaymentTerms);
+            var RAWHTML = '<option value="' + PaymentTermCode + '" selected disabled>' + PaymentTerms + '</option>';
+            getOptDataForAddPaymentTermsUpdateAppend(optSource, optId, optName, RAWHTML);
         }
     }
 }
@@ -454,7 +455,7 @@ function getOptDataForAddPaymentTermsSelectionUpdate(PaymentTermCode, PaymentTer
  * @param {*} optName 
  * @param {*} RAWHTML 
  */
-function getOptDataForAddPaymentTermsUpdateAppend(optSource,optId,optName,PaymentTermCode,PaymentTerms){
+function getOptDataForAddPaymentTermsUpdateAppend(optSource, optId, optName, RAWHTML) {
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getOptData',
         type: 'post',
@@ -470,11 +471,12 @@ function getOptDataForAddPaymentTermsUpdateAppend(optSource,optId,optName,Paymen
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             console.log('payment terms daw', data);
-            var selectedValue = PaymentTermCode;
-            var RAWHTML = '<option value="' + PaymentTermCode + '" disabled>' + PaymentTerms + '</option>';
+            // var selectedValue = PaymentTermCode;
+            //
             for (var i in data) {
-                var selected = data[i].id === selectedValue ? ' selected' : '';
-                RAWHTML += '<option value="' + data[i].id + '"' + selected + '>' + data[i].name + '</option>';
+                console.log('payment terms ', data[i].id);
+                // var selected = data[i].id === selectedValue ? ' selected' : '';
+                RAWHTML += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
             }
             $('.' + optSource + '.triggerpaymenttermselectionupdate').html(RAWHTML);
         },
