@@ -148,7 +148,7 @@
             </div>
             <div class="card-body">
                 <div class="col-md-12">
-                    <div class="row" style="overflow: auto;" >
+                    <div class="row">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4 form-group">
@@ -160,20 +160,20 @@
                                             </span>
                                         </div>
                                         <input type="text"
-                                            class="LeasePeriod form-control form-control-sm float-right triggerdetail" readonly
-                                            id="lease_period">
+                                            class="LeasePeriod form-control form-control-sm float-right triggerdetail"
+                                            readonly id="lease_period">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label>Lease Term </label>
                                     <input type="text" disabled
-                                        class="LeaseTerm reservationdate form-control form-control-sm float-right triggerdetail" readonly
-                                        id="terms">
+                                        class="LeaseTerm reservationdate form-control form-control-sm float-right triggerdetail"
+                                        readonly id="terms">
                                 </div>
                                 <div class="col-md-4">
                                     <label>Years of Advance Payment</label>
-                                    <input class="AdvancePayment form-control form-control-sm triggerdetail" type="number" readonly
-                                        Placeholder="Input Number of Year(s)">
+                                    <input class="AdvancePayment form-control form-control-sm triggerdetail"
+                                        type="number" readonly Placeholder="Input Number of Year(s)">
                                 </div>
                             </div>
                             <div class="row">
@@ -187,16 +187,16 @@
                                                 </span>
                                             </div>
                                             <input type="text"
-                                                class="StartOfPayment reservationdate form-control form-control-sm float-right triggerdetail" readonly
-                                                id="reservationdate">
+                                                class="StartOfPayment reservationdate form-control form-control-sm float-right triggerdetail"
+                                                readonly id="reservationdate">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label>Payment Terms</label>
                                     <input
-                                        class="PaymentTerms PaymentTerms PaymentTerms form-control form-control-sm triggerdetail" readonly
-                                        type="text">
+                                        class="PaymentTerms PaymentTerms PaymentTerms form-control form-control-sm triggerdetail"
+                                        readonly type="text">
                                 </div>
                             </div>
                             <div class="row">
@@ -206,6 +206,14 @@
                                     <input hidden type="text" id="LandContractCode">
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="card-body" style="overflow:auto;">
                             <div class="row">
                                 <!-- insert table start -->
                                 <div class="col-md-12">
@@ -228,30 +236,30 @@
                                     </table>
                                     <tfoot>
                                         <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label class="labelwidth" style="margin-top: 20px;">Total
-                                                            Rental:</label>
-                                                        <span class="Total_rental"></span>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="labelwidth">Advance Payment:</label>
-                                                        <span class="advance_payment_amount"></span>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="labelwidth">Remaining Rental:</label>
-                                                        <span class="Remaining_rental"></span>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="labelwidth">Years Divided:</label>
-                                                        <span class="yrsdivided"></span>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="labelwidth">Gross Annual Rental:</label>
-                                                        <span class="Payment_Amount"></span>
-                                                    </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="labelwidth" style="margin-top: 20px;">Total
+                                                        Rental:</label>
+                                                    <span class="Total_rental"></span>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="labelwidth">Advance Payment:</label>
+                                                    <span class="advance_payment_amount"></span>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="labelwidth">Remaining Rental:</label>
+                                                    <span class="Remaining_rental"></span>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="labelwidth">Years Divided:</label>
+                                                    <span class="yrsdivided"></span>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="labelwidth">Gross Annual Rental:</label>
+                                                    <span class="Payment_Amount"></span>
                                                 </div>
                                             </div>
+                                        </div>
                                     </tfoot>
                                 </div>
                             </div>
@@ -283,6 +291,7 @@
                                    </div>
                                    <!-- insert table end -->
                                </div>
+                              
                         </div>
                     </div>
                 </div>
