@@ -1,9 +1,9 @@
 $('.HTML_container').ready(function () {
-    initDataTablesPaymentSchedule('PaymentSchedule');
-    getSysAllDataContract('ContractMain');
+    initDataTablesPaymentMonitoring('PaymentMonitoring');
+    getSysAllDataPaymentMonitoring('PaymentMonitoring');
 })
-var dataSource = 'PaymentSchedule';
-function initDataTablesPaymentSchedule(Data) {
+var dataSource = 'PaymentMonitoring';
+function initDataTablesPaymentMonitoring(Data) {
     $('#tbl_' + Data).DataTable({
         language: {
             sSearch: "",
@@ -38,7 +38,7 @@ function initDataTablesPaymentSchedule(Data) {
             'data-off-color="danger" ' +
             'data-on-color="success" ' +
             'data-on-text="Enabled" ' +
-            'data-off-text="Disabled"></datatablefilterbox> <button class="btn btn-info btn-sm" onclick="getSysAllData(\'' + Data + '\')" title="Reload Table"><i class="fas fa-redo-alt"></i> Reload</button>';
+            'data-off-text="Disabled"></datatablefilterbox> <button class="btn btn-info btn-sm" onclick="getSysAllDataPaymentMonitoring(\'' + Data + '\')" title="Reload Table"><i class="fas fa-redo-alt"></i> Reload</button>';
         $('#tbl_' + Data + '_filter').prepend(htmlFilter);
         $("input[data-bootstrap-switch]").each(function () {
             $(this).bootstrapSwitch('state', $(this).prop('checked'));
@@ -51,7 +51,7 @@ function initDataTablesPaymentSchedule(Data) {
     }
 }
 
-function getSysAllDataContract(Source) {
+function getSysAllDataPaymentMonitoring(Source) {
     showdatatablesLoader(dataSource);
     var headcol = $('#tbl_' + dataSource + ' thead tr th');
     var colid = [];
@@ -62,7 +62,7 @@ function getSysAllDataContract(Source) {
         }
     }
     $.ajax({
-        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getSysAllData',
+        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getPaymentMonitoring',
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -80,7 +80,8 @@ function getSysAllDataContract(Source) {
                 var dataarr = [];
                 for (var j in colid) {
                     if (colid[j] == 'id') {
-                        dataarr.push('<div style="text-align:center"><button type="button" onclick="updateDataContract(\'' + dataSource + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
+                        dataarr.push('<div style="text-align:center"><button type="button" onclick="viewLandcontractData(\'' + dataSource + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">View</button></div>');
+                        // dataarr.push('<div style="text-align:center"><button type="button" onclick="updateDataContract(\'' + dataSource + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
                     } else if (colid[j] == 'isactive') {
                         if (data[i][colid[j]]) {
                             dataarr.push('<div style="text-align:center;color:green"><b>Enabled</b></div>');
@@ -103,38 +104,6 @@ function getSysAllDataContract(Source) {
         error: function () {
             toastr.error('Error on Fetching Data!');
             hidedatatablesLoader(dataSource);
-        }
-    })
-}
-function updateDataContract(data, id, name, status) {
-    showModal();
-    ModalSize('xl');
-    var title = 'Update ' + data + ' <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
-    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >';
-    $('.modal-title').html(title);
-    $('.modal-footer').html(footer);
-    title += '<b></b>';
-    // if (status == 'true') {
-    //     $('.modal-title').append('- <b style="color:green" class="status" data-status="1">Enabled</b>');
-    //     $('.modal-footer').append('<button type="button" class="btn btn-danger enabledisabledata" onclick="enabledisabledata(\'' + data + '\')"> Disable</button >');
-    // } else {
-    //     $('.modal-title').append('- <b style="color:red" class="status" data-status="0">Disabled</b>');
-    $('.modal-footer').append('<button type="button" style="margin:2px;" class="btn btn-success" onclick = "saveData()" > Save</button > ');
-    // }
-    if (Permission.includes(data + "_update") || excempted.includes($("#username").val())) {
-    } else {
-        $('.modal-title').append(' <em>(Read Only)</em>');
-        $('.enabledisabledata').prop('disabled', 'true');
-    }
-    $.ajax({
-        url: $('#tbl_' + data).data('editpage'),
-        type: 'post',
-        dataType: 'html',
-        success: function (htmlreturn) {
-            $('.modal-body').html(htmlreturn);
-        },
-        error: function () {
-            toastr.error('Error on fetching modal view!');
         }
     })
 }

@@ -170,6 +170,7 @@ function routePagebyBC(bc) {
                     }),
                     contentType: "application/json; charset=utf-8",
                     success: function (data) {
+                        console.log('home data', data);
                         $.ajax({
                             url: data.route_fileLoc,
                             type: 'post',
@@ -873,7 +874,11 @@ $(document).on('keyup', '.autoCaps', function () {
 })
 $(document).on('keyup', '.maskAmount', function () {
     $(this).mask("#,##0.00", { reverse: true });
-
+})
+$(document).on('keypress', '.maskMobile', function () {
+    $(this).mask("+63 000 000 0000");
+    // var val = $(this).val();
+    // $(this).val('').focus().val(val);
 })
 $(document).on('keyup', '.maskPhone', function () {
     $(this).mask("0000-000-0000");

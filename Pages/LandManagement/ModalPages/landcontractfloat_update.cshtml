@@ -1,0 +1,776 @@
+<section>
+    <div class="container-fluid">
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title" id="selectType">
+                    Contract Type
+                </h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <!-- START: CONTRACT INFORMATION -->
+                <div class="col-md-12">
+                    <form id="selectcontracttype">
+                        <div class="form-group clearfix beforeSelect">
+                            <div class="row d-flex text-center">
+                                <div class="icheck-lightblue d-inline col-sm-12 col-md-4 divNewContract">
+                                    <input class="contracttype" type="radio" name="contracttypeRadio" id="newcontract"
+                                        value="newcontract">
+                                    <label for="newcontract">New Contract</label>
+                                </div>
+                                <div class="icheck-lightblue d-inline col-sm-12 col-md-4 divRenewContract">
+                                    <input class="contracttype" type="radio" name="contracttypeRadio" id="renewcontract"
+                                        value="renewcontract">
+                                    <label for="renewcontract">Contract Renewal</label>
+                                </div>
+                                <div class="icheck-lightblue d-inline col-sm-12 col-md-4 divPreTerm">
+                                    <input class="contracttype" type="radio" name="contracttypeRadio" id="preterm"
+                                        value="pretermination">
+                                    <label for="preterm">Pre-Termination</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="container-fluid form hideContract">
+                    <div class="card-container viewRNC">
+                        <div class="card card-lightblue">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-lightblue"></i>
+                                    Information Reference
+                                </h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-sm-12 col-md-4">
+                                    <label>Select Land Contract</label>
+                                    <select class="RNCLandContractCode form-control form-control-sm select2" type="text"
+                                        id="LandContracCodeSelect" onChange="clearSelection('.plantationClear')">
+                                    </select>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="form-control form-control-sm border-0">Label</label>
+                                        <input type="text" class="LandContractCodeupdate form-control form-control-sm form-control-border border-width-2">
+                                    </div>
+                                </div>
+                                <input type="text" class="floatStatusupdate" hidden>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Name :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refLandownerName form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Contact Number :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refContactNumber form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row hideRefCoOwner">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Co-Owner :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-10">
+                                        <p
+                                            class="refCoOwner form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Address :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-10">
+                                        <p
+                                            class="refAddress form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0"
+                                            style="height: 29px; width: 166px;">Document Presented:</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refDocumentType form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Document Number:</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refDocumentNumber form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Lot Number :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refLotNumber form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Leased Area
+                                            <i>(sqm)</i>:</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refTotalArea form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Plantation :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refPlantation form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <label class="form-control form-control-sm border-0">Company :</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p
+                                            class="refCompanyName form-control form-control-sm form-control-border border-width-2">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 bg-light headertext viewNC">
+                        <h5>Owner Information</h5>
+                    </div>
+                    <div class="row viewNC">
+                        <div class="col-sm-12 col-md-4">
+                            <label>Landowner</label>
+                            <select
+                                class="LandownerCode FullName Landowner form-control form-control-sm triggerlandownerselectionupdate triggerNewContract LandownerCodeNC NCLandownerCode select2"
+                                type="text" id="viewLandownerNC">
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label>Land Information/Document</label>
+                            <select
+                                class="LandInformationCode viewLandInformationNC NCLandInformationCode form-control form-control-sm select2"
+                                type="text" id="viewLandInformationNC">
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label>Plantation</label>
+                            <select class="PlantationCode NCPlantationCode form-control form-control-sm triggercontractplantationselect select2 plantationClear"
+                                id="plantationSelectNC">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row viewRNC">
+                        <div class="col-md-12 bg-light headertext viewRNC">
+                            <h5>Owner Information</h5>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label>Landowner</label>
+                            <select
+                                class="LandownerCode FullName Landowner form-control form-control-sm LandownerCodeRNC select2"
+                                type="text" id="viewLandownerRNC" disabled>
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label>Land Information/Document</label>
+                            <select
+                                class="LandInformationCode viewLandInformationRNC form-control form-control-sm select2"
+                                type="text" id="viewLandInformationRNC" disabled>
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label>Plantation</label>
+                            <select class="PlantationCode form-control form-control-sm trigger select2 plantationClear"
+                                id="plantationSelectRNC" disabled>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Name :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <p
+                                class="infoLandownerName form-control form-control-sm form-control-border border-width-2">
+                            </p>
+                        </div>
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Contact Number :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <p
+                                class="infoContactNumber form-control form-control-sm form-control-border border-width-2">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row hideCoOwner">
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Co-Owner :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-10">
+                            <p class="infoCoOwner form-control form-control-sm form-control-border border-width-2"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Address :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-10">
+                            <p class="infoAddress form-control form-control-sm form-control-border border-width-2"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Lot Number :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <p class="infoLotNumber form-control form-control-sm form-control-border border-width-2">
+                            </p>
+                        </div>
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Total Area <i>(sqm)</i>:</label>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <p class="infoTotalArea form-control form-control-sm form-control-border border-width-2">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-2">
+                            <label class="form-control form-control-sm border-0">Company :</label>
+                        </div>
+                        <div class="col-sm-12 col-md-10">
+                            <p class="infoCompanyName form-control form-control-sm form-control-border border-width-2">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <br>
+                        <div class="col-md-12 bg-light headertext">
+                            <h5>Representative</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 hideRepresentative">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group clearfix">
+                                                    <div class="icheck-lightblue d-inline">
+                                                        <input type="checkbox" id="isRep" class="checkRepresentative">
+                                                        <label for="isRep">is the Landowner same as the Authorize
+                                                            Representative?</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 hideRepresentativeLabel">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4">
+                                                <label>Name</label>
+                                                <input type="text" class="RepName triggerNewContract NCRepresentativeName form-control form-control-sm">
+                                            </div>
+                                            <div class="col-sm-12 col-md-4 showRepresentativeNumber">
+                                                <label>Contact Number</label>
+                                                <input class="RepContactNumber NCRepresentativeContactNumber form-control form-control-sm maskMobile"
+                                                    id="companynumber" type="text" autocomplete="off">
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <label>Email</label>
+                                                <input type="text" class="RepEmail NCRepresentativeEmail triggerNewContract form-control form-control-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <br>
+                        <div class="col-md-12 bg-light headertext">
+                            <h5>Leased Area</h5>
+                        </div>
+                        <div class="row flort-right">
+                            <div class="col-md-6">
+                                <label>Lease Contracted <i>(sqm)</i></label>
+                                <input type="text"
+                                    class="LandContractedArea form-control form-control-sm form-control-border border-width-2 triggercontractinfo triggerNewContract NCSqm"
+                                    id="Sqm" step='0.01' min="1" max="1000000" placeholder='0.00' type="number"
+                                    onkeyup=imposeMinMax(this)>
+                                <input type="text"
+                                    class="availableArea form-control form-control-sm form-control-border border-width-2"
+                                    id="remaining" step='0.01' min="1" max="1000000" placeholder='0.00' type="number"
+                                    hidden>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Lease Contracted <i>(has)</i></label>
+                                <input type="text"
+                                    class="Hectare form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
+                                    id="Hectares" step='0.01' min="1" placeholder='0.00' type="number" disabled>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="col-md-12 bg-light headertext">
+                            <h5>Attachment</h5>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input id="fileUploader" name="file"
+                                        class="Init_Filename form-control form-control-sm triggerdetail border-0"
+                                        type="file" multiple />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid form viewPTC">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                                <label>Select Land Contract</label>
+                                <select class="PTCLandContractCode form-control form-control-sm select2" type="text"
+                                    id="LandContracCodeSelect" onChange="clearSelection('.plantationClear')">
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2">
+                                <label class="form-control form-control-sm border-0">Name:</label>
+                            </div>
+                            <div class="col-sm-12 col-md-10">
+                                <p class="PTCName form-control form-control-sm form-control-border border-width-2">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: CONTRACT INFORMATION -->
+        </div>
+        <!-- /.card-body -->
+    </div>
+    </div>
+</section>
+<section class="viewNC viewRNCPayment">
+    <div class="container-fluid">
+        <div class="card card-lightblue">
+            <div class="card-header">
+                <h3 class="card-title">Contract Payment</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body" style="overflow: auto;">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="card-body form">
+                            <!-- insert: table starts here -->
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Lease Period</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text"
+                                            class="form-control form-control-sm float-right triggercontractinfo"
+                                            id="lease_period">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Lease Term </label>
+                                    <input type="text" disabled
+                                        class="terms triggerNewContract reservationdate form-control form-control-sm float-right"
+                                        id="terms">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Years of Advance Payment</label>
+                                    <input class="advance_payment form-control form-control-sm triggerNewContract" type="number"
+                                        Placeholder="Input Number of Year(s)">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label> Start of Payment:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text"
+                                                class="start_of_payment reservationdate form-control form-control-sm float-right triggerNewContract"
+                                                id="reservationdate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Payment Terms</label>
+                                    <select
+                                        class="PaymentTermsCode PaymentTerms PaymentTerms form-control form-control-sm triggerpaymenttermselectionupdate triggercontractinfo triggerNewContract select2"
+                                        type="text">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input hidden type="text" id="StartDate">
+                                    <input hidden type="text" id="EndDate">
+                                    <input hidden type="text" id="LandContractCode">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!-- insert table start -->
+                                <div class="col-md-12">
+                                    <div class="row" style="overflow: auto;">
+                                        <label for="Escalation">Generate Escalation</label>
+                                        <table id="tbl_Escalation" class="table table-bordered table-striped table-sm"
+                                            style="width:100%">
+                                            <thead>
+                                                <tr style="text-align:center">
+                                                    <!-- <th hidden class="Payment_date">Payment_date</th> -->
+                                                    <th class="date_of_payment">Date</th>
+                                                    <th class="years">Years</th>
+                                                    <th class="Rate">Rate</th>
+                                                    <th class="Num_of_has">Hectares</th>
+                                                    <th class="Rate_per_year">Annual Rate</th>
+                                                    <th class="Total_rate">Contract Rate</th>
+                                                    <th class="deleteRow">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_Users-data">
+                                            </tbody>
+                                        </table>
+                                        <tfoot>
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-success" id="addRow">Add
+                                                    Row</button>
+                                                <label class="" style="margin-left: 118px;">Total:</label>
+                                                <span class="totalyrs"></span>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth" style="margin-top: 20px;">Total
+                                                            Rental:</label>
+                                                        <span class="Total_rental"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Less:Advance Payment:</label>
+                                                        <!-- <input class="advance_payment_amount maskAmount" style="border:1px solid #ced4da"> -->
+                                                        <input
+                                                            class="advance_payment_amount triggerNewContract maskAmount triggercontractinfo ">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Remaining Rental:</label>
+                                                        <span class="Remaining_rental"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="dividedyrs labelwidth" for="divided"></label>
+                                                        <input class="yrsdivided triggerNewContract" style="border:1px solid #ced4da">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="labelwidth">Gross Annual Rental:</label>
+                                                        <span class="Payment_Amount triggerNewContract"></span>
+                                                    </div>
+                                                </div>
+                                        </tfoot>
+                                    </div>
+                                </div>
+                                <!-- insert table end -->
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12" style="margin-top: 20px;">
+                                        <button type="button" class="view btn btn-success" onclick="generatePaymentSched()">
+                                            View Payment Schedule </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12" style="margin-top: 20px;">
+                                        <table id="tbl_PaymentSchedule"
+                                            class="table table-bordered table-striped table-sm"
+                                            style="width:100%">
+                                            <thead>
+                                                <tr style="text-align:center">
+                                                    <th class="id">#</th>
+                                                    <th class="Payment_date">Payment Schedule Date</th>
+                                                    <th class="remarks">Status</th>
+                                                    <th class="amount">Gross Annual Rental</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_Users-data">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 card-footer" style="background-color: white;">
+                <button type="submit" class="btn btn-success float-right" onclick="updateLCData()"> Update</button >
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    var sourceContract = 'ContractMain_Float';
+    var dataSourceIdCol = 'FloatID';
+    // getOptDataForAddLandContractUpdate();
+    // getOptDataForPlantation();
+    
+    function updateLCData() {
+        alert(1);
+    }
+
+    $('.viewRNC, .viewPTC').hide();
+     /////////////////////////////////////////////////////////////////////////////START: MINIMUM INPUT OF AREA TO BE CONTRACTED/////////////////////////////////////////////////////////////////////////////
+    function imposeMinMax(input) {
+        if (input.value != "") {
+            if (parseFloat(input.value) < parseFloat(input.min)) {
+                input.value = input.min;
+            }
+            if (parseFloat(input.value) > parseFloat($('#remaining').val())) {
+                toastr.error('Input data reach the max limit of available total area!');
+                input.value = $('#remaining').val();
+            }
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////END: MINIMUM INPUT OF AREA TO BE CONTRACTED/////////////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////////////////START: SQM CONVERTION INTO HAS/////////////////////////////////////////////////////////////////////////////
+    $("#Sqm").keyup(function () {
+        var hectares = $('#Sqm').val() / 10000;
+        // var remaining =  $('.remaining').val();
+        $('#Hectares').val(hectares);
+    });
+
+    $("#Hectares").keyup(function () {
+        var squareMeters = $('#Hectares').val() * 10000;
+        $('#Sqm').val(squareMeters);
+    });
+    /////////////////////////////////////////////////////////////////////////////END: SQM CONVERTION INTO HAS/////////////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////////////////START: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN SEARCHING CSS/////////////////////////////////////////////////////////////////////////////
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    })
+    /////////////////////////////////////////////////////////////////////////////END: INITIALIZATION OF MULTIPLE SELECT AND DROPWDOWN SEARCHING CSS/////////////////////////////////////////////////////////////////////////////
+    
+    /////////////////////////////////////////////////////////////////////////////START: LEASE PERIOD/////////////////////////////////////////////////////////////////////////////
+    $('#lease_period').daterangepicker({
+        showDropdowns: true,
+        minYear: 1950,
+        maxYear: 2500,
+        showAnim: 'slideDown',
+        dateFormat: 'dd/mm/yyyy'
+    });
+    $('#lease_period').on('apply.daterangepicker', function () {
+        var lease_period = $('#lease_period').val().split(' - ');
+        var start_lease = lease_period[0];
+        var end_lease = lease_period[1];
+        var start = new Date(start_lease);
+        var end = new Date(end_lease);
+        console.log(start_lease, end_lease)
+        var diff = new Date(end - start);
+        var days = diff / 1000 / 60 / 60 / 24;
+        var years = parseInt(days / 365);
+        $('#terms').val(years);
+    });
+    /////////////////////////////////////////////////////////////////////////////END: LEASE PERIOD/////////////////////////////////////////////////////////////////////////////
+
+    
+    /////////////////////////////////////////////////////////////////////////////START: START OF PAYMENT DATE QUERY/////////////////////////////////////////////////////////////////////////////
+    $('#reservationdate').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1950,
+        maxYear: 2500,
+        showAnim: 'slideDown',
+        locale: {
+            cancelLabel: 'Clear',
+            format: 'MM/DD/YYYY'
+        }
+    });
+
+    $('#reservationdate').on('apply.daterangepicker', function (ev, picker) {
+        $(this).val(picker.startDate.format('MM/DD/YYYY'));
+        console.log('reservationdate apply', $(this).val(picker.startDate.format('MM/DD/YYYY')));
+    });
+
+    $('#reservationdate').on('cancel.daterangepicker', function (ev, picker) {
+        $(this).val('');
+    });
+    /////////////////////////////////////////////////////////////////////////////END: START OF PAYMENT DATE QUERY/////////////////////////////////////////////////////////////////////////////
+
+
+    // START: REPRESENTATIVE 
+    $('#isRep').change(function(e){
+        var isRepCheck = $("#isRep").prop('checked');
+        var FloatID = $('.selectedid').data('id');
+        var LandContractCode = $('.LandContractCodeupdate').val();
+        var floatStatus = $('.floatStatusupdate').val();
+
+        if (isRepCheck) {
+            $('.RepName').prop('disabled', true);
+            $('.RepContactNumber').prop('disabled', true);
+            $('.RepEmail').prop('disabled', true);
+
+            $.ajax({
+                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getLandContractInfobyID',
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify({
+                    LandContractCode: LandContractCode,
+                    FloatID: FloatID,
+                    floatStatus: floatStatus,
+                    username: $("#username").val(),
+                    token: $("#token").val(),
+                    sysapp: sysapp
+                }),
+                contentType: "application/json; charset=utf-8",
+                success: function (viewData) {
+                    var LandContractData = viewData;
+                    console.log('stop', LandContractData);
+
+                    $('.RepName').val(LandContractData.RepresentativeName);
+                    $('.RepContactNumber').val(LandContractData.RepresentativeContactNumber);
+                    $('.RepEmail').val(LandContractData.RepresentativeEmail);
+                },
+                error: function () {
+                    toastr.error('Error on saving data!');
+                    stopLoading();
+                }
+            });
+        } else {
+            $('.RepName').prop('disabled', false);
+            $('.RepContactNumber').prop('disabled', false);
+            $('.RepEmail').prop('disabled', false);
+            $('.RepName').val('');
+            $('.RepContactNumber').val('');
+            $('.RepEmail').val('');
+        }
+    });
+
+    //START: UPLOAD FOR UPDATING ATTACHMENTS
+    function saveNewFile(dataSource) {
+        var input = document.getElementById('fileUploader');
+        if (input.files && input.files.length > 0) {
+            var formData = new FormData();
+            for (var i = 0; i < input.files.length; i++) {
+                formData.append("file" + i, input.files[i]);
+            }
+            formData.append('username', $("#username").val());
+            formData.append('token', $("#token").val());
+            formData.append('dataSource', dataSource);
+            formData.append('sysapp', sysapp);
+        }
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentInitUpload',
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                for (var i in data) {
+                    var name = data[i].name;
+                    var filename = data[i].filename;
+                    var extension = data[i].extension;
+                    console.log(name, filename, extension);
+                    saveNewUploadedFile(name, filename, extension, dataSource);
+                }
+            },
+            error: function () {
+                console.log("error");
+            }
+        })
+    }
+
+    function saveNewUploadedFile(name, filename, extension, dataSource) {
+        var inputData = {};
+        var inputDataCollection = {};
+        inputDataCollection['username'] = $("#username").val();
+        inputDataCollection['token'] = $("#token").val();
+        inputDataCollection['dataSource'] = dataSource;
+        inputDataCollection['sysapp'] = sysapp;
+        inputData['Init_Filename'] = name;
+        inputData['Sys_Filename'] = filename;
+        inputData['extension'] = extension;
+        inputData['Sys_AppsId'] = sysapp;
+        // inputData['route_code'] = $('.pagelink.active').data('bcrumbs');
+        inputData['route_code'] = $('.pagelink.active').attr("class").split(' ')[1];
+        inputDataCollection['inputData'] = inputData;
+
+        console.log(inputDataCollection);
+        $.ajax({
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/FMSattachmentSaveData',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify(inputDataCollection),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.retval == 1) {
+                    $('.triggerdetail').val('');
+                } else {
+                    toastr.error('Duplicate code!');
+                    stopLoading();
+                }
+            },
+            error: function () {
+                toastr.error('Error on saving data!');
+                stopLoading();
+            }
+        })
+    }
+</script>

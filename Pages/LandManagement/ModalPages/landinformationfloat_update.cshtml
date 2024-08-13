@@ -1,0 +1,252 @@
+<!-- <div class="container" id="hideRemarks"> -->
+<div class="container">
+    <section>
+        <div class="container-fluid">
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-edit"></i>
+                        For Update Information
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        @*<button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>*@
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label>History Remarks</label>
+                                    <ul class="historyremarks"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" id="remarksTextArea">
+                                <div class="form-group">
+                                    <label>Remarks *<em style="font-weight: normal;">remove input to add new remarks</em></label>
+                                    <textarea class="remarks form-control form-control-sm autoCaps" placeholder="Add remarks" id="Othersremarks"></textarea  autocomplete="off" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="container">
+    <section>
+        <form id="LandInfoForm">
+            <div class="container-fluid">
+                <div class="card card-lightblue">
+                    <div class="card-header">
+                        <h3 class="card-title">Land Information</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <!-- START: LAND INFORMATION -->
+                            <div class="container">
+                                <div class="col-md-12">
+                                    <!-- insert here -->
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Land Information Code</label>
+                                                <input class="LandInformationCode form-control form-control-sm triggerlandinformation" type="text" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Landowner/Company</label>
+                                                <select class="LandownerCode FullName Landowner form-control form-control-sm triggerlandinformation triggerlandinformationselect select2" data-placeholder="Select Landowner" name="Landowner" id="LandownerMultiple">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Document Presented</label>
+                                                <select class="DocumentTypeCode Description DocumentType form-control form-control-sm triggerlandinformation triggerlandinformationselect select2" name="DocumentPresented" id="DocumentTypeSelect">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Document Number</label>
+                                                <input class="DocumentNumber form-control form-control-sm triggerlandinformation" type="text" name="DocumentNumber" placeholder="-" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Lot Number</label>
+                                                <input class="LotNumber form-control form-control-sm triggerlandinformation" type="text" name="LotNumber" placeholder="-" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Total Area<i> (sqm)</i></label>
+                                                <input class="Area form-control form-control-sm triggerlandinformation" step='0.01' placeholder='0.00' type="number" name="TotalArea">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label id="provinceLabel">Province</label>
+                                                <select class="provinceCode provinceName Province form-control form-control-sm triggerlandinformation triggerlandinformationselect select2" name="Province" id="provinceSelect">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label id="cityLabel">Municipality/City</label>
+                                                <select class="cityCode form-control form-control-sm triggerlandinformationselect select2 provinceUpdate" id="citySelect" name="City">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label id="barangayLabel">Barangay</label>
+                                                <select class="barangayCode form-control form-control-sm triggerlandinformationselect select2 provinceUpdate cityUpdate" id="barangaySelect" name="Barangay">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row hideCoOwner">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Co-Owner <em>(optional)</em></label>
+                                                        <textarea class="CoOwner form-control form-control-sm triggerlandinformation autoCaps" placeholder="-" autocomplete="off" id="textareaCoOwner"></textarea>          
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- insert here: ends here -->
+                                </div>
+                            </div>
+                        <!-- END: LAND INFORMATION -->
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </form>
+        <div class="col-md-12 card-footer">
+            <button type="submit" class="btn btn-success float-right" onclick="updateLIData()"> Update</button >
+        </div>
+    </section>
+</div>
+<script>
+    var sourceLandInformation = 'LandInformation_Float';
+    var dataSourceIdCol = 'FloatID';
+    // $('#remarksTextArea').hide();
+    getSysLandInfoFloatingData(sourceLandInformation, dataSourceIdCol);
+
+    $('#DocumentTypeSelect').change(function () {
+        if( $('#DocumentTypeSelect').val() == 4 ) {
+            // $('#remarksTextArea').show();
+            $('#remarksTextArea').prop('disabled', true);
+        } else {
+            $('#remarksTextArea').prop('disabled', false);
+            // $('#remarksTextArea').hide();
+        }
+    })
+
+    function updateLIData() {
+        var fields = $('.triggerlandinformation');
+        var fieldsSelection = $('.triggerlandinformationselect');
+        var fieldID = [];
+        var fieldIDselect = [];
+        var remarks = '';
+        console.log('variable fields LI', fields);
+        console.log('variable fieldSelection LI', fieldsSelection);
+
+        if (confirm('Do you want to save the changes\n\nPlease check the correctness of the information before saving.')) {
+            for (var x in fields) {
+                if (fields[x].className != undefined) {
+                    var y = fields[x].className.split(' ');
+                    fieldID.push(y[0]);
+                    console.log('for loop fields', fieldID);
+                }
+            }
+            for (var x in fieldsSelection) {
+                if (fieldsSelection[x].className != undefined) {
+                    var y = fieldsSelection[x].className.split(' ');
+                    fieldIDselect.push(y[0]);
+                    console.log('for loop fieldsSelection', fieldIDselect);
+                }
+            }
+            console.log('LI fields', fields);
+            console.log('LI fieldsSelection', fieldsSelection);
+            var inputDataCollection = {
+                username: $("#username").val(),
+                token: $("#token").val(),
+                dataSource: sourceLandInformation,
+                filter: dataSourceIdCol,
+                FloatID: $('.selectedid').data('id'),
+                sysapp,
+            };
+            remarks = $('#Othersremarks').val();
+
+            inputDataCollection['remarks'] = remarks;
+            for (var j in fieldID) {
+                inputDataCollection[fieldID[j]] = $('.triggerlandinformation.' + fieldID[j]).val();
+            }
+            for (var j in fieldIDselect) {
+                inputDataCollection[fieldIDselect[j]] = $('.' + fieldIDselect[j] + ' option:selected').val();
+                console.log('fieldIDselect', inputDataCollection[fieldIDselect[j]]);
+            }
+            // if (inputDataCollection['CoOwner'] == '') {
+            //     inputDataCollection['WithCoOwner'] = false;
+            // } else {
+            //     inputDataCollection['WithCoOwner'] = true;
+            // }
+
+            console.log('Land Information inputDataCollection', inputDataCollection);
+            $.ajax({
+                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/updateSysLDMSLandInformationData',
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify(inputDataCollection),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    console.log('land information data update',data);
+                    if (data == 0) {
+                        toastr.info('Data added for approval!');
+                        getSysAllLandInformation(sourceLandInformation, dataSourceIdCol);
+                        hideModal();
+                    } else {
+                        toastr.error('Error on Updating!');
+                    }
+                },
+                error: function () {
+                    toastr.error('Error on Updating!');
+                }
+            })
+        } else {
+            toastr.error('Error on Updating!');
+        }
+        
+    }
+    //START: INITIALIZATION OF MULTIPLE SELECT CSS
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+    //END: INITIALIZATION OF MULTIPLE SELECT CSS
+</script>

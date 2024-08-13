@@ -55,7 +55,7 @@ function initDataContractInfo(Data) {
     }
 }
 /**
- * Description: To add data of the specific table.
+ * Description: To add data of the specific table. Table name TBL_ContractMain
  * 
  * @param {*} data 
  */
@@ -92,106 +92,94 @@ function addContractInfoData(data) {
  * @param {*} sourceContract 
  */
 function saveLandContractData(sourceContract) {
-    var fields = $('.triggercontractinfo');
     var sourcefile = 'Tbl_Uploads';
-    var fieldID = [];
     // var inputData = {};
     var inputDataCollection = {};
-    var inputDataNewContract = {};
-    var inputDataRenewContract = {};
-    var inputDataPreTermination = {};
+    // var inputDataRenewContract = {};
+    // var inputDataPreTermination = {};
 
-    for (var x in fields) {
-        if (fields[x].className != undefined) {
-            var y = fields[x].className.split(' ');
-            fieldID.push(y[0]);
-        }
-    }
-    var advancepayment = $(".advance_payment").val();
-    var startpayment = $(".start_of_payment").val();
+    // var advancepayment = $(".advance_payment").val();
+    // var startpayment = $(".start_of_payment").val();
     var lease_period = $('#lease_period').val().split(' - ');
     var start_lease = lease_period[0];
     var end_lease = lease_period[1];
     var selectedValue = $('input[name=contracttypeRadio]:checked').val();
 
     if (confirm('Do you want to save it?\n\nPlease check the correctness of the information before saving.')) {
-        if (selectedValue === 'newcontract') {
-            inputDataNewContract['username'] = $("#username").val();
-            inputDataNewContract['token'] = $("#token").val();
-            inputDataNewContract['dataSource'] = sourceContract;
-            inputDataNewContract['sysapp'] = sysapp;
+        var fieldNC = $('.triggerNewContract');
+        var fieldIDNC = [];
 
-            // New Contract Data [Status: Pending]
-            inputDataNewContract['LandInformationCode'] = $('#viewLandInformationNC').val();
-            inputDataNewContract['PlantationCode'] = $('.PlantationCode option:selected').val();
-            inputDataNewContract['Status'] = 6;
-            inputDataNewContract['RepresentativeName'] = $('.RepName').val();
-            inputDataNewContract['RepresentativeContactNumber'] = $('#isRep').is(":checked") !== true ? '+' + $('.RepContactNumber').val() : $('.textRepContactNumber').text();
-            inputDataNewContract['RepresentativeEmail'] = $('.RepEmail').val();
-            inputDataNewContract['LandContractedArea'] = $('.LandContractedArea').val();
+        // if (selectedValue === 'newcontract') {
+            var inputDataNewContract = {
+                username: $("#username").val(),
+                token: $("#token").val(),
+                dataSource: sourceContract + '_Float',
+                sysapp: sysapp
+            };
+
+            for (var x in fieldNC) {
+                if (fieldNC[x].className != undefined) {
+                    var y = fieldNC[x].className.split(' ');
+                    fieldIDNC.push(y[0]);
+                }
+            }
+
+            for (var j in fieldIDNC) {
+                inputDataNewContract[fieldIDNC[j]] = $('.triggerNewContract.' + fieldIDNC[j]).val();
+                $('.triggerNewContract.' + fieldIDNC[j]).val('');
+            }
+            // inputDataNewContract['RepresentativeContactNumber'] = $('#isRep').is(":checked") !== true ? '+' + $('.RepContactNumber').val() : $('.textRepContactNumber').text();
             inputDataNewContract['StartDate'] = start_lease;
             inputDataNewContract['EndDate'] = end_lease;
-            inputDataNewContract['LeaseTerm'] = $(".terms").val(),
-            inputDataNewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
-            inputDataNewContract['AdvancePayment'] = advancepayment;
-            inputDataNewContract['StartOfPayment'] = startpayment;
-            inputDataNewContract['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
-            inputDataNewContract['YearsDivided'] = $(".yrsdivided").val();
-            inputDataNewContract['Payment_Amount'] = $('.Payment_Amount').val();
-            console.log('new contract', inputDataCollection);
-            for (var j in fieldID) {
-                inputDataNewContract[fieldID[j]] = $('.triggercontractinfo.' + fieldID[j]).val();
-                $('.triggercontractinfo.' + fieldID[j]).val('');
-            }
-
             inputDataCollection = inputDataNewContract;
-        } else if (selectedValue === 'renewcontract') {
-            inputDataRenewContract['username'] = $("#username").val();
-            inputDataRenewContract['token'] = $("#token").val();
-            inputDataRenewContract['dataSource'] = sourceContract;
-            inputDataRenewContract['sysapp'] = sysapp;
+        // } 
+        // else if (selectedValue === 'renewcontract') {
+        //     inputDataRenewContract['username'] = $("#username").val();
+        //     inputDataRenewContract['token'] = $("#token").val();
+        //     inputDataRenewContract['dataSource'] = sourceContract + '_Float';
+        //     inputDataRenewContract['sysapp'] = sysapp;
 
-            // Renew Contract Data
-            inputDataRenewContract['LandInformationCode'] = $('#viewLandInformationRNC').val();
-            inputDataRenewContract['RefLandContractCode'] = $('.RNCLandContractCode option:selected').val();
-            inputDataRenewContract['Status'] = 3; // Status: Renewed
-            inputDataRenewContract['PlantationCode'] = $('.PlantationCode option:selected').val();
-            inputDataRenewContract['RepresentativeName'] = $('.RepName').val();
-            inputDataRenewContract['RepresentativeContactNumber'] = $('#isRep').is(":checked") !== true ? '+' + $('.RepContactNumber').val() : $('.textRepContactNumber').text();
-            inputDataRenewContract['RepresentativeEmail'] = $('.RepEmail').val();
-            inputDataRenewContract['LandContractedArea'] = $('.LandContractedArea').val();
-            inputDataRenewContract['StartDate'] = start_lease;
-            inputDataRenewContract['EndDate'] = end_lease;
-            inputDataRenewContract['LeaseTerm'] = $(".terms").val(),
-            inputDataRenewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
-            inputDataRenewContract['AdvancePayment'] = advancepayment;
-            inputDataRenewContract['StartOfPayment'] = startpayment;
-            inputDataRenewContract['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
-            inputDataRenewContract['YearsDivided'] = $(".yrsdivided").val();
-            inputDataRenewContract['Payment_Amount'] = $('.Payment_Amount').val();
-            console.log('renew contract', inputDataCollection);
-            for (var j in fieldID) {
-                inputDataRenewContract[fieldID[j]] = $('.triggercontractinfo.' + fieldID[j]).val();
-                $('.triggercontractinfo.' + fieldID[j]).val('');
-            }
+        //     // Renew Contract Data
+        //     inputDataRenewContract['LandInformationCode'] = $('#viewLandInformationRNC').val();
+        //     inputDataRenewContract['RefLandContractCode'] = $('.RNCLandContractCode option:selected').val();
+        //     inputDataRenewContract['Status'] = 3; // Status: Renewed
+        //     inputDataRenewContract['PlantationCode'] = $('.PlantationCode option:selected').val();
+        //     inputDataRenewContract['RepresentativeName'] = $('.RepName').val();
+        //     inputDataRenewContract['RepresentativeContactNumber'] = $('#isRep').is(":checked") !== true ? '+' + $('.RepContactNumber').val() : $('.textRepContactNumber').text();
+        //     inputDataRenewContract['RepresentativeEmail'] = $('.RepEmail').val();
+        //     inputDataRenewContract['LandContractedArea'] = $('.LandContractedArea').val();
+        //     inputDataRenewContract['StartDate'] = start_lease;
+        //     inputDataRenewContract['EndDate'] = end_lease;
+        //     inputDataRenewContract['LeaseTerm'] = $(".terms").val(),
+        //     inputDataRenewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
+        //     inputDataRenewContract['AdvancePayment'] = advancepayment;
+        //     inputDataRenewContract['StartOfPayment'] = startpayment;
+        //     inputDataRenewContract['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
+        //     inputDataRenewContract['YearsDivided'] = $(".yrsdivided").val();
+        //     inputDataRenewContract['Payment_Amount'] = $('.Payment_Amount').val();
+        //     console.log('renew contract', inputDataCollection);
+        //     for (var j in fieldID) {
+        //         inputDataRenewContract[fieldID[j]] = $('.triggercontractinfo.' + fieldID[j]).val();
+        //         $('.triggercontractinfo.' + fieldID[j]).val('');
+        //     }
 
-            inputDataCollection = inputDataRenewContract;
-        } else if (selectedValue === 'pretermination') {
-            inputDataCollection['username'] = $("#username").val();
-            inputDataCollection['token'] = $("#token").val();
-            inputDataCollection['dataSource'] = sourceContract;
-            inputDataCollection['sysapp'] = sysapp;
+        //     inputDataCollection = inputDataRenewContract;
+        // } else if (selectedValue === 'pretermination') {
+        //     inputDataCollection['username'] = $("#username").val();
+        //     inputDataCollection['token'] = $("#token").val();
+        //     inputDataCollection['dataSource'] = sourceContract + '_Float';
+        //     inputDataCollection['sysapp'] = sysapp;
 
-            // Pre-Termination Data
-            inputDataRenewContract['Status'] = 4; // Status: Pre Termination
+        //     // Pre-Termination Data
+        //     inputDataRenewContract['Status'] = 4; // Status: Pre Termination
 
-            inputDataCollection['inputData'] = inputDataPreTermination;
-        }
+        //     inputDataCollection['inputData'] = inputDataPreTermination;
+        // }
 
         // inputDataCollection['inputData'] = inputData;
         console.log('data', inputDataCollection);
         $.ajax({
-            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveLandContract',
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveLDMSLandContractInformationData',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify(inputDataCollection),
@@ -203,8 +191,7 @@ function saveLandContractData(sourceContract) {
                     getSysAllContractInfoData(sourceContract);
                     saveNewFile(sourcefile);
                     saveEscalation(data.LandContractCode);
-
-                    toastr.success('Data added!');
+                    toastr.info('Data added for approval!');
                     hideModal();
                 } else {
                     toastr.error('Duplicate code!');
@@ -315,15 +302,20 @@ function getSysAllContractInfoData(sourceContract) {
                 var dataarr = [];
                 for (var j in colid) {
                     if (colid[j] == 'id') {
-                        if (data[i].Status === 7) {
-                            dataarr.push(
-                                '<div style="text-align:center">' + 
-                                '<button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button>' + 
-                                '<button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 80px; margin-left: 10px; margin-right: 10px;" id="updateButton">Update</button>' + 
-                                '</div>');
+                        if (Permission.includes('LandContract_viewActionsLDMS') || excempted.includes($("#username").val())) {
+                            dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 80px; margin-left: 10px; margin-right: 10px;" id="updateButton">Update</button></div>');
                         } else {
-                            dataarr.push('<div style="text-align:center"><button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button></div>');
+                            dataarr.push('<div style="text-align:center"><button type="button" class="btn btn-outline-info btn-xs" style="width: 60px; display: none;" disabled></button></div>');
                         }
+                        // if (data[i].Status === 7) {
+                        //     dataarr.push(
+                        //         '<div style="text-align:center">' + 
+                        //         '<button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button>' + 
+                        //         '<button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 80px; margin-left: 10px; margin-right: 10px;" id="updateButton">Update</button>' + 
+                        //         '</div>');
+                        // } else {
+                        //     dataarr.push('<div style="text-align:center"><button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button></div>');
+                        // }
                     } else if (colid[j] == 'Status') {
                         switch (data[i].Status) {
                             case 0:
@@ -347,12 +339,18 @@ function getSysAllContractInfoData(sourceContract) {
                             case 6:
                                 dataarr.push('<div style="text-align:center;color:#077A88"><b>Pending</b></div>');
                                 break;
-                            case 7:
-                                dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Returned</b></div>');
-                                break;
+                            // case 7:
+                            //     dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Returned</b></div>');
+                            //     break;
                             default:
                                 dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Error Status</b></div>');
                                 break;
+                        }   
+                    } else if (colid[j] == 'isactive') {
+                        if (data[i][colid[j]]) {
+                            dataarr.push('<div style="text-align:center;color:green"><b>Enabled</b></div>');
+                        } else {
+                            dataarr.push('<div style="text-align:center;color:red"><b>Disabled</b></div>');
                         }   
                     } else if (colid[j] == 'geoLocation') {
                         //dataarr.push('<div style="text-align:center"><a href="https://www.google.com/maps/place/' + data[i][colid[j]] + '" target="_blank">' + data[i][colid[j]] + '</a></div>');
@@ -372,7 +370,6 @@ function getSysAllContractInfoData(sourceContract) {
         }
     })
 }
-
 //UPDATE MODAL
 /**
  * Description: To update data of the specific table.

@@ -140,9 +140,9 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <div class="form-group clearfix">
-                                                    <div class="icheck-lightblue d-inline">
+                                                    <div class="icheck-success d-inline">
                                                         <input type="checkbox" id="checkbox2"  class="checkCoOwners">
-                                                        <label for="checkbox2">Co-Owners</label>
+                                                        <label for="checkbox2">Co-Owners <em>(optional)</em></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -159,7 +159,7 @@
                                 <div class="row" id="remarksTextArea">
                                     <div class="col-md-12">
                                         <label>Remarks</label>
-                                        <textarea class="remarks form-control form-control-sm triggerlandinformation" placeholder="-"></textarea  autocomplete="off">
+                                        <textarea class="remarks form-control form-control-sm triggerlandinformation autoCaps" placeholder="-"></textarea  autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -344,12 +344,11 @@
             }),
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                console.log('Check Document Number', data);
-                console.log('result', data[""]);
-                if (data.length !== 0 && data[""] === 1) {
-                    toastr.error('Document Number already exists!');
+                console.log('Check Document Number', data.DocumentNumber);
+                if (data.DocumentNumber === undefined) {
+                    toastr.success('Document Number is available!'); 
                 } else {
-                    toastr.success('Document Number is available!');
+                    toastr.error('Document Number already exists!'); 
                 }
             },
             error: function (xhr, status, error) {

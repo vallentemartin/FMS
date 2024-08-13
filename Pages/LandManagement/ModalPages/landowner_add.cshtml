@@ -36,135 +36,143 @@
                             </div>
                             <!--END: radio buton: SELECT OWNER TYPE -->
                             <!--START: COMPANY FORM -->
-                            <div class="hidecompany">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <label>Company Name</label>
-                                            <input class="LastName form-control form-control-sm autoCaps" id="companylastname" type="text" placeholder="-" autocomplete="off">
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <label>Contract Number</label>
-                                            <input class="ContactNumber form-control form-control-sm" id="companynumber" type="number" step="1" pattern="\d+" value="63" autocomplete="off">
+                            <form id="companyValidation">
+                                <div class="hidecompany">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <label>Company Name</label>
+                                                <input class="LastName form-control form-control-sm autoCaps triggercompany" id="companylastname" type="text" placeholder="-" autocomplete="off">
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label>Contract Number</label>
+                                                <input class="ContactNumber form-control form-control-sm triggercompany maskMobile" 
+                                                id="companynumber" type="text" autocomplete="off">
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-12 checkboxCompany">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <label>Address</label>
+                                                <textarea class="Address form-control form-control-sm autoCaps triggercompany" placeholder="(e.g UNIT/ROOM NO., FLOOR, BUILDING NAME, LOT NO., PHASE NO., HOUSE NO., STREET NAME)" id="companyaddress" autocomplete="off"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 checkboxCompany">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <label>Remarks</label>
+                                                <textarea class="remarks form-control form-control-sm autoCaps triggercompany" id="companyremarks" placeholder="-" autocomplete="off"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>                                      
                                 </div>
-                                <div class="col-md-12 checkboxCompany">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12">
-                                            <label>Address</label>
-                                            <textarea class="Address form-control form-control-sm autoCaps" placeholder="(e.g UNIT/ROOM NO., FLOOR, BUILDING NAME, LOT NO., PHASE NO., HOUSE NO., STREET NAME)" id="companyaddress" autocomplete="off"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 checkboxCompany">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12">
-                                            <label>Remarks</label>
-                                            <textarea class="remarks form-control form-control-sm autoCaps" id="companyremarks" placeholder="-" autocomplete="off"></textarea>
-                                        </div>
-                                    </div>
-                                </div>                                      
-                            </div>
+                            </form>
                             <!--END: COMPANY FORM -->
                             <!--START: INDIVIDUAL FORM -->
-                            <div class="hideindividual container">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        @*<div class="col-md-4">
-                                            <label>Landowner Code</label>
-                                            <input class="LandownerCode form-control form-control-sm triggerlandowner" value="0" type="text" hidden>
-                                        </div>*@
-                                        <div class="col-sm-12 col-md-3">
-                                            <label>First Name</label>
-                                            <input class="FirstName form-control form-control-sm triggerlandowner autoCaps" type="text" placeholder="-" autocomplete="off">
-                                        </div>
-                                        <div class="col-sm-12 col-md-3">
-                                            <label>Middle Name</label>
-                                            <input class="MiddleName form-control form-control-sm triggerlandowner autoCaps" type="text" placeholder="(e.g DOE)" autocomplete="off">
-                                        </div>
-                                        <div class="col-sm-12 col-md-3">
-                                            <label>Last Name</label>
-                                            <input class="LastName form-control form-control-sm autoCaps" id="idvllastname" type="text" placeholder="-" autocomplete="off">
-                                        </div>
-                                        <div class="col-sm-12 col-md-3">
-                                            <label>Suffix</label>
-                                            <input class="Suffix form-control form-control-sm triggerlandowner autoCaps" type="text" id="idvlsuffix" placeholder="(e.g. JR., II)" autocomplete="off">
+                            <form id="individualValidation">
+                                <div class="hideindividual container">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            @*<div class="col-md-4">
+                                                <label>Landowner Code</label>
+                                                <input class="LandownerCode form-control form-control-sm triggerlandowner" value="0" type="text" hidden>
+                                            </div>*@
+                                            <div class="col-sm-12 col-md-3">
+                                                <label>First Name</label>
+                                                <input class="FirstName form-control form-control-sm triggerlandowner autoCaps triggerindividual" type="text" placeholder="-" autocomplete="off">
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <label>Middle Name</label>
+                                                <input class="MiddleName form-control form-control-sm triggerlandowner autoCaps triggerindividual" type="text" placeholder="(e.g DOE)" autocomplete="off">
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <label>Last Name</label>
+                                                <input class="LastName form-control form-control-sm autoCaps triggerindividual" id="idvllastname" type="text" placeholder="-" autocomplete="off">
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <label>Suffix</label>
+                                                <input class="Suffix form-control form-control-sm triggerlandowner autoCaps triggerindividual" type="text" id="idvlsuffix" placeholder="(e.g. JR., II)" autocomplete="off">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-3 form-group hideGenderCode">
-                                            <label>Sex</label>
-                                            <select class="GenderCode GenderName Gender form-control form-control-sm triggerlandowner select2">
-                                            </select>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-3 form-group hideGenderCode">
+                                                <label>Sex</label>
+                                                <select class="GenderCode GenderName Gender form-control form-control-sm triggerlandowner select2 triggerindividual triggerselect">
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3 hideBirthDate">
+                                                <label>Date of Birth:</label>
+                                                <input type="date" class="BirthDate form-control form-control-sm float-right triggerlandowner triggerindividual" autocomplete="off">
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <label>Nationality</label>
+                                                <input class="Nationality form-control form-control-sm triggerlandowner autoCaps triggerindividual" type="text" placeholder="(e.g FILIPINO)" autocomplete="off">
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group hideCivilStatusCode">
+                                                    <label>Civil Status</label>
+                                                    <select class="CivilStatusCode CS_Name CivilStatus form-control form-control-sm triggerlandowner select2 triggerindividual triggerselect" id="civilStatus">
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-3 hideBirthDate">
-                                            <label>Date of Birth:</label>
-                                            <input type="date" class="BirthDate form-control form-control-sm float-right triggerlandowner" autocomplete="off">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <label>Address</label>
+                                                <textarea class="Address form-control form-control-sm triggerlandowner autoCaps triggerindividual" placeholder="(e.g UNIT/ROOM NO., FLOOR, BUILDING NAME, LOT NO., PHASE NO., HOUSE NO., STREET NAME)" id="idvladdress" autocomplete="off"></textarea>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-3">
-                                            <label>Nationality</label>
-                                            <input class="Nationality form-control form-control-sm triggerlandowner autoCaps" type="text" placeholder="(e.g FILIPINO)" autocomplete="off">
-                                        </div>
-                                        <div class="col-sm-12 col-md-3">
-                                            <div class="form-group hideCivilStatusCode">
-                                                <label>Civil Status</label>
-                                                <select class="CivilStatusCode CS_Name CivilStatus form-control form-control-sm triggerlandowner select2" id="civilStatus">
+                                    </div>
+                                    <div class="col-md-12 hideSelection">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4">
+                                                <label>Province</label>
+                                                <select class="provinceCode provinceName Province form-control form-control-sm triggerlandowner select2 triggerindividual triggerselect" type="text" id="provinceSelect">
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <label>Municipality/City</label>
+                                                <select class="cityCode form-control form-control-sm select2 triggerindividual triggerselect" type="text" id="citySelect" disabled>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <label>Barangay</label>
+                                                <select class="barangayCode form-control form-control-sm select2 triggerindividual triggerselect" type="text" id="barangaySelect" disabled>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12">
-                                            <label>Address</label>
-                                            <textarea class="Address form-control form-control-sm triggerlandowner autoCaps" placeholder="(e.g UNIT/ROOM NO., FLOOR, BUILDING NAME, LOT NO., PHASE NO., HOUSE NO., STREET NAME)" id="idvladdress" autocomplete="off"></textarea>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <label>Contact Number</label>
+                                                <input class="ContactNumber form-control form-control-sm triggerindividual maskMobile" id="idvlcontactnumber" type="text" autocomplete="off">
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label>Email Address</label>
+                                                <input class="Email form-control form-control-sm triggerlandowner triggerindividual" type="email" name="email" placeholder="ABC@xyz.com" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">
+                                                <label>Remarks</label>
+                                                <textarea class="remarks form-control form-control-sm autoCaps triggerindividual" id="idvlremarks" placeholder="-" autocomplete="off"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 hideSelection">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-4">
-                                            <label>Province</label>
-                                            <select class="provinceCode provinceName Province form-control form-control-sm triggerlandowner select2" type="text" id="provinceSelect">
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 col-md-4">
-                                            <label>Municipality/City</label>
-                                            <select class="cityCode form-control form-control-sm select2" type="text" id="citySelect" disabled>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12 col-md-4">
-                                            <label>Barangay</label>
-                                            <select class="barangayCode form-control form-control-sm select2" type="text" id="barangaySelect" disabled>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <label>Contact Number</label>
-                                            <input class="ContactNumber form-control form-control-sm" id="idvlcontactnumber" type="number" step="1" pattern="\d+" value="63" autocomplete="off">
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <label>Email Address</label>
-                                            <input class="Email form-control form-control-sm triggerlandowner" type="email" placeholder="ABC@xyz.com" autocomplete="off">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12">
-                                            <label>Remarks</label>
-                                            <textarea class="remarks form-control form-control-sm autoCaps" id="idvlremarks" placeholder="-" autocomplete="off"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                <!-- <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div> -->
+                            </form>
                             <!--END: INDIVIDUAL FORM -->
                             <!-- insert here: ends here -->
                         </div>

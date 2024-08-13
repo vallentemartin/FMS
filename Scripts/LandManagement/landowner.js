@@ -87,88 +87,91 @@ function addLandownerData(data) {
 }
 /**
  * Description:
- * This function save the data of the specific table.
+ * This function save the landowner's data, either individual landowner or a company landowner.
  * 
  * @param {*} sourceLandowner 
  */
 function saveLandownerData(sourceLandowner) {
-    var fields = $('.triggerlandowner');
-    var fieldID = [];
-    var inputDataIndividual = {};
-    var inputDataCollection = {};
-    var inputDataCompany = {};
-    var lastname = '';
-    var contactnumber = '';
-    var remarks = '';
-    var address = '';
+    var selectedValue = $('input[name=ownertypeRadio]:checked', '#selectownertype').val();
 
-    for (var x in fields) {
-        if (fields[x].className != undefined) {
-            var y = fields[x].className.split(' ');
-            fieldID.push(y[0]);
+    if( selectedValue === 'company' ) {
+        var fieldsCompany = $('.triggercompany');
+        var fieldCompanyID = [];
+        var inputDataCollection = {};
+        var inputDataCompany = {
+            username: $("#username").val(),
+            token: $("#token").val(),
+            dataSource: sourceLandowner + '_Float',
+            sysapp: sysapp
+        };
+
+        for (var x in fieldsCompany) {
+            if (fieldsCompany[x].className != undefined) {
+                var y = fieldsCompany[x].className.split(' ');
+                fieldCompanyID.push(y[0]);
+            }
         }
-    }
 
-    console.log('fields', fields);
-    console.log('fields ID', fieldID);
-    console.log($('#companynumber').val());
-
-    lastname = $('#idvllastname').val() == '' ? $('#companylastname').val() : $('#idvllastname').val();
-    address = $('#idvladdress').val() == '' ? $('#companyaddress').val() : $('#idvladdress').val();
-    remarks = $('#idvlremarks').val() == '' ? $('#companyremarks').val() : $('#idvlremarks').val();
-    console.log('last name', lastname);
-    console.log('remarks', remarks);
-    console.log('address', address);
-    // console.log('suffix', suffix);
-
-    if (confirm('Save Landowner data?')) {
-        console.log('save lastname',lastname);
-        inputDataCollection['username'] = $("#username").val();
-        inputDataCollection['token'] = $("#token").val();
-        inputDataCollection['dataSource'] = sourceLandowner;
-        inputDataCollection['sysapp'] = sysapp;
-        inputDataIndividual['LastName'] = lastname;
-        inputDataIndividual['ContactNumber'] = '+' + $('#idvlcontactnumber').val();
-        inputDataIndividual['remarks'] = remarks;
-        // inputData['Suffix'] = suffix;
-        inputDataIndividual['cityCode'] = $('.cityCode').val();
-        inputDataIndividual['barangayCode'] = $('.barangayCode').val();
-        inputDataCompany['LastName'] = lastname;
-        inputDataCompany['ContactNumber'] = '+' + $('#companynumber').val();
-        inputDataCompany['Address'] = address;
-        inputDataCompany['remarks'] = remarks;
-        for (var j in fieldID) {
-            inputDataIndividual[fieldID[j]] = $('.triggerlandowner.' + fieldID[j]).val();
-            $('.triggerlandowner.' + fieldID[j]).val('');
+        for (var j in fieldCompanyID) {
+            inputDataCompany[fieldCompanyID[j]] = $('.triggercompany.' + fieldCompanyID[j]).val();
+            $('.triggercompany.' + fieldCompanyID[j]).val('');
         }
-        inputDataCollection['inputData'] = $('input[name=ownertypeRadio]:checked', '#selectownertype').val() == 'individual' ? inputDataIndividual : inputDataCompany;
+
+        inputDataCompany['FloatType'] = 'LANDOWNER';
+        inputDataCollection = inputDataCompany;
         console.log('Landowner Data',inputDataCollection);
-        
-        $.ajax({
-            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/saveSysData',
-            type: 'post',
-            dataType: 'json',
-            data: JSON.stringify(inputDataCollection),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                console.log(data);
-                if (data.retval == 1) {
-                    getSysAllLandownerData(sourceLandowner);
-                    toastr.success('Data added!');
-                    clearSelection('.GenderCode, .CivilStatusCode, .provinceCode, .cityCode, .barangayCode');
-                    $('.LastName, .ContactNumber, .Address, .remarks, .FirstName, .MiddleName, .Suffix, .BirthDate, .Nationality, .Email').val('');
-                    hideModal();
-                } else {
-                    toastr.error('Duplicate code!');
-                    stopLoading();
-                }
-            },
-            error: function () {
-                toastr.error('Error on saving data!');
+    } else if( selectedValue === 'individual' ) {
+        var fieldsIndividual = $('.triggerindividual');
+        var fieldIndividualID = [];
+        var inputDataCollection = {};
+        var inputDataIndividual = {
+            username: $("#username").val(),
+            token: $("#token").val(),
+            dataSource: sourceLandowner + '_Float',
+            sysapp: sysapp
+        };
+
+        for (var x in fieldsIndividual) {
+            if (fieldsIndividual[x].className != undefined) {
+                var y = fieldsIndividual[x].className.split(' ');
+                fieldIndividualID.push(y[0]);
+            }
+        }
+
+        for (var j in fieldIndividualID) {
+            inputDataIndividual[fieldIndividualID[j]] = $('.triggerindividual.' + fieldIndividualID[j]).val();
+            $('.triggerindividual.' + fieldIndividualID[j]).val('');
+        }
+
+        inputDataIndividual['FloatType'] = 'LANDOWNER';
+        clearSelection('.triggerselect');
+        $('.cityCode, .barangayCode').prop('disabled', 'true');
+        inputDataCollection = inputDataIndividual;
+
+        console.log('Landowner Data',inputDataCollection);
+    }
+    $.ajax({
+        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveLDMSLandownerData',
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify(inputDataCollection),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            console.log(data);
+            if (data == 1) {
+                getSysAllLandownerData(sourceLandowner);
+                toastr.info('Data added for approval!');
+                hideModal();
+            } else {
+                toastr.error('Duplicate code!');
                 stopLoading();
             }
-        })
-    }
+        },
+        error: function () {
+            toastr.error('Error on saving data!');
+            stopLoading();
+        }
+    })
 }
 function clearSelection(e) {
     $(e).select2('destroy').val('').select2();
@@ -269,10 +272,16 @@ function getSysAllLandownerData(sourceLandowner) {
             var datarow = [];
             $('#tbl_' + sourceLandowner).DataTable().clear().draw();
             for (var i in data) {
+                console.log('landowner data', data);
+                console.log('landowner colid', colid);
                 var dataarr = [];
                 for (var j in colid) {
                     if (colid[j] == 'id') {
-                        dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceLandowner + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
+                        if (Permission.includes('Landowner_viewActionsLDMS') || excempted.includes($("#username").val())) {
+                            dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceLandowner + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
+                        } else {
+                            dataarr.push('<div style="text-align:center"><button type="button" class="btn btn-outline-info btn-xs" style="width: 60px; display: none;" disabled></button></div>');
+                        }
                     } else if (colid[j] == 'isactive') {
                         if (data[i][colid[j]]) {
                             dataarr.push('<div style="text-align:center;color:green"><b>Enabled</b></div>');
@@ -373,7 +382,8 @@ function getSysLandownerData(sourceLandowner, filter) {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             console.log('data update', data);
-
+            // data.BirthDate = moment(data.BirthDate).format('MM/DD/YYYY');
+            // console.log('Birthday', $('.BirthDate').val(data.BirthDate));
             if ( data.FirstName == null ) {
                 $('#selectType').text('Company Information')
                 $('.hideIndividual').hide()
@@ -580,3 +590,48 @@ function hidedatatablesLoader(addTo) {
 function clearSelection(e) {
     $(e).select2('destroy').val('').select2();
 }
+
+$(function () {
+    $.validator.setDefaults({
+      submitHandler: function () {
+        // alert( "Form successful submitted!" );
+      }
+    });
+    $('#individualValidation').validate({
+      rules: {
+        email: {
+          required: true,
+          email: true,
+        },
+        password: {
+          required: true,
+          minlength: 5
+        },
+        terms: {
+          required: true
+        },
+      },
+      messages: {
+        email: {
+          required: "Please enter a email address",
+          email: "Please enter a vaild email address"
+        },
+        password: {
+          required: "Please provide a password",
+          minlength: "Your password must be at least 5 characters long"
+        },
+        terms: "Please accept our terms"
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
