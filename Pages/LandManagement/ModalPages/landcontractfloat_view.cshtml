@@ -17,7 +17,7 @@
                         <div class="col-md-2">
                             <label class="form-control form-control-sm border-0">Land Contract Code</label>
                             <p
-                                class="LandContractCode LandContractCodeView form-control form-control-sm" title="Land Contract Code" style="text-align: center;" id="tbl_LandContractCode" readonly>
+                                class="LandContractCode form-control form-control-sm" title="Land Contract Code" style="text-align: center;" id="tbl_LandContractCode" readonly>
                             </p>
                         </div>
                     </div>
@@ -283,6 +283,7 @@
                                    </div>
                                    <!-- insert table end -->
                                </div>
+                              
                         </div>
                     </div>
                 </div>
@@ -296,7 +297,7 @@
 <script>
     var sourceContract = 'ContractMain_Float';
     var dataSourceIdCol = 'FloatID';
-    // viewContractInfoData(sourceContract, dataSourceIdCol);
+    viewContractInfoDataFloat(sourceContract, dataSourceIdCol);
     initDataTablesPaymentSched();
     initDataTablesEscalation();
     getSysData(sourceContract, dataSourceIdCol);

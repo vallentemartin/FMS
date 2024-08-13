@@ -103,16 +103,17 @@ function saveLandInformationData(sourceLandInformation) {
         inputDataCollection['token'] = $("#token").val();
         inputDataCollection['dataSource'] = sourceLandInformation + '_Float';
         inputDataCollection['sysapp'] = sysapp;
-        inputData['cityCode'] = $('.cityCode').val();
-        inputData['barangayCode'] = $('.barangayCode').val();
-        inputData['CoOwner'] = coowners;
-        inputData['WithCoOwner'] = owners;
+        inputDataCollection['cityCode'] = $('.cityCode').val();
+        inputDataCollection['barangayCode'] = $('.barangayCode').val();
+        inputDataCollection['CoOwner'] = coowners;
+        inputDataCollection['WithCoOwner'] = owners;
+        inputDataCollection['FloatType'] = 'LAND INFORMATION';
         for (var j in fieldID) {
-            inputData[fieldID[j]] = $('.triggerlandinformation.' + fieldID[j]).val();
+            inputDataCollection[fieldID[j]] = $('.triggerlandinformation.' + fieldID[j]).val();
             // $('.triggerlandinformation.' + fieldID[j]).val('');
         }
 
-        inputDataCollection['inputData'] = inputData;
+        inputDataCollection = inputDataCollection;
         console.log('data',inputDataCollection);
         
         if (documentNumber !== '') {
@@ -130,15 +131,15 @@ function saveLandInformationData(sourceLandInformation) {
                 success: function (data) {
                     if (data.DocumentNumber === undefined) {
                         $.ajax({
-                            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveLDMSData',
+                            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveLDMSLandInformationData',
                             type: 'post',
                             dataType: 'json',
                             data: JSON.stringify(inputDataCollection),
                             contentType: "application/json; charset=utf-8",
                             success: function (data) {
-                                if (data.retval == 1) {
+                                if (data == 1) {
                                     getSysAllLandInformationData(sourceLandInformation);
-                                    toastr.success('Data added!');
+                                    toastr.info('Data added for approval!');
                                     hideModal();
                                 } else {
                                     toastr.error('Duplicate Code!');
@@ -152,8 +153,6 @@ function saveLandInformationData(sourceLandInformation) {
                         })
                     } else {
                         toastr.error('Document Number already exists!');
-                        // clearSelection('.LandownerCode, .DocumentTypeCode, .provinceCode, .cityCode, .barangayCode');
-                        // $('.Hectare').val('');
                     }
                 },
                 error: function (xhr, status, error) {
@@ -239,7 +238,6 @@ function getOptDataForAddLandInformationMultiple() {
         }
     }
 }
-
 function getOptDataForAddMultipleLandInformationAppend(optSource,optId,optName,RAWHTML){
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getOptData',
@@ -298,7 +296,11 @@ function getSysAllLandInformationData(sourceLandInformation) {
                 var dataarr = [];
                 for (var j in colid) {
                     if (colid[j] == 'id') {
-                        dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandInformationData(\'' + sourceLandInformation + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
+                        if (Permission.includes('LandInformation_viewActionsLDMS') || excempted.includes($("#username").val())) {
+                            dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandInformationData(\'' + sourceLandInformation + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
+                        } else {
+                            dataarr.push('<div style="text-align:center"><button type="button" class="btn btn-outline-info btn-xs" style="width: 60px; display: none;" disabled></button></div>');
+                        }
                     } else if (colid[j] == 'isactive') {
                         if (data[i][colid[j]]) {
                             dataarr.push('<div style="text-align:center;color:green"><b>Enabled</b></div>');
