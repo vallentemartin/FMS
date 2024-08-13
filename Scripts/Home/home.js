@@ -5,25 +5,16 @@ $('.HTML_container').ready(function () {
     getSysAllLandInfoData('LandInformation_Float')
     initDataContractInfo('ContractMain_Float');
     getSysAllContractInfoData('ContractMain_Float');
-})
-
-
-$('.role').ready(function () {
-    console.log(1, Permission);
+    for (var x in Permission) {
+        $('.' + Permission[x]).show();
+        console.log('Permission HOME',Permission);
+    } 
     setTimeout(function () {
-        loadHomeContent();
-        getDashboardPaymentMonitoring();
         console.log('load na');
-
+        getLDMSDashboardData();
+        getDashboardPaymentMonitoring();
     }, 1000);
-    console.log(3, Permission);
-    getLDMSDashboardData();
-
-
-
 })
-
-
 /**
  * Description: This function initialize the data table set by ID.
  * 
@@ -121,7 +112,6 @@ function getSysAllLandownerData(sourceLandowner) {
                             '<button type="button" onclick="disapproveLandownermodal(\'' + sourceLandowner + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandownerCode + '\')" class="btn btn-outline-danger btn-xs" style="width: 30px; margin-right: 10px;" title="Disapprove"><i class="fas fa-thumbs-down"></i></button>' +
                             '</div>');
                         }
-                        // dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceLandowner + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
                     } else if (colid[j] == 'floatStatus') {
                         switch (data[i].floatStatus) {
                             case 0:
@@ -251,9 +241,9 @@ function getSysAllLandInfoData(sourceLandInfo) {
                         if ( Permission.includes('LandInformation_viewButtonsLDMS') || excempted.includes($("#username").val()) ) {
                             dataarr.push('<div style="text-align:center">' +
                             '<button type="button" onclick="viewLandInfomodal(\'' + sourceLandInfo + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 30px; margin-right: 10px;" title="View"><i class="fas fa-eye"></i></button>' +
-                            '<button type="button" onclick="approvedLandInfomodal(\'' + sourceLandInfo + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandownerCode + '\')" class="btn btn-outline-success btn-xs" style="width: 30px; margin-right: 10px;" title="Approve"><i class="far fa-thumbs-up"></i></button>' +
-                            '<button type="button" onclick="returnedLandInfomodal(\'' + sourceLandInfo + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandownerCode + '\')" class="btn btn-outline-danger btn-xs" style="width: 30px; margin-right: 10px;" title="Return"><i class="fas fa-undo"></i></button>' +
-                            '<button type="button" onclick="disapprovedLandInformodal(\'' + sourceLandInfo + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandownerCode + '\')" class="btn btn-outline-danger btn-xs" style="width: 30px; margin-right: 10px;" title="Disapprove"><i class="fas fa-thumbs-down"></i></button>' +
+                            '<button type="button" onclick="approvedLandInfomodal(\'' + sourceLandInfo + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandownerCode + '\',\'' + data[i].LandInformationCode + '\')" class="btn btn-outline-success btn-xs" style="width: 30px; margin-right: 10px;" title="Approve"><i class="far fa-thumbs-up"></i></button>' +
+                            '<button type="button" onclick="returnedLandInfomodal(\'' + sourceLandInfo + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandownerCode + '\',\'' + data[i].LandInformationCode + '\')" class="btn btn-outline-danger btn-xs" style="width: 30px; margin-right: 10px;" title="Return"><i class="fas fa-undo"></i></button>' +
+                            '<button type="button" onclick="disapprovedLandInfomodal(\'' + sourceLandInfo + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandownerCode + '\',\'' + data[i].LandInformationCode + '\')" class="btn btn-outline-danger btn-xs" style="width: 30px; margin-right: 10px;" title="Disapprove"><i class="fas fa-thumbs-down"></i></button>' +
                             '</div>');
                         }
                         // dataarr.push('<div style="text-align:center"><button type="button" onclick="updateLandownerData(\'' + sourceLandInfo + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 60px;">Update</button></div>');
@@ -348,7 +338,7 @@ function getSysAllContractInfoData(sourceContract) {
         }
     }
     $.ajax({
-        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getContractsPendingStatus',
+        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getLandContractInfoForApprovalStatus',
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
@@ -374,9 +364,9 @@ function getSysAllContractInfoData(sourceContract) {
                         if (Permission.includes('Contracts_viewButtonsLDMS') || excempted.includes($("#username").val())) {
                             dataarr.push('<div style="text-align:center">' +
                                 '<button type="button" onclick="viewLandContractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 30px; margin-right: 10px;" title="View"><i class="fas fa-eye"></i></button>' + 
-                                '<button type="button" onclick="approvedLandContractmodal(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandContractCode + '\')" class="btn btn-outline-success btn-xs" style="width: 30px; margin-right: 10px;" 10px; margin-right: 10px;" title="Approve"><i class="far fa-thumbs-up"></i></button>' +
-                                '<button type="button" onclick="returnedContractmodal(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandContractCode + '\')" class="btn btn-outline-danger btn-xs" style="width: 30px; margin-right: 10px;" title="Return"><i class="fas fa-undo"></i></buttons>' +
-                                '<button type="button" onclick="disapprovedContractmodal(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandContractCode + '\')" class="btn btn-outline-danger btn-xs" style="width: 30px; margin-right: 10px;" title="Disapprove"><i class="fas fa-thumbs-down"></i></button>' +
+                                '<button type="button" onclick="approvedLandContractmodal(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandContractCode + '\',\'' + data[i].LandInformationCode + '\')" class="btn btn-outline-success btn-xs" style="width: 30px; margin-right: 10px;" 10px; margin-right: 10px;" title="Approve"><i class="far fa-thumbs-up"></i></button>' +
+                                '<button type="button" onclick="returnedLandContractmodal(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandContractCode + '\',\'' + data[i].LandInformationCode + '\')" class="btn btn-outline-danger btn-xs" style="width: 30px; margin-right: 10px;" title="Return"><i class="fas fa-undo"></i></buttons>' +
+                                '<button type="button" onclick="disapprovedLandContractmodal(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].LandContractCode + '\',\'' + data[i].LandInformationCode + '\')" class="btn btn-outline-danger btn-xs" style="width: 30px; margin-right: 10px;" title="Disapprove"><i class="fas fa-thumbs-down"></i></button>' +
                                 '</div>');
                         } else {
                             toastr.error('Permission Denied!');
@@ -481,7 +471,7 @@ function approvelandownerRemarks(sourceLandowner, id, LandownerCode) {
             token: $("#token").val(),
             dataSource: sourceLandowner,
             sysapp: sysapp,
-            FloatLOID: id,
+            FloatID: id,
             LandownerCode: LandownerCode,
             approvedRemarks: $('#approveRemarks').val()
         }),
@@ -538,7 +528,7 @@ function returnLandownerRemarks(sourceLandowner, id, LandownerCode) {
             token: $("#token").val(),
             dataSource: sourceLandowner,
             sysapp: sysapp,
-            FloatLOID: id,
+            FloatID: id,
             LandownerCode: LandownerCode,
             returnedRemarks: $('#returnRemarks').val()
         }),
@@ -595,7 +585,7 @@ function disapproveLandownerRemarks(sourceLandowner, id, LandownerCode) {
             token: $("#token").val(),
             dataSource: sourceLandowner,
             sysapp: sysapp,
-            FloatLOID: id,
+            FloatID: id,
             LandownerCode: LandownerCode,
             disapproveddRemarks: $('#disapproveRemarks').val()
         }),
@@ -613,17 +603,18 @@ function disapproveLandownerRemarks(sourceLandowner, id, LandownerCode) {
 }
 //END: LANDOWNER DISAPPROVE FUNCTION
 //START: LAND INFORMATION APPROVAL MODAL
-function approvedLandInfomodal(sourceLandInfo, id, name, LandownerCode) {
+function approvedLandInfomodal(sourceLandInfo, id, name, LandownerCode, LandInformationCode) {
     console.log('modal sourcedata', sourceLandInfo);
     console.log('modal id', id);
     console.log('modal name', name);
     console.log('modal Landowner', LandownerCode);
+    console.log('modal Land Information', LandInformationCode);
 
     showModal();
     ModalSize('m');
     var title = 'Approve Remarks';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
-                 '<button type="button" class="btn btn-success" onclick="approvelandinformationRemarks(\'' + sourceLandInfo + '\',\'' + id + '\',\'' + LandownerCode + '\')"> Save' + '</button >';
+                 '<button type="button" class="btn btn-success" onclick="approvelandinformationRemarks(\'' + sourceLandInfo + '\',\'' + id + '\',\'' + LandownerCode + '\',\'' + LandInformationCode + '\')"> Save' + '</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     $.ajax({
@@ -640,10 +631,11 @@ function approvedLandInfomodal(sourceLandInfo, id, name, LandownerCode) {
 }
 //END: LAND INFORMATION APPROVAL MODAL
 //START: LAND INFORMATION APPROVAL FUNCTION
-function approvelandinformationRemarks(sourceLandInfo, id, LandownerCode) {
+function approvelandinformationRemarks(sourceLandInfo, id, LandownerCode, LandInformationCode) {
     console.log('approve source landowner', sourceLandInfo);
     console.log('approve id', id);
     console.log('approve landownercode', LandownerCode);
+    console.log('approve LandInformationCode', LandInformationCode);
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/approveFloatingLandInformationData',
         type: 'post',
@@ -653,7 +645,8 @@ function approvelandinformationRemarks(sourceLandInfo, id, LandownerCode) {
             token: $("#token").val(),
             dataSource: sourceLandInfo,
             sysapp: sysapp,
-            FloatLIID: id,
+            FloatID: id,
+            LandInformationCode: LandInformationCode,
             LandownerCode: LandownerCode,
             approvedRemarks: $('#approveRemarks').val()
         }),
@@ -671,16 +664,18 @@ function approvelandinformationRemarks(sourceLandInfo, id, LandownerCode) {
 }
 //END: LAND INFORMATION APPROVAL FUNCTION
 //START: LAND CONTRACT INFORMATION APPROVAL MODAL
-function approvedLandContractmodal(sourceContract, id, name, LandContractCode) {
+function approvedLandContractmodal(sourceContract, id, name, LandContractCode, LandInformationCode) {
     console.log('modal sourcedata', sourceContract);
     console.log('modal id', id);
     console.log('modal name', name);
+    console.log('modal LandContractCode', LandContractCode);
+    console.log('modal LandInformationCode', LandInformationCode);
 
     showModal();
     ModalSize('m');
     var title = 'Approve Remarks';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
-                 '<button type="button" class="btn btn-success" onclick="approvecontractsRemarks(\'' + sourceContract + '\',\'' + id + '\',\'' + LandContractCode + '\')"> Save' + '</button >';
+                 '<button type="button" class="btn btn-success" onclick="approvecontractsRemarks(\'' + sourceContract + '\',\'' + id + '\',\'' + LandContractCode + '\',\'' + LandInformationCode + '\')"> Save' + '</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     $.ajax({
@@ -697,7 +692,7 @@ function approvedLandContractmodal(sourceContract, id, name, LandContractCode) {
 }
 //END: LAND CONTRACT INFORMATION APPROVAL MODAL
 //START: LAND CONTRACT INFORMATION APPROVE FUNCTION
-function approvecontractsRemarks(sourceContract, id, LandContractCode) {
+function approvecontractsRemarks(sourceContract, id, LandContractCode, LandInformationCode) {
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/approveFloatingLandContractData',
         type: 'post',
@@ -706,8 +701,9 @@ function approvecontractsRemarks(sourceContract, id, LandContractCode) {
             username: $("#username").val(),
             token: $("#token").val(),
             dataSource: sourceContract,
-            FloatLCID: id,
+            FloatID: id,
             sysapp: sysapp,
+            LandInformationCode: LandInformationCode,
             LandContractCode: LandContractCode,
             approvedRemarks: $('#approveRemarks').val()
         }),
@@ -725,17 +721,18 @@ function approvecontractsRemarks(sourceContract, id, LandContractCode) {
 }
 //END: LAND CONTRACT INFORMATION APPROVE FUNCTION
 //START: LAND INFORMATION RETURN MODAL
-function returnedLandInfomodal(sourceLandInfo, id, name, LandownerCode) {
+function returnedLandInfomodal(sourceLandInfo, id, name, LandownerCode, LandInformationCode) {
     console.log('modal sourcedata', sourceLandInfo);
     console.log('modal id', id);
     console.log('modal name', name);
     console.log('modal LandownerCode', LandownerCode);
+    console.log('modal LandInformationCode', LandInformationCode);
 
     showModal();
     ModalSize('m');
     var title = 'Return Remarks';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
-                 '<button type="button" class="btn btn-success" onclick="returnLandInformationRemarks(\'' + sourceLandInfo + '\',\'' + id + '\',\'' + LandownerCode + '\')"> Save' + '</button >';
+                 '<button type="button" class="btn btn-success" onclick="returnLandInformationRemarks(\'' + sourceLandInfo + '\',\'' + id + '\',\'' + LandownerCode + '\',\'' + LandInformationCode + '\')"> Save' + '</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     $.ajax({
@@ -753,7 +750,7 @@ function returnedLandInfomodal(sourceLandInfo, id, name, LandownerCode) {
 }
 //END: LAND INFORMATION RETURN MODAL
 //START: LAND INFORMATION RETURN FUNCTION
-function returnLandInformationRemarks(sourceLandInfo, id, LandownerCode) {
+function returnLandInformationRemarks(sourceLandInfo, id, LandownerCode, LandInformationCode) {
 
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/returnFloatingLandInformationData',
@@ -764,7 +761,8 @@ function returnLandInformationRemarks(sourceLandInfo, id, LandownerCode) {
             token: $("#token").val(),
             dataSource: sourceLandInfo,
             sysapp: sysapp,
-            FloatLIID: id,
+            FloatID: id,
+            LandInformationCode: LandInformationCode,
             LandownerCode: LandownerCode,
             returnedRemarks: $('#returnRemarks').val()
         }),
@@ -782,17 +780,18 @@ function returnLandInformationRemarks(sourceLandInfo, id, LandownerCode) {
 }
 //END: LAND INFORMATION RETURN FUNCTION
 //START: LAND CONTRACT INFROMATION RETURN MODAL
-function returnedContractmodal(sourceLandInfo, id, name, LandContractCode) {
+function returnedLandContractmodal(sourceLandInfo, id, name, LandContractCode, LandInformationCode) {
     console.log('modal sourcedata', sourceLandInfo);
     console.log('modal id', id);
     console.log('modal name', name);
     console.log('modal LandContractCode', LandContractCode);
+    console.log('modal LandInformationCode', LandInformationCode);
 
     showModal();
     ModalSize('m');
     var title = 'Return Remarks';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
-                 '<button type="button" class="btn btn-success" onclick="returnLandInformationRemarks(\'' + sourceLandInfo + '\',\'' + id + '\',\'' + LandContractCode + '\')"> Save' + '</button >';
+                 '<button type="button" class="btn btn-success" onclick="returnLandContractRemarks(\'' + sourceLandInfo + '\',\'' + id + '\',\'' + LandContractCode + '\',\'' + LandInformationCode + '\')"> Save' + '</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     $.ajax({
@@ -808,7 +807,7 @@ function returnedContractmodal(sourceLandInfo, id, name, LandContractCode) {
         }
     })
 }
-function returnLandContractRemarks(sourceContract, id, LandContractCode) {
+function returnLandContractRemarks(sourceContract, id, LandContractCode, LandInformationCode) {
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/returnFloatingLandContractData',
         type: 'post',
@@ -818,7 +817,8 @@ function returnLandContractRemarks(sourceContract, id, LandContractCode) {
             token: $("#token").val(),
             dataSource: sourceContract,
             sysapp: sysapp,
-            FloatLCID: id,
+            FloatID: id,
+            LandInformationCode: LandInformationCode,
             LandContractCode: LandContractCode,
             returnedRemarks: $('#returnRemarks').val()
         }),
@@ -836,17 +836,19 @@ function returnLandContractRemarks(sourceContract, id, LandContractCode) {
 }
 //END: LAND CONTRACT INFROMATION RETURN MODAL
 //START: LANDOWNER DISAPPROVE MODAL
-function disapprovedLandInformodal(sourceLandInfo, id, name, LandownerCode) {
+function disapprovedLandInfomodal(sourceLandInfo, id, name, LandownerCode, LandInformationCode) {
     console.log('modal sourcedata', sourceLandInfo);
     console.log('modal id', id);
     console.log('modal name', name);
     console.log('modal LandownerCode', LandownerCode);
+    console.log('modal LandInformationCode', LandInformationCode);
+    
 
     showModal();
     ModalSize('m');
     var title = 'Disapprove Remarks';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
-                 '<button type="button" class="btn btn-success" onclick="disapproveLandInfoRemarks(\'' + sourceLandInfo + '\',\'' + id + '\',\'' + LandownerCode + '\')"> Save' + '</button >';
+                 '<button type="button" class="btn btn-success" onclick="disapproveLandInfoRemarks(\'' + sourceLandInfo + '\',\'' + id + '\',\'' + LandownerCode + '\',\'' + LandInformationCode + '\')"> Save' + '</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     $.ajax({
@@ -864,7 +866,7 @@ function disapprovedLandInformodal(sourceLandInfo, id, name, LandownerCode) {
 }
 //END: LANDOWNER DISAPPROVE MODAL
 //START: LANDOWNER DISAPPROVE FUNCTION
-function disapproveLandInfoRemarks(sourceLandInfo, id, LandownerCode) {
+function disapproveLandInfoRemarks(sourceLandInfo, id, LandownerCode, LandInformationCode) {
 
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/disapproveFloatingLandInformationData',
@@ -875,7 +877,8 @@ function disapproveLandInfoRemarks(sourceLandInfo, id, LandownerCode) {
             token: $("#token").val(),
             dataSource: sourceLandInfo,
             sysapp: sysapp,
-            FloatLIID: id,
+            FloatID: id,
+            LandInformationCode: LandInformationCode,
             LandownerCode: LandownerCode,
             disapprovedRemarks: $('#disapproveRemarks').val()
         }),
@@ -892,151 +895,66 @@ function disapproveLandInfoRemarks(sourceLandInfo, id, LandownerCode) {
     })
 }
 //END: LANDOWNER DISAPPROVE FUNCTION
-function viewLandContractData(data, id, name, status) {
-    console.log('data', data);
-    console.log('id', id);
-    console.log('name', name);
-    console.log('status', status);
+//START: LANDOWNER DISAPPROVE MODAL
+function disapprovedLandContractmodal(sourceLandInfo, id, name, LandContractCode, LandInformationCode) {
+    console.log('modal sourcedata', sourceLandInfo);
+    console.log('modal id', id);
+    console.log('modal name', name);
+    console.log('modal LandContractCode', LandContractCode);
+    console.log('modal LandInformationCode', LandInformationCode);
+    
+
     showModal();
-    ModalSize('xl');
-    var title = 'View Contract <b class="selectedid" data-id="' + id + '">(' + name + ')</b> ';
-    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >';
+    ModalSize('m');
+    var title = 'Disapprove Remarks';
+    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >' + 
+                 '<button type="button" class="btn btn-success" onclick="disapproveLandContractRemarks(\'' + sourceLandInfo + '\',\'' + id + '\',\'' + LandContractCode + '\',\'' + LandInformationCode + '\')"> Save' + '</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
-    title += '<b></b>';
-    if (status == 'true') {
-        $('.modal-title').append('- <b style="color:green" class="status" data-status="1">Enabled</b>');
-        $('.modal-footer').append('<button type="button" class="btn btn-danger enabledisabledata" onclick="enabledisabledata(\'' + data + '\')"> Disable</button >');
-    } else {
-        $('.modal-title').append('- <b style="color:red" class="status" data-status="0">Disabled</b>');
-        $('.modal-footer').append('<button type="button" class="btn btn-success enabledisabledata" onclick="enabledisabledata(\'' + data + '\')"> Enable</button >');
-    }
-    if (Permission.includes(data + "_view") || excempted.includes($("#username").val())) {
-    } else {
-        $('.modal-title').append(' <em style="color:#088C08">(Read Only)</em>');
-        $('.enabledisabledata').prop('disabled', 'true');
-    }
     $.ajax({
-        url: $('#tbl_' + data).data('viewpage'),
+        url: $('#tbl_' + sourceLandInfo).data('disapprovepage'),
         type: 'post',
         dataType: 'html',
         success: function (htmlreturn) {
             $('.modal-body').html(htmlreturn);
+            $('#name').text(name);
         },
         error: function () {
             toastr.error('Error on fetching modal view!');
         }
     })
 }
-/**
- * Description: View Data for Contracts
- * 
- * @param {*} sourceContract 
- * @param {*} filter 
- */
-function viewContractInfoData(sourceContract, filter) {
-    console.log('function parameters 1', sourceContract);
-    console.log('function parameters 2', filter);
-    startLoading();
-    var fields = $('.triggercontractinfoview');
-    var fieldID = [];
-    for (var x in fields) {
-        if (fields[x].className != undefined) {
-            var y = fields[x].className.split(' ');
-            fieldID.push(y[0]);
-        }
-    }
+//END: LANDOWNER DISAPPROVE MODAL
+//START: LANDOWNER DISAPPROVE FUNCTION
+function disapproveLandContractRemarks(sourceLandInfo, id, LandContractCode, LandInformationCode) {
+
     $.ajax({
-        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getSysData',
+        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/disapproveFloatingLandContractInformationData',
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
             username: $("#username").val(),
             token: $("#token").val(),
-            dataSource: sourceContract,
-            filter: filter,
-            selectedID: $('.selectedid').data('id'),
-            sysapp: sysapp
+            dataSource: sourceLandInfo,
+            sysapp: sysapp,
+            FloatID: id,
+            LandInformationCode: LandInformationCode,
+            LandContractCode: LandContractCode,
+            disapprovedRemarks: $('#disapproveRemarks').val()
         }),
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            console.table('Land Information data troubleshoot', data);
-            var LandInformationCode = data.LandInformationCode;
-            // var LandContractCode = data.LandContractCode;
-            console.log(LandInformationCode);
-            $.ajax({
-                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getContractInfoData',
-                type: 'post',
-                dataType: 'json',
-                data: JSON.stringify({
-                    data: data,
-                    LandInformationCode: data.LandInformationCode,
-                    username: $("#username").val(),
-                    token: $("#token").val(),
-                    sysapp: sysapp
-                }),
-                contentType: "application/json; charset=utf-8",
-                success: function (viewdata) {
-                    
-                    viewContract = {
-                        contractdata: data,
-                        landinformationdata: viewdata
-                    };
-                    console.log('view data', viewContract);
-
-                    //view contract data
-                    $('.name').text(viewContract.contractdata.Fullname);
-                    $('.landdocument').text(viewContract.landinformationdata.Document);
-                    $('.landlotnumber').text(viewContract.landinformationdata.LotNumber);
-                    $('.LandContractCode').text(viewContract.contractdata.LandContractCode);
-
-                    if (viewContract.landinformationdata.WithCoOwner == true) {
-                        $('.hideCoOwner').show();
-                        $('.CoOwner').text(viewContract.landinformationdata.CoOwner);
-                    } else {
-                        $('.hideCoOwner').hide();
-                        $('.CoOwner').text('');
-                    }
-
-                    if (viewContract.contractdata.RepresentativeName == '') {
-                        $('.hideRepresentativeLabel').hide();
-                    } else {
-                        $('.hideRepresentativeLabel').show();
-                        $('.RepName').text(viewContract.contractdata.RepresentativeName);
-                        $('.RepContactNumber').text(viewContract.contractdata.RepresentativeContactNumber);
-                        $('.RepEmail').text(viewContract.contractdata.RepresentativeEmail);
-                    }
-
-                    $('.province').text(viewContract.landinformationdata.provinceName);
-                    $('.city').text(viewContract.landinformationdata.cityName);
-                    $('.barangay').text(viewContract.landinformationdata.barangayName);
-                    $('.landtotalarea').text(viewContract.landinformationdata.Area);
-                    $('.landplantation').text(viewContract.contractdata.PlantationCode);
-                    $('.landcompany').text(viewContract.contractdata.CompanyCode + ' - ' + viewContract.contractdata.Companyname);
-                    $('.landcontractedarea').text(viewContract.contractdata.LandContractedArea);
-                }
-            })
-            stopLoading();
+            console.log('disapprove',data);
+            hideModal();
+            getSysAllLandownerData(sourceLandInfo);
         },
         error: function () {
-            toastr.error('Data gathering error!');
+            toastr.error('Error on updating data!');
             stopLoading();
         }
     })
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////Start: LOAD LDMS CONTEXT//////////////////////////////////////////////////////////////////////////////////////////
-function loadHomeContent() {
-    var section = '';
-    // var LDMSheader = '';
-    var LDMSREPORT = Permission.includes('LDMSDashboard_role'); // if role exsist
-    section = LDMSREPORT === true ? $('#LDMSDashboard_role').show() : $('#LDMSDashboard_role').hide(); // hide/show role
-    // LDMSheader = $('#LDMSchartbutton').data().card('widget') == 'collapse' ? $('hideLDMSheader').show() : $('hideLDMSheader').hide()
-    console.log(2, Permission);
-
-}
-//////////////////////////////////////////////////////////////////////////////////////////End: LOAD LDMS CONTEXT//////////////////////////////////////////////////////////////////////////////////////////
-
+//END: LANDOWNER DISAPPROVE FUNCTION
 //////////////////////////////////////////////////////////////////////////////////////////Start: LOAD LDMS DASHBOARD DATA//////////////////////////////////////////////////////////////////////////////////////////
 function getLDMSDashboardData() {
     $.ajax({
@@ -1067,14 +985,12 @@ function getLDMSDashboardData() {
                     var barPlantationCode = [];
                     var barActiveContracts = [];
                     var barExpiringContracts = [];
-                    // var barInactiveContracts = [];
                     var barTerminatedContracts = [];
 
                     for (var j in data) {
                         barPlantationCode.push(data[j].PlantationCode);
                         barActiveContracts.push(data[j].ActiveContracts);
                         barExpiringContracts.push(data[j].ExpiringContracts);
-                        // barInactiveContracts.push(data[j].InactiveContracts);
                         barTerminatedContracts.push(data[j].TerminatedContracts);
                     }
 
@@ -1105,17 +1021,6 @@ function getLDMSDashboardData() {
                                 pointHighlightStroke: 'rgb(130,218,92)',
                                 data: barActiveContracts
                             },
-                            // {
-                            // label               : 'Inactive',
-                            // backgroundColor     : 'rgb(255,120,129)',
-                            // borderColor         : 'rgb(255,120,129)',
-                            // pointRadius         : false,
-                            // pointColor          : 'rgb(255,120,129)',
-                            // pointStrokeColor    : 'rgb(255,120,129)',
-                            // pointHighlightFill  : 'rgb(255,120,129)',
-                            // pointHighlightStroke: 'rgb(255,120,129)',
-                            // data                : barInactiveContracts
-                            // },
                             {
                                 label: 'Terminated',
                                 backgroundColor: 'rgb(255,120,129)',
@@ -1190,26 +1095,22 @@ function getLDMSDashboardData() {
 
             var labelAContracts = '';
             var labelEContracts = '';
-            // var labelIContracts = '';
             var labelTContracts = '';
 
             console.log('sa baba', data.TerminatedContracts);
 
             data.ActiveContracts <= 1 ? $('#activeContracts').text('Active Contract') : $('#activeContracts').text('Active Contracts');
             data.ExpiringContracts <= 1 ? $('#expiringContracts').text('Expiring Contract') : $('#expiringContracts').text('Expiring Contracts');
-            // data.InactiveContracts <= 1 ? $('#inactiveContracts').text('Inactive Contract') : $('#inactiveContracts').text('Inactive Contracts');
             data.TerminatedContracts <= 1 ? $('#terminatedContracts').text('Terminated Contract') : $('#terminatedContracts').text('Terminated Contracts');
 
             labelAContracts = data.ActiveContracts <= 1 ? 'Active Contract' : 'Active Contracts';
             labelEContracts = data.ExpiringContracts <= 1 ? 'Expiring Contract' : 'Expiring Contracts';
-            // labelIContracts = data.InactiveContracts <= 1 ? 'Inactive Contract' : 'Inactive Contracts';
             labelTContracts = data.TerminatedContracts <= 1 ? 'Terminated Contract' : 'Terminated Contracts';
 
 
 
             $('.activeContracts').text(data.ActiveContracts);
             $('.expiringContracts').text(data.ExpiringContracts);
-            // $('.inactiveContracts').text(data.InactiveContracts);
             $('.terminatedContracts').text(data.TerminatedContracts);
 
             //-------------
@@ -1221,7 +1122,6 @@ function getLDMSDashboardData() {
                 labels: [
                     labelAContracts,
                     labelEContracts,
-                    // labelIContracts,
                     labelTContracts
                 ],
                 datasets: [
@@ -1257,14 +1157,14 @@ function getLDMSDashboardData() {
 function viewLandownermodal(data, id, name) {
     showModal();
     ModalSize('xl');
-    var title = 'View Landowner <b class="selectedid" data-id="' + id + '">' + name + '</b> ';
+    var title = 'View Landowner (<b class="selectedid" data-id="' + id + '">' + name + '</b>) ';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     title += '<b></b>';
     if (Permission.includes(data + "_view") || excempted.includes($("#username").val())) {
     } else {
-        $('.modal-title').append(' <em style="color:#088C08">(Read Only)</em>');
+        $('.modal-title').append(' -<b style="color:#C73644"> Read-Only</b>');
     }
     $.ajax({
         url: $('#tbl_' + data).data('viewpage'),
@@ -1284,13 +1184,13 @@ function viewLandownermodal(data, id, name) {
  * @param {*} sourceContract 
  * @param {*} filter 
  */
-function viewLandownerInfoData() {
+function viewLandownerInfoDataFloat() {
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/viewLandownerFloatingData',
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
-            FloatLOID: $('.selectedid').data('id'),
+            FloatID: $('.selectedid').data('id'),
             username: $("#username").val(),
             token: $("#token").val(),
             sysapp: sysapp
@@ -1303,7 +1203,7 @@ function viewLandownerInfoData() {
                 $('#selectType').text('Company Information')
                 $('.hideIndividual').hide()
                 $('.hideCompany').show()
-                $('.LandownerCode').text(CompanyData.LandownerCode);
+                $('.LandownerCodeview').text(CompanyData.LandownerCode);
                 $('.LastName').text(CompanyData.LastName);
                 $('.ContactNumber').text(CompanyData.ContactNumber);
                 $('.Address').text(CompanyData.Address);
@@ -1313,7 +1213,7 @@ function viewLandownerInfoData() {
                 $('#selectType').text('Individual Information')
                 $('.hideIndividual').show()
                 $('.hideCompany').hide()
-                $('.LandownerCode').text(IndividualData.LandownerCode);
+                $('.LandownerCodeview').text(IndividualData.LandownerCode);
                 $('.FirstName').text(IndividualData.FirstName);
                 $('.MiddleName').text(IndividualData.MiddleName);
                 $('.LastName').text(IndividualData.LastName);
@@ -1345,14 +1245,14 @@ function viewLandInfomodal(data, id, name) {
     console.log('modal LI name', name);
     showModal();
     ModalSize('xl');
-    var title = 'View Land Information <b class="selectedid" data-id="' + id + '">' + name + '</b> ';
+    var title = 'View Land Information (<b class="selectedid" data-id="' + id + '">' + name + '</b>) ';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     title += '<b></b>';
     if (Permission.includes(data + "_view") || excempted.includes($("#username").val())) {
     } else {
-        $('.modal-title').append(' <em style="color:#088C08">(Read Only)</em>');
+        $('.modal-title').append(' -<b style="color:#C73644"> Read-Only</b>');
     }
     $.ajax({
         url: $('#tbl_' + data).data('viewpage'),
@@ -1372,13 +1272,13 @@ function viewLandInfomodal(data, id, name) {
  * @param {*} sourceContract 
  * @param {*} filter 
  */
-function viewLandInformationData() {
+function viewLandInfoDataFloat() {
     $.ajax({
         url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/viewLandInfoFloatingData',
         type: 'post',
         dataType: 'json',
         data: JSON.stringify({
-            FloatLIID: $('.selectedid').data('id'),
+            FloatID: $('.selectedid').data('id'),
             username: $("#username").val(),
             token: $("#token").val(),
             sysapp: sysapp
@@ -1390,7 +1290,7 @@ function viewLandInformationData() {
 
             // Set common properties
             $('.LandInformationCode').text(LandInformation.LandInformationCode);
-            $('.FullName').text(LandInformation.Fullname);
+            $('.fullname').text(LandInformation.Fullname);
             $('.Description').text(LandInformation.Description);
             $('.DocumentNumber').text(LandInformation.DocumentNumber);
             $('.LotNumber').text(LandInformation.LotNumber);
@@ -1418,43 +1318,158 @@ function viewLandInformationData() {
     })
 }
 //END: LANDOWNER INFORMATION FLOAT VIEW MODAL
+function viewLandContractData(data, id, name, status) {
+    console.log('data', data);
+    console.log('id', id);
+    console.log('name', name);
+    console.log('status', status);
+    showModal();
+    ModalSize('xl');
+    var title = 'View Contract (<b class="selectedid" data-id="' + id + '">' + name + '</b>) ';
+    var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >';
+    $('.modal-title').html(title);
+    $('.modal-footer').html(footer);
+    title += '<b></b>';
+    if (Permission.includes(data + "_view") || excempted.includes($("#username").val())) {
+    } else {
+        $('.modal-title').append(' -<b style="color:#C73644"> Read-Only</b>');
+        $('.enabledisabledata').prop('disabled', 'true');
+    }
+    $.ajax({
+        url: $('#tbl_' + data).data('viewpage'),
+        type: 'post',
+        dataType: 'html',
+        success: function (htmlreturn) {
+            $('.modal-body').html(htmlreturn);
+        },
+        error: function () {
+            toastr.error('Error on fetching modal view!');
+        }
+    })
+}
+/**
+ * Description: View Data for Contracts
+ * 
+ * @param {*} sourceContract 
+ * @param {*} filter 
+ */
+function viewContractInfoDataFloat(sourceContract, filter) {
+    console.log('function parameters 1', sourceContract);
+    console.log('function parameters 2', filter);
+    startLoading();
+    var fields = $('.triggercontractinfoview');
+    var fieldID = [];
+    for (var x in fields) {
+        if (fields[x].className != undefined) {
+            var y = fields[x].className.split(' ');
+            fieldID.push(y[0]);
+        }
+    }
+    $.ajax({
+        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'Common/getSysData',
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+            username: $("#username").val(),
+            token: $("#token").val(),
+            dataSource: sourceContract,
+            filter: filter,
+            selectedID: $('.selectedid').data('id'),
+            sysapp: sysapp
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            console.table('Land Information data troubleshoot', data);
+            var LandInformationCode = data.LandInformationCode;
+            // var LandContractCode = data.LandContractCode;
+            console.log(LandInformationCode);
+            $.ajax({
+                url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getContractInfoData',
+                type: 'post',
+                dataType: 'json',
+                data: JSON.stringify({
+                    data: data,
+                    LandInformationCode: data.LandInformationCode,
+                    username: $("#username").val(),
+                    token: $("#token").val(),
+                    sysapp: sysapp
+                }),
+                contentType: "application/json; charset=utf-8",
+                success: function (viewdata) {
+                    
+                    viewContract = {
+                        contractdata: data,
+                        landinformationdata: viewdata
+                    };
+                    console.log('view data', viewContract);
 
+                    //view contract data
+                    $('.name').text(viewContract.contractdata.Fullname);
+                    $('.landdocument').text(viewContract.landinformationdata.Document);
+                    $('.landlotnumber').text(viewContract.landinformationdata.LotNumber);
+                    $('.LandContractCodeView').val(viewContract.contractdata.LandContractCode);
+                    $('.LandContractCode').text(viewContract.contractdata.LandContractCode);
+
+                    if (viewContract.landinformationdata.WithCoOwner == true) {
+                        $('.hideCoOwner').show();
+                        $('.CoOwner').text(viewContract.landinformationdata.CoOwner);
+                    } else {
+                        $('.hideCoOwner').hide();
+                        $('.CoOwner').text('');
+                    }
+
+                    if (viewContract.contractdata.RepresentativeName == '') {
+                        $('.hideRepresentativeLabel').hide();
+                    } else {
+                        $('.hideRepresentativeLabel').show();
+                        $('.RepName').text(viewContract.contractdata.RepresentativeName);
+                        $('.RepContactNumber').text(viewContract.contractdata.RepresentativeContactNumber);
+                        $('.RepEmail').text(viewContract.contractdata.RepresentativeEmail);
+                    }
+
+                    $('.province').text(viewContract.landinformationdata.provinceName);
+                    $('.city').text(viewContract.landinformationdata.cityName);
+                    $('.barangay').text(viewContract.landinformationdata.barangayName);
+                    $('.landtotalarea').text(viewContract.landinformationdata.Area);
+                    $('.landplantation').text(viewContract.contractdata.PlantationCode);
+                    $('.landcompany').text(viewContract.contractdata.CompanyCode + ' - ' + viewContract.contractdata.Companyname);
+                    $('.landcontractedarea').text(viewContract.contractdata.LandContractedArea);
+                }
+            })
+            stopLoading();
+        },
+        error: function () {
+            toastr.error('Data gathering error!');
+            stopLoading();
+        }
+    })
+}
 
 //Start: Payment Monitoring Dashboard
 
 
 function getDashboardPaymentMonitoring() {
-    console.log('Permission', Permission, Permission.includes('LDMSDashboard_paymentsched'));
-    var PaymentPermission = Permission.includes('LDMSDashboard_paymentsched');
-    if (Permission.includes('LDMSDashboard_paymentsched') === true) {
-        $('#LDMSDashboard_paymentsched').show();
-        $.ajax({
-            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getDashboardPaymentMonitoring',
-            type: 'post',
-            dataType: 'json',
-            data: JSON.stringify({
-                username: $("#username").val(),
-                token: $("#token").val(),
-                sysapp: sysapp
-            }),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
+    $.ajax({
+        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/getDashboardPaymentMonitoring',
+        type: 'post',
+        dataType: 'json',
+        data: JSON.stringify({
+            username: $("#username").val(),
+            token: $("#token").val(),
+            sysapp: sysapp
+        }),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
 
-                console.log(data);
-                $('#forpayment').text(data.ForPayment);
-                $('#overdue').text(data.Overdue);
-            },
-            error: function () {
-                toastr.error('Data gathering error!');
-                stopLoading();
-            }
-
-        })
-    }
-    else {
-        $('#LDMSDashboard_paymentsched').hide();
-    }
-
+            console.log(data);
+            $('#forpayment').text(data.ForPayment);
+            $('#overdue').text(data.Overdue);
+        },
+        error: function () {
+            toastr.error('Data gathering error!');
+            stopLoading();
+        }
+    })
 }
 
 //End: Payment Monitoring Dashboard

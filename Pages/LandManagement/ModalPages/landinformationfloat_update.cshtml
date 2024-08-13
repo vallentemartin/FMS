@@ -31,7 +31,7 @@
                             <div class="col-md-12" id="remarksTextArea">
                                 <div class="form-group">
                                     <label>Remarks *<em style="font-weight: normal;">remove input to add new remarks</em></label>
-                                    <textarea class="remarks form-control form-control-sm triggerlandinformation autoCaps" placeholder="-"></textarea  autocomplete="off" disabled>
+                                    <textarea class="remarks form-control form-control-sm autoCaps" placeholder="Add remarks" id="Othersremarks"></textarea  autocomplete="off" disabled>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
 </div>
 <script>
     var sourceLandInformation = 'LandInformation_Float';
-    var dataSourceIdCol = 'FloatLIID';
+    var dataSourceIdCol = 'FloatID';
     // $('#remarksTextArea').hide();
     getSysLandInfoFloatingData(sourceLandInformation, dataSourceIdCol);
 
@@ -169,6 +169,7 @@
         var fieldsSelection = $('.triggerlandinformationselect');
         var fieldID = [];
         var fieldIDselect = [];
+        var remarks = '';
         console.log('variable fields LI', fields);
         console.log('variable fieldSelection LI', fieldsSelection);
 
@@ -194,9 +195,12 @@
                 token: $("#token").val(),
                 dataSource: sourceLandInformation,
                 filter: dataSourceIdCol,
-                FloatLIID: $('.selectedid').data('id'),
+                FloatID: $('.selectedid').data('id'),
                 sysapp,
             };
+            remarks = $('#Othersremarks').val();
+
+            inputDataCollection['remarks'] = remarks;
             for (var j in fieldID) {
                 inputDataCollection[fieldID[j]] = $('.triggerlandinformation.' + fieldID[j]).val();
             }

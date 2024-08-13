@@ -164,20 +164,20 @@
                         <div class="col-sm-12 col-md-4">
                             <label>Landowner</label>
                             <select
-                                class="LandownerCode FullName Landowner form-control form-control-sm triggercontractinfo LandownerCodeNC select2"
+                                class="LandownerCode FullName Landowner form-control form-control-sm triggercontractinfo triggerNewContract LandownerCodeNC select2"
                                 type="text" id="viewLandownerNC" onChange="clearSelection('.plantationClear')">
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label>Land Information/Document</label>
                             <select
-                                class="LandInformationCode viewLandInformationNC form-control form-control-sm select2"
+                                class="LandInformationCode viewLandInformationNC triggerNewContract form-control form-control-sm select2"
                                 type="text" id="viewLandInformationNC" disabled>
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label>Plantation</label>
-                            <select class="PlantationCode form-control form-control-sm trigger select2 plantationClear"
+                            <select class="PlantationCode form-control form-control-sm trigger triggerNewContract select2 plantationClear"
                                 id="plantationSelectNC" disabled>
                             </select>
                         </div>
@@ -294,22 +294,16 @@
                                         <div class="row">
                                             <div class="col-sm-12 col-md-4">
                                                 <label>Name</label>
-                                                <input type="text" class="RepName form-control form-control-sm">
+                                                <input type="text" class="RepName triggerNewContract form-control form-control-sm">
                                             </div>
                                             <div class="col-sm-12 col-md-4 showRepresentativeNumber">
                                                 <label>Contact Number</label>
-                                                <input class="RepContactNumber form-control form-control-sm"
-                                                    id="companynumber" type="number" step="1" pattern="\d+" value="63"
-                                                    autocomplete="off">
-                                            </div>
-                                            <div class="col-sm-12 col-md-4 hideRepresentativeNumber">
-                                                <label>Contact Number</label>
-                                                <p class="textRepContactNumber form-control form-control-sm" readonly>
-                                                </p>
+                                                <input class="RepContactNumber triggerNewContract form-control form-control-sm maskMobile"
+                                                    id="companynumber" type="text" autocomplete="off">
                                             </div>
                                             <div class="col-sm-12 col-md-4">
                                                 <label>Email</label>
-                                                <input type="text" class="RepEmail form-control form-control-sm">
+                                                <input type="text" class="RepEmail triggerNewContract form-control form-control-sm">
                                             </div>
                                         </div>
                                     </div>
@@ -326,7 +320,7 @@
                             <div class="col-md-6">
                                 <label>Lease Contracted <i>(sqm)</i></label>
                                 <input type="text"
-                                    class="LandContractedArea form-control form-control-sm form-control-border border-width-2 triggercontractinfo"
+                                    class="LandContractedArea form-control form-control-sm form-control-border border-width-2 triggercontractinfo triggerNewContract"
                                     id="Sqm" step='0.01' min="1" max="1000000" placeholder='0.00' type="number"
                                     onkeyup=imposeMinMax(this)>
                                 <input type="text"
@@ -420,12 +414,12 @@
                                 <div class="col-md-4">
                                     <label>Lease Term </label>
                                     <input type="text" disabled
-                                        class="terms reservationdate form-control form-control-sm float-right"
+                                        class="terms triggerNewContract reservationdate form-control form-control-sm float-right"
                                         id="terms">
                                 </div>
                                 <div class="col-md-4">
                                     <label>Years of Advance Payment</label>
-                                    <input class="advance_payment form-control form-control-sm" type="number"
+                                    <input class="advance_payment form-control form-control-sm triggerNewContract" type="number"
                                         Placeholder="Input Number of Year(s)">
                                 </div>
                             </div>
@@ -440,7 +434,7 @@
                                                 </span>
                                             </div>
                                             <input type="text"
-                                                class="start_of_payment reservationdate form-control form-control-sm float-right"
+                                                class="start_of_payment reservationdate form-control form-control-sm float-right triggerNewContract"
                                                 id="reservationdate">
                                         </div>
                                     </div>
@@ -448,7 +442,7 @@
                                 <div class="col-md-6">
                                     <label>Payment Terms</label>
                                     <select
-                                        class="PaymentTermsCode PaymentTerms PaymentTerms form-control form-control-sm triggercontractinfo select2"
+                                        class="PaymentTermsCode PaymentTerms PaymentTerms form-control form-control-sm triggercontractinfo triggerNewContract select2"
                                         type="text">
                                     </select>
                                 </div>
@@ -503,7 +497,7 @@
                                                         <label class="labelwidth">Less:Advance Payment:</label>
                                                         <!-- <input class="advance_payment_amount maskAmount" style="border:1px solid #ced4da"> -->
                                                         <input
-                                                            class="advance_payment_amount maskAmount triggercontractinfo ">
+                                                            class="advance_payment_amount triggerNewContract maskAmount triggercontractinfo ">
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="labelwidth">Remaining Rental:</label>
@@ -511,11 +505,11 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="dividedyrs labelwidth" for="divided"></label>
-                                                        <input class="yrsdivided" style="border:1px solid #ced4da">
+                                                        <input class="yrsdivided triggerNewContract" style="border:1px solid #ced4da">
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="labelwidth">Gross Annual Rental:</label>
-                                                        <span class="Payment_Amount"></span>
+                                                        <span class="Payment_Amount triggerNewContract"></span>
                                                     </div>
                                                 </div>
                                         </tfoot>
@@ -1294,7 +1288,6 @@
     /////////////////////////////////////////////////////////////////////////////START: SQM CONVERTION INTO HAS/////////////////////////////////////////////////////////////////////////////
     $("#Sqm").keyup(function () {
         var hectares = $('#Sqm').val() / 10000;
-        // var remaining =  $('.remaining').val();
         $('#Hectares').val(hectares);
     });
 
@@ -1344,16 +1337,14 @@
 
                     if ($('#isRep').is(":checked") == true) {
                         $('.RepName').prop('disabled', true);
-                        $('.showRepresentativeNumber').hide();
-                        $('.hideRepresentativeNumber').show();
+                        $('.RepContactNumber').prop('disabled', true);
                         $('.RepEmail').prop('disabled', true);
                         $('.RepName').val(data.Fullname);
-                        $('.textRepContactNumber').text(data.ContactNumber);
+                        $('.RepContactNumber').val(data.ContactNumber);
                         $('.RepEmail').val(data.Email);
                     } else {
                         $(".RepName").removeAttr('disabled');
-                        $('.showRepresentativeNumber').show();
-                        $('.hideRepresentativeNumber').hide();
+                        $(".RepContactNumber").removeAttr('disabled');
                         $(".RepEmail").removeAttr('disabled');
                         $('.RepName').val('');
                         $('.RepContactNumber').val('');
