@@ -132,7 +132,7 @@ function saveLandContractData(sourceContract) {
             inputDataNewContract['StartDate'] = start_lease;
             inputDataNewContract['EndDate'] = end_lease;
             inputDataNewContract['LeaseTerm'] = $(".terms").val(),
-            inputDataNewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
+                inputDataNewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
             inputDataNewContract['AdvancePayment'] = advancepayment;
             inputDataNewContract['StartOfPayment'] = startpayment;
             inputDataNewContract['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
@@ -163,7 +163,7 @@ function saveLandContractData(sourceContract) {
             inputDataRenewContract['StartDate'] = start_lease;
             inputDataRenewContract['EndDate'] = end_lease;
             inputDataRenewContract['LeaseTerm'] = $(".terms").val(),
-            inputDataRenewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
+                inputDataRenewContract['PaymentTerms'] = $(".PaymentTermsCode").val();
             inputDataRenewContract['AdvancePayment'] = advancepayment;
             inputDataRenewContract['StartOfPayment'] = startpayment;
             inputDataRenewContract['AmountOfAdvancePayment'] = $(".advance_payment_amount").val();
@@ -199,10 +199,10 @@ function saveLandContractData(sourceContract) {
             success: function (data) {
                 console.log(data);
                 if (data) {
-                    saveupdateddata(data.LandContractCode);
+                    savePaymentSchedAmount(data.LandContractCode); //add FloatLCID as parameter
                     getSysAllContractInfoData(sourceContract);
                     saveNewFile(sourcefile);
-                    saveEscalation(data.LandContractCode);
+                    saveEscalation(data.LandContractCode); //add FloatLCID as parameter
 
                     toastr.success('Data added!');
                     hideModal();
@@ -317,9 +317,9 @@ function getSysAllContractInfoData(sourceContract) {
                     if (colid[j] == 'id') {
                         if (data[i].Status === 7) {
                             dataarr.push(
-                                '<div style="text-align:center">' + 
-                                '<button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button>' + 
-                                '<button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 80px; margin-left: 10px; margin-right: 10px;" id="updateButton">Update</button>' + 
+                                '<div style="text-align:center">' +
+                                '<button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button>' +
+                                '<button type="button" onclick="updateLandownerData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-info btn-xs" style="width: 80px; margin-left: 10px; margin-right: 10px;" id="updateButton">Update</button>' +
                                 '</div>');
                         } else {
                             dataarr.push('<div style="text-align:center"><button type="button" onclick="viewLandcontractData(\'' + sourceContract + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button></div>');
@@ -353,13 +353,13 @@ function getSysAllContractInfoData(sourceContract) {
                             default:
                                 dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Error Status</b></div>');
                                 break;
-                        }   
+                        }
                     } else if (colid[j] == 'isactive') {
                         if (data[i][colid[j]]) {
                             dataarr.push('<div style="text-align:center;color:green"><b>Enabled</b></div>');
                         } else {
                             dataarr.push('<div style="text-align:center;color:red"><b>Disabled</b></div>');
-                        }   
+                        }
                     } else if (colid[j] == 'geoLocation') {
                         //dataarr.push('<div style="text-align:center"><a href="https://www.google.com/maps/place/' + data[i][colid[j]] + '" target="_blank">' + data[i][colid[j]] + '</a></div>');
                         dataarr.push('<div style="text-align:center"><button class="btn btn-success-sm" onclick="showiFrame(\'' + data[i][colid[j]] + '\')">' + data[i][colid[j]] + '</a></div>');

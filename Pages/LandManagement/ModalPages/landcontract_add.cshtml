@@ -1016,7 +1016,7 @@
     /////////////////////////////////////////////////////////////////////////////END: INITIALIZE CONTRACT PAYMENT TABLE/////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////////////////START: SAVE UPDATE DATA/////////////////////////////////////////////////////////////////////////////
-    function saveupdateddata(LandContractCode) {
+    function savePaymentSchedAmount(LandContractCode) {
         paymentdata = [];
 
         $('.date_end').each(function (index) {
@@ -1035,7 +1035,7 @@
             });
         })
         $.ajax({
-            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/saveAmount',
+            url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/savePaymentSchedAmount',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify({
