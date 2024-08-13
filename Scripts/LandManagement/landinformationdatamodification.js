@@ -89,7 +89,7 @@ function getSysAllLandInformation(sourceLandInformation) {
                     if (colid[j] == 'id') {
                         if (data[i].floatStatus == 1) {
                             dataarr.push('<div style="text-align:center">' +
-                                '<button type="button" onclick="viewLandInfomodal(\'' + sourceLandInformation + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">Views</button>' +
+                                '<button type="button" onclick="viewLandInfomodal(\'' + sourceLandInformation + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].isactive + '\')" class="btn btn-outline-primary btn-xs" style="width: 80px;">View</button>' +
                                 '<button type="button" onclick="updateLandInfomodal(\'' + sourceLandInformation + '\',\'' + data[i][colid[j]] + '\',\'' + data[i].name + '\',\'' + data[i].floatStatus + '\')" class="btn btn-outline-info btn-xs" style="width: 80px; margin-left: 10px; margin-right: 10px;">Update</button>' +
                                 '</div>');
                         } else {
@@ -99,19 +99,19 @@ function getSysAllLandInformation(sourceLandInformation) {
                     } else if (colid[j] == 'floatStatus') {
                         switch (data[i].floatStatus) {
                             case 0:
-                                dataarr.push('<div style="text-align:center;color:#FF6308"><b>For Approval</b></div>');
+                                dataarr.push('<div style="text-align:center;color:#155724"><b>For Approval</b></div>');
                                 break;
                             case 1:
-                                dataarr.push('<div style="text-align:center;color:#72918E"><b>Returned</b></div>');
+                                dataarr.push('<div style="text-align:center;color:#a68d00"><b>Returned</b></div>');
                                 break;
                             case 2:
-                                dataarr.push('<div style="text-align:center;color:#088C08"><b>Approved</b></div>');
+                                dataarr.push('<div style="text-align:center;color:#007bff"><b>Approved</b></div>');
                                 break
                             case 3:
                                 dataarr.push('<div style="text-align:center;color:#8b0000"><b>Disapproved</b></div>');
                                 break
                             default:
-                                dataarr.push('<div style="text-align:center;color:red"><b>Error Status</b></div>');
+                                dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Error Status</b></div>');
                                 break;
                         }
                     } else if (colid[j] == 'geoLocation') {
@@ -138,14 +138,14 @@ function viewLandInfomodal(data, id, name) {
     console.log('modal LI name', name);
     showModal();
     ModalSize('xl');
-    var title = 'View Land Information <b class="selectedid" data-id="' + id + '">' + name + '</b> ';
+    var title = 'View Land Information (<b class="selectedid" data-id="' + id + '">' + name + '</b>) ';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     title += '<b></b>';
     if (Permission.includes(data + "_view") || excempted.includes($("#username").val())) {
     } else {
-        $('.modal-title').append(' <em style="color:#088C08">(Read Only)</em>');
+        $('.modal-title').append(' -<b style="color:#C73644"> Read-Only</b>');
     }
     $.ajax({
         url: $('#tbl_' + data).data('viewpage'),
@@ -159,63 +159,6 @@ function viewLandInfomodal(data, id, name) {
         }
     })
 }
-/**
- * Description: View Data for Landowner Information
- * 
- * @param {*} sourceContract 
- * @param {*} filter 
- */
-function viewLandInformationData() {
-    $.ajax({
-        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/viewLandInfoFloatingData',
-        type: 'post',
-        dataType: 'json',
-        data: JSON.stringify({
-            FloatLIID: $('.selectedid').data('id'),
-            username: $("#username").val(),
-            token: $("#token").val(),
-            sysapp: sysapp
-        }),
-        contentType: "application/json; charset=utf-8",
-        success: function (viewdata) {
-            console.log('view data Land Information', viewdata);
-            var LandInformation = viewdata;
-
-            // Set common properties
-            $('.LandInformationCode').text(LandInformation.LandInformationCode);
-            $('.FullName').text(LandInformation.Fullname);
-            $('.Description').text(LandInformation.Description);
-            $('.DocumentNumber').text(LandInformation.DocumentNumber);
-            $('.LotNumber').text(LandInformation.LotNumber);
-            $('.Area').text(LandInformation.Area);
-            $('.provinceName').text(LandInformation.provinceName);
-            $('.cityName').text(LandInformation.cityName);
-            $('.barangayName').text(LandInformation.barangayName);
-
-            // Handle CoOwner display
-            $('.hideCoOwner').css('display', LandInformation.WithCoOwner ? 'block' : 'none');
-            $('.CoOwner').text(LandInformation.CoOwner);
-
-            // Handle Remarks display
-            // if (LandInformation.DocumentTypeCode === 4) {
-            //     $('.hideRemarks').show();
-            //     $('.remarks').text(LandInformation.remarks);
-            // } else {
-            //     $('.hideRemarks').hide();
-            // }
-            if (LandInformation.remarks === '') {
-                $('.hideRemarks').hide();
-            } else {
-                $('.hideRemarks').show();
-                $('.remarks').text(LandInformation.remarks);
-            }
-        },
-        error: function () {
-            toastr.error('Data gathering error!');
-            stopLoading();
-        }
-    })
-}
 //END: LAND INFORMATION FLOAT VIEW MODAL
 //START: LAND INFORMATION FLOAT VIEW REMARKS
 function getLandInformationRemarks(LandInformationCode) {
@@ -226,7 +169,7 @@ function getLandInformationRemarks(LandInformationCode) {
         token: $("#token").val(),
         dataSource: sourceLandInformation,
         filter: dataSourceIdCol,
-        FloatLIID: $('.selectedid').data('id'),
+        FloatID: $('.selectedid').data('id'),
         sysapp,
     };
     console.log('test', inputDataCollection);
@@ -275,17 +218,9 @@ function updateLandInfomodal(data, id, name, status) {
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     title += '<b></b>';
-    // if (status == 'true') {
-    //     $('.modal-title').append('- <b style="color:green" class="status" data-status="1">Enabled</b>');
-    //     $('.modal-footer').append('<button type="button" class="btn btn-danger enabledisabledata" onclick="enabledisabledata(\'' + data + '\')"> Disable</button >');
-    // } else {
-    //     $('.modal-title').append('- <b style="color:red" class="status" data-status="0">Disabled</b>');
-    //     $('.modal-footer').append('<button type="button" class="btn btn-success enabledisabledata" onclick="enabledisabledata(\'' + data + '\')"> Enable</button >');
-    // }
     if (Permission.includes(data + "_update") || excempted.includes($("#username").val())) {
     } else {
         $('.modal-title').append(' <em>(Read Only)</em>');
-        $('.enabledisabledata').prop('disabled', 'true');
     }
     $.ajax({
         url: $('#tbl_' + data).data('editpage'),

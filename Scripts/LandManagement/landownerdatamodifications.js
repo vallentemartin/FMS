@@ -99,19 +99,19 @@ function getSysAllLandownerData(sourceLandowner) {
                     } else if (colid[j] == 'floatStatus') {
                         switch (data[i].floatStatus) {
                             case 0:
-                                dataarr.push('<div style="text-align:center;color:#FF6308"><b>For Approval</b></div>');
+                                dataarr.push('<div style="text-align:center;color:#155724"><b>For Approval</b></div>');
                                 break;
                             case 1:
-                                dataarr.push('<div style="text-align:center;color:#72918E"><b>Returned</b></div>');
+                                dataarr.push('<div style="text-align:center;color:#a68d00"><b>Returned</b></div>');
                                 break;
                             case 2:
-                                dataarr.push('<div style="text-align:center;color:#088C08"><b>Approved</b></div>');
+                                dataarr.push('<div style="text-align:center;color:#007bff"><b>Approved</b></div>');
                                 break
                             case 3:
                                 dataarr.push('<div style="text-align:center;color:#8b0000"><b>Disapproved</b></div>');
                                 break
                             default:
-                                dataarr.push('<div style="text-align:center;color:red"><b>Error Status</b></div>');
+                                dataarr.push('<div style="text-align:center;color:#A5C18A"><b>Error Status</b></div>');
                                 break;
                         }
                     } else if (colid[j] == 'geoLocation') {
@@ -136,14 +136,14 @@ function getSysAllLandownerData(sourceLandowner) {
 function viewLandownerData(data, id, name) {
     showModal();
     ModalSize('xl');
-    var title = 'View Landowner <b class="selectedid" data-id="' + id + '">' + name + '</b> ';
+    var title = 'View Landowner (<b class="selectedid" data-id="' + id + '">' + name + '</b>) ';
     var footer = '<button type = "button" class="btn btn-default" data-dismiss="modal" > Close</button >';
     $('.modal-title').html(title);
     $('.modal-footer').html(footer);
     title += '<b></b>';
     if (Permission.includes(data + "_view") || excempted.includes($("#username").val())) {
     } else {
-        $('.modal-title').append(' <em style="color:#088C08">(Read Only)</em>');
+        $('.modal-title').append(' -<b style="color:#C73644"> Read-Only</b>');
     }
     $.ajax({
         url: $('#tbl_' + data).data('viewpage'),
@@ -157,67 +157,6 @@ function viewLandownerData(data, id, name) {
         }
     })
 }
-/**
- * Description: View Data for Contracts
- * 
- * @param {*} sourceContract 
- * @param {*} filter 
- */
-function viewLandownerInfoData() {
-    console.log('FloatLOID', $('.selectedid').data('id'));
-    $.ajax({
-        url: apiURL('c2673537-85cf-4a28-9cbc-5dad26d9c4a9') + 'FMSmain/viewLandownerFloatingData',
-        type: 'post',
-        dataType: 'json',
-        data: JSON.stringify({
-            FloatLOID: $('.selectedid').data('id'),
-            username: $("#username").val(),
-            token: $("#token").val(),
-            sysapp: sysapp
-        }),
-        contentType: "application/json; charset=utf-8",
-        success: function (viewdata) {
-            console.log('view data', viewdata);
-            if (viewdata.FirstName == null) {
-                var CompanyData = viewdata;
-                $('#selectType').text('Company Information')
-                $('.hideIndividual').hide()
-                $('.hideCompany').show()
-                $('.LandownerCode').text(CompanyData.LandownerCode);
-                $('.LastName').text(CompanyData.LastName);
-                $('.ContactNumber').text(CompanyData.ContactNumber);
-                $('.Address').text(CompanyData.Address);
-                $('.remarks').text(CompanyData.remarks);
-            } else {
-                var IndividualData = viewdata;
-                var IndividualBirthDate = moment(IndividualData.BirthDate).format('MM/DD/YYYY');
-                $('#selectType').text('Individual Information')
-                $('.hideIndividual').show()
-                $('.hideCompany').hide()
-                $('.LandownerCode').text(IndividualData.LandownerCode);
-                $('.FirstName').text(IndividualData.FirstName);
-                $('.MiddleName').text(IndividualData.MiddleName);
-                $('.LastName').text(IndividualData.LastName);
-                $('.Suffix').text(IndividualData.Suffix);
-                $('.GenderName').text(IndividualData.GenderName);
-                $('.BirthDate').text(IndividualBirthDate);
-                $('.Nationality').text(IndividualData.Nationality);
-                $('.CS_Name').text(IndividualData.CS_Name);
-                $('.provinceName').text(IndividualData.provinceName);
-                $('.cityName').text(IndividualData.cityName);
-                $('.barangayName').text(IndividualData.barangayName);
-                $('.Address').text(IndividualData.Address);
-                $('.ContactNumber').text(IndividualData.ContactNumber);
-                $('.Email').text(IndividualData.Email);
-                $('.remarks').text(IndividualData.remarks);
-            }
-        },
-        error: function () {
-            toastr.error('Data gathering error!');
-            stopLoading();
-        }
-    })
-}
 //END: LANDOWNER FLOAT VIEW MODAL
 //START: LANDOWNER FLOAT VIEW REMARKS
 function getLandownerRemarks() {
@@ -227,7 +166,7 @@ function getLandownerRemarks() {
         token: $("#token").val(),
         dataSource: sourceLandowner,
         filter: dataSourceIdCol,
-        FloatLOID: $('.selectedid').data('id'),
+        FloatID: $('.selectedid').data('id'),
         sysapp,
         };
     $.ajax({
