@@ -55,7 +55,7 @@ function initDataContractInfo(Data) {
     }
 }
 /**
- * Description: To add data of the specific table.
+ * Description: To add data of the specific table. Table name TBL_ContractMain
  * 
  * @param {*} data 
  */
